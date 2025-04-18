@@ -17,8 +17,8 @@ export const shop: Shop[] = [{
     name: "Ring",
     href: "/Ring"
 }, {
-    name: "Tarring",
-    href: "/Tarring"
+    name: "Earring",
+    href: "/Earring"
 }, {
     name: "Necklace",
     href: "/Necklace"
