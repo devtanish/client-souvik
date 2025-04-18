@@ -41,9 +41,9 @@ export default function WhatsAppChatButton({
         onClick={handleClick}
         className={`
           relative flex items-center justify-center
-          w-16 h-16 rounded-full bg-green-500
+          w-16 h-16 rounded-full bg-[#171717]
           text-white shadow-lg
-          hover:bg-green-600 transition-all duration-300
+          hover:bg-[#2e2e2e] transition-all duration-300
           ${isAnimating ? "scale-110" : "scale-100"}
           hover:scale-105 active:scale-95
         `}
