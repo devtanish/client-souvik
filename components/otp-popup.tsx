@@ -1,0 +1,40 @@
+"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+interface OtpPopupProps {
+  onSubmit: () => void
+}
+
+export default function OtpPopup({ onSubmit }: OtpPopupProps) {
+  const [otp, setOtp] = useState("")
+
+  return (
+    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+      <div className="mb-6 text-center">
+        <h2 className="mb-2 text-2xl font-bold">Enter OTP</h2>
+        <p className="text-sm text-gray-500">We&apos;ve sent a verification code to your phone number</p>
+      </div>
+
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="otp">OTP</Label>
+          <Input
+            id="otp"
+            type="text"
+            placeholder="Enter verification code"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+          />
+        </div>
+
+        <Button className="w-full" onClick={onSubmit}>
+          Submit
+        </Button>
+      </div>
+    </div>
+  )
+}
