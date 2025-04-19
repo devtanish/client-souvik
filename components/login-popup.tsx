@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Clock } from "lucide-react"
+import { Clock, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,14 +10,24 @@ import { Separator } from "@/components/ui/separator"
 
 interface LoginPopupProps {
   onVerify: () => void
+  onClose: () => void
 }
 
-export default function LoginPopup({ onVerify }: LoginPopupProps) {
+export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
   const [phoneNumber, setPhoneNumber] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
 
   return (
-    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+    <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+        aria-label="Close"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
       <div className="mb-6 flex justify-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
           <Clock className="h-6 w-6 text-gray-600" />
@@ -95,7 +105,7 @@ export default function LoginPopup({ onVerify }: LoginPopupProps) {
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
           <a href="#" className="text-blue-500 hover:underline">
-            login
+            Signup
           </a>
         </div>
       </div>

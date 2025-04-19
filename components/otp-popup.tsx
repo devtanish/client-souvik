@@ -1,19 +1,30 @@
 "use client"
 
 import { useState } from "react"
+import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 interface OtpPopupProps {
   onSubmit: () => void
+  onClose: () => void
 }
 
-export default function OtpPopup({ onSubmit }: OtpPopupProps) {
+export default function OtpPopup({ onSubmit, onClose }: OtpPopupProps) {
   const [otp, setOtp] = useState("")
 
   return (
-    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+    <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute right-4 top-4 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+        aria-label="Close"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
       <div className="mb-6 text-center">
         <h2 className="mb-2 text-2xl font-bold">Enter OTP</h2>
         <p className="text-sm text-gray-500">We&apos;ve sent a verification code to your phone number</p>
