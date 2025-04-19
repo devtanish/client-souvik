@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-200">
       {/* Example of button that could be positioned anywhere */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute ">
         <Button onClick={handleLoginClick}>Login</Button>
       </div>
 
