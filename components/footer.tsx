@@ -2,7 +2,6 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { shop, customeService, company } from "./interface-contents/footerContents"
-import { IoLogoPinterest } from "react-icons/io5";
 
 export default function Footer() {
   return (
