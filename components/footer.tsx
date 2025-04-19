@@ -2,32 +2,59 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { shop, customeService, company } from "./interface-contents/footerContents"
+import { Roboto } from "next/font/google"
+
+const robotoMedium = Roboto({
+  subsets: ["latin"],
+  weight: ["300"],
+  display: "swap",
+})
+
+const robotSemiBold = Roboto({
+  subsets: ["latin"],
+  weight: ["200"],
+  display: "swap",
+})
+
+
+const robotoBold = Roboto({
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+})
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t bg-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+    <footer className={`w-full border-t bg-white border-t-black ${robotoMedium.className}`}>
+      <div className="container mx-15  py-10">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-6 pb-6 text-[#081336]">
           {/* Newsletter Signup */}
           <div className="md:col-span-1">
-            <h3 className="mb-4 text-lg font-medium">Sign up to Our Newsletter</h3>
+            <h3 className={`mb-4 text-lg ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email<span className="text-red-500">*</span>
+              <label htmlFor="email" className={`text-sm ${robotoBold.className}`}>
+                Email<span className="text-red-500 pb-1">*</span>
               </label>
-              <div className="flex w-full max-w-sm flex-col space-y-2">
-                <Input type="email" id="email" placeholder="Email" className="h-10 border-gray-300" />
-                <Button variant="outline" className="w-fit border-gray-300 px-6">
+              <div className="flex w-full max-w-sm flex-col space-y-2 gap-2.5 mt-2">
+                <Input type="email" id="email" placeholder="Email" className="h-11 w-4/2 rounded-none border-black" />
+                <Button variant="outline" className="w-fit border-black rounded-none px-8 py-5">
                   Submit
                 </Button>
               </div>
             </div>
           </div>
+          <div>
+            
+          </div>
+
+          <div>
+
+          </div>
 
           {/* Shop Links */}
-          <div>
-            <h3 className="mb-4 text-lg font-medium">Shop</h3>
-            <ul className="space-y-2 text-sm">
+          <div className="mt-6">
+            <h3 className="mb-2 text-lg font-medium text-[#081336]">Shop</h3>
+            <ul className="space-y-2 text-sm text-[#081336]">
               {shop.map((items, key) => (
                 <li key={key}>
                   <Link href={items.href ? `${items.href}` : `/${(items.name).toLowerCase().replace(/\s+/g, "-")}`} className="hover:underline">
@@ -39,9 +66,9 @@ export default function Footer() {
           </div>
 
           {/* Customer Service Links */}
-          <div>
-            <h3 className="mb-4 text-lg font-medium">Customer Service</h3>
-            <ul className="space-y-2 text-sm">
+          <div className="mt-6">
+            <h3 className="mb-2 text-lg font-medium text-[#081336]">Customer Service</h3>
+            <ul className="space-y-2 text-sm text-[#081336]">
               {customeService.map((items, key) => (
                 <li key={key}>
                   <Link href={items.href ? `${items.href}` : `/${(items.name).replace(/\s+/g, "-").toLowerCase()}`} className="hover:underline">
@@ -53,9 +80,9 @@ export default function Footer() {
           </div>
 
           {/* About Links */}
-          <div>
-            <h3 className="mb-4 text-lg font-medium">Company</h3>
-            <ul className="space-y-2 text-sm">
+          <div className="mt-6">
+            <h3 className="mb-2 text-lg font-medium text-[#081336]">Company</h3>
+            <ul className="space-y-2 text-sm text-[#081336]">
               {company.map((items, key) => (
                 <li key={key}>
                   <Link href={items.href ? `${items.href}` : `/${(items.name).replace(/\s+/g, "-").toLowerCase()}`} className="hover:underline">
@@ -68,7 +95,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section with Logo and Social Icons */}
-        <div className="mt-12 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
+        <div className="mt-12 ml-64 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
           <div className="flex space-x-4">
             <Link href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" 
