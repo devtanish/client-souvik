@@ -10,13 +10,6 @@ const robotoMedium = Roboto({
   display: "swap",
 })
 
-const robotSemiBold = Roboto({
-  subsets: ["latin"],
-  weight: ["200"],
-  display: "swap",
-})
-
-
 const robotoBold = Roboto({
   subsets: ["latin"],
   weight: ["500"],
