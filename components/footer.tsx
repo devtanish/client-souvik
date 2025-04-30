@@ -88,7 +88,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section with Logo and Social Icons */}
-        <div className="md:mt-12 mt-2 md:ml-64 pl-33 md:pl-0 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
+        <div className="md:mt-12 mt-2 md:ml-64 pl-32 md:pl-0 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
           <div className="flex space-x-4">
             <Link href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" 
