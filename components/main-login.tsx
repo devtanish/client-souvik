@@ -11,7 +11,7 @@ export default function Home() {
 
   const handleLoginClick = () => {
     setShowLoginPopup(true)
-  }
+  } 
 
   const handleVerifyClick = () => {
     setShowLoginPopup(false)
