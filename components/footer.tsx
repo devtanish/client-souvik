@@ -19,28 +19,28 @@ const robotoBold = Roboto({
 export default function Footer() {
   return (
     <footer className={`w-full border-t bg-white border-t-black ${robotoMedium.className}`}>
-      <div className="container md:mx-15 mx-5  py-10">
-        <div className="grid grid-cols-1 md:gap-7 gap-7 md:grid-cols-6 pb-6 text-[#081336]">
+      <div className="container md:mx-15 py-10">
+        <div className="grid grid-cols-1 pl-5 md:gap-7 gap-7 md:grid-cols-6 pb-6 text-[#081336]">
           {/* Newsletter Signup */}
-          <div className="md:col-span-1">
+          <div className="col-span-1 md:col-span-3 ">
             <h3 className={`mb-4 text-lg ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
             <div className="space-y-2">
               <label htmlFor="email" className={`text-sm ${robotoBold.className}`}>
                 Email<span className="text-red-500 pb-1">*</span>
               </label>
               <div className="flex w-full max-w-sm flex-col space-y-2 gap-2.5 mt-2">
-                <Input type="email" id="email" placeholder="Email" className="h-11 md:w-4/2 w-2xl rounded-none border-black" />
+                <Input type="email" id="email" placeholder="Email" className="h-11 md:w-12/10 w-6/7 rounded-none border-black" />
                 <Button variant="outline" className="w-fit border-black rounded-none px-8 py-5">
                   Submit
                 </Button>
               </div>
             </div>
           </div>
-          <div className="">
+          <div className="md:visible hidden">
             
           </div>
 
-          <div className="">
+          <div className="md:visible hidden">
 
           </div>
 
@@ -88,7 +88,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section with Logo and Social Icons */}
-        <div className="md:mt-12 mt-2 md:ml-64 pl-18 md:pl-0 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
+        <div className="md:mt-12 mt-2 md:ml-64 pl-24 md:pl-0 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
           <div className="flex space-x-4">
             <Link href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" 
