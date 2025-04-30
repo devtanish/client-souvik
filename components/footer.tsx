@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <footer className={`w-full border-t bg-white border-t-black ${robotoMedium.className}`}>
       <div className="container md:mx-15 py-10">
-        <div className="grid grid-cols-1 pl-5 md:gap-7 gap-7 md:grid-cols-6 pb-6 text-[#081336]">
+        <div className="grid grid-cols-1 pl-4 md:gap-7 gap-7 md:grid-cols-6 pb-6 text-[#081336]">
           {/* Newsletter Signup */}
           <div className="col-span-1 md:col-span-3 ">
             <h3 className={`mb-4 text-lg ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
@@ -88,7 +88,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section with Logo and Social Icons */}
-        <div className="md:mt-12 mt-2 md:ml-64 pl-24 md:pl-0 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
+        <div className="md:mt-12 mt-2 md:ml-64 pl-29 md:pl-0 flex flex-col items-start justify-center border-t pt-8 md:flex-row md:items-center">
           <div className="flex space-x-4">
             <Link href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" 
