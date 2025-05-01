@@ -15,7 +15,7 @@ export default function OtpPopup({ onSubmit, onClose }: OtpPopupProps) {
   const [otp, setOtp] = useState("")
 
   return (
-    <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+    <div className="relative w-full max-w-md rounded-none bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
       {/* Close button */}
       <button
         onClick={onClose}
@@ -35,6 +35,7 @@ export default function OtpPopup({ onSubmit, onClose }: OtpPopupProps) {
           <Label htmlFor="otp">OTP</Label>
           <Input
             id="otp"
+            className="rounded-none "
             type="text"
             placeholder="Enter verification code"
             value={otp}
@@ -42,7 +43,7 @@ export default function OtpPopup({ onSubmit, onClose }: OtpPopupProps) {
           />
         </div>
 
-        <Button className="w-full" onClick={onSubmit}>
+        <Button className="w-full rounded-none" onClick={onSubmit}>
           Submit
         </Button>
       </div>

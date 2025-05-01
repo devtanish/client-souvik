@@ -35,7 +35,7 @@ export default function Home() {
     <main className="flex min-h-screen items-center justify-center bg-gray-200">
       {/* Example of button that could be positioned anywhere */}
       <div className="absolute ">
-        <Button onClick={handleLoginClick}>Login</Button>
+        <Button className="rounded-none" onClick={handleLoginClick}>Login</Button>
       </div>
 
       {/* Modal backdrop and container - fixed positioning ensures it's always centered */}

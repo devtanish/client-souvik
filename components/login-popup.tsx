@@ -18,7 +18,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
   const [rememberMe, setRememberMe] = useState(false)
 
   return (
-    <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+    <div className="relative w-full max-w-md rounded-none bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
       {/* Close button */}
       <button
         onClick={onClose}
@@ -28,8 +28,8 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
         <X className="h-5 w-5" />
       </button>
 
-      <div className="mb-6 flex justify-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
+      <div className=" flex justify-center">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white">
           <Clock className="h-6 w-6 text-gray-600" />
         </div>
       </div>
@@ -44,6 +44,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
           <Label htmlFor="phone">Phone Number</Label>
           <Input
             id="phone"
+            className="rounded-none border-gray-300"
             type="tel"
             placeholder="+91 9876543210"
             value={phoneNumber}
@@ -54,6 +55,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Checkbox
+              className="rounded-none"
               id="remember"
               checked={rememberMe}
               onCheckedChange={(checked) => setRememberMe(checked as boolean)}
@@ -68,18 +70,18 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
           </a>
         </div>
 
-        <Button className="w-full" onClick={onVerify}>
+        <Button className="w-full rounded-none" onClick={onVerify}>
           Verify
         </Button>
 
-        <div className="relative my-4">
+        <div className="relative my-4 mt-0">
           <Separator />
           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-xs text-gray-500">
             Or
           </span>
         </div>
 
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full rounded-none">
           <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -102,7 +104,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
           Login with Google
         </Button>
 
-        <div className="mt-4 text-center text-sm">
+        <div className=" text-center text-sm">
           Don&apos;t have an account?{" "}
           <a href="#" className="text-blue-500 hover:underline">
             Signup
