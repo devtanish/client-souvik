@@ -87,7 +87,7 @@ export default function Footer() {
         {/* Bottom Section with Logo and Social Icons */}
         <div className="md:mt-12 mt-2 align-middle border-t pt-8 ">
           <div className="flex space-x-4 justify-center align-middle">
-            <Link href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
+            <Link target="_blank" href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" 
                 width="20" 
                 height="20" 
@@ -98,7 +98,7 @@ export default function Footer() {
                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
               </svg>
             </Link>
-            <Link href="https://www.instagram.com/raya_stories?igsh=bGgydXZoNzE2M253" aria-label="Instagram">
+            <Link target="_blank" href="https://www.instagram.com/raya_stories?igsh=bGgydXZoNzE2M253" aria-label="Instagram">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -116,7 +116,7 @@ export default function Footer() {
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
               </svg>
             </Link>
-            <Link href="https://pin.it/6nY94OeoY" aria-label="Pinterest">
+            <Link target="_blank" href="https://pin.it/6nY94OeoY" aria-label="Pinterest">
             <svg 
               height="20" 
               width="20" 
@@ -136,7 +136,7 @@ export default function Footer() {
                 	c28.679-37.02,44.474-88.618,44.474-145.282C457.206,127.983,438.182,84.311,405.017,52.467z"/>
                 </svg>
             </Link>
-            <Link href="https://x.com/raya_stories?t=0Vtsc_NnsdYBjFGn7a2NnQ&s=09" aria-label="Twitter">
+            <Link target="_blank" href="https://x.com/raya_stories?t=0Vtsc_NnsdYBjFGn7a2NnQ&s=09" aria-label="Twitter">
               <svg xmlns="http://www.w3.org/2000/svg" 
                 width="19" 
                 height="19" 
@@ -147,7 +147,7 @@ export default function Footer() {
                 <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
               </svg>
             </Link>
-            <Link href="https://youtube.com/@raya_stories?si=9GyNacZKoyVW2K9z" aria-label="YouTube">
+            <Link target="_blank" href="https://youtube.com/@raya_stories?si=9GyNacZKoyVW2K9z" aria-label="YouTube">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
