@@ -144,7 +144,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 w-72 h-full bg-white border-r border-gray-200 shadow-lg z-10 overflow-y-auto transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10 overflow-y-auto transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
