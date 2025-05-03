@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, Menu, X } from "lucide-react"
 
@@ -71,6 +72,10 @@ const womenCategories: Category[] = [
 ]
 
 const menCategories: Category[] = [
+  {
+    name: "All",
+    url: "#",
+  },
   {
     name: "RINGS",
     url: "#",
@@ -144,73 +149,77 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10 overflow-y-auto transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`flex flex-col justify-between fixed top-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10 overflow-y-auto transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
-        {/* Tab Navigation */}
-        <div className="flex border-b border-gray-200 mt-16">
-          <button
-            className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-black" : "text-gray-500"}`}
-            onClick={() => setActiveTab("women")}
-          >
-            WOMEN
-          </button>
-          <button
-            className={`flex-1 py-4 text-center font-medium ${activeTab === "men" ? "text-black" : "text-gray-500"}`}
-            onClick={() => setActiveTab("men")}
-          >
-            MEN
-          </button>
-        </div>
+        <div>
+          {/* Tab Navigation */}
+          <div className="flex border-b border-gray-200 mt-16">
+            <button
+              className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-black" : "text-gray-500"}`}
+              onClick={() => setActiveTab("women")}
+            >
+              WOMEN
+            </button>
+            <button
+              className={`flex-1 py-4 text-center font-medium ${activeTab === "men" ? "text-black" : "text-gray-500"}`}
+              onClick={() => setActiveTab("men")}
+            >
+              MEN
+            </button>
+          </div>
 
-        {/* Category Navigation */}
-        <div className="py-6">
-          <div className="px-6 mb-4 text-sm font-medium text-gray-500">SHOP BY</div>
+          {/* Category Navigation */}
+          <div className="py-6">
+            <div className=" px-6 mb-4 text-sm font-medium text-gray-500">SHOP BY</div>
 
-          <ul className="space-y-1">
-            {currentCategories.map((category) => (
-              <li key={category.name} className="px-6">
-                <div className="flex items-center justify-between py-2">
-                  <a
-                    href={category.url}
-                    className="text-sm font-medium"
-                    onClick={(e) => {
-                      if (category.subCategories?.length) {
-                        e.preventDefault()
-                        toggleCategory(category.name)
-                      }
-                    }}
-                  >
-                    {category.name}
-                  </a>
-                  {category.subCategories?.length ? (
-                    <button
-                      onClick={() => toggleCategory(category.name)}
-                      className="text-gray-500 focus:outline-none"
-                      aria-label={expandedCategories.includes(category.name) ? "Collapse" : "Expand"}
+            <ul className="space-y-1">
+              {currentCategories.map((category) => (
+                <li key={category.name} className="px-6">
+                  <div className="flex items-center justify-between py-2">
+                    <a
+                      href={category.url}
+                      className="text-sm font-medium"
+                      onClick={(e) => {
+                        if (category.subCategories?.length) {
+                          e.preventDefault()
+                          toggleCategory(category.name)
+                        }
+                      }}
                     >
-                      {expandedCategories.includes(category.name) ? <Minus size={16} /> : <Plus size={16} />}
-                    </button>
-                  ) : null}
-                </div>
+                      {category.name}
+                    </a>
+                    {category.subCategories?.length ? (
+                      <button
+                        onClick={() => toggleCategory(category.name)}
+                        className="text-gray-500 focus:outline-none"
+                        aria-label={expandedCategories.includes(category.name) ? "Collapse" : "Expand"}
+                      >
+                        {expandedCategories.includes(category.name) ? <Minus size={16} /> : <Plus size={16} />}
+                      </button>
+                    ) : null}
+                  </div>
 
-                {/* Subcategories */}
-                {expandedCategories.includes(category.name) && category.subCategories && (
-                  <ul className="ml-4 mt-1 mb-2 space-y-1">
-                    {category.subCategories.map((subCategory) => (
-                      <li key={subCategory.name}>
-                        <a href={subCategory.url} className="block py-1 text-sm text-gray-600 hover:text-black">
-                          {subCategory.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
+                  {/* Subcategories */}
+                  {expandedCategories.includes(category.name) && category.subCategories && (
+                    <ul className="ml-4 mt-1 mb-2 space-y-1">
+                      {category.subCategories.map((subCategory) => (
+                        <li key={subCategory.name}>
+                          <a href={subCategory.url} className="block py-1 text-sm text-gray-600 hover:text-black">
+                            {subCategory.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+          <div className=" border-2 mb-50">
+            <Button className="w-1/2 text-lg rounded-none ">Signup</Button>
+          </div>
       </div>
     </>
   )
