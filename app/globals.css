@@ -44,8 +44,8 @@
  }
  
  ::-webkit-scrollbar {
-  width: 0px; /* Thin scrollbar */
-  height: 0px;
+  width: 1px; /* Thin scrollbar */
+  height: 1px;
 }
 
 ::-webkit-scrollbar-track {
@@ -53,7 +53,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Darker thumb */
+  background: #4e4b4b; /* Darker thumb */
   border-radius: 8px;
 }
 
