@@ -1,5 +1,6 @@
 "use client"
 
+import Logo from "./logo"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, Menu, X } from "lucide-react"
@@ -18,6 +19,10 @@ type Category = {
 
 // Sample data for both tabs
 const womenCategories: Category[] = [
+  {
+    name: "All",  
+    url: "#",
+  },
   {
     name: "RINGS",
     url: "#",
@@ -147,14 +152,16 @@ export default function Sidebar() {
         {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
+      <Logo/>
+
       {/* Sidebar */}
       <div
-        className={`flex flex-col justify-between fixed top-0 md:top-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10 overflow-y-auto transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`overflow-y-scroll hide-scrollbar delay-100 flex flex-col justify-between fixed top-0 md:top-52 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div>
           {/* Tab Navigation */}
-          <div className="flex border-b border-gray-200 mt-16">
+          <div className="flex border-b border-gray-200 mt-0">
             <button
               className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-black" : "text-gray-500"}`}
               onClick={() => setActiveTab("women")}
@@ -217,9 +224,7 @@ export default function Sidebar() {
             </ul>
           </div>
         </div>
-          <div className=" border-2 mb-50">
-            <Button className="w-1/2 text-lg rounded-none ">Signup</Button>
-          </div>
+            <Button className="w-1/2 text-lg rounded-none place-self-center-safe mb-70">Signup</Button>
       </div>
     </>
   )
