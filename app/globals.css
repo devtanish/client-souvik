@@ -44,8 +44,8 @@
  }
  
  ::-webkit-scrollbar {
-  width: 1px; /* Thin scrollbar */
-  height: 1px;
+  width: 0px; /* Thin scrollbar */
+  height: 0px;
 }
 
 ::-webkit-scrollbar-track {

@@ -20,7 +20,7 @@ type Category = {
 // Sample data for both tabs
 const womenCategories: Category[] = [
   {
-    name: "All",  
+    name: "All",
     url: "#",
   },
   {
@@ -146,17 +146,17 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed top-4 left-4 z-20 bg-white p-2 rounded-md shadow-md hover:bg-gray-100 focus:outline-none transition-all duration-200"
+        className="fixed top-4 left-4 z-50 bg-white p-2 rounded-md shadow-md hover:bg-gray-100 focus:outline-none transition-all duration-200"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
         {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      <Logo/>
+      <Logo />
 
       {/* Sidebar */}
       <div
-        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 md:top-52 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 pt-40  left-0 md:w-[40rem]  bg-white border-r border-gray-200  z-20  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div>
@@ -175,57 +175,62 @@ export default function Sidebar() {
               MEN
             </button>
           </div>
-
-          {/* Category Navigation */}
-          <div className="py-6">
-            <div className=" px-6 mb-4 text-sm font-medium text-gray-500">SHOP BY</div>
-
-            <ul className="space-y-1">
-              {currentCategories.map((category) => (
-                <li key={category.name} className="px-6">
-                  <div className="flex items-center justify-between py-2">
-                    <a
-                      href={category.url}
-                      className="text-sm font-medium"
-                      onClick={(e) => {
-                        if (category.subCategories?.length) {
-                          e.preventDefault()
-                          toggleCategory(category.name)
-                        }
-                      }}
-                    >
-                      {category.name}
-                    </a>
-                    {category.subCategories?.length ? (
-                      <button
-                        onClick={() => toggleCategory(category.name)}
-                        className="text-gray-500 focus:outline-none ml-7"
-                        aria-label={expandedCategories.includes(category.name) ? "Collapse" : "Expand"}
-                      >
-                        {expandedCategories.includes(category.name) ? <Minus size={16} /> : <Plus size={16} />}
-                      </button>
-                    ) : null}
-                  </div>
-
-                  {/* Subcategories */}
-                  {expandedCategories.includes(category.name) && category.subCategories && (
-                    <ul className="ml-4 mt-1 mb-2 space-y-1">
-                      {category.subCategories.map((subCategory) => (
-                        <li key={subCategory.name}>
-                          <a href={subCategory.url} className="block py-1 text-sm text-gray-600 hover:text-black">
-                            {subCategory.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
-            <p className="place-self-center-safe">New to raya? Create Account</p>
-            <Button className="w-1/2 text-lg rounded-none place-self-center-safe mb-70">Signup</Button>
+      </div>
+
+        {/* Category Navigation */}
+        <div
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-10 pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+      >
+        <div className="py-6">
+          <div className=" px-6 mb-4 text-sm font-medium text-gray-500">SHOP BY</div>
+
+          <ul className="space-y-1">
+            {currentCategories.map((category) => (
+              <li key={category.name} className="px-6">
+                <div className="flex items-center justify-between py-2">
+                  <a
+                    href={category.url}
+                    className="text-sm font-medium"
+                    onClick={(e) => {
+                      if (category.subCategories?.length) {
+                        e.preventDefault()
+                        toggleCategory(category.name)
+                      }
+                    }}
+                  >
+                    {category.name}
+                  </a>
+                  {category.subCategories?.length ? (
+                    <button
+                      onClick={() => toggleCategory(category.name)}
+                      className="text-gray-500 focus:outline-none ml-20"
+                      aria-label={expandedCategories.includes(category.name) ? "Collapse" : "Expand"}
+                    >
+                      {expandedCategories.includes(category.name) ? <Minus size={16} /> : <Plus size={16} />}
+                    </button>
+                  ) : null}
+                </div>
+
+                {/* Subcategories */}
+                {expandedCategories.includes(category.name) && category.subCategories && (
+                  <ul className="ml-4 mt-1 mb-2 space-y-1">
+                    {category.subCategories.map((subCategory) => (
+                      <li key={subCategory.name}>
+                        <a href={subCategory.url} className="block py-1 text-sm text-gray-600 hover:text-black">
+                          {subCategory.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="place-self-center-safe">New to raya? Create Account</p>
+        <Button className="w-1/2 text-lg rounded-none place-self-center-safe mb-70">Signup</Button>
       </div>
     </>
   )
