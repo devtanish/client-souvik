@@ -156,7 +156,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 pt-40  left-0 md:w-[40rem]  bg-white border-r border-gray-200  z-20  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 pt-40 w-screen left-0 md:w-[40rem]  bg-white border-gray-200  z-20  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div>
