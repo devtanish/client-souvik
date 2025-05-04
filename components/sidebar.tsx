@@ -156,12 +156,12 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`overflow-y-scroll hide-scrollbar delay-100 flex flex-col justify-between fixed top-0 md:top-52 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 md:top-52 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div>
           {/* Tab Navigation */}
-          <div className="flex border-b border-gray-200 mt-0">
+          <div className="flex border-b border-gray-200 md:mt-0 mt-12">
             <button
               className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-black" : "text-gray-500"}`}
               onClick={() => setActiveTab("women")}
