@@ -43,6 +43,24 @@
    --radius-xl: calc(var(--radius) + 4px);
  }
  
+ ::-webkit-scrollbar {
+  width: 0px; /* Thin scrollbar */
+  height: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Darker thumb */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
  :root {
    --radius: 0.625rem;
    --background: oklch(1 0 0);
