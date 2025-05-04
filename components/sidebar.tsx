@@ -156,7 +156,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 pt-40 w-screen left-0 md:w-[40rem]  bg-white border-gray-200  z-20  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 md:pt-40 w-screen left-0 md:w-[40rem]  bg-white border-gray-200  z-20  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div>
@@ -180,7 +180,7 @@ export default function Sidebar() {
 
         {/* Category Navigation */}
         <div
-        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-10 pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed md:top-5 top-23 md:pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div className="py-6">
