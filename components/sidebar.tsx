@@ -4,6 +4,7 @@ import Logo from "./logo"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, Menu, X } from "lucide-react"
+import { VscMenu } from "react-icons/vsc"
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -199,7 +200,7 @@ export default function Sidebar() {
                     {category.subCategories?.length ? (
                       <button
                         onClick={() => toggleCategory(category.name)}
-                        className="text-gray-500 focus:outline-none"
+                        className="text-gray-500 focus:outline-none ml-7"
                         aria-label={expandedCategories.includes(category.name) ? "Collapse" : "Expand"}
                       >
                         {expandedCategories.includes(category.name) ? <Minus size={16} /> : <Plus size={16} />}
@@ -224,6 +225,7 @@ export default function Sidebar() {
             </ul>
           </div>
         </div>
+            <p className="place-self-center-safe">New to raya? Create Account</p>
             <Button className="w-1/2 text-lg rounded-none place-self-center-safe mb-70">Signup</Button>
       </div>
     </>
