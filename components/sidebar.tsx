@@ -3,7 +3,7 @@
 import Logo from "./logo"
 import { Button } from "./ui/button"
 import { useState } from "react"
-import { Plus, Minus } from "lucide-react"
+import { Plus, Minus, X, Menu } from "lucide-react"
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -146,15 +146,16 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed md:top-7 md:left-10.5 -top-4.5 left-2 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-1000"
+        className="fixed md:top-7 md:left-10.5 top-2 left-3 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
+        {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
         {/* {isSidebarOpen ?  */}
-        <div role="presentation" className="relative md:w-16 md:h-16 h-8 w-8 inline-block cursor-pointer group">
-        <span className={`${isSidebarOpen? "visible" : "hidden"} rotate-135 top-10 block absolute h-[0.03rem]  w-full bg-black rounded transition-all duration-1000 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
-        <span className={`${isSidebarOpen? "hidden opacity-0 invisible" : "visible"}  block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-1000 ease-in-out top-6 group-[.open]:opacity-0`}></span>
-        <span className={`rotate-${isSidebarOpen? "45" : "0"} block absolute h-[0.03rem]  w-full bg-black rounded transition-all duration-1000 ease-in-out top-10 group-[.open]:rotate-45 group-[.open]:top-7`}></span>
-        <span className={`${isSidebarOpen? "hidden opacity-0 invisible" : "visible"} block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-1000 ease-in-out top-14 group-[.open]:opacity-0`}></span>
+        <div role="presentation" className="relative md:w-16 md:h-16 h-8 w-8 md:inline-block cursor-pointer group md:visible hidden">
+        <span className={`${isSidebarOpen? "visible" : "invisible opacity-0"}  rotate-135 top-10 md:block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
+        <span className={`${isSidebarOpen? " opacity-0 invisible" : "visible"}  md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-6 group-[.open]:opacity-0`}></span>
+        <span className={`${isSidebarOpen ? "rotate-45 top-7" : "rotate-0"} absolute top-10 md:block h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out `}></span>
+        <span className={`${isSidebarOpen? " opacity-0 invisible" : "visible"} md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-14 group-[.open]:opacity-0`}></span>
       </div> 
       </button>
 
