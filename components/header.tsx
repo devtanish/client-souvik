@@ -6,7 +6,7 @@ import { useState } from "react"
 
 export default function Header() {
 
-    const [selectedTab, setSelectedTab] = useState()
+    const [selectedTab] = useState()
 
     const tabs = [{
         name: "Piercing Studio",
