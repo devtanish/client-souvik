@@ -3,7 +3,7 @@
 import Logo from "./logo"
 import { Button } from "./ui/button"
 import { useState } from "react"
-import { Plus, Minus, Menu, X } from "lucide-react"
+import { Plus, Minus } from "lucide-react"
 
 // Define the data structure for our categories
 type SubCategory = {
