@@ -26,7 +26,7 @@ export default function OtpPopup({ onSubmit, onClose }: OtpPopupProps) {
       </button>
 
       <div className="mb-6 text-center">
-        <h2 className="mb-2 text-2xl font-bold">Enter OTP</h2>
+        <h2 className="mb-2 text-2xl font-bold text-[#01081c]">Enter OTP</h2>
         <p className="text-sm text-gray-500">We&apos;ve sent a verification code to your phone number</p>
       </div>
 
@@ -43,7 +43,7 @@ export default function OtpPopup({ onSubmit, onClose }: OtpPopupProps) {
           />
         </div>
 
-        <Button className="w-full rounded-none" onClick={onSubmit}>
+        <Button className="w-full rounded-none bg-[#01081c]" onClick={onSubmit}>
           Submit
         </Button>
       </div>

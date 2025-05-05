@@ -171,13 +171,13 @@ export default function Sidebar() {
           {/* Tab Navigation */}
           <div className="flex border-b border-gray-200 md:mt-0 mt-12">
             <button
-              className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-black" : "text-gray-500"}`}
+              className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-[#01081c]" : "text-gray-500"}`}
               onClick={() => setActiveTab("women")}
             >
               WOMEN
             </button>
             <button
-              className={`flex-1 py-4 text-center font-medium ${activeTab === "men" ? "text-black" : "text-gray-500"}`}
+              className={`flex-1 py-4 text-center font-medium ${activeTab === "men" ? "text-[#01081c]" : "text-gray-500"}`}
               onClick={() => setActiveTab("men")}
             >
               MEN
@@ -238,13 +238,13 @@ export default function Sidebar() {
           </ul>
         </div>
         <div className="md:mb-8 mb-24  w-full flex flex-col items-center">
-          <div className="mb-5">
-            <Button className="w-[300px] text-lg rounded-none justify-center mt-2">SIGN IN</Button>
-            <p className="text-center ">New to raya? <Link href={"sign-up"} className="underline cursor-pointer">Create Account</Link></p>
+          <div className="mb-5 ">
+            <Button className="mb-1 w-[300px] text-lg rounded-none bg-[#01081c] justify-center mt-2">SIGN IN</Button>
+            <p className="text-[#01081c] text-center ">New to Raya? <Link href={"sign-up"} className="text-[#01081c] underline cursor-pointer">Create Account</Link></p>
           </div>
           <span className={`h-[0.03rem] w-full bg-gray-200 `}></span>
-          <div className="mt-2 w-full">
-            <p>Shipping To: <Link className="underline cursor-pointer" href="#">CANADA (CAD)</Link></p>
+          <div className="mt-2 w-full text-sm font-medium text-gray-500">
+            <p>Shipping To: <Link className="underline cursor-pointer " href="#">CANADA (CAD)</Link></p>
           </div>
 
           {/* <div className="justify-center mt-2">

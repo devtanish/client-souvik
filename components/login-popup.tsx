@@ -41,7 +41,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">Phone Number</Label>
+          <Label className="text-[#01081c]" htmlFor="phone">Phone Number</Label>
           <Input
             id="phone"
             className="rounded-none border-gray-300"
@@ -70,7 +70,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
           </a>
         </div>
 
-        <Button className="w-full rounded-none" onClick={onVerify}>
+        <Button className="w-full rounded-none bg-[#01081c]" onClick={onVerify}>
           Verify
         </Button>
 
@@ -81,7 +81,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
           </span>
         </div>
 
-        <Button variant="outline" className="w-full rounded-none">
+        <Button variant="outline" className="w-full rounded-none text-[#01081c]">
           <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -104,7 +104,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
           Login with Google
         </Button>
 
-        <div className=" text-center text-sm">
+        <div className=" text-center text-sm text-[#01081c]">
           Don&apos;t have an account?{" "}
           <a href="#" className="text-blue-500 hover:underline">
             Signup
