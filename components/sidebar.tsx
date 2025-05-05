@@ -146,10 +146,16 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed top-4 left-4 z-50 bg-white p-2 rounded-md shadow-md hover:bg-gray-100 focus:outline-none transition-all duration-200"
+        className="fixed md:top-7 md:left-10.5 -top-4.5 left-2 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-1000"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
-        {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        {/* {isSidebarOpen ?  */}
+        <div role="presentation" className="relative md:w-16 md:h-16 h-8 w-8 inline-block cursor-pointer group">
+        <span className={`${isSidebarOpen? "visible" : "hidden"} rotate-135 top-10 block absolute h-[0.03rem]  w-full bg-black rounded transition-all duration-1000 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
+        <span className={`${isSidebarOpen? "hidden opacity-0 invisible" : "visible"}  block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-1000 ease-in-out top-6 group-[.open]:opacity-0`}></span>
+        <span className={`rotate-${isSidebarOpen? "45" : "0"} block absolute h-[0.03rem]  w-full bg-black rounded transition-all duration-1000 ease-in-out top-10 group-[.open]:rotate-45 group-[.open]:top-7`}></span>
+        <span className={`${isSidebarOpen? "hidden opacity-0 invisible" : "visible"} block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-1000 ease-in-out top-14 group-[.open]:opacity-0`}></span>
+      </div> 
       </button>
 
       <Logo />
@@ -178,8 +184,8 @@ export default function Sidebar() {
         </div>
       </div>
 
-        {/* Category Navigation */}
-        <div
+      {/* Category Navigation */}
+      <div
         className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed md:top-5 top-23 md:pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
