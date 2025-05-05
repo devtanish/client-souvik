@@ -152,11 +152,11 @@ export default function Sidebar() {
         {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
         {/* {isSidebarOpen ?  */}
         <div role="presentation" className="relative md:w-16 md:h-16 h-8 w-8 md:inline-block cursor-pointer group md:visible hidden">
-        <span className={`${isSidebarOpen? "visible" : "invisible opacity-0"}  rotate-135 top-10 md:block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
-        <span className={`${isSidebarOpen? " opacity-0 invisible" : "visible"}  md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-6 group-[.open]:opacity-0`}></span>
-        <span className={`${isSidebarOpen ? "rotate-45 top-7" : "rotate-0"} absolute top-10 md:block h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out `}></span>
-        <span className={`${isSidebarOpen? " opacity-0 invisible" : "visible"} md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-14 group-[.open]:opacity-0`}></span>
-      </div> 
+          <span className={`${isSidebarOpen ? "visible" : "invisible opacity-0"}  rotate-135 top-10 md:block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
+          <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"}  md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-6 group-[.open]:opacity-0`}></span>
+          <span className={`${isSidebarOpen ? "rotate-45 top-7" : "rotate-0"} absolute top-10 md:block h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out `}></span>
+          <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"} md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-14 group-[.open]:opacity-0`}></span>
+        </div>
       </button>
 
       <Logo />
@@ -236,8 +236,20 @@ export default function Sidebar() {
             ))}
           </ul>
         </div>
-        <p className="place-self-center-safe">New to raya? Create Account</p>
-        <Button className="w-1/2 text-lg rounded-none place-self-center-safe mb-70">Signup</Button>
+        <div className="md:mb-8 mb-24  w-full flex flex-col items-center">
+          <div className="mb-5">
+            <Button className="w-[300px] text-lg rounded-none justify-center mt-2">Signin</Button>
+            <p className="text-center ">New to raya? <a className="underline">Create Account</a></p>
+          </div>
+          <span className={`h-[0.03rem] w-full bg-gray-200 `}></span>
+          <div className="mt-2 w-full">
+            <p>Shipping To: <a className="underline">CANADA (CAD)</a></p>
+          </div>
+
+          {/* <div className="justify-center mt-2">
+            <p className=""><p>Shipping To : </p><p>Curency :</p></p>
+          </div> */}
+        </div>
       </div>
     </>
   )
