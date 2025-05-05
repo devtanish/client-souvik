@@ -147,7 +147,7 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed md:top-7 md:left-10.5 top-2 left-3 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
+        className="fixed md:top-11 md:left-10.5 top-8 left-3 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
         {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
