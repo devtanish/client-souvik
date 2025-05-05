@@ -1,7 +1,6 @@
 import Login from "@/components/main-login";
 import WhatsAppChatButton from "@/components/whatsapp-chat-button";
 import Sidebar from "@/components/sidebar";
-import Logo from "@/components/logo";
 
 export default function Home() {
   return (
