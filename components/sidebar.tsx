@@ -4,6 +4,7 @@ import Logo from "./logo"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, X, Menu } from "lucide-react"
+import Link from "next/link"
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -238,12 +239,12 @@ export default function Sidebar() {
         </div>
         <div className="md:mb-8 mb-24  w-full flex flex-col items-center">
           <div className="mb-5">
-            <Button className="w-[300px] text-lg rounded-none justify-center mt-2">Signin</Button>
-            <p className="text-center ">New to raya? <a className="underline">Create Account</a></p>
+            <Button className="w-[300px] text-lg rounded-none justify-center mt-2">SIGN IN</Button>
+            <p className="text-center ">New to raya? <Link href={"sign-up"} className="underline cursor-pointer">Create Account</Link></p>
           </div>
           <span className={`h-[0.03rem] w-full bg-gray-200 `}></span>
           <div className="mt-2 w-full">
-            <p>Shipping To: <a className="underline">CANADA (CAD)</a></p>
+            <p>Shipping To: <Link className="underline cursor-pointer" href="#">CANADA (CAD)</Link></p>
           </div>
 
           {/* <div className="justify-center mt-2">
