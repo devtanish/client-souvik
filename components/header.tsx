@@ -9,11 +9,11 @@ export default function Header() {
     const [selectedTab] = useState()
 
     const tabs = [{
-        name: "Piercing Studio",
-        href: "/piercing-studio"
+        name: "exchange program",
+        href: "/exchange-program"
     }, {
-        name: "Stores & Services",
-        href: "/stores-services"
+        name: "Design services",
+        href: "/Design-services"
     }, {
         name: "About Us",
         href: "/about-us"
@@ -21,8 +21,8 @@ export default function Header() {
         name: "Help",
         href: "/help"
     }, {
-        name: "Join Mejuri+",
-        href: "/join-mejuri"
+        name: "Join Raya +",
+        href: "/join-raya"
     }]
 
     return (
@@ -36,7 +36,7 @@ export default function Header() {
                 </div>
 
                 <div className="hidden lg:flex">
-                    <div className="flex items-center space-x-10">
+                    <div className="flex items-center space-x-8">
                         {tabs.map((tab, index) => (
                             <Link
                                 key={index}
