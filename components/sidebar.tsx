@@ -267,7 +267,7 @@ export default function Sidebar() {
             ))}
           </ul>
         </div>
-        <div className="md:mb-8 mb-24  w-full flex flex-col items-center">
+        <div className="md:mb-8 mb-30  w-full flex flex-col items-center">
           <div className="mb-5 ">
             <Button className="mb-1 w-[300px] text-lg rounded-none bg-[#01081c] justify-center mt-2">SIGN IN</Button>
             <p className="text-[#01081c] text-center ">New to Raya? <Link href={"sign-up"} className="text-[#01081c] underline cursor-pointer">Create Account</Link></p>
