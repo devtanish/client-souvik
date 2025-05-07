@@ -67,7 +67,7 @@ export default function Header() {
     }
     
     useEffect(() => {
-        const startInterval = () => setInterval(handleClick, 32000);
+        const startInterval = () => setInterval(handleClick, 32000); 
         startInterval();
         return () => {
             clearInterval(startInterval());

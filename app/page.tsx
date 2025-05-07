@@ -3,7 +3,6 @@ import WhatsAppChatButton from "@/components/whatsapp-chat-button";
 import Sidebar from "@/components/sidebar";
 import Tooltip from "@/components/tooltip";
 import Header from "@/components/header";
-import LandingPage from "@/components/landingPage";
 
 export default function Home() {
   return (
@@ -11,7 +10,6 @@ export default function Home() {
       <Header/>
       <Sidebar/>
       <Tooltip/>
-      <LandingPage/>
       <Login/>
       <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
     </div>
