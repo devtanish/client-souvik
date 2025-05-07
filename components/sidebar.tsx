@@ -1,10 +1,22 @@
 "use client"
 
+import { DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import Logo from "./logo"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, X, Menu } from "lucide-react"
 import Link from "next/link"
+import { PiCurrencyDollarLight } from "react-icons/pi";
+import { PiQuestionLight } from "react-icons/pi";
+import { IoSearchOutline } from "react-icons/io5";
+import { BsCart3 } from "react-icons/bs";
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -170,6 +182,25 @@ export default function Sidebar() {
         <div>
           {/* Tab Navigation */}
           <div className="flex border-b border-gray-200 md:mt-0 mt-17">
+            <div>
+              <Link href={"/cart"} className="md:hidden fixed top-10.5 right-5"><BsCart3 size={21} /></Link>
+              <button className="md:hidden fixed top-10.5 right-13"><IoSearchOutline size={21} /></button>
+              <Link href={"/help"} className="md:hidden z-30 fixed top-10.5 right-21"><PiQuestionLight size={21} /></Link>
+              <div className="md:hidden z-20 fixed top-8.5 translate-y-[0.053rem] right-27.5 translate-x-[0.19rem]">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="border-none bg-[#FFFF] shadow-none"><PiCurrencyDollarLight color="black"/></Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56 ring-0">
+                    <DropdownMenuRadioGroup >
+                      <DropdownMenuRadioItem value="top">INR</DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="bottom">USD</DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="right">DRM</DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
             <button
               className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-[#01081c]" : "text-gray-500"}`}
               onClick={() => setActiveTab("women")}
