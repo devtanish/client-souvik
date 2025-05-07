@@ -1,63 +1,28 @@
-"use client"
+import { IoBag } from "react-icons/io5";
+import { Questrial, Cormorant_Garamond } from 'next/font/google';
 
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useState } from "react"
+export const cormorant_Garamond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['600'],
+  variable: '--font-inconsolata', // Correct variable name
+});
 
-export default function Header() {
+export const questrial = Questrial({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-inconsolata', // Correct variable name
+});
 
-    const [selectedTab] = useState()
-
-    const tabs = [{
-        name: "exchange program",
-        href: "/exchange-program"
-    }, {
-        name: "Design services",
-        href: "/Design-services"
-    }, {
-        name: "About Us",
-        href: "/about-us"
-    }, {
-        name: "Help",
-        href: "/help"
-    }, {
-        name: "Join Raya +",
-        href: "/join-raya"
-    }]
+export default function Header(){
 
     return (
-        <header className="w-full absolute top-0 z-40">
-            {/* Top black bar */}
-            <div className="bg-black text-white py-1.5 px-4 flex justify-between items-center text-xs">
-                <div className="flex items-center space-x-2">
-                    <ChevronLeft className="h-5 w-5" />
-                    <ChevronRight className="h-5 w-5" />
-                    <span className="ml-2">Free Shipping On All Orders Over C$75.</span>
-                </div>
+      <div className=" fixed justify-between  w-2/5 top-15 right-12 hidden lg:flex">
+        <input
+          type="email"
+          placeholder="SEARCH"
+          className= {`${questrial.className} md:w-[400px] text-sm w-[170px] bg-transparent border-b border-gray-500 focus:border-gray-300 text-black placeholder-black py- px-0 outline-none transition-colors`}
+        />
+        <IoBag size={25} className="hidden lg:flex rounded-4xl ml-5" />      </div>
 
-                <div className="hidden lg:flex">
-                    <div className="flex items-center space-x-8">
-                        {tabs.map((tab, index) => (
-                            <Link
-                                key={index}
-                                href={tab.href}
-                                className={`${selectedTab === tab.name ? "bg-white text-black" : ""
-                                    } hover:underline whitespace-nowrap`}
-                            >
-                                {tab.name}
-                            </Link>
-                        ))}
-                        <div className="flex items-center ml-0 mr-6">
-                            <span className="flex items-center">
-                                <span className="w-5 h-5 bg-red-600 text-white flex items-center justify-center text-xs mr-1">
-                                    🍁
-                                </span>
-                                CAD
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
     )
 }
