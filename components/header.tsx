@@ -3,8 +3,8 @@ import { Questrial, Cormorant_Garamond } from 'next/font/google';
 import Link from "next/link";
 import Image from "next/image";
 import ToggleSearch from "./toggle-search";
-import { LanguagesIcon } from "lucide-react";
-import { CircleDollarSignIcon } from "./ui/circle-dollar-sign";
+import { LuHeart } from "react-icons/lu";
+import { SlHandbag } from "react-icons/sl";
 
 export const cormorant_Garamond = Cormorant_Garamond({
   subsets: ['latin'],
@@ -30,10 +30,10 @@ export default function Header() {
         height={280}
       />
 
-      <div className="float-right md:hidden inline-flex -translate-y-2 -translate-x-2">
+      <div className="float-right md:hidden gap-1.5 mr-2 inline-flex -translate-y-2 -translate-x-2">
         <ToggleSearch />
         <Link href={"/cart"}>
-          <IoBag size={25} className=" ml-2 mt-1.5" />
+          <SlHandbag size={20} className="mt-2"/>
         </Link>
       </div>
 
@@ -48,8 +48,7 @@ export default function Header() {
       </div>
 
       <div className="hidden md:flex gap-4">
-        <CircleDollarSignIcon size={30} className=""/>
-        <LanguagesIcon size={30} />
+        <LuHeart size={25} className="mt-0.5"/>
         <IoBag size={25} className="rounded-4xl" />
       </div>
     </div>
