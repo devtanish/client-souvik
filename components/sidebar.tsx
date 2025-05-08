@@ -11,10 +11,10 @@ import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, X, Menu } from "lucide-react"
 import Link from "next/link"
-import { PiCurrencyDollarLight } from "react-icons/pi";
 import { PiQuestionLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
+import { LanguagesIcon } from "lucide-react";
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -157,7 +157,7 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed md:top-8 md:left-10.5 top-8 left-3 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
+        className="fixed md:top-8 md:left-10.5 top-7.5 left-1.5 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
         {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
@@ -187,7 +187,7 @@ export default function Sidebar() {
               <div className="md:hidden z-20 fixed top-8.5 translate-y-[0.053rem] right-27.5 translate-x-[0.19rem]">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="border-none bg-[#FFFF] shadow-none"><PiCurrencyDollarLight color="black"/></Button>
+                    <Button variant="outline" className="border-none bg-[#FFFF] shadow-none"><LanguagesIcon /></Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56 ring-0">
                     <DropdownMenuRadioGroup >

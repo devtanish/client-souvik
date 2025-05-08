@@ -75,9 +75,9 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={` font-sans  w-full absolute top-0 z-40`}>
+        <header className={` font-sans  w-full md:absolute fixed top-0 z-40`}>
             {/* Top black bar */}
-            <div className="bg-black text-[#FFFFFF] py-1.5 px-4 flex justify-between items-center text-xs">
+            <div className="bg-[#010614] text-[#FFFFFF] py-1.5 px-4 flex justify-between items-center text-xs">
                 <div className="items-center flex space-x-2 w-screen ">
                     <ChevronLeft className="h-5 w-5 hidden lg:flex" onClick={() => {
                         const decerese = textArray.findIndex(fruit => fruit === text) + 1
@@ -113,7 +113,7 @@ export default function Header() {
                                             variant="outline"
                                             role="combobox"
                                             aria-expanded={open}
-                                            className="mr-9 ml-0 p-0 border-none font-light h-4 hover:underline hover:bg-black hover:text-[#FFFF] bg-black w-full justify-between"
+                                            className="mr-9 ml-0 p-0 border-none font-light h-4 hover:underline hover:bg-[#081336] hover:text-[#FFFF] bg-[#081336] w-full justify-between"
                                         >
                                             {value
                                                 ? frameworks.find((framework) => framework.value === value)?.label
@@ -123,7 +123,7 @@ export default function Header() {
                                     </PopoverTrigger>
                                     <PopoverContent className=" mt-1 w-[200px] p-0 rounded-none">
                                         <Command>
-                                            <CommandInput placeholder="Search framework..." />
+                                            <CommandInput placeholder="Search language..." />
                                             <CommandList>
                                                 <CommandEmpty>No framework found.</CommandEmpty>
                                                 <CommandGroup >
