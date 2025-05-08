@@ -157,7 +157,7 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed md:top-8 md:left-10.5 top-7.5 left-1.5 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
+        className="fixed md:top-8 md:left-10.5 top-7.5 left-1.5 z-60 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
         {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
@@ -218,7 +218,7 @@ export default function Sidebar() {
 
       {/* Category Navigation */}
       <div
-        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed md:top-5 top-28 md:pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-10  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed md:top-5 top-28 md:pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-60  transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div className="py-6">
