@@ -46,7 +46,7 @@ export default function Header() {
         
       </div>
 
-      <div className="hidden md:flex gap-4">
+      <div className="hidden md:flex gap-9">
         <LuHeart size={25} className="mt-0.5"/>
         <SlHandbag size={25} className=""/>
       </div>
