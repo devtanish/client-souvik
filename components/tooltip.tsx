@@ -3,7 +3,7 @@ import * as React from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect } from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
@@ -16,21 +16,6 @@ import { DropdownMenu,
   } from "@/components/ui/dropdown-menu"
 
 export default function Header() {
-
-    const currencys = [
-        {
-            value: "english",
-            label: "English",
-        },
-        {
-            value: "french",
-            label: "French",
-        },
-        {
-            value: "spanish",
-            label: "Spanish",
-        }
-    ];
 
     const languages = [
         {
