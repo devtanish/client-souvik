@@ -1,6 +1,7 @@
 "use client"
 
-import { DropdownMenu,
+import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -184,20 +185,6 @@ export default function Sidebar() {
               <Link href={"/cart"} className="md:hidden fixed top-10.5 right-5"><BsCart3 size={21} /></Link>
               <button className="md:hidden fixed top-10.5 right-13"><IoSearchOutline size={21} /></button>
               <Link href={"/help"} className="md:hidden fixed top-10.5 right-21"><PiQuestionLight size={21} /></Link>
-              <div className="md:hidden z-20 fixed top-8.5 translate-y-[0.053rem] right-27.5 translate-x-[0.19rem]">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="border-none bg-[#FFFF] shadow-none"><LanguagesIcon /></Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56 ring-0">
-                    <DropdownMenuRadioGroup >
-                      <DropdownMenuRadioItem value="top">INR</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="bottom">USD</DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="right">DRM</DropdownMenuRadioItem>
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
             </div>
             <button
               className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-[#01081c]" : "text-gray-500"}`}
@@ -205,7 +192,7 @@ export default function Sidebar() {
             >
               WOMEN
             </button>
-            <div className="fixed md:top-42 top-42 bottom-0 left-1/2 w-[0.006rem] bg-gray-200 md:h-9 h-9 -translate-x-1/2" />
+            <div className="fixed top-42 bottom-0 left-1/2 w-[0.006rem] bg-gray-200  h-9 -translate-x-1/2" />
             <button
               className={`flex-1 py-4 text-center font-medium ${activeTab === "men" ? "text-[#01081c]" : "text-gray-500"}`}
               onClick={() => setActiveTab("men")}
@@ -273,13 +260,24 @@ export default function Sidebar() {
             <p className="text-[#01081c] text-center ">New to Raya? <Link href={"sign-up"} className="text-[#01081c] underline cursor-pointer">Create Account</Link></p>
           </div>
           <span className={`h-[0.03rem] w-full bg-gray-200 `}></span>
-          <div className="mt-2 w-full text-sm font-medium text-gray-500">
+          <div className="mt-2 w-full text-sm font-medium text-gray-500 flex">
             <p>Shipping To: <Link className="underline cursor-pointer " href="#">CANADA (CAD)</Link></p>
+            <div className="fixed right-0">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="h-5 -translate-x-6 border-none bg-[#FFFF] shadow-none hover:bg-[#FFFF] hover:text-black "><LanguagesIcon /></Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 ring-0">
+                  <DropdownMenuRadioGroup >
+                    <DropdownMenuRadioItem value="top">INR</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="bottom">USD</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="right">DRM</DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
 
-          {/* <div className="justify-center mt-2">
-            <p className=""><p>Shipping To : </p><p>Curency :</p></p>
-          </div> */}
         </div>
       </div>
     </>

@@ -49,7 +49,7 @@ export default function Header() {
 
       <div className="hidden md:flex gap-4">
         <LuHeart size={25} className="mt-0.5"/>
-        <IoBag size={25} className="rounded-4xl" />
+        <SlHandbag size={25} className=""/>
       </div>
     </div>
 

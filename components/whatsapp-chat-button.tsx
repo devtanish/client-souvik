@@ -33,7 +33,7 @@ export default function WhatsAppChatButton({
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed bottom-6 right-6 z-0">
       <Link
         href={whatsappUrl}
         target="_blank"
