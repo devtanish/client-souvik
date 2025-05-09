@@ -30,6 +30,24 @@ type Category = {
 }
 
 // Sample data for both tabs
+
+const languages = [
+  {
+    name: "English",
+    short: "EN",
+  },
+  {
+    name: "French",
+    short: "FR",
+  },
+  {
+    name: "German",
+    short: "DE",
+  }
+]
+
+const currencys = ["INR", "USD", "DRM"];
+
 const womenCategories: Category[] = [
   {
     name: "All",
@@ -130,6 +148,8 @@ const menCategories: Category[] = [
 
 export default function Sidebar() {
   // State for active tab (Women or Men)
+  const [currentCurrency, setCurrentCurrency] = useState<string>("USD")
+  const [currentLanguage , setCurrentLanguage] = useState<string>("EN")
   const [activeTab, setActiveTab] = useState<"women" | "men">("women")
 
   // State for expanded categories
@@ -185,6 +205,20 @@ export default function Sidebar() {
               <Link href={"/cart"} className="md:hidden fixed top-10.5 right-5"><BsCart3 size={21} /></Link>
               <button className="md:hidden fixed top-10.5 right-13"><IoSearchOutline size={21} /></button>
               <Link href={"/help"} className="md:hidden fixed top-10.5 right-21"><PiQuestionLight size={21} /></Link>
+              <div className="md:hidden z-20 fixed top-8.5 translate-y-[0.053rem] right-27.5 translate-x-[0.19rem]">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="border-none bg-[#FFFF] shadow-none"><LanguagesIcon /></Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56 ring-0">
+                    <DropdownMenuRadioGroup value={currentLanguage} onValueChange={setCurrentLanguage}>
+                      {languages.map((language) => (
+                        <DropdownMenuRadioItem value={language.short} key={language.short}>{`${language.name} (${language.short})`}</DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
             <button
               className={`flex-1 py-4 text-center font-medium ${activeTab === "women" ? "text-[#01081c]" : "text-gray-500"}`}
@@ -265,13 +299,13 @@ export default function Sidebar() {
             <div className="fixed right-0">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="h-5 -translate-x-6 border-none bg-[#FFFF] shadow-none hover:bg-[#FFFF] hover:text-black "><LanguagesIcon /></Button>
+                  <Button variant="outline" className="h-5 -translate-x-6 border-none bg-[#FFFF] shadow-none hover:bg-[#FFFF] hover:text-black ">{currentCurrency}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 ring-0">
-                  <DropdownMenuRadioGroup >
-                    <DropdownMenuRadioItem value="top">INR</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="bottom">USD</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="right">DRM</DropdownMenuRadioItem>
+                  <DropdownMenuRadioGroup value={currentCurrency} onValueChange={setCurrentCurrency}> 
+                    {currencys.map((currency, index) => (
+                      <DropdownMenuRadioItem  value={currency} key={index}>{currency}</DropdownMenuRadioItem> 
+                    ))}
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>

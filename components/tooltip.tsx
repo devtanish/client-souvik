@@ -3,19 +3,16 @@ import * as React from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect } from "react"
-import { Check} from "lucide-react"
+import { Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export default function Header() {
+
+    const [currentCurrency, setCurrentCurrency] = useState<string>("USD")
 
     const languages = [
         {
@@ -54,6 +51,7 @@ export default function Header() {
     const [selectedTab] = useState()
     const [text, setText] = useState("Free Shipping On All Orders Over C$75.")
     const textArray = ["Free Shipping On All Orders Over C$75.", "Welcome to Raya", "Free on Delivery"]
+    const currencys = ["INR", "USD", "DRM"];
 
     let index = 0
 
@@ -158,13 +156,13 @@ export default function Header() {
                             </span>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="outline" className="h-5 -translate-x-8 border-none bg-[#010614] shadow-none hover:bg-[#010614] hover:text-white hover:underline">USD</Button>
+                                    <Button variant="outline" className="h-5 -translate-x-9 border-none bg-[#010614] shadow-none hover:bg-[#010614] hover:text-white ">{currentCurrency}</Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-56 ring-0">
-                                    <DropdownMenuRadioGroup >
-                                    <DropdownMenuRadioItem value="top">INR</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="bottom">USD</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="right">DRM</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioGroup value={currentCurrency} onValueChange={setCurrentCurrency}>
+                                        {currencys.map((currency, index) => (
+                                            <DropdownMenuRadioItem value={currency} key={index}>{currency}</DropdownMenuRadioItem>
+                                        ))}
                                     </DropdownMenuRadioGroup>
                                 </DropdownMenuContent>
                             </DropdownMenu>
