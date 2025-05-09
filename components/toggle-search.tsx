@@ -32,7 +32,7 @@ export default function ToggleSearch({ className = "", buttonClassName = "", inp
       <div
         className={`
           overflow-hidden transition-all duration-300 ease-in-out
-          ${isOpen ? "w-66 opacity-100 ml-2" : "w-0 opacity-0"}
+          ${isOpen ? "w-53 opacity-100 ml-2" : "w-0 opacity-0"}
         `}
       >
         <input

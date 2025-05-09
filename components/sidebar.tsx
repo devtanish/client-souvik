@@ -14,8 +14,8 @@ import { Plus, Minus, X, Menu } from "lucide-react"
 import Link from "next/link"
 import { PiQuestionLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
-import { BsCart3 } from "react-icons/bs";
 import { LanguagesIcon } from "lucide-react";
+import { SlHandbag } from "react-icons/sl"
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -202,7 +202,7 @@ export default function Sidebar() {
           {/* Tab Navigation */}
           <div className="flex border-b border-gray-200 md:mt-0 mt-17">
             <div>
-              <Link href={"/cart"} className="md:hidden fixed top-10.5 right-5"><BsCart3 size={21} /></Link>
+              <Link href={"/cart"} className="md:hidden fixed top-10.5 right-5"><SlHandbag size={21} /></Link>
               <button className="md:hidden fixed top-10.5 right-13"><IoSearchOutline size={21} /></button>
               <Link href={"/help"} className="md:hidden fixed top-10.5 right-21"><PiQuestionLight size={21} /></Link>
               <div className="md:hidden z-20 fixed top-8.5 translate-y-[0.053rem] right-27.5 translate-x-[0.19rem]">
