@@ -1,11 +1,10 @@
-import Login from "@/components/main-login";
+import LandingPage from "@/components/LandingPage";
 
 export default function Home() {
   return (
-    <div className="mt-54 w-screen h-screen">
-      <Login />
-      <div className="mt-50 mx-20">
-        hello
+    <div className="mt-39 w-screen  mb-20">
+      <div className="md:mt-0 md:mx-38 mx-4">
+        <LandingPage />
       </div>
     </div>
   );
