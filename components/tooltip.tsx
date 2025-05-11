@@ -78,7 +78,7 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={` font-sans  w-full md:absolute fixed top-0 z-40`}>
+        <header className={` font-sans  w-full md:fixed fixed top-0 z-40`}>
             {/* Top black bar */}
             <div className="bg-[#010614] text-[#FFFFFF] py-1.5 px-4 flex justify-between items-center text-xs">
                 <div className="items-center flex space-x-2 w-screen ">

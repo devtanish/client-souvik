@@ -7,7 +7,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import Logo from "./logo"
+import Image from "next/image"
 import { Button } from "./ui/button"
 import { useState } from "react"
 import { Plus, Minus, X, Menu } from "lucide-react"
@@ -191,7 +191,7 @@ export default function Sidebar() {
         </div>
       </button>
 
-      <Logo />
+      <Image src={"/logo2.png"} alt="logo" className=" fixed top-10 md:flex hidden left-35 m-0 p-0" width={300} height={300}/>
 
       {/* Sidebar */}
       <div

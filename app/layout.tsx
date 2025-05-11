@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/footer";
+import WhatsAppChatButton from "@/components/whatsapp-chat-button";
+import Sidebar from "@/components/sidebar";
+import Tooltip from "@/components/tooltip";
+import Header from "@/components/header";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +33,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        
-        <Footer/>
+        <Header />
+        <Sidebar />
+        <Tooltip />
+        <div className="">
+          {children}
+        </div>
+        <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
+
+        <Footer />
       </body>
     </html>
   );
