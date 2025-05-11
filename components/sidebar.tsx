@@ -191,7 +191,7 @@ export default function Sidebar() {
         </div>
       </button>
 
-      <Image src={"/logo2.png"} alt="logo" className=" fixed top-10 md:flex hidden left-35 m-0 p-0" width={300} height={300}/>
+      <Image src={"/logo2.png"} alt="logo" className=" fixed top-10 md:flex z-30 hidden left-35 m-0 p-0" width={300} height={300}/>
 
       {/* Sidebar */}
       <div
