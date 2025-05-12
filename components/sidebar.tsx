@@ -183,7 +183,7 @@ export default function Sidebar() {
       >
         {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
         {/* {isSidebarOpen ?  */}
-        <div role="presentation" className="relative md:w-16 md:h-16 h-8 w-8 md:inline-block cursor-pointer group md:visible hidden">
+        <div role="presentation" className="relative md:w-16 z-30 md:h-16 h-8 w-8 md:inline-block cursor-pointer group md:visible hidden">
           <span className={`${isSidebarOpen ? "visible" : "invisible opacity-0"}  rotate-135 top-10 md:block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
           <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"}  md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-6 group-[.open]:opacity-0`}></span>
           <span className={`${isSidebarOpen ? "rotate-45 top-7" : "rotate-0"} absolute top-10 md:block h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out `}></span>

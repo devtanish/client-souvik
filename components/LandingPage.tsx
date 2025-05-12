@@ -136,7 +136,7 @@ export default function LandingPage() {
             <p className="text-gray-700 mb-1">${product.price}</p>
             <div className="flex gap-1 mb-1">
               {product.colors.map((color, index) => (
-                <button key={index} className="w-5 h-5 rounded-full border" style={{ backgroundColor: color }} />
+                <button key={index} className={`w-5 h-5 rounded-full border bg-[${color}]`} onClick={()=> console.log(color)}></button>
               ))}
             </div>
             <p className="text-xs text-gray-500">{product.material}</p>
@@ -182,7 +182,7 @@ const products = [
     name: "Mini Hoop",
     price: 79,
     image: "/jwel/1.avif",
-    colors: ["#E6C77E", "#E0E0E0"],
+    colors: ["#E6C77E", "#E0E0E0", "#FFFF"],
     material: "14k Yellow Gold",
     bestSeller: true,
     showAddToBag: true,
@@ -215,6 +215,36 @@ const products = [
     colors: ["#E6C77E", "#E0E0E0"],
     material: "18k Solid Vermeil",
     bestSeller: true,
+    showAddToBag: true,
+  },
+  {
+    id: 5,
+    name: "Twist Studs",
+    price: 59,
+    image: "/jwel/5.avif",
+    colors: ["#FFD700"],
+    material: "18k Gold Plated",
+    bestSeller: false,
+    showAddToBag: true,
+  },
+  {
+    id: 6,
+    name: "Diamond Accent Huggies",
+    price: 199,
+    image: "/jwel/6.avif",
+    colors: ["#E6C77E"],
+    material: "14k Yellow Gold with Diamonds",
+    bestSeller: true,
+    showAddToBag: true,
+  },
+  {
+    id: 7,
+    name: "Tiny Pearl Studs",
+    price: 49,
+    image: "/jwel/7.avif",
+    colors: ["#FFFFFF"],
+    material: "Sterling Silver with Freshwater Pearls",
+    bestSeller: false,
     showAddToBag: true,
   },
 ]
