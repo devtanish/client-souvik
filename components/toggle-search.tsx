@@ -32,7 +32,7 @@ export default function ToggleSearch({ className = "", buttonClassName = "", inp
       <div
         className={`
           overflow-hidden transition-all duration-300 ease-in-out
-          ${isOpen ? "w-53 opacity-100 ml-2" : "w-0 opacity-0"}
+          ${isOpen ? "w-33 opacity-100 ml-2" : "w-0 opacity-0"}
         `}
       >
         <input
@@ -50,7 +50,7 @@ export default function ToggleSearch({ className = "", buttonClassName = "", inp
       <button
         onClick={toggleSearch}
         className={cn(
-          "flex items-center justify-center w-10 h-10 bg-white hover:bg-gray-100 transition-colors duration-200",
+          "flex items-center justify-center w-10 h-10 bg-white hover:bg-gray-100 transition-colors duration-200 -translate-y-[0.07rem]",
           buttonClassName,
         )}
         aria-label={isOpen ? "Close search" : "Open search"}

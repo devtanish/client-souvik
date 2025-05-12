@@ -20,13 +20,13 @@ export const questrial = Questrial({
 export default function Header() {
 
   return (
-    <div className="fixed z-30 h-11.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none">
+    <div className="fixed z-15 h-11.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none">
       <Image
         src={"/logo2.png"}
         alt="logo"
-        className="m-0 p-0 z-30 fixed top-18 left-1/2 md:hidden transform -translate-x-1/2"
-        width={280}
-        height={280}
+        className="m-0 p-0 z-30 fixed top-8 left-27 md:hidden transform -translate-x-1/2"
+        width={110}
+        height={110}
       />
 
       <div className="float-right md:hidden gap-1.5 mr-2 inline-flex -translate-y-2 -translate-x-2">

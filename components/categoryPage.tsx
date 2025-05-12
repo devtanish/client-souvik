@@ -98,12 +98,12 @@ export default function EarringsPage() {
         </nav>
 
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-9">
           <h1 className="text-3xl font-bold uppercase mb-1">{activeCategory}</h1>
           <p className="text-gray-600">Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
-        <div className="relative mb-12">
+        <div className="relative md:mb-9 mb-2"> 
           <button
             onClick={() => scrollCategories("left")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-5 bg-white/80 rounded-full p-1 shadow-md"
@@ -130,7 +130,7 @@ export default function EarringsPage() {
                 <div
                   className={cn(
                     "relative w-full aspect-square mb-2 overflow-hidden",
-                    activeCategory === category.name ? "ring-2 ring-black" : "",
+                    activeCategory === category.name ? "" : "",
                   )}
                 >
                   <Image
