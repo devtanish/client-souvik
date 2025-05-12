@@ -118,7 +118,7 @@ export default function LandingPage() {
           <div key={product.id} className="group">
             <div className="relative mb-3 bg-gray-50 aspect-square overflow-hidden">
               {product.bestSeller && (
-                <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-10">Best Seller</span>
+                <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5">Best Seller</span>
               )}
               <Image
                 src={product.image || "/placeholder.svg"}
