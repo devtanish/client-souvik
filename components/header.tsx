@@ -1,4 +1,4 @@
-import { Questrial, Cormorant_Garamond, Lugrasimo } from 'next/font/google';
+import { Questrial, Cormorant_Garamond } from 'next/font/google';
 import Link from "next/link";
 import Image from "next/image";
 import ToggleSearch from "./toggle-search";
