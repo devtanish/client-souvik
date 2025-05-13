@@ -159,14 +159,14 @@ export default function EarringsPage() {
 
         {/* Mobile Filter Buttons */}
         {isMobile ? (
-          <div className="mb-4 flex justify-between items-center">
+          <div className="mb-4 flex justify-between items-center border-b border-t py-2 w-screen">
 
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" className="flex items-center justify-center gap-2">
+                <button className="flex items-center justify-center gap-2 ">
                   <SlidersHorizontal size={16} />
                   Filters
-                </Button>
+                </button>
               </SheetTrigger>
               <SheetContent side="bottom" className="h-[80vh]">
                 <SheetHeader>
