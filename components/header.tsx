@@ -20,7 +20,7 @@ export const questrial = Questrial({
 export default function Header() {
 
   return (
-    <div className="fixed z-15 h-11.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none">
+    <div className="fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none bg-white">
       <Image
         src={"/logo2.png"}
         alt="logo"

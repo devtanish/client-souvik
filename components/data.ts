@@ -1,13 +1,13 @@
 
 export const categories = [
-  { name: "Earrings", image: "/jwel/1.avif" },
-  { name: "Hoop Earrings", image: "/jwel/2.avif" },
-  { name: "Stud Earrings", image: "/jwel/3.avif" },
-  { name: "Drop Earrings", image: "/jwel/4.avif" },
-  { name: "Ear Cuffs", image: "/jwel/5.avif" },
-  { name: "Hoop Charms", image: "/jwel/6.avif" },
-  { name: "Cartilage & Helix", image: "/jwel/7.avif" },
-  { name: "Single Ear", image: "/jwel/3.avif" },
+  { name: "Earrings", image: "/jwel2/main1.webp" },
+  { name: "Hoop Earrings", image: "/jwel2/main2.webp" },
+  { name: "Stud Earrings", image: "/jwel2/main3.webp" },
+  { name: "Drop Earrings", image: "/jwel2/main4.webp" },
+  { name: "Ear Cuffs", image: "/jwel2/main5.webp" },
+  { name: "Hoop Charms", image: "/jwel2/main2.webp" },
+  { name: "Cartilage & Helix", image: "/jwel2/main1.webp" },
+  { name: "Single Ear", image: "/jwel2/main3.webp" },
 ]
 
 export const metals = [
