@@ -265,7 +265,7 @@ export default function EarringsPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-full">
-                        {["Featured", "Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
+                        {["Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
                           <DropdownMenuItem
                             key={option}
                             onClick={() => setSortBy(option)}
@@ -398,7 +398,7 @@ export default function EarringsPage() {
                   {sortBy} <ChevronDown size={16} />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  {["Featured", "Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
+                  {["Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
                     <DropdownMenuItem key={option} onClick={() => setSortBy(option)}>
                       {option}
                     </DropdownMenuItem>
