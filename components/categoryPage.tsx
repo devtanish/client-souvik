@@ -1,4 +1,6 @@
 "use client"
+
+import { Lugrasimo } from 'next/font/google';
 import { categories, metals, products, shapes } from "./data"
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
@@ -20,6 +22,11 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+
+export const lugrasimo = Lugrasimo({
+  subsets: ['latin'],
+  weight: '400', // Lugrasimo only has 400 weight
+});
 
 export default function EarringsPage() {
   const [activeCategory, setActiveCategory] = useState("Earrings")
@@ -73,6 +80,8 @@ export default function EarringsPage() {
     setSelectedShapes((prev) => (prev.includes(shapeId) ? prev.filter((id) => id !== shapeId) : [...prev, shapeId]))
   }
 
+
+
   // Reset all filters
   const resetFilters = () => {
     setSelectedMetals([])
@@ -89,17 +98,17 @@ export default function EarringsPage() {
         {/* Breadcrumb */}
         <nav className="text-sm mb-6">
           <div className="flex items-center gap-1">
-            <Link href="/" className="text-gray-500 hover:text-gray-700">
+            <Link href="/" className={`text-gray-500 hover:text-gray-700 ${lugrasimo.className}`}>
               Shop All
             </Link>
             <span className="text-gray-500">/</span>
-            <span className="font-medium">{activeCategory}</span>
+            <span className={`font-medium ${lugrasimo.className}`}>{activeCategory}</span>
           </div>
         </nav>
 
         {/* Header */}
-        <div className="mb-9">
-          <h1 className="text-3xl font-bold uppercase mb-1">{activeCategory}</h1>
+        <div className="mb-5">
+          <h1 className={`text-3xl font-bold uppercase mb-1`}>{activeCategory}</h1>
           <p className="text-gray-600">Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
@@ -418,7 +427,7 @@ export default function EarringsPage() {
               {/* Wishlist button */}
               <button
                 className={cn(
-                  "absolute top-2 right-2 z-5 p-1.5 rounded-full bg-white/80 shadow-sm",
+                  "absolute top-2 right-2 z-5 p-1.5 rounded-full ",
                   "transition-all duration-300",
                 )}
                 onClick={() => toggleWishlist(product.id)}
