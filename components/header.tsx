@@ -33,7 +33,7 @@ export default function Header() {
         />
       </Link>
 
-      <div className="float-right md:hidden mt-10 gap-1.5 mr-2 inline-flex -translate-y-2 -translate-x-2">
+      <div className="float-right md:hidden mt-0.5 gap-1.5 mr-2 inline-flex -translate-y-2 -translate-x-2">
         <ToggleSearch />
         <LuHeart size={20} className='mt-2 mr-2'/>
         <Link href={"/cart"}>
