@@ -178,7 +178,7 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed md:top-8 md:left-10.5 top-7.5 left-1.5 z-50 bg-white p-2 rounded-md   focus:outline-none transition-all duration-200"
+        className="fixed md:top-8 md:left-10.5 top-7.5 left-1.5 z-50  p-2 rounded-md   focus:outline-none transition-all duration-200"
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
         {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
@@ -191,7 +191,9 @@ export default function Sidebar() {
         </div>
       </button>
 
-      <Image src={"/logo2.png"} alt="logo" className=" fixed top-10 md:flex z-30 hidden left-35 m-0 p-0" width={300} height={300}/>
+      <Link href={"/"}>
+            <Image src={"/logo2.png"} alt="logo" className=" fixed top-10 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0" width={300} height={300}/>
+      </Link>
 
       {/* Sidebar */}
       <div

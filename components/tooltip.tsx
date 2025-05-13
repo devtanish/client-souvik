@@ -55,26 +55,26 @@ export default function Header() {
 
     let index = 0
 
-    function handleClick() {
-        if (index === textArray.length - 1) {
-            index = 0
-            setText(textArray[index])
-        } if (index === 0) {
-            index = textArray.length - 1
-            setText(textArray[index])
-        }
-        else {
-            index++;
-            setText(textArray[index])
-        }
-    }
-
     useEffect(() => {
-        const startInterval = () => setInterval(handleClick, 32000);
-        startInterval();
-        return () => {
-            clearInterval(startInterval());
-        }
+      function handleClick() {
+          if (index === textArray.length - 1) {
+              index = 0
+              setText(textArray[index])
+          } if (index === 0) {
+              index = textArray.length - 1
+              setText(textArray[index])
+          }
+          else {
+              index++;
+              setText(textArray[index])
+          }
+      }
+      
+      const intervalId = setInterval(handleClick, 32000);
+    
+      return () => {
+        clearInterval(intervalId);
+      };
     }, []);
 
     return (

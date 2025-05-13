@@ -1,9 +1,8 @@
 import type React from "react"
-import "./globals.css"
 import { ThemeProvider } from "next-themes"
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Footer from "@/components/footer";
 import WhatsAppChatButton from "@/components/whatsapp-chat-button";
 import Sidebar from "@/components/sidebar";

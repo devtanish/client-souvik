@@ -22,16 +22,18 @@ export const questrial = Questrial({
 export default function Header() {
 
   return (
-    <div className="fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none md:bg bg-white ">
-      <Image
-        src={"/logo2.png"}
-        alt="logo"
-        className="m-0 p-0 z-30 fixed top-8 left-27 md:hidden transform -translate-x-1/2"
-        width={110}
-        height={110}
-      />
+    <div className="fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none bg-white md:bg-transparent">
+      <Link href={"/"}>
+        <Image
+          src={"/logo2.png"}
+          alt="logo"
+          className="m-0 p-0 z-30 fixed top-8 left-27 md:hidden transform cursor-pointer -translate-x-1/2"
+          width={110}
+          height={110}
+        />
+      </Link>
 
-      <div className="float-right md:hidden gap-1.5 mr-2 inline-flex -translate-y-2 -translate-x-2">
+      <div className="float-right md:hidden mt-10 gap-1.5 mr-2 inline-flex -translate-y-2 -translate-x-2">
         <ToggleSearch />
         <LuHeart size={20} className='mt-2 mr-2'/>
         <Link href={"/cart"}>
