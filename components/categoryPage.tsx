@@ -1,6 +1,6 @@
 "use client"
 
-import { Lugrasimo } from 'next/font/google';
+import { Lugrasimo } from "next/font/google"
 import { categories, metals, products, shapes } from "./data"
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
@@ -24,13 +24,13 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 export const lugrasimo = Lugrasimo({
-  subsets: ['latin'],
-  weight: '400', // Lugrasimo only has 400 weight
-});
+  subsets: ["latin"],
+  weight: "400", // Lugrasimo only has 400 weight
+})
 
 export default function EarringsPage() {
   const [activeCategory, setActiveCategory] = useState("Earrings")
-  const [gridView, setGridView] = useState<"four" | "two">("four")
+  const [gridView, setGridView] = useState<"four" | "two" | "one">("four")
   const [priceRange, setPriceRange] = useState([100, 22000])
   const [inStockOnly, setInStockOnly] = useState(false)
   const [sortBy, setSortBy] = useState("Featured")
@@ -54,6 +54,15 @@ export default function EarringsPage() {
       window.removeEventListener("resize", checkIfMobile)
     }
   }, [])
+
+  useEffect(() => {
+    // Set appropriate default grid view when switching between mobile and desktop
+    if (isMobile && (gridView === "four" || gridView === "two")) {
+      setGridView("two")
+    } else if (!isMobile && gridView === "one") {
+      setGridView("four")
+    }
+  }, [isMobile, gridView])
 
   // Handle category scroll
   const scrollCategories = (direction: "left" | "right") => {
@@ -80,8 +89,6 @@ export default function EarringsPage() {
     setSelectedShapes((prev) => (prev.includes(shapeId) ? prev.filter((id) => id !== shapeId) : [...prev, shapeId]))
   }
 
-
-
   // Reset all filters
   const resetFilters = () => {
     setSelectedMetals([])
@@ -93,8 +100,7 @@ export default function EarringsPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-
-      <div className=" py-6 w-full flex-1">
+      <div className="py-6 w-full flex-1">
         {/* Breadcrumb */}
         <nav className="text-sm mb-6">
           <div className="flex items-center gap-1">
@@ -112,7 +118,7 @@ export default function EarringsPage() {
           <p className="text-gray-600">Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
-        <div className="relative md:mb-9 mb-2"> 
+        <div className="relative md:mb-9 mb-2">
           <button
             onClick={() => scrollCategories("left")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-5 bg-white/80 rounded-full p-1 shadow-md"
@@ -143,13 +149,18 @@ export default function EarringsPage() {
                   )}
                 >
                   <Image
-                    src={category.image || "/placeholder.svg"}
+                    src={category.image || "/placeholder.svg?height=300&width=300"}
                     alt={category.name}
                     fill
                     className="object-cover"
                   />
                 </div>
-                <span className={cn("text-sm text-center -translate-y-10", activeCategory === category.name ? " font-medium" : "")}>
+                <span
+                  className={cn(
+                    "text-sm text-center -translate-y-10",
+                    activeCategory === category.name ? " font-medium" : "",
+                  )}
+                >
                   {category.name}
                 </span>
                 {activeCategory === category.name && <div className="h-0.5 w-10 bg-black -translate-y-10 mt-1"></div>}
@@ -169,7 +180,6 @@ export default function EarringsPage() {
         {/* Mobile Filter Buttons */}
         {isMobile ? (
           <div className="mb-4 flex justify-between items-center border-b border-t py-2 w-screen -translate-x-4.5">
-
             <Sheet>
               <SheetTrigger asChild>
                 <button className="flex items-center justify-center gap-2 ml-4.5">
@@ -288,28 +298,49 @@ export default function EarringsPage() {
               </SheetContent>
             </Sheet>
 
-            <div className="hidden md:flex items-center gap-2 border rounded-md">
-              <button
-                className={cn("p-2", gridView === "four" ? "bg-gray-100" : "")}
-                onClick={() => setGridView("four")}
-                aria-label="Four column view"
-              >
-                <LayoutGrid size={18} />
-              </button>
-              <button
-                className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
-                onClick={() => setGridView("two")}
-                aria-label="Two column view"
-              >
-                <Columns2 size={18} />
-              </button>
+            <div className="flex items-center gap-2 border rounded-md">
+              {isMobile ? (
+                <>
+                  <button
+                    className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
+                    onClick={() => setGridView("two")}
+                    aria-label="Two column view"
+                  >
+                    <LayoutGrid size={18} />
+                  </button>
+                  <button
+                    className={cn("p-2", gridView === "one" ? "bg-gray-100" : "")}
+                    onClick={() => setGridView("one")}
+                    aria-label="One column view"
+                  >
+                    <Columns2 size={18} />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={cn("p-2", gridView === "four" ? "bg-gray-100" : "")}
+                    onClick={() => setGridView("four")}
+                    aria-label="Four column view"
+                  >
+                    <LayoutGrid size={18} />
+                  </button>
+                  <button
+                    className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
+                    onClick={() => setGridView("two")}
+                    aria-label="Two column view"
+                  >
+                    <Columns2 size={18} />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         ) : (
           /* Desktop Filters - Collapsible as per feedback */
           !isMobile &&
           showFilters && (
-            <div className="mb-8 space-y-6 border p-4 rounded-md">
+            <div className="mb-8 space-y-6 border p-4 ">
               {/* Metal filter */}
               <div>
                 <h3 className="text-sm mb-3">Metal</h3>
@@ -380,6 +411,43 @@ export default function EarringsPage() {
                   </div>
                 </div>
               </div>
+              <div className="flex items-center gap-2 border rounded-md">
+                {isMobile ? (
+                  <>
+                    <button
+                      className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
+                      onClick={() => setGridView("two")}
+                      aria-label="Two column view"
+                    >
+                      <LayoutGrid size={18} />
+                    </button>
+                    <button
+                      className={cn("p-2", gridView === "one" ? "bg-gray-100" : "")}
+                      onClick={() => setGridView("one")}
+                      aria-label="One column view"
+                    >
+                      <Columns2 size={18} />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className={cn("p-2", gridView === "four" ? "bg-gray-100" : "")}
+                      onClick={() => setGridView("four")}
+                      aria-label="Four column view"
+                    >
+                      <LayoutGrid size={18} />
+                    </button>
+                    <button
+                      className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
+                      onClick={() => setGridView("two")}
+                      aria-label="Two column view"
+                    >
+                      <Columns2 size={18} />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           )
         )}
@@ -419,17 +487,16 @@ export default function EarringsPage() {
             "grid md:gap-4 gap-2",
             gridView === "four"
               ? "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-              : "grid-cols-2 md:grid-cols-2",
+              : gridView === "two"
+                ? "grid-cols-2 md:grid-cols-2"
+                : "grid-cols-1 md:grid-cols-1",
           )}
         >
           {products.map((product) => (
             <div key={product.id} className="group relative">
               {/* Wishlist button */}
               <button
-                className={cn(
-                  "absolute top-2 right-2 z-5 p-1.5 rounded-full ",
-                  "transition-all duration-300",
-                )}
+                className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
                 onClick={() => toggleWishlist(product.id)}
                 aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
               >
@@ -446,7 +513,7 @@ export default function EarringsPage() {
 
                 {/* Default image */}
                 <Image
-                  src={product.image || "/placeholder.svg"}
+                  src={product.image || "/placeholder.svg?height=300&width=300"}
                   alt={product.name}
                   fill
                   className={cn(
@@ -458,7 +525,7 @@ export default function EarringsPage() {
                 {/* Hover image (model wearing) */}
                 {product.hoverImage && (
                   <Image
-                    src={product.hoverImage || "/placeholder.svg"}
+                    src={product.hoverImage || "/placeholder.svg?height=300&width=300"}
                     alt={`${product.name} worn`}
                     fill
                     className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
