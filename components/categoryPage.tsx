@@ -22,6 +22,15 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Poppins } from 'next/font/google';
+
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['100', '200'], // Optional
+  variable: '--fontFamily',
+  display: 'swap',
+});
 
 export const lugrasimo = Lugrasimo({
   subsets: ["latin"],
@@ -99,7 +108,7 @@ export default function EarringsPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
       <div className="py-6 w-full flex-1">
         {/* Breadcrumb */}
         <nav className="text-sm mb-6">
@@ -114,8 +123,8 @@ export default function EarringsPage() {
 
         {/* Header */}
         <div className="mb-5">
-          <h1 className={`text-3xl font-bold uppercase mb-1`}>{activeCategory}</h1>
-          <p className="text-gray-600">Huggies, hoops, studs, and more. A whole lot more.</p>
+          <h1 className={`text-3xl font-bold uppercase mb-1 ${poppins.variable}`}>{activeCategory}</h1>
+          <p className={`text-gray-600 ${poppins.variable}`}>Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
         <div className="relative md:mb-9 mb-2">
@@ -144,7 +153,7 @@ export default function EarringsPage() {
               >
                 <div
                   className={cn(
-                    "relative w-full aspect-square mb-2 overflow-hidden",
+                    "relative w-full aspect-square mb-2 overflow-hidden md:h-[400px] h-[300px] border-x border-y shadow-md",
                     activeCategory === category.name ? "" : "",
                   )}
                 >
@@ -517,7 +526,7 @@ export default function EarringsPage() {
                   alt={product.name}
                   fill
                   className={cn(
-                    "object-cover transition-opacity duration-300",
+                    "object-cover transition-opacity duration-300 ",
                     product.hoverImage ? "group-hover:opacity-0" : "",
                   )}
                 />
