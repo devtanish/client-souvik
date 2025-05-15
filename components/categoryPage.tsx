@@ -548,7 +548,7 @@ export default function EarringsPage() {
           {filteredProducts.length === 0 ? (
             <div className="col-span-full text-center py-12">
               <h3 className="text-lg font-medium">No products found</h3>
-              <p className="text-gray-500 mt-2">Try adjusting your filters to find what you're looking for.</p>
+              <p className="text-gray-500 mt-2">Try adjusting your filters to find what you&apos;re looking for.</p>
             </div>
           ) : (
             filteredProducts.map((product) => (
@@ -565,7 +565,7 @@ export default function EarringsPage() {
                   />
                 </button>
 
-                <div className="relative mb-2 bg-gray-50 aspect-square overflow-hidden">
+                <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
                   {product.bestSeller && (
                     <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5 font-medium">
                       Best Seller
