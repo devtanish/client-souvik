@@ -9,7 +9,6 @@ import Sidebar from "@/components/sidebar";
 import Tooltip from "@/components/tooltip";
 import Header from "@/components/header";
 
-
 export const metadata: Metadata = {
   title: "Earrings Collection | Raya Jewelry",
   description: "Explore our collection of earrings - huggies, hoops, studs, and more.",
@@ -30,6 +29,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body

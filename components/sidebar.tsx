@@ -16,6 +16,7 @@ import { PiQuestionLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 import { LanguagesIcon } from "lucide-react";
 import { SlHandbag } from "react-icons/sl"
+// import { usePathname } from 'next/navigation';
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -149,6 +150,7 @@ const menCategories: Category[] = [
 export default function Sidebar() {
   // State for active tab (Women or Men)
   const [currentCurrency, setCurrentCurrency] = useState<string>("USD")
+  // const pathname = usePathname();
   const [currentLanguage , setCurrentLanguage] = useState<string>("EN")
   const [activeTab, setActiveTab] = useState<"women" | "men">("women")
 

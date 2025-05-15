@@ -1,8 +1,7 @@
 "use client"
 
 import { Lugrasimo } from "next/font/google"
-import { categories, metals, products, shapes } from "./data"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Slider } from "@/components/ui/slider"
@@ -22,15 +21,15 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Poppins } from 'next/font/google';
-
+import { Poppins } from "next/font/google"
+import { categories, metals, shapes, products } from "./data"
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['100', '200'], // Optional
-  variable: '--fontFamily',
-  display: 'swap',
-});
+  subsets: ["latin"],
+  weight: ["100", "200"], // Optional
+  variable: "--fontFamily",
+  display: "swap",
+})
 
 export const lugrasimo = Lugrasimo({
   subsets: ["latin"],
@@ -40,7 +39,7 @@ export const lugrasimo = Lugrasimo({
 export default function EarringsPage() {
   const [activeCategory, setActiveCategory] = useState("Earrings")
   const [gridView, setGridView] = useState<"four" | "two" | "one">("four")
-  const [priceRange, setPriceRange] = useState([100, 22000])
+  const [priceRange, setPriceRange] = useState([0, 22000])
   const [inStockOnly, setInStockOnly] = useState(false)
   const [sortBy, setSortBy] = useState("Featured")
   const [selectedMetals, setSelectedMetals] = useState<string[]>([])
@@ -102,10 +101,55 @@ export default function EarringsPage() {
   const resetFilters = () => {
     setSelectedMetals([])
     setSelectedShapes([])
-    setPriceRange([100, 22000])
+    setPriceRange([0, 22000])
     setInStockOnly(false)
     setSortBy("Featured")
   }
+
+  // Filter and sort products based on selected filters
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter((product) => {
+        // Filter by metal
+        if (selectedMetals.length > 0) {
+          const productMetal = product.name.split(" ")[0] // Extract metal from name
+          if (!selectedMetals.includes(productMetal)) {
+            return false
+          }
+        }
+
+        // Filter by shape
+        if (selectedShapes.length > 0 && !selectedShapes.includes(product.shape.id)) {
+          return false
+        }
+
+        // Filter by price range
+        if (product.price < priceRange[0] || product.price > priceRange[1]) {
+          return false
+        }
+
+        // Filter by in-stock
+        if (inStockOnly && !product.bestSeller) {
+          // Using bestSeller as a proxy for inStock
+          return false
+        }
+
+        return true
+      })
+      .sort((a, b) => {
+        // Sort based on selected option
+        switch (sortBy) {
+          case "Price: Low to High":
+            return a.price - b.price
+          case "Price: High to Low":
+            return b.price - a.price
+          case "Newest":
+            return b.id - a.id // Using ID as a proxy for date
+          default:
+            return b.bestSeller ? 1 : -1 // Featured sorts by best seller
+        }
+      })
+  }, [selectedMetals, selectedShapes, priceRange, inStockOnly, sortBy])
 
   return (
     <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
@@ -501,75 +545,92 @@ export default function EarringsPage() {
                 : "grid-cols-1 md:grid-cols-1",
           )}
         >
-          {products.map((product) => (
-            <div key={product.id} className="group relative">
-              {/* Wishlist button */}
-              <button
-                className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
-                onClick={() => toggleWishlist(product.id)}
-                aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
-              >
-                <Heart
-                  size={18}
-                  className={wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}
-                />
-              </button>
-
-              <div className="relative mb-2 bg-gray-50 aspect-square overflow-hidden">
-                {product.bestSeller && (
-                  <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5 font-medium">Best Seller</span>
-                )}
-
-                {/* Default image */}
-                <Image
-                  src={product.image || "/placeholder.svg?height=300&width=300"}
-                  alt={product.name}
-                  fill
-                  className={cn(
-                    "object-cover transition-opacity duration-300 ",
-                    product.hoverImage ? "group-hover:opacity-0" : "",
-                  )}
-                />
-
-                {/* Hover image (model wearing) */}
-                {product.hoverImage && (
-                  <Image
-                    src={product.hoverImage || "/placeholder.svg?height=300&width=300"}
-                    alt={`${product.name} worn`}
-                    fill
-                    className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                )}
-
-                {/* Add to bag button */}
-                <div className="absolute bottom-0 left-0 right-0 bg-white py-2 px-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <button className="w-full text-center text-sm font-medium flex items-center justify-center gap-2">
-                    <ShoppingBag size={16} />
-                    ADD TO BAG
-                  </button>
-                </div>
-              </div>
-
-              <h3 className="font-medium text-sm mb-0.5">{product.name}</h3>
-              <p className="text-gray-700 text-sm mb-0.5">${product.price}</p>
-
-              <div className="flex gap-1 mb-0.5">
-                {product.colors.map((color, index) => (
-                  <button
-                    key={index}
-                    className={cn(
-                      "w-4 h-4 rounded-full border hover:ring-1 hover:ring-offset-1 hover:ring-gray-400",
-                      isMobile ? "w-3 h-3" : "w-4 h-4",
-                    )}
-                    style={{ backgroundColor: color }}
-                    aria-label={color}
-                  />
-                ))}
-              </div>
-
-              <p className={cn("text-xs text-gray-500", isMobile ? "text-[10px]" : "text-xs")}>{product.material}</p>
+          {filteredProducts.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <h3 className="text-lg font-medium">No products found</h3>
+              <p className="text-gray-500 mt-2">Try adjusting your filters to find what you're looking for.</p>
             </div>
-          ))}
+          ) : (
+            filteredProducts.map((product) => (
+              <div key={product.id} className="group relative">
+                {/* Wishlist button */}
+                <button
+                  className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
+                  onClick={() => toggleWishlist(product.id)}
+                  aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
+                >
+                  <Heart
+                    size={18}
+                    className={wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}
+                  />
+                </button>
+
+                <div className="relative mb-2 bg-gray-50 aspect-square overflow-hidden">
+                  {product.bestSeller && (
+                    <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5 font-medium">
+                      Best Seller
+                    </span>
+                  )}
+
+                  {!product.bestSeller && ( // Using bestSeller as a proxy for inStock since inStock isn't in the data
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                      <span className="text-white font-medium text-sm">Out of Stock</span>
+                    </div>
+                  )}
+
+                  {/* Default image */}
+                  <Image
+                    src={product.image || "/placeholder.svg?height=300&width=300"}
+                    alt={product.name}
+                    fill
+                    className={cn(
+                      "object-cover transition-opacity duration-300 ",
+                      product.hoverImage ? "group-hover:opacity-0" : "",
+                    )}
+                  />
+
+                  {/* Hover image (model wearing) */}
+                  {product.hoverImage && (
+                    <Image
+                      src={product.hoverImage || "/placeholder.svg?height=300&width=300"}
+                      alt={`${product.name} worn`}
+                      fill
+                      className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  )}
+
+                  {/* Add to bag button */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-white py-2 px-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <button
+                      className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
+                      disabled={!product.bestSeller}
+                    >
+                      <ShoppingBag size={16} />
+                      ADD TO BAG
+                    </button>
+                  </div>
+                </div>
+
+                <h3 className="font-medium text-sm mb-0.5">{product.name}</h3>
+                <p className="text-gray-700 text-sm mb-0.5">${product.price}</p>
+
+                <div className="flex gap-1 mb-0.5">
+                  {product.colors.map((color, index) => (
+                    <button
+                      key={index}
+                      className={cn(
+                        "w-4 h-4 rounded-full border hover:ring-1 hover:ring-offset-1 hover:ring-gray-400",
+                        isMobile ? "w-3 h-3" : "w-4 h-4",
+                      )}
+                      style={{ backgroundColor: color }}
+                      aria-label={color}
+                    />
+                  ))}
+                </div>
+                <p className={cn("text-xs text-gray-500", isMobile ? "text-[10px]" : "text-xs")}>{product.material}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
