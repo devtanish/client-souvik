@@ -225,7 +225,7 @@ export default function EarringsPage() {
                     activeCategory === category.name ? " font-medium" : "",
                   )}
                 >
-                  {category.name}
+                  {category.name.toUpperCase()}
                 </span>
                 {activeCategory === category.name && <div className="h-0.5 w-10 bg-black -translate-y-10 mt-1"></div>}
               </div>
@@ -268,7 +268,7 @@ export default function EarringsPage() {
 
               <div className="flex-1 overflow-auto">
                 <div className="p-4 flex items-center justify-between">
-                  <Label htmlFor="pickup" className="text-lg font-medium">
+                  <Label htmlFor="pickup" className="text-md font-medium">
                     IN-STOCK ONLY
                   </Label>
                   <Switch id="pickup" className="float-right" checked={inStockOnly} onCheckedChange={setInStockOnly} />
@@ -279,7 +279,7 @@ export default function EarringsPage() {
                   <Collapsible className="w-full" defaultOpen={true}>
                     <div className="p-4">
                       <CollapsibleTrigger className="flex w-full items-center justify-between">
-                        <span className="text-lg font-medium">MATERIAL</span>
+                        <span className="text-md font-medium">MATERIAL</span>
                         <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                       </CollapsibleTrigger>
                     </div>
@@ -309,7 +309,7 @@ export default function EarringsPage() {
                   <Collapsible className="w-full" defaultOpen={true}>
                     <div className="p-4">
                       <CollapsibleTrigger className="flex w-full items-center justify-between">
-                        <span className="text-lg font-medium">SHAPE</span>
+                        <span className="text-md font-medium">SHAPE</span>
                         <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                       </CollapsibleTrigger>
                     </div>
@@ -339,7 +339,7 @@ export default function EarringsPage() {
                   <Collapsible className="w-full" defaultOpen={true}>
                     <div className="p-4">
                       <CollapsibleTrigger className="flex w-full items-center justify-between">
-                        <span className="text-lg font-medium">PRICE</span>
+                        <span className="text-md font-medium">PRICE</span>
                         <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                       </CollapsibleTrigger>
                     </div>
@@ -417,7 +417,7 @@ export default function EarringsPage() {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <div className="flex items-center gap-2 border rounded-md">
+            <div className="flex items-center gap-2 border rounded-none">
               {isMobile ? (
                 <>
                   <button
