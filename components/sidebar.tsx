@@ -16,7 +16,7 @@ import { PiQuestionLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 import { LanguagesIcon } from "lucide-react";
 import { SlHandbag } from "react-icons/sl"
-// import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -150,7 +150,7 @@ const menCategories: Category[] = [
 export default function Sidebar() {
   // State for active tab (Women or Men)
   const [currentCurrency, setCurrentCurrency] = useState<string>("USD")
-  // const pathname = usePathname();
+  const pathname = usePathname();
   const [currentLanguage , setCurrentLanguage] = useState<string>("EN")
   const [activeTab, setActiveTab] = useState<"women" | "men">("women")
 
@@ -194,7 +194,7 @@ export default function Sidebar() {
       </button>
 
       <Link href={"/"}>
-            <Image src={"/logo2.png"} alt="logo" className=" fixed top-10 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0" width={300} height={300}/>
+            <Image src={"/logo2.png"} alt="logo" className={`${pathname === '/' ? ' fixed top-10 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0' :  'fixed top-12 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0' }`} width={pathname === '/' ? 300 : 200} height={300}/>
       </Link>
 
       {/* Sidebar */}

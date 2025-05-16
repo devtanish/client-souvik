@@ -193,7 +193,7 @@ export default function EarringsPage() {
 
           <div
             ref={categoryScrollRef}
-            className="flex overflow-x-auto scrollbar-hide gap-4 px-0 pb-0 py-0 scroll-smooth -translate-x-0"
+            className="flex overflow-x-auto scrollbar-hide gap-4 px-0 pb-0 py-0 scroll-smooth -translate-x-0 mt-8"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {categories.map((category) => (
