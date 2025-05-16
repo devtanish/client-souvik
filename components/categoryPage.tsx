@@ -1,5 +1,11 @@
 "use client"
 
+import * as React from "react"
+
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { X } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { Label } from "@/components/ui/label"
 import { Lugrasimo } from "next/font/google"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
@@ -47,7 +53,12 @@ export default function EarringsPage() {
   const [wishlist, setWishlist] = useState<number[]>([])
   const categoryScrollRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
-  const [showFilters] = useState(true)
+
+  const [open, setOpen] = React.useState(false)
+  const [selectedFilters] = React.useState<Record<string, string[]>>({})
+  const [pickupOnly] = React.useState(false)
+
+  const filterCount = Object.values(selectedFilters).flat().length + (pickupOnly ? 1 : 0)
 
   // Check if mobile on mount
   useEffect(() => {
@@ -171,7 +182,7 @@ export default function EarringsPage() {
           <p className={`text-gray-600 ${poppins.variable}`}>Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
-        <div className="relative md:mb-9 mb-2">
+        <div className="relative md:mb-4 mb-2">
           <button
             onClick={() => scrollCategories("left")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-5 bg-white/80 rounded-full p-1 shadow-md"
@@ -230,127 +241,182 @@ export default function EarringsPage() {
           </button>
         </div>
 
-        {/* Mobile Filter Buttons */}
-        {isMobile ? (
-          <div className="mb-4 flex justify-between items-center border-b border-t py-2 w-screen -translate-x-4.5">
-            <Sheet>
-              <SheetTrigger asChild>
-                <button className="flex items-center justify-center gap-2 ml-4.5">
-                  <SlidersHorizontal size={16} />
-                  Filters
-                </button>
-              </SheetTrigger>
-              <SheetContent side="bottom" className="h-[80vh]">
-                <SheetHeader>
-                  <SheetTitle className="text-left">Filters</SheetTitle>
-                </SheetHeader>
-                <div className="py-4 px-3 space-y-6">
-                  {/* Mobile filter content - moved inside filter menu as per feedback */}
-                  <div>
-                    <h3 className="text-sm font-medium mb-3">Metal</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {metals.map((metal) => (
-                        <button
-                          key={metal.name}
-                          className={cn(
-                            "w-10 h-10 rounded-full border hover:ring-2 hover:ring-offset-2",
-                            selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
-                          )}
-                          style={{ backgroundColor: metal.color }}
-                          aria-label={metal.name}
-                          onClick={() => toggleMetal(metal.name)}
-                        />
-                      ))}
-                    </div>
-                  </div>
+        {/* Sort and view options */}
+        <div
+          className={cn(
+            "flex flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0 -translate-x-3.5 md:w-full w-screen ",
+            isMobile ? "py-2" : "border-t border-b py-3",
+          )}
+        >
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <button className="flex items-center justify-center gap-2 ml-4.5">
+                <SlidersHorizontal size={16} />
+                Filters {filterCount > 0 && `(${filterCount})`}
+              </button>
+            </SheetTrigger>
+            <SheetContent side="left" className=" lg:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
+              <SheetHeader className="p-4 border-b">
+                <div className="flex items-center justify-between">
+                  <SheetTitle className="text-xl font-bold">FILTERS</SheetTitle>
+                  <button onClick={() => setOpen(false)}>
+                    <X className="h-5 w-5" />
+                    <span className="sr-only">Close</span>
+                  </button>
+                </div>
+              </SheetHeader>
 
-                  <div>
-                    <h3 className="text-sm font-medium mb-3">Shape</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {shapes.map((shape) => (
-                        <button
-                          key={shape.id}
-                          className={cn(
-                            "w-10 h-10 rounded-full border flex items-center justify-center",
-                            selectedShapes.includes(shape.id)
-                              ? "border-black bg-gray-100"
-                              : "border-gray-300 hover:border-gray-400",
-                          )}
-                          onClick={() => toggleShape(shape.id)}
-                        >
-                          {shape.icon}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+              <div className="flex-1 overflow-auto">
+                <div className="p-4 flex items-center justify-between">
+                  <Label htmlFor="pickup" className="text-lg font-medium">
+                    IN-STOCK ONLY
+                  </Label>
+                  <Switch id="pickup" className="float-right" checked={inStockOnly} onCheckedChange={setInStockOnly} />
+                </div>
+                <Separator />
 
-                  <div>
-                    <h3 className="text-sm font-medium mb-3">Price</h3>
-                    <div className="space-y-4">
-                      <Slider value={priceRange} min={0} max={25000} step={100} onValueChange={setPriceRange} />
-                      <div className="flex items-center gap-2">
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                          <Input
-                            type="number"
-                            className="pl-7 w-24"
-                            value={priceRange[0]}
-                            onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
-                            min={0}
-                          />
-                        </div>
-                        <span className="text-gray-500">-</span>
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                          <Input
-                            type="number"
-                            className="pl-7 w-24"
-                            value={priceRange[1]}
-                            onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
-                            min={0}
-                          />
+                <React.Fragment>
+                  <Collapsible className="w-full" defaultOpen={true}>
+                    <div className="p-4">
+                      <CollapsibleTrigger className="flex w-full items-center justify-between">
+                        <span className="text-lg font-medium">MATERIAL</span>
+                        <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      </CollapsibleTrigger>
+                    </div>
+                    <CollapsibleContent className="px-3 pb-4">
+                      <div className="space-y-3">
+                        <div className="flex gap-2">
+                          {metals.map((metal) => (
+                            <button
+                              key={metal.name}
+                              className={cn(
+                                "w-8 h-8 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
+                                selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
+                              )}
+                              style={{ backgroundColor: metal.color }}
+                              aria-label={metal.name}
+                              onClick={() => toggleMetal(metal.name)}
+                            />
+                          ))}
                         </div>
                       </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                  <Separator />
+                </React.Fragment>
+
+                <React.Fragment>
+                  <Collapsible className="w-full" defaultOpen={true}>
+                    <div className="p-4">
+                      <CollapsibleTrigger className="flex w-full items-center justify-between">
+                        <span className="text-lg font-medium">SHAPE</span>
+                        <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      </CollapsibleTrigger>
                     </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">In-Stock Only</span>
-                    <Switch checked={inStockOnly} onCheckedChange={setInStockOnly} />
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-medium mb-3">Sort By</h3>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="w-full justify-between">
-                          {sortBy} <ChevronDown size={16} />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-full">
-                        {["Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
-                          <DropdownMenuItem
-                            key={option}
-                            onClick={() => setSortBy(option)}
-                            className={sortBy === option ? "bg-gray-100" : ""}
+                    <CollapsibleContent className="pl-1 pb-4">
+                      <div className="space-y-3">
+                        {shapes.map((shape) => (
+                          <button
+                            key={shape.id}
+                            className={cn(
+                              "w-8 h-8 ml-2 rounded-full border items-center justify-center",
+                              selectedShapes.includes(shape.id)
+                                ? "border-black bg-gray-100"
+                                : "border-gray-300 hover:border-gray-400",
+                            )}
+                            onClick={() => toggleShape(shape.id)}
                           >
-                            {option}
-                          </DropdownMenuItem>
+                            {shape.icon}
+                          </button>
                         ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                  <Separator />
+                </React.Fragment>
 
-                  <div className="flex gap-2 pt-4">
-                    <Button variant="outline" className="flex-1" onClick={resetFilters}>
-                      Reset
-                    </Button>
-                    <Button className="flex-1">Apply</Button>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                <React.Fragment>
+                  <Collapsible className="w-full" defaultOpen={true}>
+                    <div className="p-4">
+                      <CollapsibleTrigger className="flex w-full items-center justify-between">
+                        <span className="text-lg font-medium">PRICE</span>
+                        <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      </CollapsibleTrigger>
+                    </div>
+                    <CollapsibleContent className="px-4 pb-4">
+                      <div className="space-y-3">
+                        <div className="flex gap-2">
+                          <div className="space-y-4">
+                            <Slider
+                              value={priceRange}
+                              min={0}
+                              max={25000}
+                              step={100}
+                              onValueChange={setPriceRange}
+                              className="w-7/4"
+                            />
+                            <div className="flex items-center gap-2">
+                              <div className="relative">
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                <Input
+                                  type="number"
+                                  className="pl-7 w-24"
+                                  value={priceRange[0]}
+                                  onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
+                                  min={0}
+                                />
+                              </div>
+                              <span className="text-gray-500">-</span>
+                              <div className="relative">
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                <Input
+                                  type="number"
+                                  className="pl-7 w-24"
+                                  value={priceRange[1]}
+                                  onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
+                                  min={0}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                  <Separator />
+                </React.Fragment>
+              </div>
 
+              <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
+                <Button
+                  variant="outline"
+                  className="rounded-none"
+                  onClick={resetFilters}
+                >
+                  CLEAR ALL
+                </Button>
+                <Button onClick={() => setOpen(false)} className="rounded-none">
+                  VIEW RESULTS {filterCount > 0 && `(${filterCount})`}
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+
+          <div className="flex items-center gap-4 justify-between lg:-translate-x-0 -translate-x-4">
+            <div className="flex items-center gap-2 ">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium">
+                  {sortBy} <ChevronDown size={16} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {["Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
+                    <DropdownMenuItem key={option} onClick={() => setSortBy(option)}>
+                      {option}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
             <div className="flex items-center gap-2 border rounded-md">
               {isMobile ? (
                 <>
@@ -388,149 +454,6 @@ export default function EarringsPage() {
                 </>
               )}
             </div>
-          </div>
-        ) : (
-          /* Desktop Filters - Collapsible as per feedback */
-          !isMobile &&
-          showFilters && (
-            <div className="mb-8 space-y-6 border p-4 ">
-              {/* Metal filter */}
-              <div>
-                <h3 className="text-sm mb-3">Metal</h3>
-                <div className="flex gap-2">
-                  {metals.map((metal) => (
-                    <button
-                      key={metal.name}
-                      className={cn(
-                        "w-8 h-8 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
-                        selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
-                      )}
-                      style={{ backgroundColor: metal.color }}
-                      aria-label={metal.name}
-                      onClick={() => toggleMetal(metal.name)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Shape filter */}
-              <div>
-                <h3 className="text-sm mb-3">Shape</h3>
-                <div className="flex gap-2">
-                  {shapes.map((shape) => (
-                    <button
-                      key={shape.id}
-                      className={cn(
-                        "w-8 h-8 rounded-full border flex items-center justify-center",
-                        selectedShapes.includes(shape.id)
-                          ? "border-black bg-gray-100"
-                          : "border-gray-300 hover:border-gray-400",
-                      )}
-                      onClick={() => toggleShape(shape.id)}
-                    >
-                      {shape.icon}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Price filter */}
-              <div>
-                <h3 className="text-sm mb-3">Price</h3>
-                <div className="space-y-4">
-                  <Slider value={priceRange} min={0} max={25000} step={100} onValueChange={setPriceRange} />
-                  <div className="flex items-center gap-2">
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                      <Input
-                        type="number"
-                        className="pl-7 w-24"
-                        value={priceRange[0]}
-                        onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
-                        min={0}
-                      />
-                    </div>
-                    <span className="text-gray-500">-</span>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                      <Input
-                        type="number"
-                        className="pl-7 w-24"
-                        value={priceRange[1]}
-                        onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 border rounded-md">
-                {isMobile ? (
-                  <>
-                    <button
-                      className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
-                      onClick={() => setGridView("two")}
-                      aria-label="Two column view"
-                    >
-                      <LayoutGrid size={18} />
-                    </button>
-                    <button
-                      className={cn("p-2", gridView === "one" ? "bg-gray-100" : "")}
-                      onClick={() => setGridView("one")}
-                      aria-label="One column view"
-                    >
-                      <Columns2 size={18} />
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={cn("p-2", gridView === "four" ? "bg-gray-100" : "")}
-                      onClick={() => setGridView("four")}
-                      aria-label="Four column view"
-                    >
-                      <LayoutGrid size={18} />
-                    </button>
-                    <button
-                      className={cn("p-2", gridView === "two" ? "bg-gray-100" : "")}
-                      onClick={() => setGridView("two")}
-                      aria-label="Two column view"
-                    >
-                      <Columns2 size={18} />
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          )
-        )}
-
-        {/* Sort and view options */}
-        <div
-          className={cn(
-            "flex flex-wrap justify-between items-center gap-4 mb-6",
-            isMobile ? "py-2" : "border-t border-b py-3",
-          )}
-        >
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium">
-                  {sortBy} <ChevronDown size={16} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {["Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
-                    <DropdownMenuItem key={option} onClick={() => setSortBy(option)}>
-                      {option}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-            <label className="flex items-center gap-2 text-sm">
-              <Switch checked={inStockOnly} onCheckedChange={setInStockOnly} />
-              IN-STOCK ONLY
-            </label>
           </div>
         </div>
 
