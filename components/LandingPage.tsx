@@ -37,7 +37,7 @@ export default function LandingPage() {
       </div>
 
       {/* Filters */}
-      <div className="mb-8 space-y-6">
+      <div className="mb-8 sticky space-y-6">
         {/* Metal filter */}
         <div>
           <h3 className="text-sm mb-3">Metal</h3>
