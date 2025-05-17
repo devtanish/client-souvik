@@ -166,13 +166,13 @@ export default function EarringsPage() {
     <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
       <div className="py-6 w-full flex-1">
         {/* Breadcrumb */}
-        <nav className="text-sm mb-6">
+        <nav className="text-sm mb-2">
           <div className="flex items-center gap-1">
-            <Link href="/" className={`text-gray-500 hover:text-gray-700 ${lugrasimo.className}`}>
+            <Link href="/" className={`text-gray-500 hover:text-gray-700 text-md`}>
               Shop All
             </Link>
-            <span className="text-gray-500">/</span>
-            <span className={`font-medium ${lugrasimo.className}`}>{activeCategory}</span>
+            <span className="text-gray-500 text-md">/</span>
+            <span className={`text-md font-medium`}>{activeCategory}</span>
           </div>
         </nav>
 
@@ -360,7 +360,7 @@ export default function EarringsPage() {
                                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
                                 <Input
                                   type="number"
-                                  className="pl-7 w-24"
+                                  className="pl-7 w-24 rounded-none"
                                   value={priceRange[0]}
                                   onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
                                   min={0}
@@ -371,7 +371,7 @@ export default function EarringsPage() {
                                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
                                 <Input
                                   type="number"
-                                  className="pl-7 w-24"
+                                  className="pl-7 w-24 rounded-none"
                                   value={priceRange[1]}
                                   onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
                                   min={0}

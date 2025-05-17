@@ -10,7 +10,7 @@ import {
 import Image from "next/image"
 import { Button } from "./ui/button"
 import { useState } from "react"
-import { Plus, Minus, X, Menu } from "lucide-react"
+import { Plus, Minus } from "lucide-react"
 import Link from "next/link"
 import { PiQuestionLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
@@ -180,16 +180,16 @@ export default function Sidebar() {
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
-        className="fixed md:top-8 md:left-10.5 top-7.5 left-1.5 z-50  p-2 rounded-md   focus:outline-none transition-all duration-200"
+        className="fixed md:top-8 md:left-10.5 top-8 -left-2.5 z-50  p-2 rounded-md   focus:outline-none transition-all duration-200 "
         aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
       >
-        {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />}
+        {/* {isSidebarOpen ? <X className="md:hidden" size={24} /> : <Menu className="md:hidden" size={24} />} */}
         {/* {isSidebarOpen ?  */}
-        <div role="presentation" className="relative md:w-16 z-30 md:h-16 h-8 w-8 md:inline-block cursor-pointer group md:visible hidden">
-          <span className={`${isSidebarOpen ? "visible" : "invisible opacity-0"}  rotate-135 top-10 md:block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
-          <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"}  md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-6 group-[.open]:opacity-0`}></span>
-          <span className={`${isSidebarOpen ? "rotate-45 top-7" : "rotate-0"} absolute top-10 md:block h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out `}></span>
-          <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"} md:block absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out top-14 group-[.open]:opacity-0`}></span>
+        <div role="presentation" className="relative md:w-16 z-30 md:h-16 h-8 w-8 md:inline-block cursor-pointer group">
+          <span className={`${isSidebarOpen ? "visible" : "invisible opacity-0"}  rotate-135 md:top-10 top-2.5 md:block absolute h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out group-[.open]:rotate-45 group-[.open]:top-7`}></span>
+          <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"}  md:block md:top-6 top-0 absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out group-[.open]:opacity-0`}></span>
+          <span className={`${isSidebarOpen ? "rotate-45 top-2.5" : "rotate-0"} absolute md:top-10 top-2.5 md:block h-[0.03rem] w-full bg-black rounded transition-all duration-500 ease-in-out `}></span>
+          <span className={`${isSidebarOpen ? " opacity-0 invisible" : "visible"} md:block md:top-14 top-5 absolute h-[0.03rem] w-full  bg-black rounded transition-all duration-500 ease-in-out group-[.open]:opacity-0`}></span>
         </div>
       </button>
 
