@@ -257,7 +257,7 @@ export default function EarringsPage() {
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className=" lg:w-1/5 w-screen sm:max-w-full p-0 flex flex-col">
+              <SheetContent side="left" className=" md:w-2/4 lg:w-1/2 xl:w-1/4 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
                     <SheetTitle className="text-xl font-bold">FILTERS</SheetTitle>
