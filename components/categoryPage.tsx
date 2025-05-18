@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Checkbox } from "@/components/ui/checkbox"
 import { X } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { Label } from "@/components/ui/label"
@@ -245,7 +246,7 @@ export default function EarringsPage() {
         <div className="">
           <div
             className={cn(
-              "flex sticky bg-white md:top-32 top-19 z-20 flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0 -translate-x-3.5 md:w-full w-screen ",
+              "flex sticky bg-white md:top-32 top-19 z-10 flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0 -translate-x-3.5 md:w-full w-screen ",
               isMobile ? "py-2" : "border-t border-b py-3",
             )}
           >
@@ -256,7 +257,7 @@ export default function EarringsPage() {
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className=" lg:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
+              <SheetContent side="left" className=" lg:w-1/5 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
                     <SheetTitle className="text-xl font-bold">FILTERS</SheetTitle>
@@ -314,21 +315,23 @@ export default function EarringsPage() {
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="pl-1 pb-4">
+                      <CollapsibleContent className="px-3 pb-4">
                         <div className="space-y-3">
                           {shapes.map((shape) => (
-                            <button
-                              key={shape.id}
-                              className={cn(
-                                "w-8 h-8 ml-2 rounded-full border items-center justify-center",
-                                selectedShapes.includes(shape.id)
-                                  ? "border-black bg-gray-100"
-                                  : "border-gray-300 hover:border-gray-400",
-                              )}
-                              onClick={() => toggleShape(shape.id)}
-                            >
-                              {shape.icon}
-                            </button>
+                            <div key={shape.name} className="flex items-center space-x-2">
+                              <Checkbox
+                                className="h-5 w-5"
+                                id={`shape-${shape.name}`}
+                                checked={selectedShapes.includes(shape.id)}
+                                onCheckedChange={() => toggleShape(shape.id)}
+                              />
+                              <Label
+                                htmlFor={`shape-${shape.name}`}
+                                className="text-lg font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {shape.name}
+                              </Label>
+                            </div>
                           ))}
                         </div>
                       </CollapsibleContent>
@@ -403,7 +406,7 @@ export default function EarringsPage() {
               </SheetContent>
             </Sheet>
 
-            <div className="flex items-center gap-4 justify-between lg:-translate-x-0 -translate-x-4">
+            <div className="flex rounded-none items-center gap-4 justify-between lg:-translate-x-0 -translate-x-4">
               <div className="flex items-center gap-2 ">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium">

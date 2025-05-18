@@ -17,14 +17,14 @@ export const metals = [
 ]
 
 export const shapes = [
-  { id: 1, icon: "○" },
-  { id: 2, icon: "◎" },
-  { id: 3, icon: "◻" },
-  { id: 4, icon: "◇" },
-  { id: 5, icon: "◈" },
-  { id: 6, icon: "□" },
-  { id: 7, icon: "△" },
-  { id: 8, icon: "◯" },
+  { id: 1, name: "○" },
+  { id: 2, name: "◎" },
+  { id: 3, name: "◻" },
+  { id: 4, name: "◇" },
+  { id: 5, name: "◈" },
+  { id: 6, name: "□" },
+  { id: 7, name: "△" },
+  { id: 8, name: "◯" },
 ]
 
 export const products = [
