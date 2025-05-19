@@ -281,6 +281,57 @@ export default function EarringsPage() {
                     <Collapsible className="w-full" defaultOpen={true}>
                       <div className="p-5 px-4">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
+                          <span className="text-md font-medium">PRICE</span>
+                          <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                        </CollapsibleTrigger>
+                      </div>
+                      <CollapsibleContent className="px-4 pb-4">
+                        <div className="space-y-3">
+                          <div className="flex gap-2">
+                            <div className="space-y-4">
+                              <Slider
+                                value={priceRange}
+                                min={0}
+                                max={25000}
+                                step={100}
+                                onValueChange={setPriceRange}
+                                className="w-7/4"
+                              />
+                              <div className="flex items-center gap-2">
+                                <div className="relative">
+                                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                  <Input
+                                    type="number"
+                                    className="pl-7 w-24 rounded-none"
+                                    value={priceRange[0]}
+                                    onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
+                                    min={0}
+                                  />
+                                </div>
+                                <span className="text-gray-500">-</span>
+                                <div className="relative">
+                                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                  <Input
+                                    type="number"
+                                    className="pl-7 w-24 rounded-none"
+                                    value={priceRange[1]}
+                                    onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
+                                    min={0}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                    <Separator />
+                  </React.Fragment>
+
+                  <React.Fragment>
+                    <Collapsible className="w-full" defaultOpen={true}>
+                      <div className="p-5 px-4">
+                        <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">MATERIAL</span>
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                         </CollapsibleTrigger>
@@ -342,56 +393,7 @@ export default function EarringsPage() {
                     <Separator />
                   </React.Fragment>
 
-                  <React.Fragment>
-                    <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-5 px-4">
-                        <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">PRICE</span>
-                          <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
-                        </CollapsibleTrigger>
-                      </div>
-                      <CollapsibleContent className="px-4 pb-4">
-                        <div className="space-y-3">
-                          <div className="flex gap-2">
-                            <div className="space-y-4">
-                              <Slider
-                                value={priceRange}
-                                min={0}
-                                max={25000}
-                                step={100}
-                                onValueChange={setPriceRange}
-                                className="w-7/4"
-                              />
-                              <div className="flex items-center gap-2">
-                                <div className="relative">
-                                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                                  <Input
-                                    type="number"
-                                    className="pl-7 w-24 rounded-none"
-                                    value={priceRange[0]}
-                                    onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
-                                    min={0}
-                                  />
-                                </div>
-                                <span className="text-gray-500">-</span>
-                                <div className="relative">
-                                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                                  <Input
-                                    type="number"
-                                    className="pl-7 w-24 rounded-none"
-                                    value={priceRange[1]}
-                                    onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
-                                    min={0}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                    <Separator />
-                  </React.Fragment>
+                  
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
