@@ -257,7 +257,7 @@ export default function EarringsPage() {
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className=" md:w-2/4 lg:w-1/2 xl:w-1/4 w-screen sm:max-w-full p-0 flex flex-col">
+              <SheetContent side="left" className=" md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
                     <SheetTitle className="text-xl font-bold">FILTERS</SheetTitle>
@@ -279,7 +279,7 @@ export default function EarringsPage() {
 
                   <React.Fragment>
                     <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-4">
+                      <div className="p-5 px-4">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">MATERIAL</span>
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
@@ -287,18 +287,21 @@ export default function EarringsPage() {
                       </div>
                       <CollapsibleContent className="px-3 pb-4">
                         <div className="space-y-3">
-                          <div className="flex gap-3">
+                          <div className="flex gap-3 justify-between ml-10 mr-30">
                             {metals.map((metal) => (
-                              <button
-                                key={metal.name}
-                                className={cn(
-                                  "w-8 h-8 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
-                                  selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
-                                )}
-                                style={{ backgroundColor: metal.color }}
-                                aria-label={metal.name}
-                                onClick={() => toggleMetal(metal.name)}
-                              />
+                              <div key={metal.name} className=" flex flex-col items-center justify-center gap-1">
+                                <button
+                                  key={metal.name}
+                                  className={cn(
+                                    "w-25 h-25 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
+                                    selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
+                                  )}
+                                  style={{ backgroundColor: metal.color }}
+                                  aria-label={metal.name}
+                                  onClick={() => toggleMetal(metal.name)}
+                                />
+                                <Label className="mt-3">{metal.name}</Label>
+                              </div>
                             ))}
                           </div>
                         </div>
@@ -309,7 +312,7 @@ export default function EarringsPage() {
 
                   <React.Fragment>
                     <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-4">
+                      <div className="p-5 px-4">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">SHAPE</span>
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
@@ -341,7 +344,7 @@ export default function EarringsPage() {
 
                   <React.Fragment>
                     <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-4">
+                      <div className="p-5 px-4">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">PRICE</span>
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
