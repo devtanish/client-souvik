@@ -433,7 +433,7 @@ export default function EarringsPage() {
                       open={openFilters.material}
                       onOpenChange={() => toggleFilterSection('material')}
                     >
-                      <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
+                      <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">MATERIAL</span>
                           <ChevronDown 
@@ -450,7 +450,7 @@ export default function EarringsPage() {
                                 <button
                                   key={metal.name}
                                   className={cn(
-                                    "lg:w-20 lg:h-20 w-20 h-20 rounded-full border relative overflow-hidden transition-all duration-300",
+                                    "lg:w-20 lg:h-20 w-20 h-20 rounded-full border relative overflow-hidden transition-all duration-300 mt-2",
                                     "transform hover:scale-105 hover:shadow-lg hover:z-10",
                                     "before:absolute before:inset-0 before:opacity-0 before:rounded-full before:transition-opacity before:duration-300 hover:before:opacity-20 before:bg-white",
                                     selectedMetals.includes(metal.name)
