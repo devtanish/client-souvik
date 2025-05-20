@@ -336,15 +336,15 @@ export default function EarringsPage() {
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="px-3 pb-4">
+                      <CollapsibleContent className="px-3 pb-4 lg:mx-8">
                         <div className="space-y-3">
-                          <div className="flex gap-3 justify-between ml-10 mr-30">
+                          <div className="flex gap-3 justify-between md:mx-0 ">
                             {metals.map((metal) => (
                               <div key={metal.name} className=" flex flex-col items-center justify-center gap-1">
                                 <button
                                   key={metal.name}
                                   className={cn(
-                                    "w-25 h-25 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
+                                    "lg:w-25  lg:h-25 w-20 h-20 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
                                     selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
                                   )}
                                   style={{ backgroundColor: metal.color }}
