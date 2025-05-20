@@ -435,7 +435,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">Metal Colour</span>
+                          <span className="text-md font-medium">METAL COLOUR</span>
                           <ChevronDown 
                             className="h-5 w-5 chevron-rotate" 
                             data-state={openFilters.material ? "open" : "closed"}
@@ -614,7 +614,7 @@ export default function EarringsPage() {
                 <div key={product.id} className="group relative">
                   {/* Wishlist button */}
                   <button
-                    className={cn("absolute top-2 right-2 z-10 p-1.5 rounded-full ", "transition-all duration-300")}
+                    className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
                     onClick={() => toggleWishlist(product.id)}
                     aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
                   >
@@ -626,13 +626,13 @@ export default function EarringsPage() {
 
                   <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
                     {product.bestSeller && (
-                      <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-10 font-medium">
+                      <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5 font-medium">
                         Best Seller
                       </span>
                     )}
 
                     {!product.bestSeller && ( // Using bestSeller as a proxy for inStock since inStock isn't in the data
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-5">
                         <span className="text-white font-medium text-sm">Out of Stock</span>
                       </div>
                     )}
