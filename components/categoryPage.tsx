@@ -1,39 +1,30 @@
 "use client"
 
 import * as React from "react"
-
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Checkbox } from "@/components/ui/checkbox"
-import { X } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
-import { Label } from "@/components/ui/label"
-import { Lugrasimo } from "next/font/google"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { Poppins, Lugrasimo } from 'next/font/google'
+
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Separator } from "@/components/ui/separator"
+import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Input } from "@/components/ui/input"
-import {
-  ChevronDown,
-  Heart,
-  LayoutGrid,
-  Columns2,
-  ChevronRight,
-  ChevronLeft,
-  SlidersHorizontal,
-  ShoppingBag,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
 import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Poppins } from "next/font/google"
+import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, ShoppingBag, X } from 'lucide-react'
+import { cn } from "@/lib/utils"
+
+// Import data
 import { categories, metals, shapes, products } from "./data"
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["100", "200"], // Optional
+  weight: ["100", "200", "400", "500", "600"], // Added more weights for better typography
   variable: "--fontFamily",
   display: "swap",
 })
@@ -106,11 +97,13 @@ export default function EarringsPage() {
   const [isMobile, setIsMobile] = useState(false)
 
   // State to track open filter sections
-  const [openFilters, setOpenFilters] = useState({
+  type FilterSection = 'price' | 'material' | 'shape';
+
+  const [openFilters, setOpenFilters] = useState<Record<FilterSection, boolean>>({
     price: true,
     material: true,
     shape: true
-  })
+  });
 
   const [open, setOpen] = React.useState(false)
   const [selectedFilters] = React.useState<Record<string, string[]>>({})
@@ -178,12 +171,12 @@ export default function EarringsPage() {
   }
 
   // Function to toggle a specific filter's open state
-  const toggleFilterSection = (section) => {
+  const toggleFilterSection = (section: FilterSection) => {
     setOpenFilters(prev => ({
       ...prev,
       [section]: !prev[section]
-    }))
-  }
+    }));
+  };
 
   // Filter and sort products based on selected filters
   const filteredProducts = useMemo(() => {
@@ -233,19 +226,30 @@ export default function EarringsPage() {
   return (
     <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
       <style jsx global>{`
-  ${shimmerAnimation}
-  
-  .metal-filter-selected::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-    background-size: 200% 200%;
-    animation: shimmer 2s infinite linear;
-    pointer-events: none;
-  }
-`}</style>
+        ${shimmerAnimation}
+        
+        .metal-filter-selected::after {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 100%;
+          background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+          background-size: 200% 200%;
+          animation: shimmer 2s infinite linear;
+          pointer-events: none;
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+      `}</style>
       <div className="py-6 w-full flex-1">
         {/* Breadcrumb */}
         <nav className="text-sm mb-2">
@@ -267,7 +271,7 @@ export default function EarringsPage() {
         <div className="relative md:mb-4 mb-2">
           <button
             onClick={() => scrollCategories("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-5 bg-white/80 rounded-full p-1 shadow-md"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-1 shadow-md"
             aria-label="Scroll left"
           >
             <ChevronLeft size={20} />
@@ -316,7 +320,7 @@ export default function EarringsPage() {
 
           <button
             onClick={() => scrollCategories("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-5 bg-white/80 rounded-full p-1 shadow-md"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-1 shadow-md"
             aria-label="Scroll right"
           >
             <ChevronRight size={20} />
@@ -382,14 +386,14 @@ export default function EarringsPage() {
                       <CollapsibleContent className="px-4 pb-4 overflow-hidden collapsible-content-open pt-4">
                         <div className="space-y-3">
                           <div className="flex gap-2">
-                            <div className="space-y-4">
+                            <div className="space-y-4 w-full">
                               <Slider
                                 value={priceRange}
                                 min={0}
                                 max={25000}
                                 step={100}
                                 onValueChange={setPriceRange}
-                                className="w-7/4"
+                                className="w-full"
                               />
                               <div className="flex items-center gap-2">
                                 <div className="relative">
@@ -398,7 +402,7 @@ export default function EarringsPage() {
                                     type="number"
                                     className="pl-7 w-24 rounded-none"
                                     value={priceRange[0]}
-                                    onChange={(e) => setPriceRange([Number.parseInt(e.target.value), priceRange[1]])}
+                                    onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
                                     min={0}
                                   />
                                 </div>
@@ -409,7 +413,7 @@ export default function EarringsPage() {
                                     type="number"
                                     className="pl-7 w-24 rounded-none"
                                     value={priceRange[1]}
-                                    onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
+                                    onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                                     min={0}
                                   />
                                 </div>
@@ -541,7 +545,7 @@ export default function EarringsPage() {
                     {sortBy} <ChevronDown size={16} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    {["Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
+                    {["Featured", "Price: Low to High", "Price: High to Low", "Newest"].map((option) => (
                       <DropdownMenuItem key={option} onClick={() => setSortBy(option)}>
                         {option}
                       </DropdownMenuItem>
@@ -610,7 +614,7 @@ export default function EarringsPage() {
                 <div key={product.id} className="group relative">
                   {/* Wishlist button */}
                   <button
-                    className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
+                    className={cn("absolute top-2 right-2 z-10 p-1.5 rounded-full ", "transition-all duration-300")}
                     onClick={() => toggleWishlist(product.id)}
                     aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
                   >
@@ -622,13 +626,13 @@ export default function EarringsPage() {
 
                   <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
                     {product.bestSeller && (
-                      <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5 font-medium">
+                      <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-10 font-medium">
                         Best Seller
                       </span>
                     )}
 
                     {!product.bestSeller && ( // Using bestSeller as a proxy for inStock since inStock isn't in the data
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-5">
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
                         <span className="text-white font-medium text-sm">Out of Stock</span>
                       </div>
                     )}
@@ -678,7 +682,7 @@ export default function EarringsPage() {
                           isMobile ? "w-3 h-3" : "w-4 h-4",
                         )}
                         style={{ backgroundColor: color }}
-                        aria-label={color}
+                        aria-label={`Color: ${color}`}
                       />
                     ))}
                   </div>
