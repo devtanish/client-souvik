@@ -10,10 +10,10 @@ export const categories = [
 ]
 
 export const metals = [
-  { name: "18kt Gold", color: "#E6C77E" },
-  { name: "14kt Gold", color: "#E0E0E0" },
-  { name: "9kt gold", color: "#E0BFB8" },
-  { name: "925 silver", color: "#F5F5F5" },
+  { name: "18kt Gold", color: "[linear-gradient(328deg,_rgba(227,_202,_136,_0.1)_-22%,_rgb(227,_202,_136)_54%,_rgba(227,_202,_136,_0.62)_73%,_rgba(227,_202,_136,_0.13)_88%)]" },
+  { name: "14kt Gold", color: "[linear-gradient(150deg,rgba(226,185,139,0.063)_60%,rgb(238,238,238)_110%),linear-gradient(-19deg,rgb(226,185,139)_65%,rgb(238,238,238)_99%)]" },
+  { name: "9kt gold", color: "[linear-gradient(328deg,rgb(238,238,238)_52.9%,rgb(255,255,255)_78%,rgb(238,238,238)_151%)]" },
+  { name: "925 silver", color: "[linear-gradient(328deg,rgba(202,202,202,0.2)_16%,rgb(202,202,202)_50%,rgb(202,202,202)_65%,rgba(202,202,202,0.094)_93%)]" },
 ]
 
 export const shapes = [

@@ -343,13 +343,12 @@ export default function EarringsPage() {
                               <div key={metal.name} className=" flex flex-col items-center justify-center gap-1">
                                 <button
                                   key={metal.name}
-                                  className={cn(
-                                    "lg:w-25  lg:h-25 w-20 h-20 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300",
-                                    selectedMetals.includes(metal.name) ? "ring-2 ring-offset-2 ring-black" : "",
-                                  )}
-                                  style={{ backgroundColor: metal.color }}
+                                  className={`${cn(
+                                    `lg:w-25  lg:h-25 w-20 h-20 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300 bg-${metal.color}`,
+                                    selectedMetals.includes(metal.name) ? "ring-1 ring-offset-2 ring-black" : "",
+                                  )}`}
                                   aria-label={metal.name}
-                                  onClick={() => toggleMetal(metal.name)}
+                                  onClick={() => {toggleMetal(metal.name)}}
                                 />
                                 <Label className="mt-3 text-sm">{metal.name}</Label>
                               </div>
