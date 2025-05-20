@@ -351,7 +351,7 @@ export default function EarringsPage() {
                                   aria-label={metal.name}
                                   onClick={() => toggleMetal(metal.name)}
                                 />
-                                <Label className="mt-3">{metal.name}</Label>
+                                <Label className="mt-3 text-sm">{metal.name}</Label>
                               </div>
                             ))}
                           </div>
@@ -381,7 +381,7 @@ export default function EarringsPage() {
                               />
                               <Label
                                 htmlFor={`shape-${shape.name}`}
-                                className="text-lg font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                               >
                                 {shape.name}
                               </Label>
