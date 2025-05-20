@@ -43,6 +43,18 @@ export const lugrasimo = Lugrasimo({
   weight: "400", // Lugrasimo only has 400 weight
 })
 
+// Add keyframes for subtle shimmer effect
+const shimmerAnimation = `
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+`
+
 export default function EarringsPage() {
   const [activeCategory, setActiveCategory] = useState("Earrings")
   const [gridView, setGridView] = useState<"four" | "two" | "one">("four")
@@ -100,7 +112,9 @@ export default function EarringsPage() {
   // Toggle metal selection
   const toggleMetal = (metalName: string) => {
     setSelectedMetals((prev) =>
-      prev.includes(metalName) ? prev.filter((name) => name !== metalName) : [...prev, metalName],
+      prev.includes(metalName) 
+        ? prev.filter((name) => name !== metalName) 
+        : [...prev, metalName]
     )
   }
 
@@ -165,6 +179,20 @@ export default function EarringsPage() {
 
   return (
     <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
+      <style jsx global>{`
+  ${shimmerAnimation}
+  
+  .metal-filter-selected::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 200%;
+    animation: shimmer 2s infinite linear;
+    pointer-events: none;
+  }
+`}</style>
       <div className="py-6 w-full flex-1">
         {/* Breadcrumb */}
         <nav className="text-sm mb-2">
@@ -273,7 +301,12 @@ export default function EarringsPage() {
                     <Label htmlFor="pickup" className="text-md font-medium">
                       IN-STOCK ONLY
                     </Label>
-                    <Switch id="pickup" className="float-right" checked={inStockOnly} onCheckedChange={setInStockOnly} />
+                    <Switch
+                      id="pickup"
+                      className="float-right"
+                      checked={inStockOnly}
+                      onCheckedChange={setInStockOnly}
+                    />
                   </div>
                   <Separator />
 
@@ -336,21 +369,41 @@ export default function EarringsPage() {
                           <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="px-3 pb-4 lg:mx-8">
+                      <CollapsibleContent className="px-3 pb-4 lg:mx-19">
                         <div className="space-y-3">
-                          <div className="flex gap-3 justify-between md:mx-0 ">
+                          <div className="flex gap-3 justify-between md:mx-0">
                             {metals.map((metal) => (
-                              <div key={metal.name} className=" flex flex-col items-center justify-center gap-1">
+                              <div key={metal.name} className="flex flex-col items-center justify-center gap-1">
                                 <button
                                   key={metal.name}
-                                  className={`${cn(
-                                    `lg:w-25  lg:h-25 w-20 h-20 rounded-full border hover:ring-2 hover:ring-offset-2 hover:ring-gray-300 bg-${metal.color}`,
-                                    selectedMetals.includes(metal.name) ? "ring-1 ring-offset-2 ring-black" : "",
-                                  )}`}
+                                  className={cn(
+                                    "lg:w-20 lg:h-20 w-20 h-20 rounded-full border relative overflow-hidden transition-all duration-300",
+                                    "transform hover:scale-105 hover:shadow-lg hover:z-10",
+                                    "before:absolute before:inset-0 before:opacity-0 before:rounded-full before:transition-opacity before:duration-300 hover:before:opacity-20 before:bg-white",
+                                    selectedMetals.includes(metal.name)
+                                      ? "ring-2 ring-offset-2 ring-black shadow-md metal-filter-selected"
+                                      : "hover:ring-1 hover:ring-offset-2 hover:ring-gray-300"
+                                  )}
+                                  style={{
+                                    backgroundImage: metal.color,
+                                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                                  }}
                                   aria-label={metal.name}
-                                  onClick={() => {toggleMetal(metal.name)}}
-                                />
-                                <Label className="mt-3 text-sm">{metal.name}</Label>
+                                  onClick={() => toggleMetal(metal.name)}
+                                >
+                                  <span className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                    <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                                      {selectedMetals.includes(metal.name) ? (
+                                        <X size={14} className="text-black/70" />
+                                      ) : (
+                                        <span className="w-4 h-4 bg-white/70 rounded-full"></span>
+                                      )}
+                                    </span>
+                                  </span>
+                                </button>
+                                <Label className="mt-3 text-sm transition-all duration-200 hover:font-medium">
+                                  {metal.name}
+                                </Label>
                               </div>
                             ))}
                           </div>
@@ -391,16 +444,10 @@ export default function EarringsPage() {
                     </Collapsible>
                     <Separator />
                   </React.Fragment>
-
-                  
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
-                  <Button
-                    variant="outline"
-                    className="rounded-none"
-                    onClick={resetFilters}
-                  >
+                  <Button variant="outline" className="rounded-none" onClick={resetFilters}>
                     CLEAR ALL
                   </Button>
                   <Button onClick={() => setOpen(false)} className="rounded-none">
@@ -558,7 +605,9 @@ export default function EarringsPage() {
                       />
                     ))}
                   </div>
-                  <p className={cn("text-xs text-gray-500", isMobile ? "text-[10px]" : "text-xs")}>{product.material}</p>
+                  <p className={cn("text-xs text-gray-500", isMobile ? "text-[10px]" : "text-xs")}>
+                    {product.material}
+                  </p>
                 </div>
               ))
             )}

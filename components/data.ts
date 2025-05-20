@@ -10,10 +10,10 @@ export const categories = [
 ]
 
 export const metals = [
-  { name: "18kt Gold", color: "[linear-gradient(328deg,_rgba(227,_202,_136,_0.1)_-22%,_rgb(227,_202,_136)_54%,_rgba(227,_202,_136,_0.62)_73%,_rgba(227,_202,_136,_0.13)_88%)]" },
-  { name: "14kt Gold", color: "[linear-gradient(150deg,rgba(226,185,139,0.063)_60%,rgb(238,238,238)_110%),linear-gradient(-19deg,rgb(226,185,139)_65%,rgb(238,238,238)_99%)]" },
-  { name: "9kt gold", color: "[linear-gradient(328deg,rgb(238,238,238)_52.9%,rgb(255,255,255)_78%,rgb(238,238,238)_151%)]" },
-  { name: "925 silver", color: "[linear-gradient(328deg,rgba(202,202,202,0.2)_16%,rgb(202,202,202)_50%,rgb(202,202,202)_65%,rgba(202,202,202,0.094)_93%)]" },
+  { name: "18kt Gold", color: "linear-gradient(328deg, rgba(227, 202, 136, 0.1) -22%, rgb(227, 202, 136) 54%, rgba(227, 202, 136, 0.62) 73%, rgba(227, 202, 136, 0.13) 88%)" },
+  { name: "14kt Gold", color: "linear-gradient(150deg, rgba(226, 185, 139, 0.063) 60%, rgb(238, 238, 238) 110%), linear-gradient(-19deg, rgb(226, 185, 139) 65%, rgb(238, 238, 238) 99%)" },
+  { name: "9kt gold", color: "linear-gradient(328deg, rgb(238, 238, 238) 52.9%, rgb(255, 255, 255) 78%, rgb(238, 238, 238) 151%)" },
+  { name: "925 silver", color: "linear-gradient(328deg, rgba(202, 202, 202, 0.2) 16%, rgb(202, 202, 202) 50%, rgb(202, 202, 202) 65%, rgba(202, 202, 202, 0.094) 93%)" },
 ]
 
 export const shapes = [
@@ -61,7 +61,7 @@ export const products = [
     image: categories[0].image,
     hoverImage: "/jwel/2.avif",
     colors: [metals[0].color, metals[1].color],
-    material: "14k Yellow Gold",
+    material: "18kt Gold",
     bestSeller: true,
     showAddToBag: true,
     shape: shapes[0],
