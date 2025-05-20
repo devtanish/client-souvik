@@ -53,6 +53,44 @@ const shimmerAnimation = `
       background-position: 200% 0;
     }
   }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .collapsible-content-open {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .filter-item {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .filter-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .collapsible-section {
+    transition: background-color 0.2s ease;
+  }
+  
+  .collapsible-section:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  .chevron-rotate {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .chevron-rotate[data-state="open"] {
+    transform: rotate(180deg);
+  }
 `
 
 export default function EarringsPage() {
@@ -66,6 +104,13 @@ export default function EarringsPage() {
   const [wishlist, setWishlist] = useState<number[]>([])
   const categoryScrollRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+
+  // State to track open filter sections
+  const [openFilters, setOpenFilters] = useState({
+    price: true,
+    material: true,
+    shape: true
+  })
 
   const [open, setOpen] = React.useState(false)
   const [selectedFilters] = React.useState<Record<string, string[]>>({})
@@ -130,6 +175,14 @@ export default function EarringsPage() {
     setPriceRange([0, 22000])
     setInStockOnly(false)
     setSortBy("Featured")
+  }
+
+  // Function to toggle a specific filter's open state
+  const toggleFilterSection = (section) => {
+    setOpenFilters(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
   }
 
   // Filter and sort products based on selected filters
@@ -285,7 +338,7 @@ export default function EarringsPage() {
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className=" md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
+              <SheetContent side="left" className="md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
                     <SheetTitle className="text-xl font-bold">FILTERS</SheetTitle>
@@ -311,14 +364,22 @@ export default function EarringsPage() {
                   <Separator />
 
                   <React.Fragment>
-                    <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-5 px-4">
+                    <Collapsible 
+                      className="w-full" 
+                      defaultOpen={openFilters.price}
+                      open={openFilters.price}
+                      onOpenChange={() => toggleFilterSection('price')}
+                    >
+                      <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">PRICE</span>
-                          <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                          <ChevronDown 
+                            className="h-5 w-5 chevron-rotate" 
+                            data-state={openFilters.price ? "open" : "closed"} 
+                          />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="px-4 pb-4">
+                      <CollapsibleContent className="px-4 pb-4 overflow-hidden collapsible-content-open pt-4">
                         <div className="space-y-3">
                           <div className="flex gap-2">
                             <div className="space-y-4">
@@ -362,18 +423,26 @@ export default function EarringsPage() {
                   </React.Fragment>
 
                   <React.Fragment>
-                    <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-5 px-4">
+                    <Collapsible 
+                      className="w-full" 
+                      defaultOpen={openFilters.material}
+                      open={openFilters.material}
+                      onOpenChange={() => toggleFilterSection('material')}
+                    >
+                      <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">MATERIAL</span>
-                          <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                          <ChevronDown 
+                            className="h-5 w-5 chevron-rotate" 
+                            data-state={openFilters.material ? "open" : "closed"}
+                          />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="px-3 pb-4 lg:mx-19">
+                      <CollapsibleContent className="px-3 pb-4 lg:mx-19 transition-all overflow-hidden collapsible-content-open">
                         <div className="space-y-3">
                           <div className="flex gap-3 justify-between md:mx-0">
                             {metals.map((metal) => (
-                              <div key={metal.name} className="flex flex-col items-center justify-center gap-1">
+                              <div key={metal.name} className="flex flex-col items-center justify-center gap-1 filter-item">
                                 <button
                                   key={metal.name}
                                   className={cn(
@@ -414,17 +483,25 @@ export default function EarringsPage() {
                   </React.Fragment>
 
                   <React.Fragment>
-                    <Collapsible className="w-full" defaultOpen={true}>
-                      <div className="p-5 px-4">
+                    <Collapsible 
+                      className="w-full" 
+                      defaultOpen={openFilters.shape}
+                      open={openFilters.shape}
+                      onOpenChange={() => toggleFilterSection('shape')}
+                    >
+                      <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">SHAPE</span>
-                          <ChevronDown className="h-5 w-5 transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                          <ChevronDown 
+                            className="h-5 w-5 chevron-rotate" 
+                            data-state={openFilters.shape ? "open" : "closed"}
+                          />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="px-3 pb-4">
+                      <CollapsibleContent className="px-3 pb-4 overflow-hidden collapsible-content-open">
                         <div className="space-y-3">
                           {shapes.map((shape) => (
-                            <div key={shape.name} className="flex items-center space-x-2">
+                            <div key={shape.name} className="flex items-center space-x-2 filter-item py-1 px-1 rounded-md hover:bg-gray-50">
                               <Checkbox
                                 className="h-5 w-5"
                                 id={`shape-${shape.name}`}
