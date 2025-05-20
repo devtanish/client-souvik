@@ -435,7 +435,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">MATERIAL</span>
+                          <span className="text-md font-medium">Metal Colour</span>
                           <ChevronDown 
                             className="h-5 w-5 chevron-rotate" 
                             data-state={openFilters.material ? "open" : "closed"}

@@ -10,10 +10,9 @@ export const categories = [
 ]
 
 export const metals = [
-  { name: "18kt Gold", color: "linear-gradient(328deg, rgba(227, 202, 136, 0.1) -22%, rgb(227, 202, 136) 54%, rgba(227, 202, 136, 0.62) 73%, rgba(227, 202, 136, 0.13) 88%)" },
-  { name: "14kt Gold", color: "linear-gradient(150deg, rgba(226, 185, 139, 0.063) 60%, rgb(238, 238, 238) 110%), linear-gradient(-19deg, rgb(226, 185, 139) 65%, rgb(238, 238, 238) 99%)" },
-  { name: "9kt gold", color: "linear-gradient(328deg, rgb(238, 238, 238) 52.9%, rgb(255, 255, 255) 78%, rgb(238, 238, 238) 151%)" },
-  { name: "925 silver", color: "linear-gradient(328deg, rgba(202, 202, 202, 0.2) 16%, rgb(202, 202, 202) 50%, rgb(202, 202, 202) 65%, rgba(202, 202, 202, 0.094) 93%)" },
+  { name: "Yellow Gold", color: "linear-gradient(328deg, rgba(227, 202, 136, 0.1) -22%, rgb(227, 202, 136) 54%, rgba(227, 202, 136, 0.62) 73%, rgba(227, 202, 136, 0.13) 88%)" },
+  { name: "Rose Gold", color: "linear-gradient(150deg, rgba(226, 185, 139, 0.063) 60%, rgb(238, 238, 238) 110%), linear-gradient(-19deg, rgb(226, 185, 139) 65%, rgb(238, 238, 238) 99%)" },
+  { name: "White Gold", color: "linear-gradient(328deg, rgb(238, 238, 238) 52.9%, rgb(255, 255, 255) 78%, rgb(238, 238, 238) 151%)" }
 ]
 
 export const shapes = [
@@ -92,11 +91,11 @@ export const products = [
   },
   {
     id: 4,
-    name: `${metals[3].name} ${categories[3].name}`,
+    name: `${metals[2].name} ${categories[3].name}`,
     price: 74,
     image: categories[3].image,
     hoverImage: "/jwel/1.avif",
-    colors: [metals[3].color, metals[1].color],
+    colors: [metals[2].color, metals[1].color],
     material: "18k Solid Vermeil",
     bestSeller: true,
     showAddToBag: true,
@@ -140,11 +139,11 @@ export const products = [
   },
   {
     id: 8,
-    name: `${metals[3].name} ${categories[7].name}`,
+    name: `${metals[2].name} ${categories[7].name}`,
     price: 89,
     image: categories[7].image,
     hoverImage: "/jwel/5.avif",
-    colors: [metals[3].color],
+    colors: [metals[2].color],
     material: "White Gold Plated",
     bestSeller: true,
     showAddToBag: true,
