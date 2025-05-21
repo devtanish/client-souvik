@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Poppins, Lugrasimo } from 'next/font/google'
+import { Poppins, Lugrasimo } from "next/font/google"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -16,11 +16,21 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, ShoppingBag, X } from 'lucide-react'
+import {
+  ChevronDown,
+  Heart,
+  LayoutGrid,
+  Columns2,
+  ChevronRight,
+  ChevronLeft,
+  SlidersHorizontal,
+  ShoppingBag,
+  X,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // Import data
-import { categories, metalscolor, shapes, products, metals } from "./data"
+import { categories, metalscolor, shapes, products, metals, stone } from "./data"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -82,6 +92,27 @@ const shimmerAnimation = `
   .chevron-rotate[data-state="open"] {
     transform: rotate(180deg);
   }
+
+  .filter-item .hover-info {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .filter-item:hover .hover-info {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @keyframes pulseScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .stone-hover-effect {
+    animation: pulseScale 1.5s infinite;
+  }
 `
 
 export default function EarringsPage() {
@@ -92,19 +123,21 @@ export default function EarringsPage() {
   const [sortBy, setSortBy] = useState("Featured")
   const [selectedMetals, setSelectedMetals] = useState<string[]>([])
   const [selectedShapes, setSelectedShapes] = useState<number[]>([])
+  const [selectedStones, setSelectedStones] = useState<string[]>([])
   const [wishlist, setWishlist] = useState<number[]>([])
   const categoryScrollRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
 
   // State to track open filter sections
-  type FilterSection = 'price' | 'material' | 'shape' | 'metal';
+  type FilterSection = "price" | "material" | "shape" | "metal" | "stone"
 
   const [openFilters, setOpenFilters] = useState<Record<FilterSection, boolean>>({
     price: true,
-    material: true,
-    shape: true,
-    metal: true
-  });
+    material: false,
+    shape: false,
+    metal: true,
+    stone: true,
+  })
 
   const [open, setOpen] = React.useState(false)
   const [selectedFilters] = React.useState<Record<string, string[]>>({})
@@ -151,9 +184,7 @@ export default function EarringsPage() {
   // Toggle metal selection
   const toggleMetal = (metalName: string) => {
     setSelectedMetals((prev) =>
-      prev.includes(metalName) 
-        ? prev.filter((name) => name !== metalName) 
-        : [...prev, metalName]
+      prev.includes(metalName) ? prev.filter((name) => name !== metalName) : [...prev, metalName],
     )
   }
 
@@ -162,10 +193,16 @@ export default function EarringsPage() {
     setSelectedShapes((prev) => (prev.includes(shapeId) ? prev.filter((id) => id !== shapeId) : [...prev, shapeId]))
   }
 
+  // Toggle shape selection
+  const toggleStone = (shapeId: string) => {
+    setSelectedStones((prev) => (prev.includes(shapeId) ? prev.filter((id) => id !== shapeId) : [...prev, shapeId]))
+  }
+
   // Reset all filters
   const resetFilters = () => {
     setSelectedMetals([])
     setSelectedShapes([])
+    setSelectedStones([])
     setPriceRange([0, 22000])
     setInStockOnly(false)
     setSortBy("Featured")
@@ -173,19 +210,19 @@ export default function EarringsPage() {
 
   // Function to toggle a specific filter's open state
   const toggleFilterSection = (section: FilterSection) => {
-    setOpenFilters(prev => ({
+    setOpenFilters((prev) => ({
       ...prev,
-      [section]: !prev[section]
-    }));
-  };
+      [section]: !prev[section],
+    }))
+  }
 
   // Function to toggle a specific filter's open state
   const toggleFilterSection2 = (section: FilterSection) => {
-    setOpenFilters(prev => ({
+    setOpenFilters((prev) => ({
       ...prev,
-      [section]: !prev[section]
-    }));
-  };
+      [section]: !prev[section],
+    }))
+  }
 
   // Filter and sort products based on selected filters
   const filteredProducts = useMemo(() => {
@@ -201,6 +238,11 @@ export default function EarringsPage() {
 
         // Filter by shape
         if (selectedShapes.length > 0 && !selectedShapes.includes(product.shape.id)) {
+          return false
+        }
+
+        // Filter by stone
+        if (selectedStones.length > 0 && !selectedStones.includes(product.stone)) {
           return false
         }
 
@@ -230,7 +272,7 @@ export default function EarringsPage() {
             return b.bestSeller ? 1 : -1 // Featured sorts by best seller
         }
       })
-  }, [selectedMetals, selectedShapes, priceRange, inStockOnly, sortBy])
+  }, [selectedMetals, selectedShapes, selectedStones, priceRange, inStockOnly, sortBy])
 
   return (
     <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
@@ -377,18 +419,18 @@ export default function EarringsPage() {
                   <Separator />
 
                   <React.Fragment>
-                    <Collapsible 
-                      className="w-full" 
+                    <Collapsible
+                      className="w-full"
                       defaultOpen={openFilters.price}
                       open={openFilters.price}
-                      onOpenChange={() => toggleFilterSection('price')}
+                      onOpenChange={() => toggleFilterSection("price")}
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">PRICE</span>
-                          <ChevronDown 
-                            className="h-5 w-5 chevron-rotate" 
-                            data-state={openFilters.price ? "open" : "closed"} 
+                          <ChevronDown
+                            className="h-5 w-5 chevron-rotate"
+                            data-state={openFilters.price ? "open" : "closed"}
                           />
                         </CollapsibleTrigger>
                       </div>
@@ -436,17 +478,66 @@ export default function EarringsPage() {
                   </React.Fragment>
 
                   <React.Fragment>
-                    <Collapsible 
-                      className="w-full" 
+                    <Collapsible
+                      className="w-full"
+                      defaultOpen={openFilters.stone}
+                      open={openFilters.stone}
+                      onOpenChange={() => toggleFilterSection("stone")}
+                    >
+                      <div className="p-5 px-4 collapsible-section ">
+                        <CollapsibleTrigger className="flex w-full items-center justify-between">
+                          <span className="text-md font-medium">STONE</span>
+                          <ChevronDown
+                            className="h-5 w-5 chevron-rotate"
+                            data-state={openFilters.stone ? "open" : "closed"}
+                          />
+                        </CollapsibleTrigger>
+                      </div>
+                      <CollapsibleContent className="px-3 pb-4 lg:mx-25 transition-all overflow-hidden collapsible-content-open">
+                        <div className="space-y-3">
+                          <div className="flex gap-3 justify-between md:mx-0">
+                            {stone.map((metal) => (
+                              <div
+                                key={metal.id}
+                                className="flex flex-col items-center justify-center gap-1 filter-item relative group"
+                              >
+                                <button
+                                  key={metal.id}
+                                  className={cn(
+                                    "rounded-full relative overflow-hidden transition-all duration-300 mt-2",
+                                    "transform hover:scale-105  hover:z-10",
+                                    "before:absolute before:inset-0 before:opacity-0 before:rounded-full before:transition-opacity before:duration-300 hover:before:opacity-20 before:bg-white",
+                                    selectedStones.includes(metal.name)
+                                      ? "ring-2 ring-offset-2 ring-black shadow metal-filter-selected"
+                                      : " hover:ring-gray-300",
+                                  )}
+                                  aria-label={metal.name}
+                                  onClick={() => toggleStone(metal.name)}
+                                >
+                                  {metal.element}
+                                </button>
+
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                    <Separator />
+                  </React.Fragment>
+
+                  <React.Fragment>
+                    <Collapsible
+                      className="w-full"
                       defaultOpen={openFilters.metal}
                       open={openFilters.metal}
-                      onOpenChange={() => toggleFilterSection2('metal')}
+                      onOpenChange={() => toggleFilterSection2("metal")}
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">METALS</span>
-                          <ChevronDown 
-                            className="h-5 w-5 chevron-rotate" 
+                          <ChevronDown
+                            className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.metal ? "open" : "closed"}
                           />
                         </CollapsibleTrigger>
@@ -454,7 +545,10 @@ export default function EarringsPage() {
                       <CollapsibleContent className="px-3 pb-4 overflow-hidden collapsible-content-open">
                         <div className="space-y-1">
                           {metals.map((shape) => (
-                            <div key={shape.name} className="flex items-center space-x-2 filter-item py-1 px-1 rounded-md hover:bg-gray-50">
+                            <div
+                              key={shape.name}
+                              className="flex items-center space-x-2 filter-item py-1 px-1 rounded-md hover:bg-gray-50"
+                            >
                               <Checkbox
                                 className="h-5 w-5"
                                 id={`shape-${shape.name}`}
@@ -476,17 +570,17 @@ export default function EarringsPage() {
                   </React.Fragment>
 
                   <React.Fragment>
-                    <Collapsible 
-                      className="w-full" 
+                    <Collapsible
+                      className="w-full"
                       defaultOpen={openFilters.material}
                       open={openFilters.material}
-                      onOpenChange={() => toggleFilterSection('material')}
+                      onOpenChange={() => toggleFilterSection("material")}
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">METAL COLOUR</span>
-                          <ChevronDown 
-                            className="h-5 w-5 chevron-rotate" 
+                          <ChevronDown
+                            className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.material ? "open" : "closed"}
                           />
                         </CollapsibleTrigger>
@@ -495,7 +589,10 @@ export default function EarringsPage() {
                         <div className="space-y-3">
                           <div className="flex gap-3 justify-between md:mx-0">
                             {metalscolor.map((metal) => (
-                              <div key={metal.name} className="flex flex-col items-center justify-center gap-1 filter-item">
+                              <div
+                                key={metal.name}
+                                className="flex flex-col items-center justify-center gap-1 filter-item"
+                              >
                                 <button
                                   key={metal.name}
                                   className={cn(
@@ -504,11 +601,11 @@ export default function EarringsPage() {
                                     "before:absolute before:inset-0 before:opacity-0 before:rounded-full before:transition-opacity before:duration-300 hover:before:opacity-20 before:bg-white",
                                     selectedMetals.includes(metal.name)
                                       ? "ring-2 ring-offset-2 ring-black shadow-md metal-filter-selected"
-                                      : "hover:ring-1 hover:ring-offset-2 hover:ring-gray-300"
+                                      : "hover:ring-1 hover:ring-offset-2 hover:ring-gray-300",
                                   )}
                                   style={{
                                     backgroundImage: metal.color,
-                                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                                   }}
                                   aria-label={metal.name}
                                   onClick={() => toggleMetal(metal.name)}
@@ -536,17 +633,17 @@ export default function EarringsPage() {
                   </React.Fragment>
 
                   <React.Fragment>
-                    <Collapsible 
-                      className="w-full" 
+                    <Collapsible
+                      className="w-full"
                       defaultOpen={openFilters.shape}
                       open={openFilters.shape}
-                      onOpenChange={() => toggleFilterSection('shape')}
+                      onOpenChange={() => toggleFilterSection("shape")}
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className="text-md font-medium">SHAPE</span>
-                          <ChevronDown 
-                            className="h-5 w-5 chevron-rotate" 
+                          <ChevronDown
+                            className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.shape ? "open" : "closed"}
                           />
                         </CollapsibleTrigger>
@@ -554,7 +651,10 @@ export default function EarringsPage() {
                       <CollapsibleContent className="px-3 pb-4 overflow-hidden collapsible-content-open">
                         <div className="space-y-1">
                           {shapes.map((shape) => (
-                            <div key={shape.name} className="flex items-center space-x-2 filter-item py-1 px-1 rounded-md hover:bg-gray-50">
+                            <div
+                              key={shape.name}
+                              className="flex items-center space-x-2 filter-item py-1 px-1 rounded-md hover:bg-gray-50"
+                            >
                               <Checkbox
                                 className="h-5 w-5"
                                 id={`shape-${shape.name}`}
@@ -573,8 +673,7 @@ export default function EarringsPage() {
                       </CollapsibleContent>
                     </Collapsible>
                     <Separator />
-                  </React.Fragment>                  
-
+                  </React.Fragment>
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">

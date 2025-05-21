@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export const categories = [
   { name: "Earrings", image: "/jwel2/main1.webp" },
   { name: "Hoop Earrings", image: "/jwel2/main2.webp" },
@@ -59,6 +61,34 @@ export const shapes = [
   { id: 34, name: "Pearl" }
 ]
 
+export const stone: { id: number; element: JSX.Element; name: string }[] = [
+  {
+    id: 1, element: <div
+    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939902-oval-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
+  ></div>, name: "ovel"
+  },
+  {
+    id: 2, element: <div
+    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939815-emerald-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
+  ></div>, name: "traingle"
+  },
+  {
+    id: 3, element: <div
+    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939992-marquise-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
+  ></div>, name: "square"
+  },
+  {
+    id: 4, element: <div
+    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939971-princess-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
+  ></div>, name: "circle"
+  },
+  {
+    id: 5, element: <div
+    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722940020-trillion-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
+  ></div>, name: "poligon"
+  },
+];
+
 export const products = [
   {
     id: 1,
@@ -72,6 +102,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[0]],
     shape: shapes[0],
+    stone: stone[0].name,
   },
   {
     id: 2,
@@ -85,6 +116,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[1]],
     shape: shapes[1],
+    stone: stone[2].name,
   },
   {
     id: 3,
@@ -98,6 +130,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[2]],
     shape: shapes[2],
+    stone: stone[1].name,
   },
   {
     id: 4,
@@ -111,6 +144,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[3]],
     shape: shapes[3],
+    stone: stone[3].name,
   },
   {
     id: 5,
@@ -124,6 +158,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[0]],
     shape: shapes[4],
+    stone: stone[4].name,
   },
   {
     id: 6,
@@ -137,6 +172,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[2]],
     shape: shapes[5],
+    stone: stone[3].name,
   },
   {
     id: 7,
@@ -150,6 +186,7 @@ export const products = [
     showAddToBag: true,
     metals: [metals[3]],
     shape: shapes[6],
+    stone: stone[4].name,
   },
   {
     id: 8,
@@ -163,5 +200,6 @@ export const products = [
     showAddToBag: true,
     metals: [metals[1]],
     shape: shapes[7],
+    stone: stone[3].name,
   },
 ]
