@@ -830,7 +830,7 @@ export default function EarringsPage() {
                           "w-4 h-4 rounded-full border hover:ring-1 hover:ring-offset-1 hover:ring-gray-400",
                           isMobile ? "w-3 h-3" : "w-4 h-4",
                         )}
-                        style={{ backgroundColor: color }}
+                        style={{ backgroundImage: color }}
                         aria-label={`Color: ${color}`}
                       />
                     ))}
