@@ -5,7 +5,6 @@ import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Poppins, Lugrasimo } from "next/font/google"
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -31,18 +30,6 @@ import { cn } from "@/lib/utils"
 
 // Import data
 import { categories, metalscolor, shapes, products, metals, stone } from "./data"
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "400", "500", "600"], // Added more weights for better typography
-  variable: "--fontFamily",
-  display: "swap",
-})
-
-export const lugrasimo = Lugrasimo({
-  subsets: ["latin"],
-  weight: "400", // Lugrasimo only has 400 weight
-})
 
 // Add keyframes for subtle shimmer effect
 const shimmerAnimation = `
@@ -275,7 +262,7 @@ export default function EarringsPage() {
   }, [selectedMetals, selectedShapes, selectedStones, priceRange, inStockOnly, sortBy])
 
   return (
-    <div className={`min-h-screen flex flex-col ${poppins.variable}`}>
+    <div className={`min-h-screen flex flex-col`}>
       <style jsx global>{`
         ${shimmerAnimation}
         
@@ -315,8 +302,8 @@ export default function EarringsPage() {
 
         {/* Header */}
         <div className="mb-5">
-          <h1 className={`text-3xl font-bold uppercase mb-1 ${poppins.variable}`}>{activeCategory}</h1>
-          <p className={`text-gray-600 ${poppins.variable}`}>Huggies, hoops, studs, and more. A whole lot more.</p>
+          <h1 className={`text-3xl font-bold uppercase mb-1`}>{activeCategory}</h1>
+          <p className={`text-gray-600`}>Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
         <div className="relative md:mb-4 mb-2">
