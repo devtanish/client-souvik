@@ -1,6 +1,5 @@
 @import "tailwindcss";
  @import "tw-animate-css";
-@tailwind utilities;
 
  @custom-variant dark (&:is(.dark *));
 
@@ -132,15 +131,9 @@
  }
 
  @layer base {
-   * {
-     @apply border-border outline-ring/50;
-   }
-   body {
-     @apply bg-background text-foreground;
-   }
- }
-
- @layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
 
   body {
     @apply bg-white text-[#010614];
