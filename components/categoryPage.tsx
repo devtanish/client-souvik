@@ -1,10 +1,19 @@
 "use client"
 
+import { Cormorant_Garamond } from 'next/font/google'
+
 import { SlHandbag } from "react-icons/sl"
 import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
+
+// Initialize the Cormorant Garamond font
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -16,7 +25,7 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X } from "lucide-react"
+import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X } from 'lucide-react'
 import { cn } from "@/lib/utils"
 
 // Import data
@@ -253,7 +262,7 @@ export default function EarringsPage() {
   }, [selectedMetals, selectedShapes, selectedStones, priceRange, inStockOnly, sortBy])
 
   return (
-    <div className={`min-h-screen flex flex-col`}>
+    <div className={`min-h-screen flex flex-col ${cormorantGaramond.className}`}>
       <style jsx global>{`
         ${shimmerAnimation}
         
@@ -283,18 +292,18 @@ export default function EarringsPage() {
         {/* Breadcrumb */}
         <nav className="text-sm mb-2">
           <div className="flex items-center gap-1">
-            <Link href="/" className={`text-gray-400 hover:text-gray-700 text-md`}>
+            <Link href="/" className={`text-gray-400 hover:text-gray-700 text-md ${cormorantGaramond.className}`}>
               Shop All
             </Link>
             <span className="text-gray-500 text-md">/</span>
-            <span className={`text-md font-medium text-gray-500`}>{activeCategory}</span>
+            <span className={`text-md font-medium text-gray-500 ${cormorantGaramond.className}`}>{activeCategory}</span>
           </div>
         </nav>
 
         {/* Header */}
         <div className="mb-5">
-          <h1 className={`text-3xl font-bold uppercase mb-1`}>{activeCategory}</h1>
-          <p className={`text-gray-600`}>Huggies, hoops, studs, and more. A whole lot more.</p>
+          <h1 className={`text-3xl font-bold uppercase mb-1 ${cormorantGaramond.className}`}>{activeCategory}</h1>
+          <p className={`text-gray-600 ${cormorantGaramond.className}`}>Huggies, hoops, studs, and more. A whole lot more.</p>
         </div>
 
         <div className="relative md:mb-4 mb-2">
@@ -336,7 +345,7 @@ export default function EarringsPage() {
                 </div>
                 <span
                   className={cn(
-                    "text-sm text-center -translate-y-10",
+                   `text-sm text-center -translate-y-10 ${cormorantGaramond.className}`,
                     activeCategory === category.name ? " font-medium" : "",
                   )}
                 >
@@ -374,7 +383,7 @@ export default function EarringsPage() {
               <SheetContent side="left" className="md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
-                    <SheetTitle className="text-xl font-bold">FILTERS</SheetTitle>
+                    <SheetTitle className={`text-xl font-bold ${cormorantGaramond.className}`}>FILTERS</SheetTitle>
                     <button onClick={() => setOpen(false)}>
                       <X className="h-5 w-5" />
                       <span className="sr-only">Close</span>
@@ -384,7 +393,7 @@ export default function EarringsPage() {
 
                 <div className="flex-1 overflow-auto">
                   <div className="p-4 flex items-center justify-between">
-                    <Label htmlFor="pickup" className="text-md font-medium">
+                    <Label htmlFor="pickup" className={`text-md font-medium ${cormorantGaramond.className}`}>
                       IN-STOCK ONLY
                     </Label>
                     <Switch
@@ -405,7 +414,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">PRICE</span>
+                         <span className={`text-md font-medium ${cormorantGaramond.className}`}>PRICE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.price ? "open" : "closed"}
