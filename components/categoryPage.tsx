@@ -16,16 +16,7 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import {
-  ChevronDown,
-  Heart,
-  LayoutGrid,
-  Columns2,
-  ChevronRight,
-  ChevronLeft,
-  SlidersHorizontal,
-  X,
-} from "lucide-react"
+import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // Import data
@@ -503,7 +494,6 @@ export default function EarringsPage() {
                                 >
                                   {metal.element}
                                 </button>
-
                               </div>
                             ))}
                           </div>
