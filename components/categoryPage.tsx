@@ -1,5 +1,6 @@
 "use client"
 
+import { SlHandbag } from "react-icons/sl"
 import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
@@ -24,7 +25,6 @@ import {
   ChevronRight,
   ChevronLeft,
   SlidersHorizontal,
-  ShoppingBag,
   X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -813,7 +813,7 @@ export default function EarringsPage() {
                         className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
                         disabled={!product.bestSeller}
                       >
-                        <ShoppingBag size={16} />
+                        <SlHandbag size={16} />
                         ADD TO BAG
                       </button>
                     </div>
