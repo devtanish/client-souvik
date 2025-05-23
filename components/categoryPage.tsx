@@ -444,10 +444,10 @@ export default function EarringsPage() {
                               />
                               <div className="flex items-center gap-2">
                                 <div className="relative">
-                                  <span className={`absolute left-3 top-1/2 ${montserrat.className}  -translate-y-1/2 text-gray-500`}>$</span>
+                                  <span className={`absolute left-3 top-1/2 text-xs ${montserrat.className}  -translate-y-1/2 text-gray-500`}>$</span>
                                   <Input
                                     type="number"
-                                    className={` ${montserrat.className}  pl-7 w-30 rounded-none`}
+                                    className={` ${montserrat.className} pl-7 w-30 rounded-none text-xs`}
                                     value={priceRange[0]}
                                     onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
                                     min={0}
@@ -455,10 +455,10 @@ export default function EarringsPage() {
                                 </div>
                                 <span className="text-gray-500">-</span>
                                 <div className="relative">
-                                  <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
+                                  <span className={`absolute left-3 top-1/2 text-xs -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
                                   <Input
                                     type="number"
-                                    className={`pl-7 w-34 rounded-none text-sm ${montserrat.className} `}
+                                    className={`pl-7 w-34 rounded-none ${montserrat.className} `}
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                                     min={0}
@@ -482,7 +482,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-sm font-medium  `}>STONE</span>
+                          <span className={`text-sm font-medium `}>STONE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.stone ? "open" : "closed"}
