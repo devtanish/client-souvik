@@ -383,7 +383,7 @@ export default function EarringsPage() {
           >
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <button className={` flex items-center justify-center gap-2 ml-4.5`}>
+                <button className={` text-md flex items-center justify-center gap-2 ml-4.5`}>
                   <SlidersHorizontal size={16} />
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
@@ -691,7 +691,7 @@ export default function EarringsPage() {
             <div className="flex rounded-none items-center gap-4 justify-between lg:-translate-x-0 -translate-x-4">
               <div className="flex items-center gap-2 ">
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium">
+                  <DropdownMenuTrigger className="flex items-center gap-1 text-md font-medium">
                     {sortBy} <ChevronDown size={16} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
