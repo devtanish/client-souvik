@@ -391,7 +391,7 @@ export default function EarringsPage() {
               <SheetContent side="left" className="md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
-                    <SheetTitle className={` ${montserrat.className}  text-xl font-bold `}>FILTERS</SheetTitle>
+                    <SheetTitle className={` ${montserrat.className}  text-lg font-bold `}>FILTERS</SheetTitle>
                     <button onClick={() => setOpen(false)}>
                       <X className="h-5 w-5" />
                       <span className="sr-only">Close</span>
@@ -401,7 +401,8 @@ export default function EarringsPage() {
 
                 <div className="flex-1 overflow-auto">
                   <div className="p-4 flex items-center justify-between">
-                    <Label htmlFor="pickup" className={`text-md font-medium ${montserrat.className} `}>
+                    <Label htmlFor="pickup" className={`text-sm
+                       font-medium ${montserrat.className} `}>
                       IN-STOCK ONLY
                     </Label>
                     <Switch
@@ -422,7 +423,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-md font-medium ${montserrat.className} `}>PRICE</span>
+                          <span className={`text-sm font-medium ${montserrat.className} `}>PRICE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.price ? "open" : "closed"}
@@ -481,7 +482,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-md font-medium ${montserrat.className} `}>STONE</span>
+                          <span className={`text-sm font-medium ${montserrat.className} `}>STONE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.stone ? "open" : "closed"}
@@ -535,7 +536,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-md font-medium ${montserrat.className} `}>METALS</span>
+                          <span className={`text-sm font-medium ${montserrat.className} `}>METALS</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.metal ? "open" : "closed"}
@@ -578,7 +579,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-md font-medium ${montserrat.className} `}>METAL COLOUR</span>
+                          <span className={`text-sm font-medium ${montserrat.className} `}>METAL COLOUR</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.material ? "open" : "closed"}
@@ -641,7 +642,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-md font-medium ${montserrat.className} `}>SHAPE</span>
+                          <span className={`text-sm font-medium ${montserrat.className} `}>SHAPE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.shape ? "open" : "closed"}
@@ -677,10 +678,10 @@ export default function EarringsPage() {
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
-                  <Button variant="outline" className={`rounded-none ${montserrat.className}`} onClick={resetFilters}>
+                  <Button variant="outline" className={`rounded-none text-sm ${montserrat.className}`} onClick={resetFilters}>
                     CLEAR ALL
                   </Button>
-                  <Button onClick={() => setOpen(false)} className={`rounded-none ${montserrat.className}`}>
+                  <Button onClick={() => setOpen(false)} className={`text-sm rounded-none ${montserrat.className}`}>
                     VIEW RESULTS {filterCount > 0 && `(${filterCount})`}
                   </Button>
                 </div>
