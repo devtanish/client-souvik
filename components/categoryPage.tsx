@@ -601,7 +601,7 @@ export default function EarringsPage() {
                                     "transform hover:scale-105 hover:shadow-lg hover:z-10",
                                     "before:absolute before:inset-0 before:opacity-0 before:rounded-full before:transition-opacity before:duration-300 hover:before:opacity-20 before:bg-white",
                                     selectedMetals.includes(metal.name)
-                                      ? "ring-2 ring-offset-2 ring-black shadow-md metal-filter-selected"
+                                      ? "ring-2 ring-offset-2 ring-black shadow-md"
                                       : "hover:ring-1 hover:ring-offset-2 hover:ring-gray-300",
                                   )}
                                   style={{
