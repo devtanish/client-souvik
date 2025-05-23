@@ -776,7 +776,7 @@ export default function EarringsPage() {
 
                   <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
                     {product.bestSeller && (
-                      <span className={`absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5  ${montserrat.className} `}>
+                      <span className={`absolute top-2 left-2 bg-white md:text-[10px] text-[8.5px] px-2 py-1 z-5  ${montserrat.className} `}>
                         BEST SELLING
                       </span>
                     )}
