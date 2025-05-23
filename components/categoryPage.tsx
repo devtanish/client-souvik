@@ -610,7 +610,7 @@ export default function EarringsPage() {
                                   aria-label={metal.name}
                                   onClick={() => toggleMetal(metal.name)}
                                 >
-                                  <span className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                  <span className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration">
                                     <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
                                       {selectedMetals.includes(metal.name) ? (
                                         <X size={14} className="text-black/70" />
@@ -677,10 +677,10 @@ export default function EarringsPage() {
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
-                  <Button variant="outline" className="rounded-none" onClick={resetFilters}>
+                  <Button variant="outline" className={`rounded-none ${montserrat.className}`} onClick={resetFilters}>
                     CLEAR ALL
                   </Button>
-                  <Button onClick={() => setOpen(false)} className="rounded-none">
+                  <Button onClick={() => setOpen(false)} className={`rounded-none ${montserrat.className}`}>
                     VIEW RESULTS {filterCount > 0 && `(${filterCount})`}
                   </Button>
                 </div>
