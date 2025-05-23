@@ -458,7 +458,7 @@ export default function EarringsPage() {
                                   <span className={`absolute left-3 top-1/2 text-xs -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
                                   <Input
                                     type="number"
-                                    className={`pl-7 w-34 rounded-none ${montserrat.className} `}
+                                    className={`pl-7 w-34 rounded-none text-xs ${montserrat.className} `}
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                                     min={0}
