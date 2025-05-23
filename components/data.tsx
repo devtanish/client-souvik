@@ -1,5 +1,3 @@
-import { JSX } from "react";
-
 export const categories = [
   { name: "Earrings", image: "/jwel2/main1.webp" },
   { name: "Hoop Earrings", image: "/jwel2/main2.webp" },
@@ -61,31 +59,30 @@ export const shapes = [
   { id: 34, name: "Pearl" }
 ]
 
-export const stone: { id: number; element: JSX.Element; name: string }[] = [
+export const stone: { id: number; element: string; name: string }[] = [
   {
-    id: 1, element: <div
-    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939902-oval-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
-  ></div>, name: "ovel"
+    id: 1, element: "/svg/stone7.svg", name: "ovel"
   },
   {
-    id: 2, element: <div
-    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939815-emerald-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
-  ></div>, name: "traingle"
+    id: 2, element: "/svg/stone4.svg", name: "traingle"
   },
   {
-    id: 3, element: <div
-    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939992-marquise-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
-  ></div>, name: "square"
+    id: 3, element: "/svg/stone1.svg", name: "square"
   },
   {
-    id: 4, element: <div
-    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722939971-princess-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
-  ></div>, name: "circle"
+    id: 4, element: "/svg/stone2.svg", name: "circle"
   },
   {
-    id: 5, element: <div
-    className="radioLabel cursor-pointer bg-[url('https://www.datocms-assets.com/25216/1722940020-trillion-hover.svg')] bg-cover w-10 h-10 hover:outline-none hover:outline-offset-0"
-  ></div>, name: "poligon"
+    id: 5, element: "/svg/stone3.svg", name: "poligon"
+  },
+  {
+    id: 6, element: "/svg/stone10.svg", name: "steve"
+  },
+  {
+    id: 7, element: "/svg/stone5.svg", name: "spheregstg"
+  },
+  {
+    id: 8, element: "/svg/stone6.svg", name: "spheregs"
   },
 ];
 

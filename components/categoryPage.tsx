@@ -1,18 +1,24 @@
 "use client"
 
-import { Cormorant_Garamond } from 'next/font/google'
+import { Cormorant_Garamond } from "next/font/google"
 
 import { SlHandbag } from "react-icons/sl"
 import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { Montserrat } from "next/font/google"
 
 // Initialize the Cormorant Garamond font
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
+})
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400"],
 })
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
@@ -25,7 +31,7 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X } from 'lucide-react'
+import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // Import data
@@ -303,7 +309,9 @@ export default function EarringsPage() {
         {/* Header */}
         <div className="mb-5">
           <h1 className={`text-3xl font-bold uppercase mb-1 ${cormorantGaramond.className}`}>{activeCategory}</h1>
-          <p className={`text-gray-600 ${cormorantGaramond.className}`}>Huggies, hoops, studs, and more. A whole lot more.</p>
+          <p className={`text-gray-600 ${cormorantGaramond.className}`}>
+            Huggies, hoops, studs, and more. A whole lot more.
+          </p>
         </div>
 
         <div className="relative md:mb-4 mb-2">
@@ -345,7 +353,7 @@ export default function EarringsPage() {
                 </div>
                 <span
                   className={cn(
-                   `text-sm text-center -translate-y-10 ${cormorantGaramond.className}`,
+                    `text-sm text-center -translate-y-10 ${cormorantGaramond.className}`,
                     activeCategory === category.name ? " font-medium" : "",
                   )}
                 >
@@ -375,7 +383,7 @@ export default function EarringsPage() {
           >
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <button className="flex items-center justify-center gap-2 ml-4.5">
+                <button className={` flex items-center justify-center gap-2 ml-4.5`}>
                   <SlidersHorizontal size={16} />
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
@@ -383,7 +391,7 @@ export default function EarringsPage() {
               <SheetContent side="left" className="md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
-                    <SheetTitle className={`text-xl font-bold ${cormorantGaramond.className}`}>FILTERS</SheetTitle>
+                    <SheetTitle className={` ${montserrat.className}  text-xl font-bold `}>FILTERS</SheetTitle>
                     <button onClick={() => setOpen(false)}>
                       <X className="h-5 w-5" />
                       <span className="sr-only">Close</span>
@@ -393,7 +401,7 @@ export default function EarringsPage() {
 
                 <div className="flex-1 overflow-auto">
                   <div className="p-4 flex items-center justify-between">
-                    <Label htmlFor="pickup" className={`text-md font-medium ${cormorantGaramond.className}`}>
+                    <Label htmlFor="pickup" className={`text-md font-medium ${montserrat.className} `}>
                       IN-STOCK ONLY
                     </Label>
                     <Switch
@@ -414,7 +422,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                         <span className={`text-md font-medium ${cormorantGaramond.className}`}>PRICE</span>
+                          <span className={`text-md font-medium ${montserrat.className} `}>PRICE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.price ? "open" : "closed"}
@@ -435,10 +443,10 @@ export default function EarringsPage() {
                               />
                               <div className="flex items-center gap-2">
                                 <div className="relative">
-                                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                  <span className={`absolute left-3 top-1/2 ${montserrat.className}  -translate-y-1/2 text-gray-500`}>$</span>
                                   <Input
                                     type="number"
-                                    className="pl-7 w-24 rounded-none"
+                                    className={` ${montserrat.className}  pl-7 w-30 rounded-none`}
                                     value={priceRange[0]}
                                     onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
                                     min={0}
@@ -446,10 +454,10 @@ export default function EarringsPage() {
                                 </div>
                                 <span className="text-gray-500">-</span>
                                 <div className="relative">
-                                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                  <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
                                   <Input
                                     type="number"
-                                    className="pl-7 w-24 rounded-none"
+                                    className={`pl-7 w-34 rounded-none ${montserrat.className} `}
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                                     min={0}
@@ -473,16 +481,16 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">STONE</span>
+                          <span className={`text-md font-medium ${montserrat.className} `}>STONE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.stone ? "open" : "closed"}
                           />
                         </CollapsibleTrigger>
                       </div>
-                      <CollapsibleContent className="px-3 pb-4 lg:mx-25 transition-all overflow-hidden collapsible-content-open">
+                      <CollapsibleContent className="px-3 pb-4 lg:mx-0 transition-all overflow-hidden collapsible-content-open">
                         <div className="space-y-3">
-                          <div className="flex gap-3 justify-between md:mx-0">
+                          <div className="flex gap-3 flex-wrap justify-between md:mx-0">
                             {stone.map((metal) => (
                               <div
                                 key={metal.id}
@@ -501,7 +509,13 @@ export default function EarringsPage() {
                                   aria-label={metal.name}
                                   onClick={() => toggleStone(metal.name)}
                                 >
-                                  {metal.element}
+                                  <Image
+                                    src={metal.element}
+                                    alt={metal.name}
+                                    width={40}
+                                    height={40}
+                                    className="w-20 h-20 object-contain p-3"
+                                  />
                                 </button>
                               </div>
                             ))}
@@ -521,7 +535,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">METALS</span>
+                          <span className={`text-md font-medium ${montserrat.className} `}>METALS</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.metal ? "open" : "closed"}
@@ -543,7 +557,7 @@ export default function EarringsPage() {
                               />
                               <Label
                                 htmlFor={`shape-${shape.name}`}
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${montserrat.className} `}
                               >
                                 {shape.name}
                               </Label>
@@ -564,7 +578,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">METAL COLOUR</span>
+                          <span className={`text-md font-medium ${montserrat.className} `}>METAL COLOUR</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.material ? "open" : "closed"}
@@ -606,7 +620,7 @@ export default function EarringsPage() {
                                     </span>
                                   </span>
                                 </button>
-                                <Label className="mt-3 text-sm transition-all duration-200 hover:font-medium">
+                                <Label className={`mt-3 text-sm transition-all duration-200 hover:font-medium ${montserrat.className} `}>
                                   {metal.name}
                                 </Label>
                               </div>
@@ -627,7 +641,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className="text-md font-medium">SHAPE</span>
+                          <span className={`text-md font-medium ${montserrat.className} `}>SHAPE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.shape ? "open" : "closed"}
@@ -649,7 +663,7 @@ export default function EarringsPage() {
                               />
                               <Label
                                 htmlFor={`shape-${shape.name}`}
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${montserrat.className} `}
                               >
                                 {shape.name}
                               </Label>
@@ -761,8 +775,8 @@ export default function EarringsPage() {
 
                   <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
                     {product.bestSeller && (
-                      <span className="absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5 font-medium">
-                        Best Seller
+                      <span className={`absolute top-2 left-2 bg-white text-xs px-2 py-1 z-5  ${montserrat.className} `}>
+                        BEST SELLING
                       </span>
                     )}
 
