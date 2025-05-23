@@ -458,7 +458,7 @@ export default function EarringsPage() {
                                   <span className={`absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
                                   <Input
                                     type="number"
-                                    className={`pl-7 w-34 rounded-none ${montserrat.className} `}
+                                    className={`pl-7 w-34 rounded-none text-sm ${montserrat.className} `}
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                                     min={0}
@@ -558,7 +558,7 @@ export default function EarringsPage() {
                               />
                               <Label
                                 htmlFor={`shape-${shape.name}`}
-                                className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${montserrat.className} `}
+                                className={`text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${montserrat.className} `}
                               >
                                 {shape.name}
                               </Label>
@@ -621,7 +621,7 @@ export default function EarringsPage() {
                                     </span>
                                   </span>
                                 </button>
-                                <Label className={`mt-3 text-sm transition-all duration-200 hover:font-medium ${montserrat.className} `}>
+                                <Label className={`mt-3 text-xs transition-all duration-200 hover:font-medium ${montserrat.className} `}>
                                   {metal.name}
                                 </Label>
                               </div>
@@ -664,7 +664,7 @@ export default function EarringsPage() {
                               />
                               <Label
                                 htmlFor={`shape-${shape.name}`}
-                                className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${montserrat.className} `}
+                                className={`text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${montserrat.className} `}
                               >
                                 {shape.name}
                               </Label>
