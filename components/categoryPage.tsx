@@ -678,10 +678,10 @@ export default function EarringsPage() {
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
-                  <Button variant="outline" className={`rounded-none text-sm ${montserrat.className}`} onClick={resetFilters}>
+                  <Button variant="outline" className={`rounded-none text-sm `} onClick={resetFilters}>
                     CLEAR ALL
                   </Button>
-                  <Button onClick={() => setOpen(false)} className={`text-sm rounded-none ${montserrat.className}`}>
+                  <Button onClick={() => setOpen(false)} className={`text-sm rounded-none `}>
                     VIEW RESULTS {filterCount > 0 && `(${filterCount})`}
                   </Button>
                 </div>
