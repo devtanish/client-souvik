@@ -482,7 +482,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-sm font-medium `}>STONE</span>
+                          <span className={`text-sm font-medium `}>SHAPE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.stone ? "open" : "closed"}
@@ -642,7 +642,7 @@ export default function EarringsPage() {
                     >
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
-                          <span className={`text-sm font-medium `}>SHAPE</span>
+                          <span className={`text-sm font-medium `}>STONE</span>
                           <ChevronDown
                             className="h-5 w-5 chevron-rotate"
                             data-state={openFilters.shape ? "open" : "closed"}

@@ -84,6 +84,12 @@ export const stone: { id: number; element: string; name: string }[] = [
   {
     id: 8, element: "/svg/stone6.svg", name: "spheregs"
   },
+  {
+    id:9, element: "/svg/stone11.svg", name: "sphers"
+  },
+  {
+    id: 10, element: "/svg/stone12.svg", name: "sheregs"
+  },
 ];
 
 export const products = [
