@@ -28,8 +28,19 @@ export default function Home() {
           <div className={`${oswald.className} col-span-3 row-start-1 row-end-5 mx-10 `}>
             <div className="flex justify-between wrap-normal">
               <div className="text-2xl ">The Classic Emerald Engagement Ring</div>
-              <div className="mt-2 ml-6"> <Heart/></div>
+              <div className="mt-2 ml-6">
+                <Image
+                src={"/svg/heart.svg"}
+                height={27}
+                width={27}
+                alt="heart"
+                className="-translate-y-0.5"
+                >
+                </Image>
+              </div>
             </div>
+            <div className="mt-2.5 text-xl">Starting at $900</div>
+            <div className="mt-2.5 text-md">Shape: </div>
           </div>
         </div>
       </div>

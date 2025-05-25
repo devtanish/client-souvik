@@ -773,8 +773,11 @@ export default function EarringsPage() {
                     onClick={() => toggleWishlist(product.id)}
                     aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
                   >
-                    <Heart
-                      size={18}
+                    <Image
+                      src={"/svg/heart.svg"}
+                      height={18}
+                      width={18}
+                      alt="heart"
                       className={wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}
                     />
                   </button>
