@@ -114,7 +114,11 @@ export const products = [
     stone_size_option_id: 1,
     detachable_pendant: false,
     is_set: true,
-    set_components: ["Pendant", "Chain"]
+    set_components: ["Pendant", "Chain"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 2,
@@ -137,7 +141,11 @@ export const products = [
     stone_size_option_id: 2,
     detachable_pendant: false,
     is_set: false,
-    set_components: ["Ring"]
+    set_components: ["Ring"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 3,
@@ -160,7 +168,11 @@ export const products = [
     stone_size_option_id: 3,
     detachable_pendant: true,
     is_set: true,
-    set_components: ["Pendant", "Chain"]
+    set_components: ["Pendant", "Chain"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 4,
@@ -183,7 +195,11 @@ export const products = [
     stone_size_option_id: 4,
     detachable_pendant: false,
     is_set: true,
-    set_components: ["Earring"]
+    set_components: ["Earring"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 5,
@@ -206,7 +222,11 @@ export const products = [
     stone_size_option_id: 5,
     detachable_pendant: false,
     is_set: false,
-    set_components: ["Bracelet"]
+    set_components: ["Bracelet"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 6,
@@ -229,7 +249,11 @@ export const products = [
     stone_size_option_id: 6,
     detachable_pendant: false,
     is_set: false,
-    set_components: ["Ring"]
+    set_components: ["Ring"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 7,
@@ -252,7 +276,11 @@ export const products = [
     stone_size_option_id: 7,
     detachable_pendant: false,
     is_set: false,
-    set_components: ["Earring"]
+    set_components: ["Earring"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   },
   {
     id: 8,
@@ -275,6 +303,10 @@ export const products = [
     stone_size_option_id: 8,
     detachable_pendant: true,
     is_set: true,
-    set_components: ["Anklet", "Charm"]
+    set_components: ["Anklet", "Charm"],
+    title: "The Classic Oval Engagement Ring",
+    subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
+    description:
+      "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   }
 ];
