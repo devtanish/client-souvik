@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Hind } from "next/font/google";
-import { Heart } from "lucide-react";
 
 const oswald =Hind({
   subsets: ["latin"],
