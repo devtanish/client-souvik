@@ -766,7 +766,7 @@ export default function EarringsPage() {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <Link href={`/shop/${product.name}`} key={product.id} className="group relative">
+                <Link href={`/shop/${product.productName}`} key={product.id} className="group relative">
                   {/* Wishlist button */}
                   <button
                     className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
@@ -797,7 +797,7 @@ export default function EarringsPage() {
 
                     {/* Default image */}
                     <Image
-                      src={product.image || "/placeholder.svg?height=300&width=300"}
+                      src={product.images || "/placeholder.svg?height=300&width=300"}
                       alt={product.name}
                       fill
                       className={cn(
