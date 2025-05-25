@@ -15,7 +15,7 @@ export const metalscolor = [
   { name: "White Gold", color: "linear-gradient(328deg, rgb(238, 238, 238) 52.9%, rgb(255, 255, 255) 78%, rgb(238, 238, 238) 151%)" }
 ]
 
-export const metals = [
+const metals = [
   { id: 1, name: "18k Gold" },
   { id: 2, name: "14k Gold" },
   { id: 3, name: "9kt Gold" },

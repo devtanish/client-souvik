@@ -35,7 +35,7 @@ import { ChevronDown, Heart, LayoutGrid, Columns2, ChevronRight, ChevronLeft, Sl
 import { cn } from "@/lib/utils"
 
 // Import data
-import { categories, metalscolor, shapes, products, metals, stone } from "./data"
+import { categories, metalscolor, shapes, products, stone } from "./data"
 
 // Add keyframes for subtle shimmer effect
 const shimmerAnimation = `
@@ -545,7 +545,12 @@ export default function EarringsPage() {
                       </div>
                       <CollapsibleContent className="px-3 pb-4 overflow-hidden collapsible-content-open">
                         <div className="space-y-1">
-                          {metals.map((shape) => (
+                          {[
+                            { id: 1, name: "18k Gold" },
+                            { id: 2, name: "14k Gold" },
+                            { id: 3, name: "9kt Gold" },
+                            { id: 4, name: "925 silver" },
+                          ].map((shape) => (
                             <div
                               key={shape.name}
                               className="flex items-center space-x-2 filter-item py-1 px-1 rounded-md hover:bg-gray-50"
@@ -761,7 +766,7 @@ export default function EarringsPage() {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <div key={product.id} className="group relative">
+                <Link href={`/shop/${product.name}`} key={product.id} className="group relative">
                   {/* Wishlist button */}
                   <button
                     className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
@@ -820,7 +825,7 @@ export default function EarringsPage() {
                     </div>
                   </div>
 
-                  <h3 className="font-medium text-sm mb-0.5">{product.name}</h3>
+                  <h3 className="font-medium text-md mb-0.5">{product.name}</h3>
                   <p className="text-gray-700 text-sm mb-0.5">${product.price}</p>
 
                   <div className="flex gap-1 mb-0.5">
@@ -836,10 +841,10 @@ export default function EarringsPage() {
                       />
                     ))}
                   </div>
-                  <p className={cn("text-xs text-gray-500", isMobile ? "text-[10px]" : "text-xs")}>
+                  <p className={cn("text-xs text-gray-500", `${cormorantGaramond.className}`, isMobile ? "text-[15px]" : "text-xs")}>
                     {product.material}
                   </p>
-                </div>
+                </Link>
               ))
             )}
           </div>
