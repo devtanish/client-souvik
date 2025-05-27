@@ -29,7 +29,7 @@ export default function Footer() {
                 Email<span className="text-black pb-1">*</span>
               </label>
               <div className="flex w-full max-w-sm flex-col space-y-2  gap-2.5 mt-2 ">
-                <Input type="email" id="email" placeholder="Email" className="h-10 bg-[#ffffff] w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black" />
+                <Input type="email" id="email" placeholder="Email" className="h-10 bg-[#fffef0] w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black" />
                 <Button variant="outline" className="w-fit bg-[#ffffff] border-black rounded-none px-8 py-5">
                   Submit
                 </Button>
