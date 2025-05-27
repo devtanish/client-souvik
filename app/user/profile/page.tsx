@@ -133,7 +133,7 @@ export default function Profile() {
                                 <h2 className="text-2xl font-light tracking-wide">MY ORDERS</h2>
                                 <div className="space-y-4">
                                     <div>
-                                        <p className="text-sm font-medium text-gray-900">You haven't placed any orders yet.</p>
+                                        <p className="text-sm font-medium text-gray-900">You haven&apos;t placed any orders yet.</p>
                                         <p className="text-sm text-gray-600">Stock up on something new</p>
                                     </div>
                                     <div className="flex flex-wrap gap-3">
