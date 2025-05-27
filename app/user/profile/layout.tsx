@@ -1,0 +1,52 @@
+import type React from "react"
+import { ThemeProvider } from "next-themes"
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "../../globals.css";
+import Footer from "@/components/footer";
+import WhatsAppChatButton from "@/components/whatsapp-chat-button";
+import Sidebar from "@/components/sidebar";
+import Tooltip from "@/components/tooltip";
+import Header from "@/components/header";
+
+export const metadata: Metadata = {
+  title: "Earrings Collection | Raya Jewelry",
+  description: "Explore our collection of earrings - huggies, hoops, studs, and more.",
+}
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="light">
+        <Header />
+        <Sidebar />
+        <Tooltip />
+        <div className="">
+          {children}
+        </div>
+        <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
+
+        <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
