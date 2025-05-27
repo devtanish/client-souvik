@@ -39,13 +39,13 @@ export default function Profile() {
     ]
 
     return (
-        <div className="mt-23 md:mt-40 w-screen  mb-20">
+        <div className="mt-25 md:mt-40 w-screen  mb-20">
             <div className="md:mt-0 lg:mx-15 md:mx-10 mx-3">
                 <div className="w-screen h-24 bg-white z-10 top-8 md:flex hidden -translate-x-12 fixed"></div>
                 <div className=" bg-white">
                     <div className="">
                         {/* Header Greeting */}
-                        <h1 className="text-6xl font-light mb-8 tracking-wide">HI, TANISH</h1>
+                        <h1 className="text-3xl md:text-6xl font-light mb-2 md:mb-8 tracking-wide">HI, TANISH</h1>
 
                         {/* Navigation Tabs */}
                         <div className="flex flex-wrap gap-1 mb-3 border-gray-200">
