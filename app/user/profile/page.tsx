@@ -103,7 +103,7 @@ export default function Profile() {
                         {/* Membership Perks Section */}
                         {activeTab === "MEMBERSHIP PERKS" && (
                             <div className="space-y-6">
-                                <h2 className="text-lg font-medium tracking-wide">Membership Perks</h2>
+                                <h2 className="text-2xl font-medium tracking-wide">MEMBERSHIP PERKS</h2>
 
                                 <div className="space-y-4">
                                     {membershipPerks.map((perk) => (
