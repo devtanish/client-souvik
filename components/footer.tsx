@@ -18,19 +18,19 @@ const robotoBold = Roboto({
 
 export default function Footer() {
   return (
-    <footer className={`w-full border-t bg-white border-t-black ${robotoMedium.className}`}>
+    <footer className={`w-full border-t bg-[#fffef2] border-t-black ${robotoMedium.className}`}>
       <div className=" md:mx-15 py-10">
         <div className="grid grid-cols-1 md:gap-7 gap-7 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
           {/* Newsletter Signup */}
           <div className="col-span-1 md:col-span-3 ">
-            <h3 className={`mb-4 text-lg ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
+            <h3 className={`mb-4 text-xl ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
             <div className="space-y-2">
               <label htmlFor="email" className={`text-sm ${robotoBold.className}`}>
                 Email<span className="text-black pb-1">*</span>
               </label>
               <div className="flex w-full max-w-sm flex-col space-y-2  gap-2.5 mt-2 ">
-                <Input type="email" id="email" placeholder="Email" className="h-10 w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black" />
-                <Button variant="outline" className="w-fit border-black rounded-none px-8 py-5">
+                <Input type="email" id="email" placeholder="Email" className="h-10 bg-[#ffffff] w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black" />
+                <Button variant="outline" className="w-fit bg-[#ffffff] border-black rounded-none px-8 py-5">
                   Submit
                 </Button>
               </div>
