@@ -10,9 +10,9 @@ export const categories = [
 ]
 
 export const metalscolor = [
-  { name: "Yellow Gold", color: "linear-gradient(328deg, rgba(227, 202, 136, 0.1) -22%, rgb(227, 202, 136) 54%, rgba(227, 202, 136, 0.62) 73%, rgba(227, 202, 136, 0.13) 88%)" },
-  { name: "Rose Gold", color: "linear-gradient(150deg, rgba(226, 185, 139, 0.063) 60%, rgb(238, 238, 238) 110%), linear-gradient(-19deg, rgb(226, 185, 139) 65%, rgb(238, 238, 238) 99%)" },
-  { name: "White Gold", color: "linear-gradient(328deg, rgb(238, 238, 238) 52.9%, rgb(255, 255, 255) 78%, rgb(238, 238, 238) 151%)" }
+  { name: "Yellow Gold", color: "linear-gradient(328deg, rgba(227, 202, 136, 0.1) -22%, rgb(227, 202, 136) 54%, rgba(227, 202, 136, 0.62) 73%, rgba(227, 202, 136, 0.13) 88%)", metal: "18k Gold" },
+  { name: "Rose Gold", color: "linear-gradient(150deg, rgba(226, 185, 139, 0.063) 60%, rgb(238, 238, 238) 110%), linear-gradient(-19deg, rgb(226, 185, 139) 65%, rgb(238, 238, 238) 99%)", metal: "14k Gold" },
+  { name: "White Gold", color: "linear-gradient(328deg, rgb(238, 238, 238) 52.9%, rgb(255, 255, 255) 78%, rgb(238, 238, 238) 151%)", metal: "9kt Gold" },
 ]
 
 const metals = [
@@ -99,6 +99,7 @@ export const products = [
     name: `${metalscolor[0].name} ${categories[0].name}`,
     price: 79,
     images: categories[0].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "/jwel/2.avif",
     colors: [metalscolor[0].color, metalscolor[1].color],
     material: "18kt Gold",
@@ -126,6 +127,7 @@ export const products = [
     name: `${metalscolor[1].name} ${categories[1].name}`,
     price: 64,
     images: categories[1].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "/jwel/3.avif",
     colors: [metalscolor[1].color],
     material: "Sterling Silver",
@@ -153,6 +155,7 @@ export const products = [
     name: `${metalscolor[2].name} ${categories[2].name}`,
     price: 178,
     images: categories[2].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "/jwel/4.avif",
     colors: [metalscolor[2].color, metalscolor[1].color],
     material: "14k Rose Gold",
@@ -180,6 +183,7 @@ export const products = [
     name: `${metalscolor[2].name} ${categories[3].name}`,
     price: 74,
     images: categories[3].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "/jwel/1.avif",
     colors: [metalscolor[2].color, metalscolor[1].color],
     material: "18k Solid Vermeil",
@@ -207,6 +211,7 @@ export const products = [
     name: `${metalscolor[0].name} ${categories[4].name}`,
     price: 59,
     images: categories[4].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "/jwel/3.avif",
     colors: ["#FFD700"],
     material: "18k Gold Plated",
@@ -234,6 +239,7 @@ export const products = [
     name: `${metalscolor[1].name} ${categories[5].name}`,
     price: 199,
     images: categories[5].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "",
     colors: [metalscolor[1].color],
     material: "14k Yellow Gold with Diamonds",
@@ -261,6 +267,7 @@ export const products = [
     name: `${metalscolor[2].name} ${categories[6].name}`,
     price: 49,
     images: categories[6].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "",
     colors: ["#FFFFFF"],
     material: "Sterling Silver with Freshwater Pearls",
@@ -288,6 +295,7 @@ export const products = [
     name: `${metalscolor[2].name} ${categories[7].name}`,
     price: 89,
     images: categories[7].image,
+    productImg: ["./product/ring.avif", "./product/girl.avif", "./product/ring2.png", "./product/ring3.avif", "./product/hand.webp", "./product/ring4.avif", "./product/ring5.avif"],
     hoverImage: "/jwel/5.avif",
     colors: [metalscolor[2].color],
     material: "White Gold Plated",
