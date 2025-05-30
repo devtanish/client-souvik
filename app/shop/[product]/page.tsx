@@ -1,5 +1,7 @@
 "use client"
 
+// DOMPurify used to convert productcat?.description which is in String format to HTML format
+import DOMPurify from "dompurify";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Hind } from "next/font/google";
@@ -10,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import data
-import { stone } from "./../../../components/data"
+import { stone, products } from "./../../../components/data"
 
 const oswald = Hind({
   subsets: ["latin"],
@@ -18,12 +20,21 @@ const oswald = Hind({
   display: "swap",
 })
 
-export default function Home() {
+interface Props {
+  params: {
+    product: string
+  }
+}
+
+export default function Home({ params }: { params: Promise<{ product: string }> }) {
+
+  const { product } = React.use(params);
+
+  const originalValue = product.replaceAll("%20", " ")
+  const productcat = products.find(p => p.name === originalValue)
 
   const categoryScrollRef = useRef<HTMLDivElement>(null)
-  const [activeCategory, setActiveCategory] = useState("Earrings")
-
-  console.log(activeCategory)
+  const [activeCategory, setActiveCategory] = useState("ovel")
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryScrollRef.current) {
@@ -33,23 +44,17 @@ export default function Home() {
   }
 
   return (
-    <div className="mt-18 md:mt-34 w-screen  mb-20">
+    <div className="mt-18 md:mt-36 w-screen  mb-20">
       <div className="md:mt-0 lg:mx-2.5 md:mx-10 mx-3">
         <div className="grid gap-1.5 grid-cols-11 grid-rows-5 ">
-          <div className="col-span-4 row-start-1 row-end-5 space-y-1.5">
-            <Image src={"/product/ring.avif"} alt="product" className="cursor-crosshair" width={800} height={800} />
-            <Image src={"/product/ring2.png"} alt="product" className="cursor-crosshair" width={800} height={800} />
-            <Image src={"/product/ring3.avif"} alt="product" className="cursor-crosshair" width={800} height={800} />
-            <Image src={"/product/hand.webp"} alt="product" className="cursor-crosshair" width={800} height={800} />
+          <div className="col-span-8 space-y-1.5 flex flex-wrap">
+            {productcat?.productImg.map((img, index) => (
+              <Image src={img} alt="product" className="cursor-crosshair mr-2 md:size-130 xl:size-170" width={650} height={650} key={index} />
+            ))}
           </div>
-          <div className="col-span-4 row-start-1 row-end-5 space-y-1.5">
-            <Image src={"/product/girl.avif"} alt="product" className="cursor-crosshair" width={800} height={800} />
-            <Image src={"/product/ring4.avif"} alt="product" className="cursor-crosshair" width={800} height={800} />
-            <Image src={"/product/ring5.avif"} alt="product" className="cursor-crosshair" width={800} height={800} />
-          </div>
-          <div className={` col-span-3 row-start-1 row-end-5 mx-10 sticky`}>
+          <div className={` col-span-3 mx-10 sticky`}>
             <div className="flex justify-between wrap-normal">
-              <div className="text-2xl font-semibold">The Classic Emerald Engagement Ring</div>
+              <div className="text-2xl font-semibold">{productcat?.title}</div>
               <div className="mt-2 ml-6">
                 <Image
                   src={"/svg/heart.svg"}
@@ -63,7 +68,7 @@ export default function Home() {
             </div>
 
             <div>
-              <div className="mt-0 font-bold  text-xl flex">Starting at <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}>{` $900`}</div></div>
+              <div className="mt-0 font-bold  text-xl flex">Starting at <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div></div>
               <div className="mt-2.5 text-md ">Shape: </div>
               <div className=" h-10"><div className="mx-3 -translate-y-4 relative">
                 <button
@@ -79,9 +84,9 @@ export default function Home() {
                   className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                  {stone.map((category) => (
+                  {productcat?.activeStones.map((category, index) => (
                     <div
-                      key={category.name}
+                      key={index}
                       className={cn(
                         "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
                         " sm:w-1/7",
@@ -89,8 +94,7 @@ export default function Home() {
                       )}
                       onClick={() => {
                         console.log(category.name)
-                        console.log(activeCategory)
-                        setActiveCategory(category.name)
+                        setActiveCategory(category.name);
                       }}
                     >
                       <div className="relative h-20 w-20">
@@ -100,8 +104,8 @@ export default function Home() {
                           fill
                           className=" scale-40"
                         />
-                        
-                      {activeCategory === category.name && <div className="h-0.5 w-10 bg-black -translate-y-5">hello</div>}
+
+                        {activeCategory === category.name && <div className="h-0.5 w-10 bg-black -translate-y-5">hello</div>}
                       </div>
                     </div>
                   ))}
@@ -151,15 +155,15 @@ export default function Home() {
 
             <div>
               <div className="text-2xl mt-6">The Classic Design</div>
-              <div className="text-lg mt-3">The Classic solitaire in 18k yellow gold with a oval diamond</div>
-              <div className="mt-3">With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it’s thoughtfully designed and meticulously perfected for ultimate comfort and wearability. <br />
-                <br />
-                Band width: 1.7mm <br />
-                Band depth: 1.6mm <br />
-                Setting height: 6.5mm <br />
-                Gold/Platinum metal weight: 2.86g (Ring size 6) <br />
-                Pavé carat weight: 0.18ctw <br />
-                Shown with center stone: 1.5ct</div>
+              <div className="text-lg mt-3">{productcat?.subtitle}</div>
+
+              {/* //used to convert productcat?.description which is in String format to HTML format */}
+              <div
+                className="mt-3"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(productcat?.description || ""),
+                }}
+              />
             </div>
           </div>
           <div>

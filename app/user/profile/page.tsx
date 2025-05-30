@@ -13,7 +13,7 @@ export default function Profile() {
         setExpandedSections((prev) => (prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]))
     }
 
-    const tabs = ["PROFILE", "MEMBERSHIP PERKS", "ORDERS", "ADDRESSES", "STORE CREDIT & GIFT CARDS", "WISHLIST"]
+    const tabs = ["PROFILE", "AFFILIATE PROGRAM", "ORDERS", "ADDRESSES", "STORE CREDIT & GIFT CARDS", "WISHLIST"]
 
     const membershipPerks = [
         {
@@ -101,7 +101,7 @@ export default function Profile() {
                         )}
 
                         {/* Membership Perks Section */}
-                        {activeTab === "MEMBERSHIP PERKS" && (
+                        {activeTab === "AFFILIATE PROGRAM" && (
                             <div className="space-y-6">
                                 <h2 className="text-2xl font-medium tracking-wide">MEMBERSHIP PERKS</h2>
 
