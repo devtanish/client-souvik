@@ -12,19 +12,13 @@ import { cn } from "@/lib/utils"
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import data
-import { stone, products } from "./../../../components/data"
+import { products } from "./../../../components/data"
 
 const oswald = Hind({
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
 })
-
-interface Props {
-  params: {
-    product: string
-  }
-}
 
 export default function Home({ params }: { params: Promise<{ product: string }> }) {
 
