@@ -766,7 +766,7 @@ export default function EarringsPage() {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <a href={`/shop/${product.name.toString()}`} key={product.id} className="group relative">
+                <Link href={`/shop/${product.name.toString()}`} key={product.id} className="group relative">
                   {/* Wishlist button */}
                   <button
                     className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
@@ -847,7 +847,7 @@ export default function EarringsPage() {
                   <p className={cn("text-xs text-gray-500", `${cormorantGaramond.className}`, isMobile ? "text-[15px]" : "text-xs")}>
                     {product.material}
                   </p>
-                </a>
+                </Link>
               ))
             )}
           </div>

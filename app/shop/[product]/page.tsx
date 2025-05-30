@@ -28,7 +28,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const productcat = products.find(p => p.name === originalValue)
 
   const categoryScrollRef = useRef<HTMLDivElement>(null)
-  const [activeCategory, setActiveCategory] = useState("ovel")
+  const [activeCategory, setActiveCategory] = useState(productcat?.activeStones[0].name)
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryScrollRef.current) {
@@ -40,7 +40,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   return (
     <div className="mt-18 md:mt-36 w-screen  mb-20">
       <div className="md:mt-0 lg:mx-2.5 md:mx-10 mx-3">
-        <div className="grid gap-1.5 grid-cols-11 grid-rows-5 ">
+        <div className="grid gap-1.5 grid-cols-11 ">
           <div className="col-span-8 space-y-1.5 flex flex-wrap">
             {productcat?.productImg.map((img, index) => (
               <Image src={img} alt="product" className="cursor-crosshair mr-2 md:size-130 xl:size-170" width={650} height={650} key={index} />
@@ -84,23 +84,23 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       className={cn(
                         "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
                         " sm:w-1/7",
-                        activeCategory === category.name ? "opacity-100" : "opacity-80 hover:opacity-100",
+                        activeCategory === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
                       )}
                       onClick={() => {
                         console.log(category.name)
                         setActiveCategory(category.name);
                       }}
                     >
-                      <div className="relative h-20 w-20">
+                      <div className={`relative h-20 w-20`}>
                         <Image
                           src={category.element}
                           alt={category.name}
                           fill
-                          className=" scale-40"
+                          className={`  scale-40`}
                         />
 
-                        {activeCategory === category.name && <div className="h-0.5 w-10 bg-black -translate-y-5">hello</div>}
                       </div>
+                        {activeCategory === category.name && <div className="border-1 w-7 border-black transition-transform duration-300 -translate-y-4.5"></div>}
                     </div>
                   ))}
                 </div>
