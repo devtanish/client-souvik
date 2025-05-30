@@ -46,7 +46,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               <Image src={img} alt="product" className="cursor-crosshair mr-2 md:size-130 xl:size-170" width={650} height={650} key={index} />
             ))}
           </div>
-          <div className={` col-span-3 mx-10 sticky`}>
+          <div className={` col-span-3 mx-4 sticky`}>
             <div className="flex justify-between wrap-normal">
               <div className="text-2xl font-semibold">{productcat?.title}</div>
               <div className="mt-2 ml-6">
