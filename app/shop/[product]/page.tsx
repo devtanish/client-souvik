@@ -36,6 +36,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const categoryScrollRef = useRef<HTMLDivElement>(null)
   const [activeStone, setActiveStone] = useState(productcat?.activeStones[0].name)
   const [activeSize, setActiveSize] = useState(productcat?.sizes[0])
+  const [activeLength, setActiveLength] = useState(productcat?.length[0])
+  const [liked, setLiked] = useState(productcat?.Liked)
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false)
 
   const scrollCategories = (direction: "left" | "right") => {
@@ -83,7 +85,9 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               <div className="flex justify-between wrap-normal">
                 <div className="text-2xl mt-5 md:mt-0 font-semibold">{productcat?.title}</div>
                 <div className="mt-2 ml-6">
-                  <Image src={"/svg/heart.svg"} height={27} width={27} alt="heart" className="-translate-y-0.5"></Image>
+                  <svg width="27" height="27" onClick={()=> {
+                    setLiked(!liked)
+                  }} viewBox="0 0 24 24" fill={liked ? "red" : "white"} xmlns="http://www.w3.org/2000/svg"><path d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z" fill="" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" className="svg-stroke svg-fill -translate-y-0.5"></path></svg>
                 </div>
               </div>
 
@@ -178,15 +182,53 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       ))}
                     </div>
                     <button
-                      className="underline cursor-pointer -translate-x-2.5 hover:text-gray-600 transition-colors"
+                      className="underline cursor-pointer -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
                       onClick={() => setIsSizeGuideOpen(true)}
                     >
                       size guide
                     </button>
                   </div>
                 </div>
-                <div className="mt-12.5 text-md ">Metal: </div>
-                <div className="h-10"></div>
+                <div className="mt-2.5 text-md ">Metal: {activeLength} inches</div>
+                <div className="h-10">
+                  <div className="mx-3 -translate-y-4 relative">
+                    <div
+                      ref={categoryScrollRef}
+                      className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                    >
+                      {productcat?.length.map((category, index) => (
+                        <div
+                          key={index}
+                          className={cn(
+                            "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                            " lg:w-1/6 sm:w-1/10 w-1/6",
+                            activeLength === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                          )}
+                          onClick={() => {
+                            console.log(category)
+                            setActiveLength(category)
+                          }}
+                        >
+                          <div className={`relative h-20 w-20 ${oswald.className} `}>
+                            <div className={`${oswald.className} border h-6 w-15 -translate-x-4 text-center mt-6 ml-[1.6rem]`}>
+                              {category}
+                            </div>
+                          </div>
+                          {activeLength === category && (
+                            <div className="border-1 w-7 border-black transition-transform duration-300"></div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      className="underline cursor-pointer -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
+                      onClick={() => setIsSizeGuideOpen(true)}
+                    >
+                      size guide
+                    </button>
+                  </div>
+                </div>
                 <div className="mt-2.5 text-md font-medium">Band: </div>
                 <div className="h-10"></div>
               </div>
