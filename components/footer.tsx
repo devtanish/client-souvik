@@ -84,8 +84,10 @@ export default function Footer() {
           </div>
         </div>
 
+
+
         {/* Bottom Section with Logo and Social Icons */}
-        <div className="md:mt-12 mt-2 align-middle border-t pt-8 ">
+        <div className="md:mt-12 mt-2 align-middle border-t pt-8 text-black">
           <div className="flex space-x-4 justify-center align-middle">
             <Link target="_blank" href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" 
