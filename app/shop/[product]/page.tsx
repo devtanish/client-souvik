@@ -2,21 +2,17 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel"
-import DOMPurify from "dompurify"
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Hind } from 'next/font/google'
+import { Hind } from "next/font/google"
 import * as React from "react"
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { RingSizeGuideSidebar } from "@/components/ring-size-guide-sidebar"
+import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sidebar"
 
 // Import data
 import { products } from "./../../../components/data"
@@ -37,8 +33,10 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [activeStone, setActiveStone] = useState(productcat?.activeStones[0].name)
   const [activeSize, setActiveSize] = useState(productcat?.sizes[0])
   const [activeLength, setActiveLength] = useState(productcat?.length[0])
+  const [activeBand, setActiveBand] = useState(productcat?.bands ? productcat?.bands[0] : "")
   const [liked, setLiked] = useState(productcat?.Liked)
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false)
+  const [isNecklaceSizeGuideOpen, setIsNecklaceSizeGuideOpen] = useState(false)
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryScrollRef.current) {
@@ -59,7 +57,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     <div className="">
                       <Card className="border-none">
                         <CardContent className=" border-none flex aspect-square items-center justify-center scale-115">
-                          <Image src={img || "/placeholder.svg"} alt="product" className="cursor-crosshair w-full h-full" width={800} height={800} />
+                          <Image
+                            src={img || "/placeholder.svg"}
+                            alt="product"
+                            className="cursor-crosshair w-full h-full"
+                            width={800}
+                            height={800}
+                          />
                         </CardContent>
                       </Card>
                     </div>
@@ -81,7 +85,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
             ))}
           </div>
           <div className={` col-span-3 mx-2 md:mx-4 sticky`}>
-            <div className="col-span-1">
+            <div className="col-span-1 mb-5">
               <div className="flex justify-between wrap-normal">
                 <div className="text-2xl mt-5 md:mt-0 font-semibold">{productcat?.title}</div>
                 <div className="mt-7.5 md:mt-2 ml-6">
@@ -89,7 +93,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     width="27"
                     height="27"
                     onClick={() => {
-                      setLiked(!liked);
+                      setLiked(!liked)
                     }}
                     viewBox="0 0 24 24"
                     fill={liked ? "red" : "white"}
@@ -107,52 +111,55 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               </div>
 
               <div>
-                <div className="mt-0 font-bold  text-xl flex">
-                  Starting at{" "}
-                  <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
-                </div>
-                <div className="mt-2.5 text-md ">Shape: {activeStone}</div>
-                <div className=" h-10">
-                  <div className="mx-3 -translate-y-4 relative">
-                    <button
-                      onClick={() => scrollCategories("left")}
-                      className="absolute -left-5 top-1/2 -translate-y-2/3 -translate-x-2 z-10 bg-white/80 rounded-full p-1 shadow-md opacity-15 lg:flex hidden"
-                      aria-label="Scroll left"
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
+                <div className="">
 
-                    <div
-                      ref={categoryScrollRef}
-                      className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                    >
-                      {productcat?.activeStones.map((category, index) => (
-                        <div
-                          key={index}
-                          className={cn(
-                            "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                            "lg:w-1/6 sm:w-1/10 w-1/6",
-                            activeStone === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                          )}
-                          onClick={() => {
-                            console.log(category.name)
-                            setActiveStone(category.name)
-                          }}
-                        >
-                          <div className={`relative h-20 w-20`}>
-                            <Image
-                              src={category.element || "/placeholder.svg"}
-                              alt={category.name}
-                              fill
-                              className={`  scale-40`}
-                            />
+                  <div className="mt-0 font-bold  text-xl flex">
+                    Starting at{" "}
+                    <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
+                  </div>
+                  <div className="mt-2.5 text-md ">Shape: {activeStone}</div>
+                  <div className=" h-10">
+                    <div className="mx-3 -translate-y-4 relative">
+                      <button
+                        onClick={() => scrollCategories("left")}
+                        className="absolute -left-5 top-1/2 -translate-y-2/3 -translate-x-2 z-10 bg-white/80 rounded-full p-1 shadow-md opacity-15 lg:flex hidden"
+                        aria-label="Scroll left"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
+                        {productcat?.activeStones.map((category, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                              "lg:w-1/10 sm:w-1/10 w-1/7",
+                              activeStone === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                            )}
+                            onClick={() => {
+                              console.log(category.name)
+                              setActiveStone(category.name)
+                            }}
+                          >
+                            <div className={`relative h-20 w-20`}>
+                              <Image
+                                src={category.element || "/placeholder.svg"}
+                                alt={category.name}
+                                fill
+                                className={`  scale-40`}
+                              />
+                            </div>
+                            {activeStone === category.name && (
+                              <div className="border-1 w-7 border-black transition-transform duration-300 -translate-y-4.5"></div>
+                            )}
                           </div>
-                          {activeStone === category.name && (
-                            <div className="border-1 w-7 border-black transition-transform duration-300 -translate-y-4.5"></div>
-                          )}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
 
                     <button
@@ -164,88 +171,132 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     </button>
                   </div>
                 </div>
-                <div className="mt-2.5 text-md ">Select Size: {activeSize} </div>
-                <div className="h-10">
-                  <div className="mx-3 -translate-y-4 relative">
-                    <div
-                      ref={categoryScrollRef}
-                      className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                    >
-                      {productcat?.sizes.map((category, index) => (
-                        <div
-                          key={index}
-                          className={cn(
-                            "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                            " lg:w-1/6 sm:w-1/10 w-1/6",
-                            activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                          )}
-                          onClick={() => {
-                            console.log(category)
-                            setActiveSize(category)
-                          }}
-                        >
-                          <div className={`relative h-20 w-20 ${oswald.className} `}>
-                            <div className={`${oswald.className} border h-6 w-7  text-center mt-6 ml-[1.6rem]`}>
-                              {category}
+
+                <div className={`${productcat?.sizes ? "" : "hidden"}`}>
+                  <div className="mt-2.5 text-md ">Select Size: {activeSize} inch</div>
+                  <div className="h-10">
+                    <div className="mx-3 -translate-y-4 relative">
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
+                        {productcat?.sizes.map((category, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                              " lg:w-1/10 sm:w-1/10 w-1/7",
+                              activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                            )}
+                            onClick={() => {
+                              console.log(category)
+                              setActiveSize(category)
+                            }}
+                          >
+                            <div className={`relative h-20 w-20 ${oswald.className} `}>
+                              <div className={`${oswald.className} border h-6 w-7  text-center mt-6 ml-[1.6rem]`}>
+                                {category}
+                              </div>
                             </div>
+                            {activeSize === category && (
+                              <div className="border-1 w-7 border-black transition-transform duration-300"></div>
+                            )}
                           </div>
-                          {activeSize === category && (
-                            <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                          )}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                      <button
+                        className="underline cursor-pointer -translate-y-3 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
+                        onClick={() => setIsSizeGuideOpen(true)}
+                      >
+                        size guide
+                      </button>
                     </div>
-                    <button
-                      className="underline cursor-pointer -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
-                      onClick={() => setIsSizeGuideOpen(true)}
-                    >
-                      size guide
-                    </button>
                   </div>
                 </div>
-                <div className="mt-2.5 text-md ">Metal: {activeLength} inches</div>
-                <div className="h-10">
-                  <div className="mx-3 -translate-y-4 relative">
-                    <div
-                      ref={categoryScrollRef}
-                      className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                    >
-                      {productcat?.length.map((category, index) => (
-                        <div
-                          key={index}
-                          className={cn(
-                            "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                            " lg:w-1/6 sm:w-1/10 w-1/6",
-                            activeLength === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                          )}
-                          onClick={() => {
-                            console.log(category)
-                            setActiveLength(category)
-                          }}
-                        >
-                          <div className={`relative h-20 w-20 ${oswald.className} `}>
-                            <div className={`${oswald.className} border h-6 w-15 -translate-x-4 text-center mt-6 ml-[1.6rem]`}>
-                              {category}
+
+                <div className={`${productcat?.bands ? "" : "hidden"}`}>
+                  <div className="mt-2.5 text-md font-medium">Band: {activeBand} mm</div>
+                  <div className="h-10">
+                    <div className="mx-3 -translate-y-4 relative">
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
+                        {productcat?.bands ? productcat?.bands.map((category, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                              " lg:w-1/10 sm:w-1/10 w-1/7",
+                              activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                            )}
+                            onClick={() => {
+                              console.log(category)
+                              setActiveBand(category)
+                            }}
+                          >
+                            <div className={`relative h-20 w-20 ${oswald.className} `}>
+                              <div className={`${oswald.className} border h-6 w-7  text-center mt-6 ml-[1.6rem]`}>
+                                {category}
+                              </div>
                             </div>
+                            {activeBand === category && (
+                              <div className="border-1 w-7 border-black transition-transform duration-300"></div>
+                            )}
                           </div>
-                          {activeLength === category && (
-                            <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                          )}
-                        </div>
-                      ))}
+                        )) : ""}
+                      </div>
                     </div>
-                    <button
-                      className="underline cursor-pointer -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
-                      onClick={() => setIsSizeGuideOpen(true)}
-                    >
-                      size guide
-                    </button>
                   </div>
                 </div>
-                <div className="mt-2.5 text-md font-medium">Band: </div>
-                <div className="h-10"></div>
+
+                <div className={`${productcat?.metals ? "" : "hidden"}`}>
+                  <div className="mt-2.5 text-md ">Metal: {activeLength} inches</div>
+                  <div className="h-10">
+                    <div className="mx-3 -translate-y-4 relative">
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
+                        {productcat?.length.map((category, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                              " lg:w-1/8 sm:w-1/10 w-1/6",
+                              activeLength === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                            )}
+                            onClick={() => {
+                              console.log(category)
+                              setActiveLength(category)
+                            }}
+                          >
+                            <div className={`relative h-20 w-20 ${oswald.className} `}>
+                              <div
+                                className={`${oswald.className} border h-6 w-15 -translate-x-4 text-center mt-6 ml-[1.6rem]`}
+                              >
+                                {category}
+                              </div>
+                            </div>
+                            {activeLength === category && (
+                              <div className="border-1 w-7 border-black transition-transform duration-300"></div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <button
+                        className="underline cursor-pointer -translate-y-5 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
+                        onClick={() => setIsNecklaceSizeGuideOpen(true)}
+                      >
+                        metal guide
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -330,18 +381,20 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               <div className="text-lg mt-3">{productcat?.subtitle}</div>
 
               {/* //used to convert productcat?.description which is in String format to HTML format */}
-              <div
-                className="mt-3"
-                dangerouslySetInnerHTML={{ __html: productcat?.description }}
-              />
+              {productcat?.description && (
+                <div className="mt-3" dangerouslySetInnerHTML={{ __html: productcat.description }} />
+              )}
             </div>
           </div>
           <div></div>
         </div>
       </div>
 
-      {/* Ring Size Guide Sidebar */}
+      {/* Ring Size Guide Sidebar (First size guide - unchanged) */}
       <RingSizeGuideSidebar isOpen={isSizeGuideOpen} onClose={() => setIsSizeGuideOpen(false)} />
+
+      {/* Necklace Size Guide Sidebar (Second size guide - new) */}
+      <NecklaceSizeGuideSidebar isOpen={isNecklaceSizeGuideOpen} onClose={() => setIsNecklaceSizeGuideOpen(false)} />
     </div>
   )
 }
