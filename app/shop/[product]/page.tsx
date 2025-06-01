@@ -85,9 +85,24 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               <div className="flex justify-between wrap-normal">
                 <div className="text-2xl mt-5 md:mt-0 font-semibold">{productcat?.title}</div>
                 <div className="mt-7.5 md:mt-2 ml-6">
-                  <svg width="27" height="27" onClick={()=> {
-                    setLiked(!liked)
-                  }} viewBox="0 0 24 24" fill={liked ? "red" : "white"} xmlns="http://www.w3.org/2000/svg"><path d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z" fill="" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" className="svg-stroke svg-fill -translate-y-0.5"></path></svg>
+                  <svg
+                    width="27"
+                    height="27"
+                    onClick={() => {
+                      setLiked(!liked);
+                    }}
+                    viewBox="0 0 24 24"
+                    fill={liked ? "red" : "white"}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      className="svg-stroke svg-fill -translate-y-0.5"
+                    />
+                  </svg>
                 </div>
               </div>
 
@@ -317,9 +332,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               {/* //used to convert productcat?.description which is in String format to HTML format */}
               <div
                 className="mt-3"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(productcat?.description || ""),
-                }}
+                dangerouslySetInnerHTML={{ __html: productcat?.description }}
               />
             </div>
           </div>
