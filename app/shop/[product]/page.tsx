@@ -33,7 +33,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [activeStone, setActiveStone] = useState(productcat?.activeStones[0].name)
   const [activeSize, setActiveSize] = useState(productcat?.sizes[0])
   const [activeLength, setActiveLength] = useState(productcat?.length[0])
-  const [activeBand, setActiveBand] = useState(productcat?.bands ? productcat?.bands[0] : "")
+  const [activeBand, setActiveBand] = useState(productcat?.bands ? productcat?.bands[0].name : "")
+  const [activeBandWidth, setActiveBandWidth] = useState(productcat?.bandWidth ? productcat?.bandWidth[0].name : "")
   const [liked, setLiked] = useState(productcat?.Liked)
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false)
   const [isNecklaceSizeGuideOpen, setIsNecklaceSizeGuideOpen] = useState(false)
@@ -117,7 +118,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     Starting at{" "}
                     <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                   </div>
-                  <div className="mt-2.5 text-md ">Shape: {activeStone}</div>
+                  <div className="mt-2.5 text-md "><b>Shape:</b> {activeStone}</div>
                   <div className=" h-10">
                     <div className="mx-3 -translate-y-4 relative">
                       <button
@@ -172,8 +173,82 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   </div>
                 </div>
 
+                <div className={`${productcat?.bands ? "" : "hidden"}`}>
+                  <div className="mt-2.5 text-md font-medium"><b>Band:</b> {activeBand}</div>
+                  <div className="h-10">
+                    <div className="mx-3 -translate-y-4 relative">
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
+                        {productcat?.bands ? productcat?.bands.map((category, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                              " lg:w-1/10 sm:w-1/10 w-1/7",
+                              activeBand === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                            )}
+                            onClick={() => {
+                              console.log(category)
+                              setActiveBand(category.name)
+                            }}
+                          >
+                            <div className={`relative h-20 w-20 ${oswald.className} `}>
+                              <div className={`${oswald.className}  h-7.5 w-7.5  text-center  mt-6 ml-[1.6rem]`}>
+                                <Image src={category.img} width={100} height={100} alt="band" className="w-full rounded-2xl -translate-x-[0.1rem] border-1 h-full object-cover " />
+                              </div>
+                            </div>
+                            {activeBand === category.name && (
+                              <div className="border-1 w-7 border-black transition-transform duration-300"></div>
+                            )}
+                          </div>
+                        )) : ""}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`${productcat?.bandWidth ? "" : "hidden"}`}>
+                  <div className="mt-2.5 text-md font-medium"><b>Band Width:</b> {activeBandWidth}</div>
+                  <div className="h-10">
+                    <div className="mx-3 -translate-y-4 relative">
+                      <div
+                        ref={categoryScrollRef}
+                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
+                        {productcat?.bandWidth ? productcat?.bandWidth.map((category, index) => (
+                          <div
+                            key={index}
+                            className={cn(
+                              "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                              " lg:w-1/10 sm:w-1/10 w-1/7",
+                              activeBand === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                            )}
+                            onClick={() => {
+                              console.log(category)
+                              setActiveBandWidth(category.name)
+                            }}
+                          >
+                            <div className={`relative h-20 w-20 ${oswald.className} `}>
+                              <div className={`${oswald.className}  h-7.5 w-7.5  text-center  mt-6 ml-[1.6rem]`}>
+                                <Image src={category.img} width={100} height={100} alt="band" className="w-full rounded-2xl -translate-x-[0.1rem] border-1 h-full object-cover " />
+                              </div>
+                            </div>
+                            {activeBandWidth === category.name && (
+                              <div className="border-1 w-7 border-black transition-transform duration-300"></div>
+                            )}
+                          </div>
+                        )) : ""}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className={`${productcat?.sizes ? "" : "hidden"}`}>
-                  <div className="mt-2.5 text-md ">Select Size: {activeSize} inch</div>
+                  <div className="mt-2.5 text-md "><b>Select Size:</b> {activeSize} inch</div>
                   <div className="h-10">
                     <div className="mx-3 -translate-y-4 relative">
                       <div
@@ -215,45 +290,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   </div>
                 </div>
 
-                <div className={`${productcat?.bands ? "" : "hidden"}`}>
-                  <div className="mt-2.5 text-md font-medium">Band: {activeBand} mm</div>
-                  <div className="h-10">
-                    <div className="mx-3 -translate-y-4 relative">
-                      <div
-                        ref={categoryScrollRef}
-                        className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                      >
-                        {productcat?.bands ? productcat?.bands.map((category, index) => (
-                          <div
-                            key={index}
-                            className={cn(
-                              "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                              " lg:w-1/10 sm:w-1/10 w-1/7",
-                              activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                            )}
-                            onClick={() => {
-                              console.log(category)
-                              setActiveBand(category)
-                            }}
-                          >
-                            <div className={`relative h-20 w-20 ${oswald.className} `}>
-                              <div className={`${oswald.className} border h-6 w-7  text-center mt-6 ml-[1.6rem]`}>
-                                {category}
-                              </div>
-                            </div>
-                            {activeBand === category && (
-                              <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                            )}
-                          </div>
-                        )) : ""}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 <div className={`${productcat?.metals ? "" : "hidden"}`}>
-                  <div className="mt-2.5 text-md ">Metal: {activeLength} inches</div>
+                  <div className="mt-2.5 text-md "><b>Metal:</b> {activeLength} inches</div>
                   <div className="h-10">
                     <div className="mx-3 -translate-y-4 relative">
                       <div
