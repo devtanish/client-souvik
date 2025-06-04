@@ -342,7 +342,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             >
                               <Image
                                 className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center shadow-inner border`}
-                                src={option?.url ? option?.url : "/placeholder.svg"}
+                                src={'url' in option ? option?.url : "/placeholder.svg"}
                                 width={100}
                                 height={100}
                                 alt="carat weight"
