@@ -2,16 +2,16 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
-import { Info } from "lucide-react"
+import { Info } from 'lucide-react'
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Hind } from "next/font/google"
+import { Hind } from 'next/font/google'
 import * as React from "react"
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { RingSizeGuideSidebar } from "@/components/ring-size-guide-sidebar"
 import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sidebar"
 import { Badge } from "@/components/ui/badge"
@@ -40,11 +40,11 @@ interface MetalType {
   url: string
 }
 
-interface CaratWidth{
+interface CaratWidth {
   id: string | number,
   weight: string,
   displayWeight: string,
-  price: number,  
+  price: number,
   url?: string
 }
 
@@ -67,6 +67,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedGemstone, setSelectedGemstone] = useState<GemStone | null>(productcat?.GemStone?.[0] || null)
   const [selectedCarat, setSelectedCarat] = useState<CaratWidth | null>(productcat?.CaratWidth?.[0] || null)
   const [selectedMetal, setSelectedMetal] = useState<MetalType | null>(productcat?.metalType?.[0] || null)
+  const [selectedDiamond, setSelectedDiamond] = useState<string>("Lab Grown Diamond")
+  const [selectedBacking, setSelectedBacking] = useState<string>("Push Back") 
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
@@ -76,6 +78,22 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
       const scrollAmount = direction === "left" ? -300 : 300
       categoryScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" })
     }
+  }
+
+  const handleDiamondChange = () => {
+    if (!productcat?.diamondOptions) return
+
+    const currentIndex = productcat.diamondOptions.indexOf(selectedDiamond)
+    const nextIndex = (currentIndex + 1) % productcat.diamondOptions.length
+    setSelectedDiamond(productcat.diamondOptions[nextIndex])
+  }
+
+  const handleBackingChange = () => {
+    if (!productcat?.backingOptions) return
+
+    const currentIndex = productcat.backingOptions.indexOf(selectedBacking)
+    const nextIndex = (currentIndex + 1) % productcat.backingOptions.length
+    setSelectedBacking(productcat.backingOptions[nextIndex])
   }
 
   return (
@@ -144,10 +162,10 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   </div>
                 </div>
 
-
+                {/* Shape Section */}
                 <div>
                   {productcat?.shape && (
-                    <div className="mb-5">
+                    <div className="mb-4">
                       <div className="mt-0 font-bold  text-xl flex">
                         Starting at{" "}
                         <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
@@ -211,8 +229,17 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     </div>
                   )}
 
+                  {/* Explore More Options Section */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-lg font-medium text-gray-800 ">Explore More Options</h2>
+                      <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
+                        NEW
+                      </Badge>
+                    </div>
+                  </div>
                   {productcat?.GemStone && (
-                    <div className="mb-5">
+                    <div className="mb-2 md:mb-4">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="text-gray-700 font-medium">
                           Gemstone Quality : {selectedGemstone?.grade || "Not selected"}
@@ -284,8 +311,73 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     </div>
                   )}
 
+                  
+                  {/* Explore Gemstones Section */}
+                  {productcat?.diamondOptions && (
+                    <div className="border mb-2 md:mb-4">
+                      <div className="flex items-center gap-3 py-1 bg-gray-100">
+                        <h2 className="text-lg px-2 font-medium text-gray-800">Explore Gemstones</h2>
+                        <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
+                          NEW
+                        </Badge>
+                      </div>
+                      <div className="flex items-center py-3 justify-between">
+                        <div className="flex items-center gap-3 px-2">
+                          <div>
+                            <Image
+                              src={selectedGemstone?.url || "/svg/diamond.svg"}
+                              width={20}
+                              height={20}
+                              alt="diamond"
+                              className="w-6 h-6 rounded-full"
+                            />
+                          </div>
+                          <span className="text-gray-700 font-medium">{selectedDiamond}</span>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          className="text-gray-600 underline hover:text-gray-800 p-0 h-auto font-normal px-2"
+                          onClick={handleDiamondChange}
+                        >
+                          Change
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Backing Type Selection */}
+                  {productcat?.backingOptions && (
+                    <div className="border mb-2 md:mb-4">
+                      <div className="flex items-center gap-3 py-1 bg-gray-100">
+                        <h2 className="text-lg px-2 font-medium text-gray-800">Explore More Options</h2>
+                        <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
+                          NEW
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between py-3 mx-2">
+                        <div className="flex items-center gap-3">
+                          <div className="w-6 h-6 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-gray-600">
+                              <path d="M8 2L6 4H10L8 2Z" fill="currentColor" />
+                              <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                              <path d="M8 14L6 12H10L8 14Z" fill="currentColor" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-700 font-medium">Backing Type : {selectedBacking}</span>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          className="text-gray-600 underline hover:text-gray-800 p-0 h-auto font-normal"
+                          onClick={handleBackingChange}
+                        >
+                          Change
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {productcat?.metalType && (
-                    <div className="mb-5">
+                    <div className="mb-2 md:mb-4">
                       <h3 className="text-gray-700 font-medium mb-2">
                         Metal Type : 18K {selectedMetal?.displayName || "Not selected"}
                       </h3>
@@ -321,7 +413,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.CaratWidth && (
-                    <div className={`mb-5 ${productcat?.CaratWidth ? "" : "hidden"}`}>
+                    <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
                       <h3 className="text-gray-700 font-medium z-0 mb-1">
                         Total Carat Weight : {selectedCarat?.displayWeight || "Not selected"}
                       </h3>

@@ -104,6 +104,8 @@ export const products = [
     hoverImage: "/jwel/2.avif",
     colors: [metalscolor[0].color, metalscolor[1].color],
     material: "18kt Gold",
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     GemStone: [
       {
         id: "fg-vs",
@@ -182,6 +184,8 @@ export const products = [
     productName: "Platinum Grace Ring",
     name: `${metalscolor[2].name} ${categories[1].name}`,
     Liked: false,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     GemStone: [
       {
         id: "fg-vs",
@@ -265,6 +269,8 @@ export const products = [
     productName: "Silver Heart Necklace",
     name: `${metalscolor[1].name} ${categories[2].name}`,
     Liked: true,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     price: 99,
     GemStone: [
       {
@@ -348,6 +354,8 @@ export const products = [
     productName: "Rose Gold Twist Ring",
     name: `${metalscolor[2].name} ${categories[0].name}`,
     Liked: false,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     price: 139,
     images: categories[0].image,
     productImg: ["/product/ring5.avif", "/product/ring2.png"],
@@ -431,6 +439,8 @@ export const products = [
     productName: "Minimalist Gold Bar Necklace",
     name: `${metalscolor[0].name} ${categories[1].name}`,
     Liked: true,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     GemStone: [
       {
         id: "fg-vs",
@@ -514,6 +524,8 @@ export const products = [
     productName: "Vintage Diamond Ring",
     name: `${metalscolor[1].name} ${categories[0].name}`,
     Liked: false,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     GemStone: [
       {
         id: "fg-vs",
@@ -597,6 +609,8 @@ export const products = [
     productName: "Pearl Earrings",
     name: `${metalscolor[2].name} ${categories[6].name}`,
     Liked: false,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     price: 49,
     images: categories[6].image,
     productImg: ["/product/ring.avif", "/product/girl.avif", "/product/ring2.png", "/product/ring3.avif", "/product/hand.webp", "/product/ring4.avif", "/product/ring5.avif"],
@@ -680,6 +694,8 @@ export const products = [
     productName: "White Gold Anklet",
     name: `${metalscolor[2].name} ${categories[7].name}`,
     Liked: false,
+    diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
+    backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     price: 89,
     GemStone: [
       {
