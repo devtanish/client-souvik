@@ -296,7 +296,7 @@ export default function EarringsPage() {
       `}</style>
       <div className="py-6 w-full flex-1">
         {/* Breadcrumb */}
-        <nav className="text-sm mb-2">
+        <nav className="text-sm mb-2 lg:mx-12 md:mx-10 mx-3">
           <div className="flex items-center gap-1">
             <Link href="/" className={`text-gray-400 hover:text-gray-700 text-md ${cormorantGaramond.className}`}>
               Shop All
@@ -307,17 +307,17 @@ export default function EarringsPage() {
         </nav>
 
         {/* Header */}
-        <div className="mb-5">
+        <div className="mb-5 lg:mx-12 md:mx-10 mx-3">
           <h1 className={`text-3xl font-bold uppercase mb-1 ${cormorantGaramond.className}`}>{activeCategory}</h1>
           <p className={`text-gray-600 ${cormorantGaramond.className}`}>
             Huggies, hoops, studs, and more. A whole lot more.
           </p>
         </div>
 
-        <div className="relative md:mb-4 mb-2">
+        <div className="relative md:mb-4 mb-2 lg:mx-12 md:mx-10 mx-3">
           <button
             onClick={() => scrollCategories("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-1 shadow-md"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
             aria-label="Scroll left"
           >
             <ChevronLeft size={20} />
@@ -366,7 +366,7 @@ export default function EarringsPage() {
 
           <button
             onClick={() => scrollCategories("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-1 shadow-md"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
             aria-label="Scroll right"
           >
             <ChevronRight size={20} />
@@ -377,13 +377,13 @@ export default function EarringsPage() {
         <div className="">
           <div
             className={cn(
-              "flex sticky bg-white md:top-32 top-19 z-10 flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0 -translate-x-3.5 md:w-full w-screen ",
+              "flex sticky bg-white md:top-32 top-19 z-10 flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0  w-full ",
               isMobile ? "py-2" : "border-t border-b py-3",
             )}
           >
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <button className={` text-md flex items-center justify-center gap-2 ml-4.5`}>
+                <button className={` text-md flex items-center justify-center gap-2 ml-3 md:ml-12.5`}>
                   <SlidersHorizontal size={16} />
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
@@ -693,7 +693,7 @@ export default function EarringsPage() {
               </SheetContent>
             </Sheet>
 
-            <div className="flex rounded-none items-center gap-4 justify-between lg:-translate-x-0 -translate-x-4">
+            <div className="flex rounded-none items-center gap-4 justify-between lg:-translate-x-0 mr-3 md:mr-12">
               <div className="flex items-center gap-2 ">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="flex items-center gap-1 text-md font-medium">
@@ -751,7 +751,7 @@ export default function EarringsPage() {
           {/* Product Grid */}
           <div
             className={cn(
-              "grid md:gap-4 gap-2",
+              "grid md:gap-4 gap-2 lg:mx-12 md:mx-10 mx-3",
               gridView === "four"
                 ? "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                 : gridView === "two"
