@@ -2,16 +2,16 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
-import { Info } from 'lucide-react'
+import { Info } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Hind } from 'next/font/google'
+import { Hind } from "next/font/google"
 import * as React from "react"
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { RingSizeGuideSidebar } from "@/components/ring-size-guide-sidebar"
 import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sidebar"
 import { Badge } from "@/components/ui/badge"
@@ -41,10 +41,10 @@ interface MetalType {
 }
 
 interface CaratWidth {
-  id: string | number,
-  weight: string,
-  displayWeight: string,
-  price: number,
+  id: string | number
+  weight: string
+  displayWeight: string
+  price: number
   url?: string
 }
 
@@ -68,7 +68,9 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedCarat, setSelectedCarat] = useState<CaratWidth | null>(productcat?.CaratWidth?.[0] || null)
   const [selectedMetal, setSelectedMetal] = useState<MetalType | null>(productcat?.metalType?.[0] || null)
   const [selectedDiamond, setSelectedDiamond] = useState<string>("Lab Grown Diamond")
-  const [selectedBacking, setSelectedBacking] = useState<string>("Push Back") 
+  const [selectedBacking, setSelectedBacking] = useState<string>("Push Back")
+  const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
+  const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
@@ -94,6 +96,47 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
     const currentIndex = productcat.backingOptions.indexOf(selectedBacking)
     const nextIndex = (currentIndex + 1) % productcat.backingOptions.length
     setSelectedBacking(productcat.backingOptions[nextIndex])
+  }
+
+  const getFilteredMetals = () => {
+    if (!productcat?.metalType) return []
+
+    let filtered = productcat.metalType
+
+    // Filter by main category first
+    if (selectedMetalCategory === "gold") {
+      filtered = filtered.filter(
+        (metal) =>
+          metal.displayName.toLowerCase().includes("gold") ||
+          metal.displayName.toLowerCase().includes("yellow") ||
+          metal.displayName.toLowerCase().includes("rose"),
+      )
+    } else if (selectedMetalCategory === "silver") {
+      filtered = filtered.filter(
+        (metal) =>
+          metal.displayName.toLowerCase().includes("silver") ||
+          metal.displayName.toLowerCase().includes("white") ||
+          metal.displayName.toLowerCase().includes("platinum"),
+      )
+    }
+
+    // Then filter by karat if selected
+    if (selectedKarat === "18kt") {
+      filtered = filtered.filter(
+        (metal) =>
+          metal.displayName.toLowerCase().includes("18") ||
+          (selectedMetalCategory === "gold" &&
+            metal.displayName.toLowerCase().includes("gold") &&
+            !metal.displayName.toLowerCase().includes("14")) ||
+          (selectedMetalCategory === "silver" &&
+            metal.displayName.toLowerCase().includes("silver") &&
+            !metal.displayName.toLowerCase().includes("14")),
+      )
+    } else if (selectedKarat === "14kt") {
+      filtered = filtered.filter((metal) => metal.displayName.toLowerCase().includes("14"))
+    }
+
+    return filtered
   }
 
   return (
@@ -229,6 +272,39 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     </div>
                   )}
 
+                  {/* Explore Gemstones Section */}
+                  {productcat?.diamondOptions && (
+                    <div className="border mb-2 md:mb-4">
+                      <div className="flex items-center gap-3 py-1 bg-gray-100">
+                        <h2 className="text-lg px-2 font-medium text-gray-800">Explore Gemstones</h2>
+                        <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
+                          NEW
+                        </Badge>
+                      </div>
+                      <div className="flex items-center py-3 justify-between">
+                        <div className="flex items-center gap-3 px-2">
+                          <div>
+                            <Image
+                              src={selectedGemstone?.url || "/svg/diamond.svg"}
+                              width={20}
+                              height={20}
+                              alt="diamond"
+                              className="w-6 h-6 rounded-full"
+                            />
+                          </div>
+                          <span className="text-gray-700 font-medium">{selectedDiamond}</span>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          className="text-gray-600 underline hover:text-gray-800 p-0 h-auto font-normal px-2"
+                          onClick={handleDiamondChange}
+                        >
+                          Change
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Explore More Options Section */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
@@ -287,10 +363,11 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                           {productcat?.GemStone?.map((option) => (
                             <div
                               key={option.id}
-                              className={`min-w-[80px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                ? "border-black bg-gray-100"
-                                : "border-gray-200 hover:border-gray-300"
-                                }`}
+                              className={`min-w-[80px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                selectedGemstone?.id === option.id
+                                  ? "border-black bg-gray-100"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
                               onClick={() => setSelectedGemstone(option)}
                             >
                               <Image
@@ -307,40 +384,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             </div>
                           ))}
                         </div>
-                      </div>
-                    </div>
-                  )}
-
-                  
-                  {/* Explore Gemstones Section */}
-                  {productcat?.diamondOptions && (
-                    <div className="border mb-2 md:mb-4">
-                      <div className="flex items-center gap-3 py-1 bg-gray-100">
-                        <h2 className="text-lg px-2 font-medium text-gray-800">Explore Gemstones</h2>
-                        <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
-                          NEW
-                        </Badge>
-                      </div>
-                      <div className="flex items-center py-3 justify-between">
-                        <div className="flex items-center gap-3 px-2">
-                          <div>
-                            <Image
-                              src={selectedGemstone?.url || "/svg/diamond.svg"}
-                              width={20}
-                              height={20}
-                              alt="diamond"
-                              className="w-6 h-6 rounded-full"
-                            />
-                          </div>
-                          <span className="text-gray-700 font-medium">{selectedDiamond}</span>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          className="text-gray-600 underline hover:text-gray-800 p-0 h-auto font-normal px-2"
-                          onClick={handleDiamondChange}
-                        >
-                          Change
-                        </Button>
                       </div>
                     </div>
                   )}
@@ -379,21 +422,95 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   {productcat?.metalType && (
                     <div className="mb-2 md:mb-4">
                       <h3 className="text-gray-700 font-medium mb-2">
-                        Metal Type : 18K {selectedMetal?.displayName || "Not selected"}
+                        Metal Type : {selectedMetal?.displayName || "Not selected"}
                       </h3>
+
+                      {/* Metal Type Sorting Buttons */}
+                      <div className="mb-3">
+                        {/* Main category buttons */}
+                        <div className="flex gap-2 mb-2">
+                          <Button
+                            variant={selectedMetalCategory === "gold" ? "default" : "outline"}
+                            size="sm"
+                            className="rounded-none text-xs"
+                            onClick={() => {
+                              setSelectedMetalCategory("gold")
+                              setSelectedKarat(null) // Reset karat selection when changing category
+                            }}
+                          >
+                            GOLD
+                          </Button>
+                          <Button
+                            variant={selectedMetalCategory === "silver" ? "default" : "outline"}
+                            size="sm"
+                            className="rounded-none text-xs"
+                            onClick={() => {
+                              setSelectedMetalCategory("silver")
+                              setSelectedKarat(null) // Reset karat selection when changing category
+                            }}
+                          >
+                            SILVER
+                          </Button>
+                        </div>
+
+                        {/* Conditional karat options */}
+                        {selectedMetalCategory === "gold" && (
+                          <div className="flex gap-2">
+                            <Button
+                              variant={selectedKarat === "18kt" ? "default" : "outline"}
+                              size="sm"
+                              className="rounded-none text-xs"
+                              onClick={() => setSelectedKarat("18kt")}
+                            >
+                              18kt
+                            </Button>
+                            <Button
+                              variant={selectedKarat === "14kt" ? "default" : "outline"}
+                              size="sm"
+                              className="rounded-none text-xs"
+                              onClick={() => setSelectedKarat("14kt")}
+                            >
+                              14kt
+                            </Button>
+                          </div>
+                        )}
+
+                        {selectedMetalCategory === "silver" && (
+                          <div className="flex gap-2">
+                            <Button
+                              variant={selectedKarat === "18kt" ? "default" : "outline"}
+                              size="sm"
+                              className="rounded-none text-xs"
+                              onClick={() => setSelectedKarat("18kt")}
+                            >
+                              18kt
+                            </Button>
+                            <Button
+                              variant={selectedKarat === "14kt" ? "default" : "outline"}
+                              size="sm"
+                              className="rounded-none text-xs"
+                              onClick={() => setSelectedKarat("14kt")}
+                            >
+                              14kt
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+
                       <div className="relative">
                         <div
                           ref={metalScrollRef}
                           className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
                           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                         >
-                          {productcat?.metalType?.map((option) => (
+                          {getFilteredMetals().map((option) => (
                             <div
                               key={option.id}
-                              className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedMetal?.id === option.id
-                                ? "border-black bg-gray-50"
-                                : "border-gray-200 hover:border-gray-300"
-                                }`}
+                              className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                selectedMetal?.id === option.id
+                                  ? "border-black bg-gray-50"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
                               onClick={() => setSelectedMetal(option)}
                             >
                               <Image
@@ -402,8 +519,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 width={100}
                                 height={100}
                                 alt="metal type"
-                              ></Image>
-
+                              />
                               <span className="text-xs text-center font-medium">{option.displayName}</span>
                             </div>
                           ))}
@@ -426,15 +542,16 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                           {productcat?.CaratWidth.map((option) => (
                             <div
                               key={option.id}
-                              className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedCarat?.id === option.id
-                                ? "border-black bg-gray-50"
-                                : "border-gray-200 hover:border-gray-300"
-                                }`}
+                              className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                selectedCarat?.id === option.id
+                                  ? "border-black bg-gray-50"
+                                  : "border-gray-200 hover:border-gray-300"
+                              }`}
                               onClick={() => setSelectedCarat(option)}
                             >
                               <Image
                                 className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center shadow-inner border`}
-                                src={'url' in option ? option?.url : "/placeholder.svg"}
+                                src={"url" in option ? option?.url : "/placeholder.svg"}
                                 width={100}
                                 height={100}
                                 alt="carat weight"
@@ -496,7 +613,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.bandWidth && (
-                    <div >
+                    <div>
                       <div className="mt-2.5 text-md font-medium">
                         <b>Band Width:</b> {activeBandWidth}
                       </div>

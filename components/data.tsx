@@ -159,7 +159,7 @@ export const products = [
     ],
     metalType: [
       { id: "white-gold", name: "white-gold", displayName: "White Gold", price: 0, url: "/Karet/14k-rose-gold.webp", color: "bg-amber-100" },
-      { id: "yellow-gold", name: "yellow-gold", displayName: "Yellow Gold",  url: "/Karet/2.webp", price: 200, color: "bg-amber-100" },
+      { id: "yellow-gold", name: "yellow-gold", displayName: "14kt Yellow silver",  url: "/Karet/2.webp", price: 200, color: "bg-amber-100" },
       { id: "rose-gold", name: "rose-gold", displayName: "Rose Gold",  url: "/Karet/14k-white-gold.webp", price: 150, color: "bg-orange-100" },
       { id: "platinum", name: "platinum", displayName: "Platinum",  url: "/Karet/18k-rose-gold.webp", price: 800, color: "bg-slate-100" },
     ],
