@@ -344,7 +344,7 @@ export default function EarringsPage() {
               >
                 <div
                   className={cn(
-                    "relative w-full aspect-square mb-2 overflow-hidden md:h-[400px] h-[300px] border-x border-y shadow-md",
+                    "relative w-full aspect-square mb-2 overflow-hidden md:h-[400px] h-[300px] shadow-md",
                     activeCategory === category.name ? "" : "",
                   )}
                 >
@@ -770,7 +770,7 @@ export default function EarringsPage() {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <Link href={`/shop/${product.name.toString()}`} key={product.id} className="group relative">
+                <Link target="_blank" href={`/shop/${product.name.toString()}`} key={product.id} className="group relative">
                   {/* Wishlist button */}
                   <button
                     className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
