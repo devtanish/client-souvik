@@ -40,14 +40,10 @@ export default function RootLayout({
           <Header />
           <Sidebar />
           <Tooltip />
-          <div className="">
-            {children}
-          </div>
-          <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
-
-          <Footer />
-          <main className="pt-20">{children}</main>
+          <main className="">{children}</main>
           <CartSidebar />
+          <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
+          <Footer />
         </CartProvider>
       </body>
     </html>

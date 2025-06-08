@@ -38,12 +38,12 @@ export default function Header() {
   }
 
   return (
-    <div className="fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-1.5 md:right-12 md:border-none bg-orange-200 md:bg-transparent">
+    <div className="fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none bg-white md:bg-transparent">
       <Link href={"/"}>
         <Image
           src={"/logo2.png"}
           alt="logo"
-          className="m-0 p-0 z-30 fixedmd:top-8 left-27 md:hidden transform cursor-pointer -translate-x-1/2"
+          className="m-0 p-0 z-30 fixed top-8 left-27 md:hidden transform cursor-pointer -translate-x-1/2"
           width={110}
           height={110}
         />
@@ -52,10 +52,10 @@ export default function Header() {
       <div className={`float-right md:hidden mt-0.5 gap-1.5 mr-2 inline-flex -translate-x-2  ${inter.className}`}>
         <ToggleSearch2 />
         <button onClick={handleWishlistClick} className="relative">
-          <LuHeart size={20} className="mt-2 mr-2" />
+          <LuHeart size={20} className="mt-0.5 mr-2" />
         </button>
         <button onClick={handleCartClick} className={`relative  ${inter.className}`}>
-          <SlHandbag size={20} className="mt-2" />
+          <SlHandbag size={20} className="mt-0.5" />
           {getCartCount() > 0 && (
             <Badge
               variant="destructive"

@@ -8,7 +8,7 @@ export default function ToggleSearch2() {
 
   return (
     <button onClick={() => setIsOpen(!isOpen)}>
-      <LuSearch size={20} className="mt-2 mr-2" />
+      <LuSearch size={20} className="mt-0.5 mr-2" />
     </button>
   )
 }

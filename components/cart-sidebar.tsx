@@ -15,14 +15,14 @@ const recommendedProducts = [
     id: "2",
     name: "Mini Hoop",
     price: 68,
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/jwel/1.avif",
     material: "14k Yellow Gold",
   },
   {
     id: "3",
     name: "Classic Chain",
     price: 95,
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/jwel/5.avif",
     material: "Sterling Silver",
   },
 ]
@@ -53,7 +53,7 @@ export default function CartSidebar() {
       <div className={`${inter.className} fixed inset-0 bg-black/50 z-40`} onClick={() => setIsCartOpen(false)} />
 
       {/* Sidebar */}
-      <div className={`fixed right-0 top-8 h-full w-full max-w-xl bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out ${inter.className}`}>
+      <div className={`fixed right-0 top-7 md:top-8 h-full w-full max-w-xl bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out ${inter.className}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-4 border-b">
@@ -300,7 +300,7 @@ export default function CartSidebar() {
                 </div>
               </div>
 
-              <Button className=" rounded-none w-full mt-4 bg-green-600 hover:bg-green-700 text-white">CHECKOUT</Button>
+              <Button className=" rounded-none w-full mt-4 bg-black hover:bg-gray-900 text-white">CHECKOUT</Button>
 
               <div className="text-xs text-center mt-2 text-gray-600">
                 4 payments of $42.00 with <strong>afterpay</strong> or <strong>Klarna.</strong>{" "}
