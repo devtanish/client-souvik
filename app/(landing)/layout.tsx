@@ -1,5 +1,4 @@
 import type React from "react"
-import { ThemeProvider } from "next-themes"
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
@@ -7,7 +6,9 @@ import Footer from "@/components/footer";
 import WhatsAppChatButton from "@/components/whatsapp-chat-button";
 import Sidebar from "@/components/sidebar";
 import Tooltip from "@/components/tooltip";
-import Header from "@/components/header";
+import { CartProvider } from "@/contexts/cart-context"
+import Header from "@/components/header"
+import CartSidebar from "@/components/cart-sidebar"
 
 export const metadata: Metadata = {
   title: "Earrings Collection | Raya Jewelry",
@@ -35,17 +36,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
-        <Header />
-        <Sidebar />
-        <Tooltip />
-        <div className="">
-          {children}
-        </div>
-        <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
+        <CartProvider>
+          <Header />
+          <Sidebar />
+          <Tooltip />
+          <div className="">
+            {children}
+          </div>
+          <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
 
-        <Footer />
-        </ThemeProvider>
+          <Footer />
+          <main className="pt-20">{children}</main>
+          <CartSidebar />
+        </CartProvider>
       </body>
     </html>
   );

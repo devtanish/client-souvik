@@ -7,6 +7,8 @@ import WhatsAppChatButton from "@/components/whatsapp-chat-button";
 import Sidebar from "@/components/sidebar";
 import Tooltip from "@/components/tooltip";
 import Header from "@/components/header";
+import CartSidebar from "@/components/cart-sidebar";
+import { CartProvider } from "@/contexts/cart-context";
 
 
 export const metadata: Metadata = {
@@ -34,15 +36,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <Sidebar />
-        <Tooltip />
-        <div className="">
-          {children}
-        </div>
-        <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
+        <CartProvider>
+          <Header />
+          <Sidebar />
+          <Tooltip />
+          <div className="">
+            {children}
+          </div>
+          <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
 
-        <Footer />
+          <Footer />
+          <main className="pt-20">{children}</main>
+          <CartSidebar />
+        </CartProvider>
       </body>
     </html>
   );

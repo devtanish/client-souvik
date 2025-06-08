@@ -8,6 +8,7 @@ import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Montserrat } from "next/font/google"
+import { useCart } from "@/contexts/cart-context"
 
 // Initialize the Cormorant Garamond font
 const cormorantGaramond = Cormorant_Garamond({
@@ -109,6 +110,9 @@ const shimmerAnimation = `
 `
 
 export default function EarringsPage() {
+
+  const  { addToCart } = useCart()
+
   const [activeCategory, setActiveCategory] = useState("Earrings")
   const [gridView, setGridView] = useState<"four" | "two" | "one">("four")
   const [priceRange, setPriceRange] = useState([0, 22000])
@@ -821,6 +825,7 @@ export default function EarringsPage() {
                       <button
                         className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
                         disabled={!product.bestSeller}
+                        onClick={() => addToCart({id: product.id.toString(), name: product.name, price: product.price, image: product.images, material: product.material, stone: product.stone})}
                       >
                         <SlHandbag size={16} />
                         ADD TO BAG
