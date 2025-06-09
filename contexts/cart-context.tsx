@@ -8,9 +8,18 @@ interface CartItem {
   price: number
   image: string
   material: string
+  quantity: number // Added missing quantity property
   stone?: string
   length?: string
-  quantity: number
+  GemStone?: { id: string; grade: string; price: number; url: string; description?: string }
+  bands?: { name: string; img: string }
+  bandWidth?: { name: string; img: string }
+  shape?: { id: number; name: string }
+  CaratWidth?: { id: string; weight: string; displayWeight: string; price: number; url?: string }
+  metalType?: { id: string; name: string; displayName: string; price: number; url: string; color: string }
+  diamond?: string
+  backingOption?: string
+  sizes?: number | string
 }
 
 interface WishlistItem {
