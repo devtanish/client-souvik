@@ -585,7 +585,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 key={index}
                                 className={cn(
                                   "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/10 sm:w-1/10 w-1/7",
+                                  " lg:w-1/8 sm:w-1/10 w-1/6",
                                   activeBand === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
                                 )}
                                 onClick={() => {
@@ -632,7 +632,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 key={index}
                                 className={cn(
                                   "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/10 sm:w-1/10 w-1/7",
+                                  " lg:w-1/8 sm:w-1/10 w-1/6",
                                   activeBandWidth === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
                                 )}
                                 onClick={() => {
@@ -679,7 +679,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 key={index}
                                 className={cn(
                                   "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/10 sm:w-1/10 w-1/7",
+                                  " lg:w-1/8 sm:w-1/10 w-1/6",
                                   activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
                                 )}
                                 onClick={() => {
@@ -688,7 +688,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 }}
                               >
                                 <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className} border h-6 w-7  text-center mt-6 ml-[1.6rem]`}>
+                                  <div className={`${oswald.className}  h-6 w-7  text-center mt-6 ml-[1.6rem] `}>
                                     {category}
                                   </div>
                                 </div>
@@ -726,7 +726,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 key={index}
                                 className={cn(
                                   "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/8 sm:w-1/10 w-1/6",
+                                  " lg:w-1/8 sm:w-1/10 w-1/5",
                                   activeLength === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
                                 )}
                                 onClick={() => {
