@@ -274,7 +274,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     <div className="mb-4">
                       <div className="mt-0 font-bold  text-xl flex">
                         Starting at{" "}
-                        <div className={`${oswald.className} text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
+                        <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                       </div>
 
                       <div className="mt-2.5 text-md ">
