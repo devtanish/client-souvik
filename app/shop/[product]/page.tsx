@@ -373,7 +373,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     <div className="mb-2 md:mb-4">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="text-gray-700 font-medium flex">
-                          Gemstone Quality : <div className="ml-1 ">{selectedGemstone?.grade || "Not selected"}</div>
+                          <div className="font-bold">Gemstone Quality :</div> <div className="ml-1 ">{selectedGemstone?.grade || "Not selected"}</div>
                         </h3>
                         <Tooltip>
                           <TooltipTrigger>
@@ -476,8 +476,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.metalType && (
                     <div className="mb-2 md:mb-4">
-                      <h3 className="text-gray-700 font-medium mb-2">
-                        Metal Type : {selectedMetal?.displayName || "Not selected"}
+                      <h3 className="text-gray-700 flex font-medium mb-2">
+                        <div className="font-bold mr-1">Metal Type </div>: {selectedMetal?.displayName || "Not selected"} 
                       </h3>
 
                       {/* Metal Type Sorting Buttons */}
@@ -585,8 +585,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.CaratWidth && (
                     <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
-                      <h3 className="text-gray-700 font-medium z-0 mb-1">
-                        Total Carat Weight : {selectedCarat?.displayWeight || "Not selected"}
+                      <h3 className="text-gray-700 font-medium z-0 mb-1 flex">
+                        <div className="font-bold mr-1">Total Carat Weight </div>: {selectedCarat?.displayWeight || "Not selected"}
                       </h3>
                       <div className="relative">
                         <div
