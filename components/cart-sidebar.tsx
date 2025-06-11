@@ -225,7 +225,7 @@ export default function CartSidebar() {
                 ) : (
                   <div className="space-y-4">
                     {wishlistItems.map((item) => (
-                      <div key={item.id} className="flex gap-4 p-3 border rounded">
+                      <div key={item.id} className="flex gap-4 p-3 border ">
                         <div className="w-16 h-16 bg-gray-100 rounded flex-shrink-0">
                           <Image
                             src={item.image || "/placeholder.svg"}

@@ -18,7 +18,7 @@ export default function LoginPopup({ onVerify, onClose }: LoginPopupProps) {
   const [rememberMe, setRememberMe] = useState(false)
 
   return (
-    <div className="relative w-full max-w-md rounded-none bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
+    <div className="relative w-screen max-w-sm rounded-none bg-white p-6 shadow-lg animate-in fade-in zoom-in duration-300">
       {/* Close button */}
       <button
         onClick={onClose}

@@ -7,6 +7,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import LoginPopup from "@/components/login-popup"
+import OtpPopup from "@/components/otp-popup"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
@@ -147,6 +149,32 @@ const menCategories: Category[] = [
 ]
 
 export default function Sidebar() {
+
+  const [showLoginPopup, setShowLoginPopup] = useState(false)
+  const [showOtpPopup, setShowOtpPopup] = useState(false)
+
+  const handleLoginClick = () => {
+    setShowLoginPopup(true)
+  } 
+
+  const handleVerifyClick = () => {
+    setShowLoginPopup(false)
+    setShowOtpPopup(true)
+  }
+
+  const handleOtpSubmit = () => {
+    setShowOtpPopup(false)
+    // Handle successful authentication here
+  }
+
+  const handleCloseLoginPopup = () => {
+    setShowLoginPopup(false)
+  }
+
+  const handleCloseOtpPopup = () => {
+    setShowOtpPopup(false)
+  }
+
   // State for active tab (Women or Men)
   const [currentCurrency, setCurrentCurrency] = useState<string>("USD")
   const pathname = usePathname()
@@ -176,6 +204,18 @@ export default function Sidebar() {
 
   return (
     <>
+    {(showLoginPopup || showOtpPopup) && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 backdrop-blur-sm transition-all">
+          <div
+            className={`transform transition-all duration-300 ease-in-out ${
+              showLoginPopup || showOtpPopup ? "scale-100 opacity-100" : "scale-95 opacity-0"
+            }`}
+          >
+            {showLoginPopup && <LoginPopup onVerify={handleVerifyClick} onClose={handleCloseLoginPopup} />}
+            {showOtpPopup && <OtpPopup onSubmit={handleOtpSubmit} onClose={handleCloseOtpPopup} />}
+          </div>
+        </div>
+      )}
       {/* Toggle Button - Always visible */}
       <button
         onClick={toggleSidebar}
@@ -353,7 +393,7 @@ export default function Sidebar() {
         </div>
         <div className="md:mb-8 mb-30 w-full flex flex-col items-center">
           <div className="mb-5">
-            <Button className="mb-1 w-[300px] text-lg rounded-none bg-[#01081c] justify-center mt-2">SIGN IN</Button>
+            <Button className="mb-1 w-[300px] text-lg rounded-none bg-[#01081c] justify-center mt-2" onClick={handleLoginClick}>SIGN IN</Button>
             <p className="text-[#01081c] text-center">
               New to Raya?{" "}
               <Link href={"sign-up"} className="text-[#01081c] underline cursor-pointer">

@@ -28,6 +28,18 @@ interface WishlistItem {
   price: number
   image: string
   material: string
+  quantity: number // Added missing quantity property
+  stone?: string
+  length?: string
+  GemStone?: { id: string; grade: string; price: number; url: string; description?: string }
+  bands?: { name: string; img: string }
+  bandWidth?: { name: string; img: string }
+  shape?: { id: number; name: string }
+  CaratWidth?: { id: string; weight: string; displayWeight: string; price: number; url?: string }
+  metalType?: { id: string; name: string; displayName: string; price: number; url: string; color: string }
+  diamond?: string
+  backingOption?: string
+  sizes?: number | string
 }
 
 interface CartContextType {
@@ -41,7 +53,7 @@ interface CartContextType {
   removeFromCart: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
   moveToWishlist: (id: string) => void
-  addToWishlist: (item: WishlistItem) => void
+  addToWishlist: (item: Omit<WishlistItem, "quantity">) => void
   removeFromWishlist: (id: string) => void
   getCartTotal: () => number
   getCartCount: () => number
@@ -89,19 +101,33 @@ export function CartProvider({ children }: { children: ReactNode }) {
         price: item.price,
         image: item.image,
         material: item.material,
+        quantity: item.quantity,
+        stone: item.stone,
+        length: item.length,
+        GemStone: item.GemStone,
+        bands: item.bands,
+        bandWidth: item.bandWidth,
+        shape: item.shape,
+        CaratWidth: item.CaratWidth,
+        metalType: item.metalType,
+        diamond: item.diamond,
+        backingOption: item.backingOption,
+        sizes: item.sizes,
       }
       addToWishlist(wishlistItem)
       removeFromCart(id)
     }
   }
 
-  const addToWishlist = (item: WishlistItem) => {
+  const addToWishlist = (item: Omit<WishlistItem, "quantity">) => {
     setWishlistItems((prev) => {
-      const existing = prev.find((wishlistItem) => wishlistItem.id === item.id)
-      if (!existing) {
-        return [...prev, item]
+      const existing = prev.find((cartItem) => cartItem.id === item.id)
+      if (existing) {
+        return prev.map((cartItem) =>
+          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem,
+        )
       }
-      return prev
+      return [...prev, { ...item, quantity: 1 }]
     })
   }
 

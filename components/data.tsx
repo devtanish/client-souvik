@@ -239,7 +239,7 @@ export const products = [
     ],
     price: 149,
     images: categories[1].image,
-    productImg: ["/product/ring2.png", "/product/hand.webp", "/product/ring3.avif"],
+    productImg: ["/product/ring2.png", "/product/hand.webp", "/product/ring3.avif", "/product/ring4.avif", "/product/ring5.avif", "/product/ring6.avif"],
     hoverImage: "/jwel/4.avif",
     colors: [metalscolor[2].color, metalscolor[1].color],
     material: "Platinum",

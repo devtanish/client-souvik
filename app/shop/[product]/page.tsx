@@ -3,16 +3,16 @@
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/contexts/cart-context"
-import { Info } from 'lucide-react'
+import { Info } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Hind } from 'next/font/google'
+import { Hind } from "next/font/google"
 import * as React from "react"
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { RingSizeGuideSidebar } from "@/components/ring-size-guide-sidebar"
 import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sidebar"
 import { Badge } from "@/components/ui/badge"
@@ -50,7 +50,7 @@ interface CaratWidth {
 }
 
 export default function Home({ params }: { params: Promise<{ product: string }> }) {
-  const { addToCart } = useCart()
+  const { addToCart, removeFromWishlist, addToWishlist } = useCart()
 
   const { product } = React.use(params)
 
@@ -192,6 +192,66 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       height="27"
                       onClick={() => {
                         setLiked(!liked)
+                        !liked
+                          ? addToWishlist({
+                              id: productcat?.id?.toString() || "",
+                              name: productcat?.title || "",
+                              price: productcat?.price || 0,
+                              image: productcat?.productImg?.[0] || "",
+                              material: selectedMetal?.displayName || "",
+                              sizes: activeSize || "",
+                              stone: activeStone || "",
+                              length: activeLength || "",
+                              GemStone: selectedGemstone
+                                ? {
+                                    id: selectedGemstone.id.toString(),
+                                    grade: selectedGemstone.grade,
+                                    price: selectedGemstone.price,
+                                    url: selectedGemstone.url,
+                                    description: selectedGemstone.description,
+                                  }
+                                : undefined,
+                              bands: activeBand
+                                ? {
+                                    name: activeBand,
+                                    img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                                  }
+                                : undefined,
+                              bandWidth: activeBandWidth
+                                ? {
+                                    name: activeBandWidth,
+                                    img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                                  }
+                                : undefined,
+                              shape: activeStone
+                                ? {
+                                    id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                                    name: activeStone,
+                                  }
+                                : undefined,
+                              CaratWidth: selectedCarat
+                                ? {
+                                    id: selectedCarat.id.toString(),
+                                    weight: selectedCarat.weight,
+                                    displayWeight: selectedCarat.displayWeight,
+                                    price: selectedCarat.price,
+                                    url: selectedCarat.url,
+                                  }
+                                : undefined,
+                              metalType: selectedMetal
+                                ? {
+                                    id: selectedMetal.id.toString(),
+                                    name: selectedMetal.displayName,
+                                    displayName: selectedMetal.displayName,
+                                    price: 0,
+                                    url: selectedMetal.url,
+                                    color: selectedMetal.color,
+                                  }
+                                : undefined,
+                              diamond: selectedDiamond || "",
+                              backingOption: selectedBacking || "",
+                            })
+                          : removeFromWishlist(productcat?.id?.toString() || "")
                       }}
                       viewBox="0 0 24 24"
                       fill={liked ? "red" : "white"}
