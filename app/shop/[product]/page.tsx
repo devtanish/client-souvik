@@ -369,19 +369,11 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {/* Explore More Options Section */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-lg font-medium text-gray-800 ">Explore More Options</h2>
-                      <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
-                        NEW
-                      </Badge>
-                    </div>
-                  </div>
                   {productcat?.GemStone && (
                     <div className="mb-2 md:mb-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-gray-700 font-medium">
-                          Gemstone Quality : {selectedGemstone?.grade || "Not selected"}
+                        <h3 className="text-gray-700 font-medium flex">
+                          Gemstone Quality : <div className="ml-1 ">{selectedGemstone?.grade || "Not selected"}</div>
                         </h3>
                         <Tooltip>
                           <TooltipTrigger>
@@ -748,13 +740,10 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 }}
                               >
                                 <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className}  h-6 w-7  text-center mt-6 ml-[1.6rem] `}>
+                                  <div className={`${oswald.className}  h-6 w-7  text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}>
                                     {category}
                                   </div>
                                 </div>
-                                {activeSize === category && (
-                                  <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                                )}
                               </div>
                             ))}
                           </div>
@@ -796,14 +785,12 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               >
                                 <div className={`relative h-20 w-20 ${oswald.className} `}>
                                   <div
-                                    className={`${oswald.className} border h-6 w-15 -translate-x-4 text-center mt-6 ml-[1.6rem]`}
+                                    className={`${oswald.className} h-6 w-15 -translate-x-4 text-center mt-6 ml-[2rem] md:ml-[2rem] ${activeLength === category && "border-black border"}`}
                                   >
                                     {category}
                                   </div>
                                 </div>
-                                {activeLength === category && (
-                                  <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                                )}
+                                
                               </div>
                             ))}
                           </div>
