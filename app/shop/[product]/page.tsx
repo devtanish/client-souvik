@@ -158,7 +158,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             <Image
                               src={img || "/placeholder.svg"}
                               alt="product"
-                              className="cursor-crosshair w-full h-full"
+                              className="cursor-crosshair "
                               width={800}
                               height={800}
                             />
@@ -172,14 +172,16 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
             </div>
             <div className="col-span-8 space-y-1.5 flex-wrap hidden lg:flex">
               {productcat?.productImg?.map((img, index) => (
-                <Image
-                  src={img || "/placeholder.svg"}
-                  alt="product"
-                  className="cursor-crosshair mr-2 md:size-130 xl:size-170 w-full "
-                  width={650}
-                  height={650}
-                  key={index}
-                />
+                <div className="w-1/2 pr-3" key={index}>
+                  <Image
+                    src={img || "/placeholder.svg"}
+                    alt="product"
+                    className="cursor-crosshair size-full"
+                    width={650}
+                    height={650}
+                    key={index}
+                  />
+                </div>
               ))}
             </div>
             <div className={` col-span-3 mx-2 md:mx-4 sticky`}>
@@ -324,13 +326,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => scrollCategories("right")}
-                          className="absolute -right-6 top-1/2 -translate-y-2/3 z-10 bg-white/80 rounded-full p-1 shadow-md opacity-15 lg:flex hidden"
-                          aria-label="Scroll right"
-                        >
-                          <ChevronRight size={20} />
-                        </button>
                       </div>
                     </div>
                   )}
@@ -785,7 +780,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               >
                                 <div className={`relative h-20 w-20 ${oswald.className} `}>
                                   <div
-                                    className={`${oswald.className} h-6 w-15 -translate-x-4 text-center mt-6 ml-[2rem] md:ml-[2rem] ${activeLength === category && "border-black border"}`}
+                                    className={`${oswald.className} h-6 w-15 -translate-x-2 text-center mt-6 ml-[2rem] md:ml-[2rem] ${activeLength === category && "border-black border"}`}
                                   >
                                     {category}
                                   </div>
