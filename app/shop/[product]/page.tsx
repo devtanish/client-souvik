@@ -641,19 +641,16 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 }}
                               >
                                 <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className}  h-7.5 w-7.5  text-center  mt-6 ml-[1.6rem]`}>
+                                  <div className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBand === category.name && "border-black border rounded-4xl "}`}>
                                     <Image
                                       src={category.img || "/placeholder.svg"}
                                       width={100}
                                       height={100}
                                       alt="band"
-                                      className="w-full rounded-2xl -translate-x-[0.1rem] border-1 h-full object-cover "
+                                      className="w-7.5 rounded-2xl h-7.5 object-cover translate-x-[0.15rem] translate-y-[0.15rem]"
                                     />
                                   </div>
                                 </div>
-                                {activeBand === category.name && (
-                                  <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                                )}
                               </div>
                             ))}
                           </div>
@@ -688,19 +685,16 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 }}
                               >
                                 <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className}  h-7.5 w-7.5  text-center  mt-6 ml-[1.6rem]`}>
+                                  <div className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBandWidth === category.name && "border-black border rounded-4xl "}`}>
                                     <Image
                                       src={category.img || "/placeholder.svg"}
                                       width={100}
                                       height={100}
                                       alt="band width"
-                                      className="w-full rounded-2xl -translate-x-[0.1rem] border-1 h-full object-cover "
+                                      className="w-7.5 rounded-2xl  h-7.5 object-cover translate-x-[0.15rem] translate-y-[0.15rem]"
                                     />
                                   </div>
                                 </div>
-                                {activeBandWidth === category.name && (
-                                  <div className="border-1 w-7 border-black transition-transform duration-300"></div>
-                                )}
                               </div>
                             ))}
                           </div>
