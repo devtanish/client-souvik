@@ -149,7 +149,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
           <div className="grid gap-1.5 grid-cols-1 md:grid-cols-3 lg:grid-cols-11 ">
             <div className="flex justify-center lg:hidden col-space-2 -mx-4 md:mx-0">
               <Carousel className="w-full max-w-none md:max-w-xs flex lg:hidden">
-                <CarouselContent className="border-2">
+                <CarouselContent className="border-none">
                   {productcat?.productImg?.map((img, index) => (
                     <CarouselItem key={index}>
                       <div className="">
