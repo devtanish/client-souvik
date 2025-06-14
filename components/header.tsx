@@ -25,7 +25,7 @@ export const questrial = Questrial({
 })
 
 export default function Header() {
-  const { setIsCartOpen, getCartCount, setActiveTab } = useCart()
+  const { setIsCartOpen, getCartCount, setActiveTab, getWishlistCount } = useCart()
 
   const handleCartClick = () => {
     setActiveTab("bag")
@@ -56,12 +56,20 @@ export default function Header() {
         </button>
         <button onClick={handleCartClick} className={`relative  ${inter.className}`}>
           <SlHandbag size={20} className="mt-0.5" />
+          {getWishlistCount() > 0 && (
+            <Badge
+              variant="destructive"
+              className={` ${inter.className} absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-xs`}
+            >
+              {getWishlistCount()} 
+            </Badge>
+          )}
           {getCartCount() > 0 && (
             <Badge
               variant="destructive"
               className={` ${inter.className} absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-xs`}
             >
-              {getCartCount()}
+              {getCartCount()} 
             </Badge>
           )}
         </button>

@@ -3,7 +3,7 @@
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/contexts/cart-context"
-import { Info } from "lucide-react"
+import { Info, ChevronUp, ChevronDown } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -57,6 +57,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const originalValue = product.replaceAll("%20", " ")
   const productcat = products.find((p) => p.name === originalValue)
 
+  const [isOpen, setIsOpen] = useState(true)
+  const [isGemstoneOpen, setIsGemstoneOpen] = useState(true)
+  const [isMetalTypeOpen, setIsMetalTypeOpen] = useState(false)
+  const [isBandOpen, setIsBandOpen] = useState(true)
+  const [isBandWidthOpen, setIsBandWidthOpen] = useState(true)
+  const [isSizeOpen, setIsSizeOpen] = useState(true)
+  const [isLengthOpen, setIsLengthOpen] = useState(true)
   const categoryScrollRef = useRef<HTMLDivElement>(null)
   const [activeStone, setActiveStone] = useState(productcat?.activeStones?.[0]?.name || "")
   const [activeSize, setActiveSize] = useState(productcat?.sizes?.[0] || "")
@@ -275,8 +282,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   {productcat?.shape && (
                     <div className="mb-4">
                       <div className="mt-0 font-bold  text-xl flex">
-                        Starting at{" "}
-                        <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
+                        Starting at <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                       </div>
 
                       <div className="mt-2.5 text-md ">
@@ -325,7 +331,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             ))}
                           </div>
                         </div>
-
                       </div>
                     </div>
                   )}
@@ -366,73 +371,597 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   {/* Explore More Options Section */}
                   {productcat?.GemStone && (
                     <div className="mb-2 md:mb-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-gray-700 font-medium flex">
-                          <div className="font-bold">Gemstone Quality :</div> <div className="ml-1 ">{selectedGemstone?.grade || "Not selected"}</div>
-                        </h3>
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Info className="w-4 h-4 text-gray-400" />
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p className="max-w-xs">
-                              {selectedGemstone?.description || selectedGemstone?.grade || "No description available"}
-                            </p>
-                          </TooltipContent>
-                        </Tooltip>
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsGemstoneOpen(!isGemstoneOpen)}
+                      >
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-gray-700 font-medium flex">
+                            <div className="font-bold">Gemstone Quality :</div>{" "}
+                            <div className="ml-1 ">{selectedGemstone?.grade || "Not selected"}</div>
+                          </h3>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Info className="w-4 h-4 text-gray-400" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="max-w-xs">
+                                {selectedGemstone?.description || selectedGemstone?.grade || "No description available"}
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsGemstoneOpen(!isGemstoneOpen)
+                          }}
+                        >
+                          {isGemstoneOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
                       </div>
 
-                      <div className="flex gap-2 mb-2">
-                        <Button
-                          variant={gemstoneType === "LAB GROWN" ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setGemstoneType("LAB GROWN")}
-                          className="rounded-none"
-                        >
-                          LAB GROWN
-                          <Badge variant="secondary" className="ml-2">
-                            -33%
-                          </Badge>
-                        </Button>
-                        <Button
-                          variant={gemstoneType === "NATURAL" ? "default" : "outline"}
-                          size="sm"
-                          onClick={() => setGemstoneType("NATURAL")}
-                          className="rounded-none"
-                        >
-                          NATURAL
-                        </Button>
-                      </div>
-
-                      <div className="relative -translate-x-1">
-                        <div
-                          ref={gemstoneScrollRef}
-                          className="flex gap-2 overflow-x-auto scrollbar-hide px-8"
-                          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                        >
-                          {productcat?.GemStone?.map((option) => (
-                            <div
-                              key={option.id}
-                              className={`min-w-[80px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
-                                selectedGemstone?.id === option.id
-                                  ? "border-black bg-gray-100"
-                                  : "border-gray-200 hover:border-gray-300"
-                              }`}
-                              onClick={() => setSelectedGemstone(option)}
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isGemstoneOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="pt-2">
+                          <div className="flex gap-2 mb-2">
+                            <Button
+                              variant={gemstoneType === "LAB GROWN" ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => setGemstoneType("LAB GROWN")}
+                              className="rounded-none"
                             >
-                              <Image
-                                className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 rounded-full mb-2 flex items-center justify-center shadow-inner"
-                                src={option.url || "/placeholder.svg"}
-                                width={100}
-                                height={100}
-                                alt="gemstone"
-                              ></Image>
-                              <span className="text-xs text-center font-medium">{option.grade}</span>
-                              <span className="text-xs text-gray-500">
-                                ${Math.round(option.price * (gemstoneType === "NATURAL" ? 1.5 : 1)).toLocaleString()}
-                              </span>
+                              LAB GROWN
+                              <Badge variant="secondary" className="ml-2">
+                                -33%
+                              </Badge>
+                            </Button>
+                            <Button
+                              variant={gemstoneType === "NATURAL" ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => setGemstoneType("NATURAL")}
+                              className="rounded-none"
+                            >
+                              NATURAL
+                            </Button>
+                          </div>
+
+                          <div className="relative -translate-x-1">
+                            <div
+                              ref={gemstoneScrollRef}
+                              className="flex gap-2 overflow-x-auto scrollbar-hide px-8"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {productcat?.GemStone?.map((option) => (
+                                <div
+                                  key={option.id}
+                                  className={`min-w-[80px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                    selectedGemstone?.id === option.id
+                                      ? "border-black bg-gray-100"
+                                      : "border-gray-200 hover:border-gray-300"
+                                  }`}
+                                  onClick={() => setSelectedGemstone(option)}
+                                >
+                                  <Image
+                                    className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 rounded-full mb-2 flex items-center justify-center shadow-inner"
+                                    src={option.url || "/placeholder.svg"}
+                                    width={100}
+                                    height={100}
+                                    alt="gemstone"
+                                  />
+                                  <span className="text-xs text-center font-medium">{option.grade}</span>
+                                  <span className="text-xs text-gray-500">
+                                    $
+                                    {Math.round(option.price * (gemstoneType === "NATURAL" ? 1.5 : 1)).toLocaleString()}
+                                  </span>
+                                </div>
+                              ))}
                             </div>
-                          ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {productcat?.metalType && (
+                    <div className="mb-2 md:mb-4">
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsMetalTypeOpen(!isMetalTypeOpen)}
+                      >
+                        <h3 className="text-gray-700 flex font-medium">
+                          <div className="font-bold mr-1">Metal Type </div>:{" "}
+                          {selectedMetal?.displayName || "Not selected"}
+                        </h3>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsMetalTypeOpen(!isMetalTypeOpen)
+                          }}
+                        >
+                          {isMetalTypeOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isMetalTypeOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="pt-2">
+                          {/* Metal Type Sorting Buttons */}
+                          <div className="mb-3">
+                            {/* Main category buttons */}
+                            <div className="flex gap-2 mb-2">
+                              <Button
+                                variant={selectedMetalCategory === "gold" ? "default" : "outline"}
+                                size="sm"
+                                className="rounded-none text-xs"
+                                onClick={() => {
+                                  setSelectedMetalCategory("gold")
+                                  setSelectedKarat(null)
+                                }}
+                              >
+                                GOLD
+                              </Button>
+                              <Button
+                                variant={selectedMetalCategory === "silver" ? "default" : "outline"}
+                                size="sm"
+                                className="rounded-none text-xs"
+                                onClick={() => {
+                                  setSelectedMetalCategory("silver")
+                                  setSelectedKarat(null)
+                                }}
+                              >
+                                SILVER
+                              </Button>
+                            </div>
+
+                            {/* Conditional karat options */}
+                            {selectedMetalCategory === "gold" && (
+                              <div className="flex gap-2">
+                                <Button
+                                  variant={selectedKarat === "18kt" ? "default" : "outline"}
+                                  size="sm"
+                                  className="rounded-none text-xs"
+                                  onClick={() => setSelectedKarat("18kt")}
+                                >
+                                  18kt
+                                </Button>
+                                <Button
+                                  variant={selectedKarat === "14kt" ? "default" : "outline"}
+                                  size="sm"
+                                  className="rounded-none text-xs"
+                                  onClick={() => setSelectedKarat("14kt")}
+                                >
+                                  14kt
+                                </Button>
+                              </div>
+                            )}
+
+                            {selectedMetalCategory === "silver" && (
+                              <div className="flex gap-2">
+                                <Button
+                                  variant={selectedKarat === "18kt" ? "default" : "outline"}
+                                  size="sm"
+                                  className="rounded-none text-xs"
+                                  onClick={() => setSelectedKarat("18kt")}
+                                >
+                                  18kt
+                                </Button>
+                                <Button
+                                  variant={selectedKarat === "14kt" ? "default" : "outline"}
+                                  size="sm"
+                                  className="rounded-none text-xs"
+                                  onClick={() => setSelectedKarat("14kt")}
+                                >
+                                  14kt
+                                </Button>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="relative">
+                            <div
+                              ref={metalScrollRef}
+                              className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {getFilteredMetals().map((option) => (
+                                <div
+                                  key={option.id}
+                                  className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                    selectedMetal?.id === option.id
+                                      ? "border-black bg-gray-50"
+                                      : "border-gray-200 hover:border-gray-300"
+                                  }`}
+                                  onClick={() => setSelectedMetal(option)}
+                                >
+                                  <Image
+                                    className={`w-12 h-12 ${option.color} rounded-full mb-2 flex items-center justify-center shadow-inner border`}
+                                    src={option.url || "/placeholder.svg"}
+                                    width={100}
+                                    height={100}
+                                    alt="metal type"
+                                  />
+                                  <span className="text-xs text-center font-medium">{option.displayName}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {productcat?.CaratWidth && (
+                    <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsOpen(!isOpen)}
+                      >
+                        <h3 className="text-gray-700 font-medium z-0 flex">
+                          <div className="font-bold mr-1">Total Carat Weight</div>:{" "}
+                          {selectedCarat?.displayWeight || "Not selected"}
+                        </h3>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsOpen(!isOpen)
+                          }}
+                        >
+                          {isOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="relative pt-2">
+                          <div
+                            ref={metalScrollRef}
+                            className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
+                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                          >
+                            {productcat?.CaratWidth.map((option) => (
+                              <div
+                                key={option.id}
+                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                  selectedCarat?.id === option.id
+                                    ? "border-black bg-gray-50"
+                                    : "border-gray-200 hover:border-gray-300"
+                                }`}
+                                onClick={() => setSelectedCarat(option)}
+                              >
+                                <Image
+                                  className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center shadow-inner border`}
+                                  src={"url" in option ? option?.url : "/placeholder.svg?height=100&width=100"}
+                                  width={100}
+                                  height={100}
+                                  alt="carat weight"
+                                />
+                                <span className="text-xs text-center font-medium">{option.displayWeight}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {productcat?.bands && (
+                    <div className="mb-2 md:mb-4">
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsBandOpen(!isBandOpen)}
+                      >
+                        <div className="text-md font-medium">
+                          <b>Band:</b> {activeBand}
+                        </div>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsBandOpen(!isBandOpen)
+                          }}
+                        >
+                          {isBandOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isBandOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="h-10.5">
+                          <div className="mx-3 -translate-y-4 relative">
+                            <div
+                              ref={categoryScrollRef}
+                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {productcat?.bands?.map((category, index) => (
+                                <div
+                                  key={index}
+                                  className={cn(
+                                    "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                                    " lg:w-1/8 sm:w-1/10 w-1/6",
+                                    activeBand === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                                  )}
+                                  onClick={() => {
+                                    console.log(category)
+                                    setActiveBand(category.name)
+                                  }}
+                                >
+                                  <div className={`relative h-20 w-20 ${oswald.className} `}>
+                                    <div
+                                      className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBand === category.name && "border-black border rounded-4xl "}`}
+                                    >
+                                      <Image
+                                        src={category.img || "/placeholder.svg"}
+                                        width={100}
+                                        height={100}
+                                        alt="band"
+                                        className="w-7.5 rounded-2xl h-7.5 object-cover translate-x-[0.15rem] translate-y-[0.15rem]"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {productcat?.bandWidth && (
+                    <div className="mb-2 md:mb-4">
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsBandWidthOpen(!isBandWidthOpen)}
+                      >
+                        <div className="text-md font-medium">
+                          <b>Band Width:</b> {activeBandWidth}
+                        </div>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsBandWidthOpen(!isBandWidthOpen)
+                          }}
+                        >
+                          {isBandWidthOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isBandWidthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="h-10.5">
+                          <div className="mx-3 -translate-y-4 relative">
+                            <div
+                              ref={categoryScrollRef}
+                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {productcat?.bandWidth?.map((category, index) => (
+                                <div
+                                  key={index}
+                                  className={cn(
+                                    "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                                    " lg:w-1/8 sm:w-1/10 w-1/6",
+                                    activeBandWidth === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                                  )}
+                                  onClick={() => {
+                                    console.log(category)
+                                    setActiveBandWidth(category.name)
+                                  }}
+                                >
+                                  <div className={`relative h-20 w-20 ${oswald.className} `}>
+                                    <div
+                                      className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBandWidth === category.name && "border-black border rounded-4xl "}`}
+                                    >
+                                      <Image
+                                        src={category.img || "/placeholder.svg"}
+                                        width={100}
+                                        height={100}
+                                        alt="band width"
+                                        className="w-7.5 rounded-2xl  h-7.5 object-cover translate-x-[0.15rem] translate-y-[0.15rem]"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {productcat?.sizes && (
+                    <div className={`mb-2 md:mb-4 ${productcat?.sizes ? "" : "hidden"}`}>
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsSizeOpen(!isSizeOpen)}
+                      >
+                        <div className="text-md">
+                          <b>Select Size:</b> {activeSize} inch
+                        </div>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsSizeOpen(!isSizeOpen)
+                          }}
+                        >
+                          {isSizeOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isSizeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="h-11">
+                          <div className="mx-3 -translate-y-4 relative">
+                            <div
+                              ref={categoryScrollRef}
+                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {productcat?.sizes?.map((category, index) => (
+                                <div
+                                  key={index}
+                                  className={cn(
+                                    "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                                    " lg:w-1/8 sm:w-1/10 w-1/6",
+                                    activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                                  )}
+                                  onClick={() => {
+                                    console.log(category)
+                                    setActiveSize(category)
+                                  }}
+                                >
+                                  <div className={`relative h-20 w-20 ${oswald.className} `}>
+                                    <div
+                                      className={`${oswald.className}  h-6 w-7  text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
+                                    >
+                                      {category}
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                            <button
+                              className="underline cursor-pointer -translate-y-3 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
+                              onClick={() => setIsSizeGuideOpen(true)}
+                            >
+                              size guide
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {productcat?.length && (
+                    <div className="mb-2 md:mb-4">
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsLengthOpen(!isLengthOpen)}
+                      >
+                        <div className="text-md">
+                          <b>Metal:</b> {activeLength} inches
+                        </div>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsLengthOpen(!isLengthOpen)
+                          }}
+                        >
+                          {isLengthOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isLengthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="h-11.5">
+                          <div className="mx-3 -translate-y-4 relative">
+                            <div
+                              ref={categoryScrollRef}
+                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {productcat?.length?.map((category, index) => (
+                                <div
+                                  key={index}
+                                  className={cn(
+                                    "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                                    " lg:w-1/8 sm:w-1/10 w-1/5",
+                                    activeLength === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                                  )}
+                                  onClick={() => {
+                                    console.log(category)
+                                    setActiveLength(category)
+                                  }}
+                                >
+                                  <div className={`relative h-20 w-20 ${oswald.className} `}>
+                                    <div
+                                      className={`${oswald.className} h-6 w-15 -translate-x-2 text-center mt-6 ml-[2rem] md:ml-[2rem] ${activeLength === category && "border-black border"}`}
+                                    >
+                                      {category}
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                            <button
+                              className="underline cursor-pointer -translate-y-5 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
+                              onClick={() => setIsNecklaceSizeGuideOpen(true)}
+                            >
+                              metal guide
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -465,331 +994,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         >
                           Change
                         </Button>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.metalType && (
-                    <div className="mb-2 md:mb-4">
-                      <h3 className="text-gray-700 flex font-medium mb-2">
-                        <div className="font-bold mr-1">Metal Type </div>: {selectedMetal?.displayName || "Not selected"} 
-                      </h3>
-
-                      {/* Metal Type Sorting Buttons */}
-                      <div className="mb-3">
-                        {/* Main category buttons */}
-                        <div className="flex gap-2 mb-2">
-                          <Button
-                            variant={selectedMetalCategory === "gold" ? "default" : "outline"}
-                            size="sm"
-                            className="rounded-none text-xs"
-                            onClick={() => {
-                              setSelectedMetalCategory("gold")
-                              setSelectedKarat(null) // Reset karat selection when changing category
-                            }}
-                          >
-                            GOLD
-                          </Button>
-                          <Button
-                            variant={selectedMetalCategory === "silver" ? "default" : "outline"}
-                            size="sm"
-                            className="rounded-none text-xs"
-                            onClick={() => {
-                              setSelectedMetalCategory("silver")
-                              setSelectedKarat(null) // Reset karat selection when changing category
-                            }}
-                          >
-                            SILVER
-                          </Button>
-                        </div>
-
-                        {/* Conditional karat options */}
-                        {selectedMetalCategory === "gold" && (
-                          <div className="flex gap-2">
-                            <Button
-                              variant={selectedKarat === "18kt" ? "default" : "outline"}
-                              size="sm"
-                              className="rounded-none text-xs"
-                              onClick={() => setSelectedKarat("18kt")}
-                            >
-                              18kt
-                            </Button>
-                            <Button
-                              variant={selectedKarat === "14kt" ? "default" : "outline"}
-                              size="sm"
-                              className="rounded-none text-xs"
-                              onClick={() => setSelectedKarat("14kt")}
-                            >
-                              14kt
-                            </Button>
-                          </div>
-                        )}
-
-                        {selectedMetalCategory === "silver" && (
-                          <div className="flex gap-2">
-                            <Button
-                              variant={selectedKarat === "18kt" ? "default" : "outline"}
-                              size="sm"
-                              className="rounded-none text-xs"
-                              onClick={() => setSelectedKarat("18kt")}
-                            >
-                              18kt
-                            </Button>
-                            <Button
-                              variant={selectedKarat === "14kt" ? "default" : "outline"}
-                              size="sm"
-                              className="rounded-none text-xs"
-                              onClick={() => setSelectedKarat("14kt")}
-                            >
-                              14kt
-                            </Button>
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="relative">
-                        <div
-                          ref={metalScrollRef}
-                          className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
-                          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                        >
-                          {getFilteredMetals().map((option) => (
-                            <div
-                              key={option.id}
-                              className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
-                                selectedMetal?.id === option.id
-                                  ? "border-black bg-gray-50"
-                                  : "border-gray-200 hover:border-gray-300"
-                              }`}
-                              onClick={() => setSelectedMetal(option)}
-                            >
-                              <Image
-                                className={`w-12 h-12 ${option.color} rounded-full mb-2 flex items-center justify-center shadow-inner border`}
-                                src={option.url || "/placeholder.svg"}
-                                width={100}
-                                height={100}
-                                alt="metal type"
-                              />
-                              <span className="text-xs text-center font-medium">{option.displayName}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.CaratWidth && (
-                    <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
-                      <h3 className="text-gray-700 font-medium z-0 mb-1 flex">
-                        <div className="font-bold mr-1">Total Carat Weight </div>: {selectedCarat?.displayWeight || "Not selected"}
-                      </h3>
-                      <div className="relative">
-                        <div
-                          ref={metalScrollRef}
-                          className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
-                          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                        >
-                          {productcat?.CaratWidth.map((option) => (
-                            <div
-                              key={option.id}
-                              className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
-                                selectedCarat?.id === option.id
-                                  ? "border-black bg-gray-50"
-                                  : "border-gray-200 hover:border-gray-300"
-                              }`}
-                              onClick={() => setSelectedCarat(option)}
-                            >
-                              <Image
-                                className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center shadow-inner border`}
-                                src={"url" in option ? option?.url : "/placeholder.svg"}
-                                width={100}
-                                height={100}
-                                alt="carat weight"
-                              />
-
-                              <span className="text-xs text-center font-medium">{option.displayWeight}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.bands && (
-                    <div>
-                      <div className="mt-2.5 text-md font-medium">
-                        <b>Band:</b> {activeBand}
-                      </div>
-                      <div className="h-10">
-                        <div className="mx-3 -translate-y-4 relative">
-                          <div
-                            ref={categoryScrollRef}
-                            className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                          >
-                            {productcat?.bands?.map((category, index) => (
-                              <div
-                                key={index}
-                                className={cn(
-                                  "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/8 sm:w-1/10 w-1/6",
-                                  activeBand === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                                )}
-                                onClick={() => {
-                                  console.log(category)
-                                  setActiveBand(category.name)
-                                }}
-                              >
-                                <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBand === category.name && "border-black border rounded-4xl "}`}>
-                                    <Image
-                                      src={category.img || "/placeholder.svg"}
-                                      width={100}
-                                      height={100}
-                                      alt="band"
-                                      className="w-7.5 rounded-2xl h-7.5 object-cover translate-x-[0.15rem] translate-y-[0.15rem]"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.bandWidth && (
-                    <div>
-                      <div className="mt-2.5 text-md font-medium">
-                        <b>Band Width:</b> {activeBandWidth}
-                      </div>
-                      <div className="h-10">
-                        <div className="mx-3 -translate-y-4 relative">
-                          <div
-                            ref={categoryScrollRef}
-                            className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                          >
-                            {productcat?.bandWidth?.map((category, index) => (
-                              <div
-                                key={index}
-                                className={cn(
-                                  "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/8 sm:w-1/10 w-1/6",
-                                  activeBandWidth === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                                )}
-                                onClick={() => {
-                                  console.log(category)
-                                  setActiveBandWidth(category.name)
-                                }}
-                              >
-                                <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBandWidth === category.name && "border-black border rounded-4xl "}`}>
-                                    <Image
-                                      src={category.img || "/placeholder.svg"}
-                                      width={100}
-                                      height={100}
-                                      alt="band width"
-                                      className="w-7.5 rounded-2xl  h-7.5 object-cover translate-x-[0.15rem] translate-y-[0.15rem]"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.sizes && (
-                    <div className={`${productcat?.sizes ? "" : "hidden"}`}>
-                      <div className="mt-2.5 text-md ">
-                        <b>Select Size:</b> {activeSize} inch
-                      </div>
-                      <div className="h-10">
-                        <div className="mx-3 -translate-y-4 relative">
-                          <div
-                            ref={categoryScrollRef}
-                            className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                          >
-                            {productcat?.sizes?.map((category, index) => (
-                              <div
-                                key={index}
-                                className={cn(
-                                  "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/8 sm:w-1/10 w-1/6",
-                                  activeSize === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                                )}
-                                onClick={() => {
-                                  console.log(category)
-                                  setActiveSize(category)
-                                }}
-                              >
-                                <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div className={`${oswald.className}  h-6 w-7  text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}>
-                                    {category}
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                          <button
-                            className="underline cursor-pointer -translate-y-3 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
-                            onClick={() => setIsSizeGuideOpen(true)}
-                          >
-                            size guide
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.length && (
-                    <div>
-                      <div className="mt-2.5 text-md ">
-                        <b>Metal:</b> {activeLength} inches
-                      </div>
-                      <div className="h-10">
-                        <div className="mx-3 -translate-y-4 relative">
-                          <div
-                            ref={categoryScrollRef}
-                            className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                          >
-                            {productcat?.length?.map((category, index) => (
-                              <div
-                                key={index}
-                                className={cn(
-                                  "flex-shrink-0 h-15 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  " lg:w-1/8 sm:w-1/10 w-1/5",
-                                  activeLength === category ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                                )}
-                                onClick={() => {
-                                  console.log(category)
-                                  setActiveLength(category)
-                                }}
-                              >
-                                <div className={`relative h-20 w-20 ${oswald.className} `}>
-                                  <div
-                                    className={`${oswald.className} h-6 w-15 -translate-x-2 text-center mt-6 ml-[2rem] md:ml-[2rem] ${activeLength === category && "border-black border"}`}
-                                  >
-                                    {category}
-                                  </div>
-                                </div>
-                                
-                              </div>
-                            ))}
-                          </div>
-                          <button
-                            className="underline cursor-pointer -translate-y-5 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
-                            onClick={() => setIsNecklaceSizeGuideOpen(true)}
-                          >
-                            metal guide
-                          </button>
-                        </div>
                       </div>
                     </div>
                   )}
