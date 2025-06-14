@@ -151,24 +151,26 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
   return (
     <TooltipProvider>
-      <div className="mt-18 md:mt-36 w-full mb-20">
+      <div className="mt-13 md:mt-28 lg:mt-36 w-full mb-20">
         <div className="md:mt-0 lg:mx-2.5 md:mx-6 mx-0">
           <div className="grid gap-1.5 grid-cols-1 md:grid-cols-3 lg:grid-cols-11 ">
-            <div className="flex justify-center lg:hidden col-space-2 -mx-4 md:mx-0">
-              <Carousel className="w-full max-w-none md:max-w-xs flex lg:hidden">
+          <div className="flex justify-center lg:hidden col-span-full -mx-4 md:mx-0 -mb-9 md:-mb-2 lg:mb-6">
+              <Carousel className="w-full max-w-2xl md:max-w-3xl flex lg:hidden">
                 <CarouselContent className="border-none">
                   {productcat?.productImg?.map((img, index) => (
                     <CarouselItem key={index}>
-                      <div className="">
-                        <Card className="border-none">
-                          <CardContent className=" border-none flex aspect-square items-center justify-center scale-115">
-                            <Image
-                              src={img || "/placeholder.svg"}
-                              alt="product"
-                              className="cursor-crosshair "
-                              width={800}
-                              height={800}
-                            />
+                      <div className="px-0 md:px-2">
+                        <Card className="border-none shadow-none">
+                          <CardContent className="border-none shadow-none flex items-center justify-center p-1">
+                            <div className="w-full aspect-[3/3] md:aspect-[4/3] flex items-center justify-center overflow-hidden ">
+                              <Image
+                                src={img || "/placeholder.svg"}
+                                alt="product"
+                                className="cursor-crosshair w-full h-full object-cover"
+                                width={800}
+                                height={600}
+                              />
+                            </div>
                           </CardContent>
                         </Card>
                       </div>
