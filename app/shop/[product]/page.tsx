@@ -151,7 +151,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
   return (
     <TooltipProvider>
-      <div className="mt-13 md:mt-28 lg:mt-36 w-full mb-20">
+      <div className="mt-13.5 md:mt-28 lg:mt-36 w-full mb-20">
         <div className="md:mt-0 lg:mx-2.5 md:mx-6 mx-0">
           <div className="grid gap-1.5 grid-cols-1 md:grid-cols-3 lg:grid-cols-11 ">
           <div className="flex justify-center lg:hidden col-span-full -mx-4 md:mx-0 -mb-9 md:-mb-2 lg:mb-6">
