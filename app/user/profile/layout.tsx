@@ -7,6 +7,7 @@ import Sidebar from "@/components/sidebar";
 import Tooltip from "@/components/tooltip";
 import Header from "@/components/header";
 import CartSidebar from "@/components/cart-sidebar";
+import Footer from "@/components/footer";
 import { CartProvider } from "@/contexts/cart-context";
 
 export const metadata: Metadata = {
@@ -39,13 +40,11 @@ export default function RootLayout({
           <Header />
           <Sidebar />
           <Tooltip />
-          <div className="">
-            {children}
-          </div>
           <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
 
           <main className="pt-20">{children}</main>
           <CartSidebar />
+          <Footer/>
         </CartProvider>
       </body>
     </html>
