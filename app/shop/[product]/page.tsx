@@ -18,6 +18,7 @@ import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sideb
 import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { products } from "./../../../components/data"
+import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
 
 const oswald = Hind({
   subsets: ["latin"],
@@ -28,10 +29,16 @@ const oswald = Hind({
 // Type definitions for better type safety
 interface GemStone {
   id: string | number
+  name?: string
   grade: string
   price: number
   url: string
   description?: string
+  rating?: number
+  features?: string[]
+  origin?: string
+  clarity?: string
+  cut?: string
 }
 
 interface MetalType {
@@ -81,6 +88,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedBacking, setSelectedBacking] = useState<string>("Push Back")
   const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
   const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
+  const [isGemstoneExplorerOpen, setIsGemstoneExplorerOpen] = useState(false)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
@@ -92,13 +100,14 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
     }
   }
 
-
   const handleDiamondChange = () => {
-    if (!productcat?.diamondOptions) return
+    setIsGemstoneExplorerOpen(true)
+  }
 
-    const currentIndex = productcat.diamondOptions.indexOf(selectedDiamond)
-    const nextIndex = (currentIndex + 1) % productcat.diamondOptions.length
-    setSelectedDiamond(productcat.diamondOptions[nextIndex])
+  const handleGemstoneSelect = (gemstone: GemStone) => {
+    setSelectedGemstone(gemstone)
+    setSelectedDiamond(gemstone.name || gemstone.grade)
+    setIsGemstoneExplorerOpen(false)
   }
 
   const handleBackingChange = () => {
@@ -155,7 +164,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
       <div className="mt-13.5 md:mt-28 lg:mt-36 w-full mb-20">
         <div className="md:mt-0 lg:mx-2.5 md:mx-6 mx-0">
           <div className="grid gap-1.5 grid-cols-1 md:grid-cols-3 lg:grid-cols-11 ">
-          <div className="flex justify-center lg:hidden col-span-full -mx-4 md:mx-0 -mb-9 md:-mb-2 lg:mb-6">
+            <div className="flex justify-center lg:hidden col-span-full -mx-4 md:mx-0 -mb-9 md:-mb-2 lg:mb-6">
               <Carousel className="w-full max-w-2xl md:max-w-3xl flex lg:hidden">
                 <CarouselContent className="border-none">
                   {productcat?.productImg?.map((img, index) => (
@@ -1219,6 +1228,25 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
         {/* Necklace Size Guide Sidebar (Second size guide - new) */}
         <NecklaceSizeGuideSidebar isOpen={isNecklaceSizeGuideOpen} onClose={() => setIsNecklaceSizeGuideOpen(false)} />
+
+        {/* Gemstone Explorer Tab */}
+        <GemstoneExplorerTab
+          isOpen={isGemstoneExplorerOpen}
+          onClose={() => setIsGemstoneExplorerOpen(false)}
+          gemstones={
+            productcat?.GemStone?.map((stone) => ({
+              ...stone,
+              name: stone.grade, // Use grade as name if name doesn't exist
+              rating: 4, // Default rating
+              features: ["High Quality", "Certified"], // Default features
+              origin: "Laboratory", // Default origin
+              clarity: stone.grade, // Use grade as clarity
+              cut: "Excellent", // Default cut
+            })) || []
+          }
+          onSelect={handleGemstoneSelect}
+          selectedGemstone={selectedGemstone}
+        />
       </div>
     </TooltipProvider>
   )
