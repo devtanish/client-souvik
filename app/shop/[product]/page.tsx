@@ -89,6 +89,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
   const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
   const [isGemstoneExplorerOpen, setIsGemstoneExplorerOpen] = useState(false)
+  const [isShapeOpen, setIsShapeOpen] = useState(true)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
@@ -104,9 +105,9 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
     setIsGemstoneExplorerOpen(true)
   }
 
-  const handleGemstoneSelect = (gemstone: GemStone) => {
-    setSelectedGemstone(gemstone)
-    setSelectedDiamond(gemstone.name || gemstone.grade)
+  const handleGemstoneSelect = (gemStone: GemStone) => {
+    setSelectedGemstone(gemStone)
+    setSelectedDiamond(gemStone.name || gemStone.grade)
     setIsGemstoneExplorerOpen(false)
   }
 
@@ -293,54 +294,81 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                 <div>
                   {productcat?.shape && (
                     <div className="mb-4">
-                      <div className="mt-0 font-bold  text-xl flex">
+                      <div className="mt-0 font-bold text-xl flex">
                         Starting at <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                       </div>
 
-                      <div className="mt-2.5 text-md ">
-                        <b>Shape:</b> {activeStone}
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1 mt-2.5"
+                        onClick={() => setIsShapeOpen(!isShapeOpen)}
+                      >
+                        <div className="text-md">
+                          <b>Shape:</b> {activeStone}
+                        </div>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsShapeOpen(!isShapeOpen)
+                          }}
+                        >
+                          {isShapeOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
                       </div>
-                      <div className=" h-10">
-                        <div className="mx-3 -translate-y-4 relative">
-                          <button
-                            onClick={() => scrollCategories("left")}
-                            className="absolute -left-5 top-1/2 -translate-y-2/3 -translate-x-2 z-10 bg-white/80 rounded-full p-1 shadow-md opacity-15 lg:flex hidden"
-                            aria-label="Scroll left"
-                          >
-                            <ChevronLeft size={20} />
-                          </button>
 
-                          <div
-                            ref={categoryScrollRef}
-                            className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                          >
-                            {productcat?.activeStones?.map((category, index) => (
-                              <div
-                                key={index}
-                                className={cn(
-                                  "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                  "lg:w-1/10 sm:w-1/10 w-1/7",
-                                  activeStone === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
-                                )}
-                                onClick={() => {
-                                  console.log(category.name)
-                                  setActiveStone(category.name)
-                                }}
-                              >
-                                <div className={`relative h-20 w-20`}>
-                                  <Image
-                                    src={category.element || "/placeholder.svg"}
-                                    alt={category.name}
-                                    fill
-                                    className={`  scale-40`}
-                                  />
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isShapeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className=" h-10">
+                          <div className="mx-3 -translate-y-4 relative">
+                            <button
+                              onClick={() => scrollCategories("left")}
+                              className="absolute -left-5 top-1/2 -translate-y-2/3 -translate-x-2 z-10 bg-white/80 rounded-full p-1 shadow-md opacity-15 lg:flex hidden"
+                              aria-label="Scroll left"
+                            >
+                              <ChevronLeft size={20} />
+                            </button>
+
+                            <div
+                              ref={categoryScrollRef}
+                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                            >
+                              {productcat?.activeStones?.map((category, index) => (
+                                <div
+                                  key={index}
+                                  className={cn(
+                                    "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
+                                    "lg:w-1/10 sm:w-1/10 w-1/7",
+                                    activeStone === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
+                                  )}
+                                  onClick={() => {
+                                    console.log(category.name)
+                                    setActiveStone(category.name)
+                                  }}
+                                >
+                                  <div className={`relative h-20 w-20`}>
+                                    <Image
+                                      src={category.element || "/placeholder.svg"}
+                                      alt={category.name}
+                                      fill
+                                      className={`  scale-40`}
+                                    />
+                                  </div>
+                                  {activeStone === category.name && (
+                                    <div className="border-1 w-7 border-black transition-transform duration-300 -translate-y-4.5"></div>
+                                  )}
                                 </div>
-                                {activeStone === category.name && (
-                                  <div className="border-1 w-7 border-black transition-transform duration-300 -translate-y-4.5"></div>
-                                )}
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
