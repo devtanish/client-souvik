@@ -2,7 +2,6 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
-import { ImprovedGemstoneModal } from "@/components/gemstone-comparison-modal"
 import { useCart } from "@/contexts/cart-context"
 import { Info, ChevronUp, ChevronDown } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
@@ -83,9 +82,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
   const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
 
-  // New state for gemstone comparison modal
-  const [isGemstoneModalOpen, setIsGemstoneModalOpen] = useState(false)
-
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
 
@@ -98,8 +94,11 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
 
   const handleDiamondChange = () => {
-    // Open the gemstone comparison modal instead of just cycling through options
-    setIsGemstoneModalOpen(true)
+    if (!productcat?.diamondOptions) return
+
+    const currentIndex = productcat.diamondOptions.indexOf(selectedDiamond)
+    const nextIndex = (currentIndex + 1) % productcat.diamondOptions.length
+    setSelectedDiamond(productcat.diamondOptions[nextIndex])
   }
 
   const handleBackingChange = () => {
@@ -1215,15 +1214,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
           </div>
         </div>
 
-        <ImprovedGemstoneModal
-          isOpen={isGemstoneModalOpen}
-          onClose={() => setIsGemstoneModalOpen(false)}
-          gemstones={productcat?.GemStone || []}
-          selectedGemstone={selectedGemstone}
-          onSelectGemstone={setSelectedGemstone}
-          gemstoneType={gemstoneType}
-          onGemstoneTypeChange={setGemstoneType}
-        />
         {/* Ring Size Guide Sidebar (First size guide - unchanged) */}
         <RingSizeGuideSidebar isOpen={isSizeGuideOpen} onClose={() => setIsSizeGuideOpen(false)} />
 
