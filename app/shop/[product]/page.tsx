@@ -64,13 +64,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const originalValue = product.replaceAll("%20", " ")
   const productcat = products.find((p) => p.name === originalValue)
 
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [isGemstoneOpen, setIsGemstoneOpen] = useState(true)
   const [isMetalTypeOpen, setIsMetalTypeOpen] = useState(false)
-  const [isBandOpen, setIsBandOpen] = useState(true)
-  const [isBandWidthOpen, setIsBandWidthOpen] = useState(true)
-  const [isSizeOpen, setIsSizeOpen] = useState(true)
-  const [isLengthOpen, setIsLengthOpen] = useState(true)
+  const [isBandOpen, setIsBandOpen] = useState(false)
+  const [isBandWidthOpen, setIsBandWidthOpen] = useState(false)
+  const [isSizeOpen, setIsSizeOpen] = useState(false)
+  const [isLengthOpen, setIsLengthOpen] = useState(false)
   const categoryScrollRef = useRef<HTMLDivElement>(null)
   const [activeStone, setActiveStone] = useState(productcat?.activeStones?.[0]?.name || "")
   const [activeSize, setActiveSize] = useState(productcat?.sizes?.[0] || "")
@@ -513,6 +513,70 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     </div>
                   )}
 
+                  {productcat?.CaratWidth && (
+                    <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
+                      {/* Title with Toggle Button */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer mb-1"
+                        onClick={() => setIsOpen(!isOpen)}
+                      >
+                        <h3 className="text-gray-700 font-medium z-0 flex">
+                          <div className="font-bold mr-1">Total Carat Weight</div>:{" "}
+                          {selectedCarat?.displayWeight || "Not selected"}
+                        </h3>
+                        <button
+                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsOpen(!isOpen)
+                          }}
+                        >
+                          {isOpen ? (
+                            <ChevronUp className="w-5 h-5 text-gray-600" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-600" />
+                          )}
+                        </button>
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="relative pt-2">
+                          <div
+                            ref={metalScrollRef}
+                            className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
+                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                          >
+                            {productcat?.CaratWidth.map((option) => (
+                              <div
+                                key={option.id}
+                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                  selectedCarat?.id === option.id
+                                    ? "border-black bg-gray-50"
+                                    : "border-gray-200 hover:border-gray-300"
+                                }`}
+                                onClick={() => setSelectedCarat(option)}
+                              >
+                                <Image
+                                  className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center shadow-inner border`}
+                                  src={"url" in option ? option?.url : "/placeholder.svg?height=100&width=100"}
+                                  width={100}
+                                  height={100}
+                                  alt="carat weight"
+                                />
+                                <span className="text-xs text-center font-medium">{option.displayWeight}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {productcat?.metalType && (
                     <div className="mb-2 md:mb-4">
                       {/* Title with Toggle Button */}
@@ -645,70 +709,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 </div>
                               ))}
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {productcat?.CaratWidth && (
-                    <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
-                      {/* Title with Toggle Button */}
-                      <div
-                        className="flex items-center justify-between cursor-pointer mb-1"
-                        onClick={() => setIsOpen(!isOpen)}
-                      >
-                        <h3 className="text-gray-700 font-medium z-0 flex">
-                          <div className="font-bold mr-1">Total Carat Weight</div>:{" "}
-                          {selectedCarat?.displayWeight || "Not selected"}
-                        </h3>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setIsOpen(!isOpen)
-                          }}
-                        >
-                          {isOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
-                      </div>
-
-                      {/* Collapsible Content */}
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <div className="relative pt-2">
-                          <div
-                            ref={metalScrollRef}
-                            className="flex gap-2 overflow-x-auto scrollbar-hide px-1"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                          >
-                            {productcat?.CaratWidth.map((option) => (
-                              <div
-                                key={option.id}
-                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
-                                  selectedCarat?.id === option.id
-                                    ? "border-black bg-gray-50"
-                                    : "border-gray-200 hover:border-gray-300"
-                                }`}
-                                onClick={() => setSelectedCarat(option)}
-                              >
-                                <Image
-                                  className={`w-12 h-12 rounded-full mb-2 flex items-center justify-center shadow-inner border`}
-                                  src={"url" in option ? option?.url : "/placeholder.svg?height=100&width=100"}
-                                  width={100}
-                                  height={100}
-                                  alt="carat weight"
-                                />
-                                <span className="text-xs text-center font-medium">{option.displayWeight}</span>
-                              </div>
-                            ))}
                           </div>
                         </div>
                       </div>
@@ -942,7 +942,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         onClick={() => setIsLengthOpen(!isLengthOpen)}
                       >
                         <div className="text-md">
-                          <b>Metal:</b> {activeLength} inches
+                          <b>Select Length:</b> {activeLength} inches
                         </div>
                         <button
                           className="p-1 hover:bg-gray-100 rounded-full transition-colors"
