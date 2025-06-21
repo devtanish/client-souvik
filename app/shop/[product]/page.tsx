@@ -89,7 +89,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
   const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
   const [isGemstoneExplorerOpen, setIsGemstoneExplorerOpen] = useState(false)
-  const [isShapeOpen, setIsShapeOpen] = useState(true)
+  const [isShapeOpen, setIsShapeOpen] = useState(false)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
