@@ -1,5 +1,6 @@
 "use client"
 
+import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -210,7 +211,7 @@ export function GemstoneExplorerTab({
 
           {/* Gemstone Grid */}
           <div className="p-6 overflow-y-auto max-h-[60vh]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {sortedGemstones.map((gemstone) => (
                 <Card
                   key={gemstone.id}
@@ -219,7 +220,7 @@ export function GemstoneExplorerTab({
                   }`}
                   onClick={() => onSelect(gemstone)}
                 >
-                  <CardContent className="p-6">
+                  <CardContent className="p-1 px-5">
                     <div className="flex items-center justify-between mb-4">
                       <Image
                         src={gemstone.url || "/placeholder.svg"}
@@ -228,47 +229,41 @@ export function GemstoneExplorerTab({
                         height={60}
                         className="rounded-full border-1 border-gray-200"
                       />
-                      <div className="text-right">
-                        <div className="text-lg font-bold text-gray-900">${gemstone.price.toLocaleString()}</div>
-                        {gemstone.rating && (
-                          <div className="flex items-center gap-1 mt-1">{renderStars(gemstone.rating)}</div>
-                        )}
+                      <div>
+                        <Checkbox id="checkbox" className="size-6 rounded-none" checked={selectedGemstone?.id === gemstone.id} onChange={() => onSelect(gemstone)} />
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <h3 className="font-bold text-lg text-gray-900">{gemstone.name || gemstone.grade}</h3>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-gray-700">{gemstone.grade}</span>
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Info className="w-4 h-4 text-gray-400" />
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <div className="max-w-xs space-y-1">
-                              <p>
-                                <strong>Origin:</strong> {gemstone.origin || "Not specified"}
-                              </p>
-                              <p>
-                                <strong>Clarity:</strong> {gemstone.clarity || "Not specified"}
-                              </p>
-                              <p>
-                                <strong>Cut:</strong> {gemstone.cut || "Not specified"}
-                              </p>
-                            </div>
-                          </TooltipContent>
-                        </Tooltip>
-                      </div>
 
                       <p className="text-sm text-gray-600 line-clamp-2">{gemstone.description}</p>
 
                       {gemstone.features && (
                         <div className="flex flex-wrap gap-1 mt-3">
-                          {gemstone.features.slice(0, 2).map((feature, index) => (
-                            <Badge key={index} variant="secondary" className="text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
+                          <div className=" flex">
+                            know more
+                            <div className="mt-1 ml-1">
+                              <Tooltip>
+                                <TooltipTrigger>
+                                  <Info className="w-4 h-4 text-gray-400" />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <div className="max-w-xs space-y-1">
+                                    <p>
+                                      <strong>Origin:</strong> {gemstone.origin || "Not specified"}
+                                    </p>
+                                    <p>
+                                      <strong>Clarity:</strong> {gemstone.clarity || "Not specified"}
+                                    </p>
+                                    <p>
+                                      <strong>Cut:</strong> {gemstone.cut || "Not specified"}
+                                    </p>
+                                  </div>
+                                </TooltipContent>
+                              </Tooltip>
+                            </div>
+                          </div>
                           {gemstone.features.length > 2 && (
                             <Badge variant="outline" className="text-xs">
                               +{gemstone.features.length - 2} more

@@ -64,6 +64,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const originalValue = product.replaceAll("%20", " ")
   const productcat = products.find((p) => p.name === originalValue)
 
+  const [isShapeOpen, setIsShapeOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isGemstoneOpen, setIsGemstoneOpen] = useState(false)
   const [isMetalTypeOpen, setIsMetalTypeOpen] = useState(false)
@@ -89,7 +90,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
   const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
   const [isGemstoneExplorerOpen, setIsGemstoneExplorerOpen] = useState(false)
-  const [isShapeOpen, setIsShapeOpen] = useState(false)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
