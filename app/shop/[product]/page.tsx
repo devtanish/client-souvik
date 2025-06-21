@@ -65,7 +65,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const productcat = products.find((p) => p.name === originalValue)
 
   const [isOpen, setIsOpen] = useState(false)
-  const [isGemstoneOpen, setIsGemstoneOpen] = useState(true)
+  const [isGemstoneOpen, setIsGemstoneOpen] = useState(false)
   const [isMetalTypeOpen, setIsMetalTypeOpen] = useState(false)
   const [isBandOpen, setIsBandOpen] = useState(false)
   const [isBandWidthOpen, setIsBandWidthOpen] = useState(false)
