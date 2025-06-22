@@ -107,41 +107,40 @@ export const products = [
     diamondOptions :["Lab Grown Diamond", "Natural Diamond", "Moissanite"],
     backingOptions :["Push Back", "Screw Back", "Lever Back", "French Wire"],
     GemStone: [
-      {
-        id: "fg-vs",
-        grade: "F-G, VS",
-        url: "/gemStone/D-Round-Faceted-GVS2.webp",
-        price: 2500,
-        description: "Excellent quality with near colorless grade and very slight inclusions",
-      },
-      {
-        id: "k-i3",
-        grade: "K, I3",
-        url: "/gemStone/D-Round-Faceted-GVS2.webp",
-        price: 800,
-        description: "Good value option with faint yellow tint and visible inclusions",
-      },
-      {
-        id: "ij-i1i2",
-        grade: "I-J, I1-I2",
-        price: 1200,
-        url: "/gemStone/D-Round-Faceted-GVS2.webp",
-        description: "Near colorless with slight inclusions visible to naked eye",
-      },
-      {
-        id: "h-si2",
-        grade: "H, SI2",
-        price: 1800,
-        url: "/gemStone/D-Round-Faceted-GVS2.webp",
-        description: "Near colorless with slight inclusions visible under magnification",
-      },
-      {
-        id: "g-vs2",
-        grade: "G, VS2",
-        price: 2200,
-        url: "/gemStone/D-Round-Faceted-GVS2.webp",
-        description: "Near colorless with very slight inclusions under magnification",
-      },
+      { id: "lab-grown", grade: "lovada", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2000, description: "A timeless choice with subtle elegance" },
+      { id: "moissanite", grade: "moissanite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3200, description: "Perfect for modern ethical jewelry" },
+      { id: "natural", grade: "natural", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3500, description: "Exceptional brilliance with unmatched clarity" },
+      { id: "lab-grown-ruby", grade: "lab-grown-ruby", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3500, description: "A timeless choice with subtle elegance" },
+      { id: "lab-grown-sapphire", grade: "lab-grown-sapphire", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3000, description: "Exceptional brilliance with unmatched clarity" },
+      { id: "lab-grown-alexandrite", grade: "lab-grown-alexandrite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1500, description: "Luxurious appeal with refined craftsmanship" },
+      { id: "lab-grown-spinel", grade: "lab-grown-spinel", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1800, description: "Luxurious appeal with refined craftsmanship" },
+      { id: "lab-grown-topaz", grade: "lab-grown-topaz", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1800, description: "Rich in color and responsibly sourced" },
+      { id: "lab-grown-amethyst", grade: "lab-grown-amethyst", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2000, description: "Perfect for modern ethical jewelry" },
+      { id: "lab-grown-citrine", grade: "lab-grown-citrine", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3000, description: "Unique hue with high transparency" },
+      { id: "lab-opal", grade: "lab-opal", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2000, description: "Natural beauty enhanced with modern science" },
+      { id: "lab-grown-morganite", grade: "lab-grown-morganite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1500, description: "Lab-crafted to mimic the finest gems" },
+      { id: "diamond", grade: "diamond", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3500, description: "Unique hue with high transparency" },
+      { id: "emerald", grade: "emerald", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2000, description: "Vibrant tones crafted for precision cuts" },
+      { id: "ruby", grade: "ruby", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2500, description: "Natural beauty enhanced with modern science" },
+      { id: "sapphire", grade: "sapphire", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3200, description: "Unique hue with high transparency" },
+      { id: "amethyst", grade: "amethyst", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2200, description: "Perfect for modern ethical jewelry" },
+      { id: "aquamarine", grade: "aquamarine", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2500, description: "A timeless choice with subtle elegance" },
+      { id: "topaz", grade: "topaz", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1500, description: "Lab-crafted to mimic the finest gems" },
+      { id: "garnet", grade: "garnet", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3000, description: "A timeless choice with subtle elegance" },
+      { id: "peridot", grade: "peridot", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1800, description: "Rich in color and responsibly sourced" },
+      { id: "opal", grade: "opal", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1800, description: "Unique hue with high transparency" },
+      { id: "citrine", grade: "citrine", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2200, description: "Lab-crafted to mimic the finest gems" },
+      { id: "tanzanite", grade: "tanzanite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3000, description: "Exceptional brilliance with unmatched clarity" },
+      { id: "zircon", grade: "zircon", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1800, description: "Natural beauty enhanced with modern science" },
+      { id: "spinel", grade: "spinel", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1500, description: "Luxurious appeal with refined craftsmanship" },
+      { id: "morganite", grade: "morganite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2500, description: "Luxurious appeal with refined craftsmanship" },
+      { id: "tourmaline", grade: "tourmaline", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2000, description: "Perfect for modern ethical jewelry" },
+      { id: "alexandrite", grade: "alexandrite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3500, description: "Exceptional brilliance with unmatched clarity" },
+      { id: "lapis-lazuli", grade: "lapis-lazuli", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2200, description: "Brilliant sparkle with ethical origins" },
+      { id: "onyx", grade: "onyx", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3200, description: "Lab-crafted to mimic the finest gems" },
+      { id: "malachite", grade: "malachite", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 2200, description: "Natural beauty enhanced with modern science" },
+      { id: "chrysoprase", grade: "chrysoprase", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 3500, description: "Exceptional brilliance with unmatched clarity" },
+      { id: "pearl", grade: "pearl", url: "/gemStone/D-Round-Faceted-GVS2.webp", price: 1800, description: "Vibrant tones crafted for precision cuts" },
     ],
     bestSeller: true,
     showAddToBag: true,
@@ -775,3 +774,106 @@ export const products = [
       "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
   }
 ];
+
+interface GemstoneOption {
+  id: string | number
+  name?: string
+  grade: string
+  price: number
+  url: string
+  description?: string
+  rating?: number
+  features?: string[]
+  origin?: string
+  clarity?: string
+  cut?: string
+}
+
+interface GemstoneExplorerTabProps {
+  isOpen: boolean
+  onClose: () => void
+  gemstones: GemstoneOption[]
+  onSelect: (gemstone: GemstoneOption) => void
+  selectedGemstone?: GemstoneOption | null
+}
+
+export const sampleGemstones: GemstoneOption[] = [
+  {
+    id: 1,
+    name: "Lab Grown Diamond",
+    grade: "VS1 Clarity",
+    price: 1200,
+    url: "/svg/diamond.svg",
+    description: "Ethically created with identical properties to natural diamonds",
+    rating: 5,
+    features: ["Eco-friendly", "Conflict-free", "Same hardness as natural"],
+    origin: "Laboratory",
+    clarity: "VS1",
+    cut: "Excellent",
+  },
+  {
+    id: 2,
+    name: "Natural Diamond",
+    grade: "VVS2 Clarity",
+    price: 2400,
+    url: "/svg/diamond.svg",
+    description: "Naturally formed over billions of years deep within the Earth",
+    rating: 5,
+    features: ["Natural formation", "Rare", "Traditional choice"],
+    origin: "Earth",
+    clarity: "VVS2",
+    cut: "Excellent",
+  },
+  {
+    id: 3,
+    name: "Sapphire",
+    grade: "AAA Quality",
+    price: 800,
+    url: "/placeholder.svg?height=100&width=100",
+    description: "Stunning blue gemstone known for its durability and brilliance",
+    rating: 4,
+    features: ["Durable", "Vibrant color", "Royal heritage"],
+    origin: "Sri Lanka",
+    clarity: "Eye Clean",
+    cut: "Round",
+  },
+  {
+    id: 4,
+    name: "Emerald",
+    grade: "AA+ Quality",
+    price: 1000,
+    url: "/placeholder.svg?height=100&width=100",
+    description: "Precious green gemstone symbolizing rebirth and love",
+    rating: 4,
+    features: ["Rare", "Vibrant green", "Historical significance"],
+    origin: "Colombia",
+    clarity: "SI1",
+    cut: "Emerald",
+  },
+  {
+    id: 5,
+    name: "Ruby",
+    grade: "AA Quality",
+    price: 1500,
+    url: "/placeholder.svg?height=100&width=100",
+    description: "The king of gemstones with passionate red color",
+    rating: 5,
+    features: ["Passionate red", "Extremely durable", "Symbol of love"],
+    origin: "Myanmar",
+    clarity: "Eye Clean",
+    cut: "Oval",
+  },
+  {
+    id: 6,
+    name: "Tanzanite",
+    grade: "A+ Quality",
+    price: 600,
+    url: "/placeholder.svg?height=100&width=100",
+    description: "Rare blue-purple gemstone found only in Tanzania",
+    rating: 4,
+    features: ["Extremely rare", "Unique color", "Investment potential"],
+    origin: "Tanzania",
+    clarity: "VS",
+    cut: "Cushion",
+  },
+]

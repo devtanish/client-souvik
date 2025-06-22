@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { X, Star, Info } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { sampleGemstones } from "./data" 
 
 interface GemstoneOption {
   id: string | number
@@ -31,87 +32,6 @@ interface GemstoneExplorerTabProps {
   selectedGemstone?: GemstoneOption | null
 }
 
-const sampleGemstones: GemstoneOption[] = [
-  {
-    id: 1,
-    name: "Lab Grown Diamond",
-    grade: "VS1 Clarity",
-    price: 1200,
-    url: "/svg/diamond.svg",
-    description: "Ethically created with identical properties to natural diamonds",
-    rating: 5,
-    features: ["Eco-friendly", "Conflict-free", "Same hardness as natural"],
-    origin: "Laboratory",
-    clarity: "VS1",
-    cut: "Excellent",
-  },
-  {
-    id: 2,
-    name: "Natural Diamond",
-    grade: "VVS2 Clarity",
-    price: 2400,
-    url: "/svg/diamond.svg",
-    description: "Naturally formed over billions of years deep within the Earth",
-    rating: 5,
-    features: ["Natural formation", "Rare", "Traditional choice"],
-    origin: "Earth",
-    clarity: "VVS2",
-    cut: "Excellent",
-  },
-  {
-    id: 3,
-    name: "Sapphire",
-    grade: "AAA Quality",
-    price: 800,
-    url: "/placeholder.svg?height=100&width=100",
-    description: "Stunning blue gemstone known for its durability and brilliance",
-    rating: 4,
-    features: ["Durable", "Vibrant color", "Royal heritage"],
-    origin: "Sri Lanka",
-    clarity: "Eye Clean",
-    cut: "Round",
-  },
-  {
-    id: 4,
-    name: "Emerald",
-    grade: "AA+ Quality",
-    price: 1000,
-    url: "/placeholder.svg?height=100&width=100",
-    description: "Precious green gemstone symbolizing rebirth and love",
-    rating: 4,
-    features: ["Rare", "Vibrant green", "Historical significance"],
-    origin: "Colombia",
-    clarity: "SI1",
-    cut: "Emerald",
-  },
-  {
-    id: 5,
-    name: "Ruby",
-    grade: "AA Quality",
-    price: 1500,
-    url: "/placeholder.svg?height=100&width=100",
-    description: "The king of gemstones with passionate red color",
-    rating: 5,
-    features: ["Passionate red", "Extremely durable", "Symbol of love"],
-    origin: "Myanmar",
-    clarity: "Eye Clean",
-    cut: "Oval",
-  },
-  {
-    id: 6,
-    name: "Tanzanite",
-    grade: "A+ Quality",
-    price: 600,
-    url: "/placeholder.svg?height=100&width=100",
-    description: "Rare blue-purple gemstone found only in Tanzania",
-    rating: 4,
-    features: ["Extremely rare", "Unique color", "Investment potential"],
-    origin: "Tanzania",
-    clarity: "VS",
-    cut: "Cushion",
-  },
-]
-
 export function GemstoneExplorerTab({
   isOpen,
   onClose,
@@ -124,10 +44,26 @@ export function GemstoneExplorerTab({
 
   if (!isOpen) return null
 
+  // Fixed filtering logic to work with your data structure
   const filteredGemstones = gemstones.filter((gemstone) => {
-    if (filter === "natural") return gemstone.origin !== "Laboratory" && gemstone.origin !== undefined
-    if (filter === "lab-grown") return gemstone.origin === "Laboratory"
-    return true
+    if (filter === "natural") {
+      // Check if it's a natural gemstone (doesn't contain "lab" in grade or id)
+      return (
+        !gemstone.grade.toLowerCase().includes("lab") &&
+        !gemstone.id.toString().toLowerCase().includes("lab") &&
+        gemstone.grade !== "moissanite"
+      ) // moissanite is synthetic
+    }
+    if (filter === "lab-grown") {
+      // Check if it's lab-grown (contains "lab" in grade/id or is moissanite)
+      return (
+        gemstone.grade.toLowerCase().includes("lab") ||
+        gemstone.id.toString().toLowerCase().includes("lab") ||
+        gemstone.grade === "moissanite" ||
+        gemstone.grade === "lovada"
+      ) // assuming lovada is lab-grown
+    }
+    return true // "all" filter
   })
 
   const sortedGemstones = [...filteredGemstones].sort((a, b) => {
@@ -151,6 +87,15 @@ export function GemstoneExplorerTab({
     ))
   }
 
+  // Helper function to format gemstone name
+  const formatGemstoneTitle = (gemstone: GemstoneOption) => {
+    const title = gemstone.name || gemstone.grade
+    return title
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  }
+
   return (
     <TooltipProvider>
       <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -170,7 +115,12 @@ export function GemstoneExplorerTab({
           <div className="p-6 border-b bg-gray-50">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex gap-2">
-                <Button variant={filter === "all" ? "default" : "outline"} className="rounded-none" size="sm" onClick={() => setFilter("all")}>
+                <Button
+                  variant={filter === "all" ? "default" : "outline"}
+                  className="rounded-none"
+                  size="sm"
+                  onClick={() => setFilter("all")}
+                >
                   All Gemstones
                 </Button>
                 <Button
@@ -188,7 +138,7 @@ export function GemstoneExplorerTab({
                   onClick={() => setFilter("lab-grown")}
                 >
                   Lab Grown
-                  <Badge variant="secondary" className=" ml-2">
+                  <Badge variant="secondary" className="ml-2">
                     -30%
                   </Badge>
                 </Button>
@@ -218,59 +168,85 @@ export function GemstoneExplorerTab({
                   className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${
                     selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
                   }`}
-                  onClick={() => onSelect(gemstone)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onSelect(gemstone)
+                  }}
                 >
-                  <CardContent className="p-1 px-5">
+                  <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-4">
                       <Image
-                        src={gemstone.url || "/placeholder.svg"}
-                        alt={gemstone.name || gemstone.grade}
+                        src={gemstone.url || "/placeholder.svg?height=60&width=60"}
+                        alt={formatGemstoneTitle(gemstone)}
                         width={60}
                         height={60}
-                        className="rounded-full border-1 border-gray-200"
+                        className="rounded-full border border-gray-200"
                       />
                       <div>
-                        <Checkbox id="checkbox" className="size-6 rounded-none" checked={selectedGemstone?.id === gemstone.id} onChange={() => onSelect(gemstone)} />
+                        <Checkbox
+                          className="size-6 rounded-none"
+                          checked={selectedGemstone?.id === gemstone.id}
+                          onChange={(e) => {
+                            e.stopPropagation()
+                            onSelect(gemstone)
+                          }}
+                        />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="font-bold text-lg text-gray-900">{gemstone.name || gemstone.grade}</h3>
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-bold text-lg text-gray-900">{formatGemstoneTitle(gemstone)}</h3>
+                        <span className="text-lg font-bold text-green-600">${gemstone.price.toLocaleString()}</span>
+                      </div>
 
                       <p className="text-sm text-gray-600 line-clamp-2">{gemstone.description}</p>
 
-                      {gemstone.features && (
-                        <div className="flex flex-wrap gap-1 mt-3">
-                          <div className=" flex">
-                            know more
-                            <div className="mt-1 ml-1">
-                              <Tooltip>
-                                <TooltipTrigger>
-                                  <Info className="w-4 h-4 text-gray-400" />
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <div className="max-w-xs space-y-1">
-                                    <p>
-                                      <strong>Origin:</strong> {gemstone.origin || "Not specified"}
-                                    </p>
-                                    <p>
-                                      <strong>Clarity:</strong> {gemstone.clarity || "Not specified"}
-                                    </p>
-                                    <p>
-                                      <strong>Cut:</strong> {gemstone.cut || "Not specified"}
-                                    </p>
-                                  </div>
-                                </TooltipContent>
-                              </Tooltip>
-                            </div>
-                          </div>
-                          {gemstone.features.length > 2 && (
-                            <Badge variant="outline" className="text-xs">
-                              +{gemstone.features.length - 2} more
-                            </Badge>
-                          )}
+                      {gemstone.rating && (
+                        <div className="flex items-center gap-1">
+                          {renderStars(gemstone.rating)}
+                          <span className="text-sm text-gray-500 ml-1">({gemstone.rating})</span>
                         </div>
                       )}
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-gray-500">Know more</span>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Info className="w-4 h-4 text-gray-400" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <div className="max-w-xs space-y-1">
+                                <p>
+                                  <strong>Type:</strong> {formatGemstoneTitle(gemstone)}
+                                </p>
+                                <p>
+                                  <strong>Origin:</strong>{" "}
+                                  {gemstone.grade.toLowerCase().includes("lab") ||
+                                  gemstone.id.toString().toLowerCase().includes("lab") ||
+                                  gemstone.grade === "moissanite" ||
+                                  gemstone.grade === "lovada"
+                                    ? "Laboratory"
+                                    : "Natural"}
+                                </p>
+                                <p>
+                                  <strong>Price:</strong> ${gemstone.price.toLocaleString()}
+                                </p>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
+
+                        {(gemstone.grade.toLowerCase().includes("lab") ||
+                          gemstone.id.toString().toLowerCase().includes("lab") ||
+                          gemstone.grade === "moissanite" ||
+                          gemstone.grade === "lovada") && (
+                          <Badge variant="secondary" className="text-xs">
+                            Lab Grown
+                          </Badge>
+                        )}
+                      </div>
                     </div>
 
                     {selectedGemstone?.id === gemstone.id && (
@@ -282,6 +258,12 @@ export function GemstoneExplorerTab({
                 </Card>
               ))}
             </div>
+
+            {sortedGemstones.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500">No gemstones found matching your filters.</p>
+              </div>
+            )}
           </div>
 
           {/* Footer */}
@@ -294,7 +276,16 @@ export function GemstoneExplorerTab({
                 <Button variant="outline" className="rounded-none" onClick={onClose}>
                   Cancel
                 </Button>
-                <Button onClick={onClose} className="rounded-none" disabled={!selectedGemstone}>
+                <Button
+                  onClick={() => {
+                    if (selectedGemstone) {
+                      onSelect(selectedGemstone)
+                    }
+                    onClose()
+                  }}
+                  className="rounded-none"
+                  disabled={!selectedGemstone}
+                >
                   Confirm Selection
                 </Button>
               </div>
