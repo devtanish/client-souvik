@@ -202,13 +202,6 @@ export function GemstoneExplorerTab({
 
                       <p className="text-sm text-gray-600 line-clamp-2">{gemstone.description}</p>
 
-                      {gemstone.rating && (
-                        <div className="flex items-center gap-1">
-                          {renderStars(gemstone.rating)}
-                          <span className="text-sm text-gray-500 ml-1">({gemstone.rating})</span>
-                        </div>
-                      )}
-
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1">
                           <span className="text-xs text-gray-500">Know more</span>
