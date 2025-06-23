@@ -126,7 +126,7 @@ export function GemstoneExplorerTab({
                   </div>
                 </TooltipContent>
               </Tooltip>
-              <X className="w-6 h-6" />
+              <X className="w-2 h-2" />
             </Button>
           </div>
 
@@ -254,9 +254,15 @@ export function GemstoneExplorerTab({
                           gemstone.id.toString().toLowerCase().includes("lab") ||
                           gemstone.grade === "moissanite" ||
                           gemstone.grade === "lovada") && (
-                          <Badge variant="secondary" className="text-xs">
-                            Lab Grown
-                          </Badge>
+                            <div>
+                            
+                            <Badge variant="secondary" className="mr-2 text-xs">
+                              Lab Grown
+                            </Badge>
+                            <Badge variant="secondary" className="text-xs">
+                              Birthstone: January
+                            </Badge>
+                            </div>
                         )}
                       </div>
                     </div>

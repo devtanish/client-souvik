@@ -777,22 +777,31 @@ export default function EarringsPage() {
                     onClick={() => toggleWishlist(product.id)}
                     aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
                   >
-                      <Image
-                        src={"/svg/heart.svg"}
-                        height={18}
-                        width={18}
-                        onClick={()=> {
-                          addToWishlist({
-                            id: product.id.toString(),
-                            name: product.name,
-                            price: product.price,
-                            image: product.images,
-                            material: product.material,
-                          })
-                        }}
-                        alt="heart"
-                        className={wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}
-                      />
+                    <svg 
+                    width="18" 
+                    height="18" 
+                    viewBox="0 0 24 24" 
+                    onClick={()=> {
+                      addToWishlist({
+                        id: product.id.toString(),
+                        name: product.name,
+                        price: product.price,
+                        image: product.images,
+                        material: product.material,
+                      })
+                    }}
+                    fill="red" 
+                    xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z" 
+                    fill="white" 
+                    stroke="currentColor" 
+                    stroke-width="1.5" 
+                    stroke-miterlimit="10" 
+                    className={`svg-stroke svg-fill ${wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`}>
+                    </path>
+
+                    </svg>
                   </button>
 
                     <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">

@@ -896,7 +896,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                           <div className="mx-3 -translate-y-4 relative">
                             <div
                               ref={categoryScrollRef}
-                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 z-10 scroll-smooth -translate-x-3"
                               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                             >
                               {productcat?.sizes?.map((category, index) => (
@@ -914,7 +914,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 >
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
-                                      className={`${oswald.className}  h-6 w-7  text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
+                                      className={`${oswald.className}  h-9 w-11 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
                                     >
                                       {category}
                                     </div>
@@ -922,12 +922,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 </div>
                               ))}
                             </div>
-                            <button
-                              className="underline cursor-pointer -translate-y-3 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
-                              onClick={() => setIsSizeGuideOpen(true)}
+                            <div
+                              className="underline cursor-pointer z-0 hover:text-gray-600 transition-colors flex mt-3 justify-end w-full"
                             >
+                              <button className="mt-0 text-end -translate-y-3 md:-translate-y-9 -translate-x-2.5" onClick={() => setIsSizeGuideOpen(true)}>
                               size guide
-                            </button>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -987,7 +988,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 >
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
-                                      className={`${oswald.className} h-6 w-15 -translate-x-2 text-center mt-6 ml-[2rem] md:ml-[2rem] ${activeLength === category && "border-black border"}`}
+                                      className={`h-9 w-15 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeLength === category && "border-black border"}`}
                                     >
                                       {category}
                                     </div>
@@ -995,12 +996,14 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 </div>
                               ))}
                             </div>
-                            <button
-                              className="underline cursor-pointer -translate-y-5 md:-translate-y-5 -translate-x-2.5 hover:text-gray-600 transition-colors justify-end text-end w-full"
-                              onClick={() => setIsNecklaceSizeGuideOpen(true)}
-                            >
-                              metal guide
-                            </button>
+                            <div className="underline cursor-pointer z-0 hover:text-gray-600 transition-colors flex mt-3 justify-end w-full">
+                              <button
+                                className="mt-0 text-end -translate-y-3 md:-translate-y-9 -translate-x-2.5"
+                                onClick={() => setIsNecklaceSizeGuideOpen(true)}
+                              >
+                                metal guide
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
