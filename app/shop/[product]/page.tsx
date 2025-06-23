@@ -293,7 +293,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                 {/* Shape Section */}
                 <div>
                   {productcat?.shape && (
-                    <div className="mb-4">
+                    <div className="mb-2">
                       <div className="mt-0 font-bold text-xl flex">
                         Starting at <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                       </div>
@@ -377,7 +377,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {/* Explore Gemstones Section */}
                   {productcat?.diamondOptions && (
-                    <div className="border mb-2 md:mb-4">
+                    <div className="border mb-2 md:mb-2">
                       <div className="flex items-center gap-3 py-1 bg-gray-100">
                         <h2 className="text-lg px-2 font-medium text-gray-800">Explore Gemstones</h2>
                         <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
@@ -410,7 +410,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {/* Explore More Options Section */}
                   {productcat?.GemStone && (
-                    <div className="mb-2 md:mb-4">
+                    <div className="mb-2 md:mb-2">
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -485,7 +485,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               {productcat?.GemStone?.map((option) => (
                                 <div
                                   key={option.id}
-                                  className={`min-w-[80px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                  className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
                                     selectedGemstone?.id === option.id
                                       ? "border-black bg-gray-100"
                                       : "border-gray-200 hover:border-gray-300"
@@ -514,7 +514,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.CaratWidth && (
-                    <div className={`mb-2 md:mb-4 ${productcat?.CaratWidth ? "" : "hidden"}`}>
+                    <div className={`mb-2 md:mb-2 ${productcat?.CaratWidth ? "" : "hidden"}`}>
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -578,7 +578,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.metalType && (
-                    <div className="mb-2 md:mb-4">
+                    <div className="mb-2 md:mb-2">
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -716,7 +716,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.bands && (
-                    <div className="mb-2 md:mb-4">
+                    <div className="mb-2 md:mb-2">
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -789,7 +789,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.bandWidth && (
-                    <div className="mb-2 md:mb-4">
+                    <div className="mb-2 md:mb-2">
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -862,7 +862,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.sizes && (
-                    <div className={`mb-2 md:mb-4 ${productcat?.sizes ? "" : "hidden"}`}>
+                    <div className={`mb-2 md:mb-2 ${productcat?.sizes ? "" : "hidden"}`}>
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -935,7 +935,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   )}
 
                   {productcat?.length && (
-                    <div className="mb-2 md:mb-4">
+                    <div className="mb-2 md:mb-2">
                       {/* Title with Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
@@ -1009,7 +1009,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {/* Backing Type Selection */}
                   {productcat?.backingOptions && (
-                    <div className="border mb-2 md:mb-4">
+                    <div className="border mb-2 md:mb-2">
                       <div className="flex items-center gap-3 py-1 bg-gray-100">
                         <h2 className="text-lg px-2 font-medium text-gray-800">Explore More Options</h2>
                         <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">

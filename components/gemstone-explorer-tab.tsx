@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { X, Star, Info } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { sampleGemstones } from "./data" 
+import { sampleGemstones } from "./data"
 
 interface GemstoneOption {
   id: string | number
@@ -41,6 +41,9 @@ export function GemstoneExplorerTab({
 }: GemstoneExplorerTabProps) {
   const [filter, setFilter] = useState<"all" | "natural" | "lab-grown">("all")
   const [sortBy, setSortBy] = useState<"price" | "rating" | "name">("price")
+  const [internalSelectedGemstone, setInternalSelectedGemstone] = useState<GemstoneOption | null>(
+    selectedGemstone || null,
+  )
 
   if (!isOpen) return null
 
@@ -107,6 +110,22 @@ export function GemstoneExplorerTab({
               <p className="text-gray-600 mt-1">Choose the perfect gemstone for your jewelry</p>
             </div>
             <Button variant="ghost" size="icon" onClick={onClose}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Info className="w-4 h-4 text-gray-400" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div className="max-w-xs space-y-1">
+                    <p>
+                      <strong>Type:</strong>
+                    </p>
+                    <p>hello</p>
+                    <p>
+                      <strong>Price:</strong>
+                    </p>
+                  </div>
+                </TooltipContent>
+              </Tooltip>
               <X className="w-6 h-6" />
             </Button>
           </div>
@@ -153,24 +172,24 @@ export function GemstoneExplorerTab({
                 >
                   <option value="price">Price</option>
                   <option value="rating">Rating</option>
-                  <option value="name">Name</option>
+                  <option value="name">A-Z</option>
                 </select>
               </div>
             </div>
           </div>
 
           {/* Gemstone Grid */}
-          <div className="p-6 overflow-y-auto max-h-[60vh]">
+          <div className="p-6 overflow-y-auto max-h-[52vh]">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {sortedGemstones.map((gemstone) => (
                 <Card
                   key={gemstone.id}
                   className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${
-                    selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
+                    internalSelectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
                   }`}
                   onClick={(e) => {
                     e.stopPropagation()
-                    onSelect(gemstone)
+                    setInternalSelectedGemstone(gemstone)
                   }}
                 >
                   <CardContent className="p-4">
@@ -185,10 +204,10 @@ export function GemstoneExplorerTab({
                       <div>
                         <Checkbox
                           className="size-6 rounded-none"
-                          checked={selectedGemstone?.id === gemstone.id}
+                          checked={internalSelectedGemstone?.id === gemstone.id}
                           onChange={(e) => {
                             e.stopPropagation()
-                            onSelect(gemstone)
+                            setInternalSelectedGemstone(gemstone)
                           }}
                         />
                       </div>
@@ -242,7 +261,7 @@ export function GemstoneExplorerTab({
                       </div>
                     </div>
 
-                    {selectedGemstone?.id === gemstone.id && (
+                    {internalSelectedGemstone?.id === gemstone.id && (
                       <div className="mt-4 p-2 bg-black text-center">
                         <span className="text-sm font-medium text-white">Selected</span>
                       </div>
@@ -271,13 +290,13 @@ export function GemstoneExplorerTab({
                 </Button>
                 <Button
                   onClick={() => {
-                    if (selectedGemstone) {
-                      onSelect(selectedGemstone)
+                    if (internalSelectedGemstone) {
+                      onSelect(internalSelectedGemstone)
                     }
                     onClose()
                   }}
                   className="rounded-none"
-                  disabled={!selectedGemstone}
+                  disabled={!internalSelectedGemstone}
                 >
                   Confirm Selection
                 </Button>
