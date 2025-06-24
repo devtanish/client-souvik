@@ -2,15 +2,15 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { shop, customeService, company } from "./interface-contents/footerContents"
-import { Roboto } from "next/font/google"
+import { Be_Vietnam_Pro } from "next/font/google"
 
-const robotoMedium = Roboto({
+const robotoMedium = Be_Vietnam_Pro({
   subsets: ["latin"],
   weight: ["300"],
   display: "swap",
 })
 
-const robotoBold = Roboto({
+const robotoBold = Be_Vietnam_Pro({
   subsets: ["latin"],
   weight: ["500"],
   display: "swap",

@@ -284,6 +284,19 @@ export function GemstoneExplorerTab({
             )}
           </div>
 
+          <div>
+            <p className="text-sm  md:text-lg h-10 text-gray-500 border">
+              <div className="mx-3 mt-2.5 md:mx-7 md:mt-1 justify-between flex">
+                <div className="">
+                  Alexandrite + Lab Grown + Blue Dimand
+                </div>
+                <div className="flex">
+                  Total:  <div className=" ml-2 text-green-700">$1500</div>
+                </div>
+              </div>
+              </p>
+          </div>
+
           {/* Footer */}
           <div className="p-6 border-t bg-gray-50">
             <div className="flex justify-between items-center">
