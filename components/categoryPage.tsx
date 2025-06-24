@@ -111,7 +111,7 @@ const shimmerAnimation = `
 
 export default function EarringsPage() {
 
-  const  { addToCart,  addToWishlist } = useCart()
+  const  { addToCart,  addToWishlist, removeFromWishlist } = useCart()
 
   const [activeCategory, setActiveCategory] = useState("Earrings")
   const [gridView, setGridView] = useState<"four" | "two" | "one">("four")
@@ -782,13 +782,15 @@ export default function EarringsPage() {
                     height="18" 
                     viewBox="0 0 24 24" 
                     onClick={()=> {
-                      addToWishlist({
+                      wishlist.includes(product.id) ? removeFromWishlist(product.id.toString()) 
+                      : addToWishlist({
                         id: product.id.toString(),
                         name: product.name,
                         price: product.price,
                         image: product.images,
                         material: product.material,
                       })
+                      
                     }}
                     fill="red" 
                     xmlns="http://www.w3.org/2000/svg">

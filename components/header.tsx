@@ -53,6 +53,14 @@ export default function Header() {
         <ToggleSearch2 />
         <button onClick={handleWishlistClick} className="relative">
           <LuHeart size={20} className="mt-0.5 mr-2" />
+          {getWishlistCount() > 0 && (
+            <Badge
+              variant="destructive"
+              className={` ${inter.className} absolute -top-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-xs`}
+            >
+              {getWishlistCount()} 
+            </Badge>
+          )}
         </button>
         <button onClick={handleCartClick} className={`relative  ${inter.className}`}>
           <SlHandbag size={20} className="mt-0.5" />
@@ -84,6 +92,14 @@ export default function Header() {
       <div className="hidden md:flex gap-9">
         <button onClick={handleWishlistClick} className="relative">
           <LuHeart size={25} className="mt-0.5" />
+          {getWishlistCount() > 0 && (
+            <Badge
+              variant="destructive"
+              className={` ${inter.className} absolute top-0 -right-1.5 h-4 w-4 p-0 flex items-center justify-center text-xs`} 
+            >
+              {getWishlistCount()} 
+            </Badge>
+          )}
         </button>
         <button onClick={handleCartClick} className="relative">
           <SlHandbag size={25} className="" />
