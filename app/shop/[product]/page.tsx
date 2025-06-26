@@ -3,16 +3,16 @@
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/contexts/cart-context"
-import { Info, ChevronUp, ChevronDown } from "lucide-react"
+import { Info, ChevronUp, ChevronDown } from 'lucide-react'
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Hind } from "next/font/google"
+import { Hind } from 'next/font/google'
 import * as React from "react"
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft } from 'lucide-react'
 import { RingSizeGuideSidebar } from "@/components/ring-size-guide-sidebar"
 import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sidebar"
 import { Badge } from "@/components/ui/badge"
@@ -32,7 +32,7 @@ interface GemStone {
   name?: string
   grade: string
   price: number
-  url: string
+  url?: string
   description?: string
   rating?: number
   features?: string[]
@@ -229,7 +229,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                     id: selectedGemstone.id.toString(),
                                     grade: selectedGemstone.grade,
                                     price: selectedGemstone.price,
-                                    url: selectedGemstone.url,
+                                    url: selectedGemstone.url || "/placeholder.svg",
                                     description: selectedGemstone.description,
                                   }
                                 : undefined,
@@ -1060,7 +1060,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             id: selectedGemstone.id.toString(),
                             grade: selectedGemstone.grade,
                             price: selectedGemstone.price,
-                            url: selectedGemstone.url,
+                            url: selectedGemstone.url || "/placeholder.svg",
                             description: selectedGemstone.description,
                           }
                         : undefined,
@@ -1119,7 +1119,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             id: selectedGemstone.id.toString(),
                             grade: selectedGemstone.grade,
                             price: selectedGemstone.price,
-                            url: selectedGemstone.url,
+                            url: selectedGemstone.url || "/placeholder.svg",
                             description: selectedGemstone.description,
                           }
                         : undefined,
@@ -1267,6 +1267,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
           gemstones={
             productcat?.GemStone?.map((stone) => ({
               ...stone,
+              id: productcat.id,
               name: stone.grade, // Use grade as name if name doesn't exist
               rating: 4, // Default rating
               features: ["High Quality", "Certified"], // Default features
@@ -1276,7 +1277,6 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
             })) || []
           }
           onSelect={handleGemstoneSelect}
-          selectedGemstone={selectedGemstone}
         />
       </div>
     </TooltipProvider>
