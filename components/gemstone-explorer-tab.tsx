@@ -1,7 +1,7 @@
 "use client"
 
 import { Checkbox } from "@/components/ui/checkbox"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -38,6 +38,21 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
   const [selectedGemstone, setSelectedGemstone] = useState<GemstoneOption | null>(null)
   const [selectedQuality, setSelectedQuality] = useState<GemstoneOption | null>(null)
   const [qualityTabSource, setQualityTabSource] = useState<"natural" | "lab-grown" | null>(null)
+
+  useEffect(() => {
+    if (isOpen) {
+      // Prevent background scrolling when modal is open
+      document.body.style.overflow = "hidden"
+    } else {
+      // Restore scrolling when modal is closed
+      document.body.style.overflow = "unset"
+    }
+
+    // Cleanup function to restore scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isOpen])
 
   if (!isOpen) return null
 
@@ -158,8 +173,8 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
     const parts = []
     if (qualityTabSource) parts.push(qualityTabSource === "natural" ? "Natural" : "Lab Grown")
     if (selectedGemstone) parts.push(formatGemstoneTitle(selectedGemstone))
-    if(selectedQuality) parts.push(formatGemstoneTitle(selectedQuality))
-    
+    if (selectedQuality) parts.push(formatGemstoneTitle(selectedQuality))
+
     return parts.join(" + ") || "No selection"
   }
 
@@ -268,7 +283,9 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
           </div>
 
           {/* Content Grid */}
-          <div className={`p-6 overflow-y-auto ${(selectedGemstone || selectedQuality) ? "max-h-[47vh]" : "max-h-[52vh]" } `}>
+          <div
+            className={`p-6 overflow-y-auto ${selectedGemstone || selectedQuality ? "max-h-[47vh]" : "max-h-[52vh]"} `}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {/* Render Gemstones (All tab) */}
               {sortedGemstones.map((gemstone) => (
@@ -416,7 +433,7 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
 
           {/* Selection Summary */}
           {(selectedGemstone || selectedQuality) && (
-            <div className="border-t h-12"> 
+            <div className="border-t h-12">
               <div className="px-6 py-3 bg-gray-50 ">
                 <div className="flex justify-between  items-center">
                   <div className="text-sm md:text-base">{getSelectionSummary()}</div>
@@ -433,7 +450,7 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
             <div className="flex justify-between items-center">
               <p className="text-sm text-gray-600">{getAvailableCount()}</p>
               <div className="flex gap-3">
-                <Button variant="outline" className="rounded-none" onClick={handleCancel}>
+                <Button variant="outline" className="rounded-none bg-transparent" onClick={handleCancel}>
                   Cancel
                 </Button>
                 <Button onClick={handleConfirmSelection} className="rounded-none" disabled={!isSelectionValid()}>
