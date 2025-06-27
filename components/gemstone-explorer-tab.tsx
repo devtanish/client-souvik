@@ -156,11 +156,10 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
   // Get selection summary
   const getSelectionSummary = () => {
     const parts = []
+    if (qualityTabSource) parts.push(qualityTabSource === "natural" ? "Natural" : "Lab Grown")
     if (selectedGemstone) parts.push(formatGemstoneTitle(selectedGemstone))
-    if (selectedQuality && qualityTabSource) {
-      parts.push(formatGemstoneTitle(selectedQuality))
-      parts.push(qualityTabSource === "natural" ? "Natural" : "Lab Grown")
-    }
+    if(selectedQuality) parts.push(formatGemstoneTitle(selectedQuality))
+    
     return parts.join(" + ") || "No selection"
   }
 
@@ -417,13 +416,12 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
 
           {/* Selection Summary */}
           {(selectedGemstone || selectedQuality) && (
-            <div className="border-t">
-              <div className="px-6 py-3 bg-gray-50">
-                <div className="flex justify-between items-center">
+            <div className="border-t"> 
+              <div className="px-6 py-3 bg-gray-50 ">
+                <div className="flex justify-between  items-center">
                   <div className="text-sm md:text-base">{getSelectionSummary()}</div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm">Total:</span>
-                    <span className="text-green-700 font-semibold">${getTotalPrice().toLocaleString()}</span>
+                    <span className="text-green-700 font-semibold"> ${getTotalPrice().toLocaleString()}</span>
                   </div>
                 </div>
               </div>
