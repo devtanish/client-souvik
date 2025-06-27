@@ -268,7 +268,7 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
           </div>
 
           {/* Content Grid */}
-          <div className="p-6 overflow-y-auto max-h-[52vh]">
+          <div className={`p-6 overflow-y-auto ${(selectedGemstone || selectedQuality) ? "max-h-[47vh]" : "max-h-[52vh]" } `}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {/* Render Gemstones (All tab) */}
               {sortedGemstones.map((gemstone) => (
@@ -416,7 +416,7 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
 
           {/* Selection Summary */}
           {(selectedGemstone || selectedQuality) && (
-            <div className="border-t"> 
+            <div className="border-t h-12"> 
               <div className="px-6 py-3 bg-gray-50 ">
                 <div className="flex justify-between  items-center">
                   <div className="text-sm md:text-base">{getSelectionSummary()}</div>
