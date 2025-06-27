@@ -225,10 +225,24 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
       <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
         <div className="bg-white max-w-6xl w-full max-h-[100vh] overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b">
+          <div className="flex items-center justify-between p-5 px-6 border-b">
             <div>
               <h2 className="text-2xl font-bold text-gray-900">Explore Gemstones</h2>
-              <p className="text-gray-600 mt-1">Choose the perfect gemstone for your jewelry</p>
+              <p className="text-gray-600 mt-1">Choose the perfect gemstone for your jewelry <p className="">Know more
+              <Tooltip>
+                  <TooltipTrigger>
+                    <Info className="w-4 h-4 translate-y-1 mx-1 text-gray-400" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="max-w-xs space-y-1">
+                      <p>
+                        <strong>Empty</strong>
+                      </p>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </p>
+                </p>
             </div>
             <Button variant="ghost" size="icon" onClick={handleCancel}>
               <X className="w-5 h-5" />
@@ -236,7 +250,7 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
           </div>
 
           {/* Filters and Sort */}
-          <div className="p-6 border-b bg-gray-50">
+          <div className="p-5 px-6 border-b bg-gray-50">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex gap-2">
                 <Button
@@ -291,9 +305,8 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
               {sortedGemstones.map((gemstone) => (
                 <Card
                   key={`gemstone-${gemstone.id}`}
-                  className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${
-                    selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
-                  }`}
+                  className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
+                    }`}
                   onClick={() => handleGemstoneSelect(gemstone)}
                 >
                   <CardContent className="p-4">
@@ -366,11 +379,10 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
               {sortedQuality.map((quality) => (
                 <Card
                   key={`quality-${quality.id}`}
-                  className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${
-                    selectedQuality?.id === quality.id && qualityTabSource === activeTab
-                      ? "ring ring-black bg-gray-50"
-                      : ""
-                  }`}
+                  className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${selectedQuality?.id === quality.id && qualityTabSource === activeTab
+                    ? "ring ring-black bg-gray-50"
+                    : ""
+                    }`}
                   onClick={() => handleQualitySelect(quality)}
                 >
                   <CardContent className="p-4">
