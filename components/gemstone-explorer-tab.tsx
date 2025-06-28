@@ -175,7 +175,7 @@ export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: Ge
     if (selectedGemstone) parts.push(formatGemstoneTitle(selectedGemstone))
     if (selectedQuality) parts.push(formatGemstoneTitle(selectedQuality))
 
-    return parts.join(" + ") || "No selection"
+    return parts.join(" ") || "No selection"
   }
 
   // Calculate total price
