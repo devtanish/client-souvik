@@ -1,6 +1,7 @@
 "use client"
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
+import { Be_Vietnam_Pro } from "next/font/google" 
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/contexts/cart-context"
 import { Info, ChevronUp, ChevronDown } from 'lucide-react'
@@ -21,6 +22,12 @@ import { products } from "./../../../components/data"
 import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
 
 const oswald = Hind({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+})
+
+const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
@@ -379,7 +386,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   {productcat?.diamondOptions && (
                     <div className="border mb-2 md:mb-2">
                       <div className="flex items-center gap-3 py-1 bg-gray-100">
-                        <h2 className="text-lg px-2 font-medium text-gray-800">Explore Gemstones</h2>
+                        <h2 className="text-lg px-2 font-medium text-gray-800">Explore Gems</h2>
                         <Badge variant="secondary" className="bg-yellow-100 rounded-none text-yellow-800 text-xs">
                           NEW
                         </Badge>
@@ -482,7 +489,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               className="flex gap-2 overflow-x-auto scrollbar-hide px-8"
                               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                             >
-                              {productcat?.GemStone?.map((option) => (
+                              {gemstoneType == "LAB GROWN" && productcat?.labGrownGemstones?.map((option) => (
                                 <div
                                   key={option.id}
                                   className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
@@ -502,7 +509,31 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                   <span className="text-xs text-center font-medium">{option.grade}</span>
                                   <span className="text-xs text-gray-500">
                                     $
-                                    {Math.round(option.price * (gemstoneType === "NATURAL" ? 1.5 : 1)).toLocaleString()}
+                                    {option.price}
+                                  </span>
+                                </div>
+                              ))}
+                              {gemstoneType == "NATURAL" && productcat?.naturalGemstones?.map((option) => (
+                                <div
+                                  key={option.id}
+                                  className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                    selectedGemstone?.id === option.id
+                                      ? "border-black bg-gray-100"
+                                      : "border-gray-200 hover:border-gray-300"
+                                  }`}
+                                  onClick={() => setSelectedGemstone(option)}
+                                >
+                                  <Image
+                                    className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 rounded-full mb-2 flex items-center justify-center shadow-inner"
+                                    src={option.url || "/placeholder.svg"}
+                                    width={100}
+                                    height={100}
+                                    alt="gemstone"
+                                  />
+                                  <span className="text-xs text-center font-medium">{option.grade}</span>
+                                  <span className="text-xs text-gray-500">
+                                    $
+                                    {option.price}
                                   </span>
                                 </div>
                               ))}
@@ -914,9 +945,11 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 >
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
-                                      className={`${oswald.className}  h-9 w-11 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
+                                      className={`${beVietnamPro.className}  h-9 w-11 items-center text-xs pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
                                     >
-                                      {category}
+                                      <div className=" translate-y-1">
+                                        {category}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
