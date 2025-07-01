@@ -6,7 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { X, Info } from "lucide-react"
+import { X, Info } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { products } from "./data"
 
@@ -30,14 +30,48 @@ interface GemstoneExplorerTabProps {
   onClose: () => void
   onSelect: (gemstone: GemstoneOption, quality?: GemstoneOption, qualitySource?: "natural" | "lab-grown") => void
   gemstones: GemstoneOption[]
+  selectedQuality?: GemstoneOption | null
+  onSelectedQualityChange?: (quality: GemstoneOption | null) => void
+  qualityTabSource?: "natural" | "lab-grown" | null
+  onQualityTabSourceChange?: (source: "natural" | "lab-grown" | null) => void
 }
 
-export function GemstoneExplorerTab({ isOpen, onClose, onSelect, gemstones }: GemstoneExplorerTabProps) {
+export function GemstoneExplorerTab({
+  isOpen,
+  onClose,
+  onSelect,
+  gemstones,
+  selectedQuality: externalSelectedQuality,
+  onSelectedQualityChange,
+  qualityTabSource: externalQualityTabSource,
+  onQualityTabSourceChange
+}: GemstoneExplorerTabProps) {
   const [activeTab, setActiveTab] = useState<"all" | "natural" | "lab-grown">("all")
   const [sortBy, setSortBy] = useState<"price" | "name">("price")
   const [selectedGemstone, setSelectedGemstone] = useState<GemstoneOption | null>(null)
-  const [selectedQuality, setSelectedQuality] = useState<GemstoneOption | null>(null)
-  const [qualityTabSource, setQualityTabSource] = useState<"natural" | "lab-grown" | null>(null)
+
+  // Use external state if provided, otherwise fall back to internal state
+  const [internalSelectedQuality, setInternalSelectedQuality] = useState<GemstoneOption | null>(null)
+  const [internalQualityTabSource, setInternalQualityTabSource] = useState<"natural" | "lab-grown" | null>(null)
+
+  const selectedQuality = externalSelectedQuality !== undefined ? externalSelectedQuality : internalSelectedQuality
+  const qualityTabSource = externalQualityTabSource !== undefined ? externalQualityTabSource : internalQualityTabSource
+
+  const setSelectedQuality = (quality: GemstoneOption | null) => {
+    if (onSelectedQualityChange) {
+      onSelectedQualityChange(quality)
+    } else {
+      setInternalSelectedQuality(quality)
+    }
+  }
+
+  const setQualityTabSource = (source: "natural" | "lab-grown" | null) => {
+    if (onQualityTabSourceChange) {
+      onQualityTabSourceChange(source)
+    } else {
+      setInternalQualityTabSource(source)
+    }
+  }
 
   useEffect(() => {
     if (isOpen) {

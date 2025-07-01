@@ -1,24 +1,24 @@
 "use client"
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
-import { Be_Vietnam_Pro } from "next/font/google" 
+import { Be_Vietnam_Pro } from "next/font/google"
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/contexts/cart-context"
-import { Info, ChevronUp, ChevronDown } from 'lucide-react'
+import { Info, ChevronUp, ChevronDown } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Hind } from 'next/font/google'
+import { Hind } from "next/font/google"
 import * as React from "react"
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from "lucide-react"
 import { RingSizeGuideSidebar } from "@/components/ring-size-guide-sidebar"
 import { NecklaceSizeGuideSidebar } from "@/components/necklace-size-guide-sidebar"
 import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { products } from "./../../../components/data"
+import { products } from "../../../components/data"
 import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
 
 const oswald = Hind({
@@ -97,6 +97,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
   const [selectedMetalCategory, setSelectedMetalCategory] = useState<"gold" | "silver" | null>(null)
   const [selectedKarat, setSelectedKarat] = useState<"18kt" | "14kt" | null>(null)
   const [isGemstoneExplorerOpen, setIsGemstoneExplorerOpen] = useState(false)
+  const [selectedQuality, setSelectedQuality] = useState<GemStone | null>(null)
+  const [qualityTabSource, setQualityTabSource] = useState<"natural" | "lab-grown" | null>(null)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
@@ -112,9 +114,22 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
     setIsGemstoneExplorerOpen(true)
   }
 
-  const handleGemstoneSelect = (gemStone: GemStone) => {
-    setSelectedGemstone(gemStone)
-    setSelectedDiamond(gemStone.name || gemStone.grade)
+  const handleGemstoneSelect = (gemstone: GemStone, quality?: GemStone, qualitySource?: "natural" | "lab-grown") => {
+    setSelectedGemstone(gemstone)
+    setSelectedDiamond(gemstone.name || gemstone.grade)
+
+    // Handle quality selection if provided - this is the key fix
+    if (quality) {
+      setSelectedQuality(quality)
+      // IMPORTANT: Also update the selectedGemstone to the quality option
+      // so it syncs with the main page gemstone quality section
+      setSelectedGemstone(quality)
+      setGemstoneType(qualitySource === "natural" ? "NATURAL" : "LAB GROWN")
+    }
+    if (qualitySource) {
+      setQualityTabSource(qualitySource)
+    }
+
     setIsGemstoneExplorerOpen(false)
   }
 
@@ -235,7 +250,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 ? {
                                     id: selectedGemstone.id.toString(),
                                     grade: selectedGemstone.grade,
-                                    price: selectedGemstone.price,
+                                    price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
                                     url: selectedGemstone.url || "/placeholder.svg",
                                     description: selectedGemstone.description,
                                   }
@@ -395,7 +410,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         <div className="flex items-center gap-3 px-2">
                           <div>
                             <Image
-                              src={selectedGemstone?.url || "/svg/diamond.svg"}
+                              src="/gemStone/D-Round-Faceted-GVS2.webp"
                               width={20}
                               height={20}
                               alt="diamond"
@@ -489,54 +504,50 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               className="flex gap-2 overflow-x-auto scrollbar-hide px-8"
                               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                             >
-                              {gemstoneType == "LAB GROWN" && productcat?.labGrownGemstones?.map((option) => (
-                                <div
-                                  key={option.id}
-                                  className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
-                                    selectedGemstone?.id === option.id
-                                      ? "border-black bg-gray-100"
-                                      : "border-gray-200 hover:border-gray-300"
-                                  }`}
-                                  onClick={() => setSelectedGemstone(option)}
-                                >
-                                  <Image
-                                    className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 rounded-full mb-2 flex items-center justify-center shadow-inner"
-                                    src={option.url || "/placeholder.svg"}
-                                    width={100}
-                                    height={100}
-                                    alt="gemstone"
-                                  />
-                                  <span className="text-xs text-center font-medium">{option.grade}</span>
-                                  <span className="text-xs text-gray-500">
-                                    $
-                                    {option.price}
-                                  </span>
-                                </div>
-                              ))}
-                              {gemstoneType == "NATURAL" && productcat?.naturalGemstones?.map((option) => (
-                                <div
-                                  key={option.id}
-                                  className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
-                                    selectedGemstone?.id === option.id
-                                      ? "border-black bg-gray-100"
-                                      : "border-gray-200 hover:border-gray-300"
-                                  }`}
-                                  onClick={() => setSelectedGemstone(option)}
-                                >
-                                  <Image
-                                    className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 rounded-full mb-2 flex items-center justify-center shadow-inner"
-                                    src={option.url || "/placeholder.svg"}
-                                    width={100}
-                                    height={100}
-                                    alt="gemstone"
-                                  />
-                                  <span className="text-xs text-center font-medium">{option.grade}</span>
-                                  <span className="text-xs text-gray-500">
-                                    $
-                                    {option.price}
-                                  </span>
-                                </div>
-                              ))}
+                              {gemstoneType == "LAB GROWN" &&
+                                productcat?.labGrownGemstones?.map((option) => (
+                                  <div
+                                    key={option.id}
+                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                      selectedGemstone?.id === option.id
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-200 hover:border-gray-300"
+                                    }`}
+                                    onClick={() => setSelectedGemstone(option)}
+                                  >
+                                    <Image
+                                      className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 mb-2 flex items-center justify-center shadow-inner"
+                                      src={option.url || "/placeholder.svg"}
+                                      width={100}
+                                      height={100}
+                                      alt="gemstone"
+                                    />
+                                    <span className="text-xs text-center font-medium">{option.grade}</span>
+                                    <span className="text-xs text-gray-500">${option.price}</span>
+                                  </div>
+                                ))}
+                              {gemstoneType == "NATURAL" &&
+                                productcat?.naturalGemstones?.map((option) => (
+                                  <div
+                                    key={option.id}
+                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                      selectedGemstone?.id === option.id
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-200 hover:border-gray-300"
+                                    }`}
+                                    onClick={() => setSelectedGemstone(option)}
+                                  >
+                                    <Image
+                                      className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 mb-2 flex items-center justify-center shadow-inner"
+                                      src={option.url || "/placeholder.svg"}
+                                      width={100}
+                                      height={100}
+                                      alt="gemstone"
+                                    />
+                                    <span className="text-xs text-center font-medium">{option.grade}</span>
+                                    <span className="text-xs text-gray-500">${option.price}</span>
+                                  </div>
+                                ))}
                             </div>
                           </div>
                         </div>
@@ -947,19 +958,18 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                     <div
                                       className={`${beVietnamPro.className}  h-9 w-11 items-center text-xs pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
                                     >
-                                      <div className=" translate-y-1">
-                                        {category}
-                                      </div>
+                                      <div className=" translate-y-1">{category}</div>
                                     </div>
                                   </div>
                                 </div>
                               ))}
                             </div>
-                            <div
-                              className="underline cursor-pointer z-0 hover:text-gray-600 transition-colors flex mt-3 justify-end w-full"
-                            >
-                              <button className="mt-0 text-end -translate-y-3 md:-translate-y-9 -translate-x-2.5" onClick={() => setIsSizeGuideOpen(true)}>
-                              size guide
+                            <div className="underline cursor-pointer z-0 hover:text-gray-600 transition-colors flex mt-3 justify-end w-full">
+                              <button
+                                className="mt-0 text-end -translate-y-3 md:-translate-y-9 -translate-x-2.5"
+                                onClick={() => setIsSizeGuideOpen(true)}
+                              >
+                                size guide
                               </button>
                             </div>
                           </div>
@@ -1092,7 +1102,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         ? {
                             id: selectedGemstone.id.toString(),
                             grade: selectedGemstone.grade,
-                            price: selectedGemstone.price,
+                            price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
                             url: selectedGemstone.url || "/placeholder.svg",
                             description: selectedGemstone.description,
                           }
@@ -1151,9 +1161,17 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         ? {
                             id: selectedGemstone.id.toString(),
                             grade: selectedGemstone.grade,
-                            price: selectedGemstone.price,
+                            price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
                             url: selectedGemstone.url || "/placeholder.svg",
                             description: selectedGemstone.description,
+                            quality: selectedQuality
+                              ? {
+                                  id: selectedQuality.id.toString(),
+                                  grade: selectedQuality.grade,
+                                  price: selectedQuality.price,
+                                  source: qualityTabSource,
+                                }
+                              : undefined,
                           }
                         : undefined,
                       bands: activeBand
@@ -1310,6 +1328,10 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
             })) || []
           }
           onSelect={handleGemstoneSelect}
+          selectedQuality={selectedQuality}
+          onSelectedQualityChange={setSelectedQuality}
+          qualityTabSource={qualityTabSource}
+          onQualityTabSourceChange={setQualityTabSource}
         />
       </div>
     </TooltipProvider>
