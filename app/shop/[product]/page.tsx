@@ -4,7 +4,7 @@
 import { Be_Vietnam_Pro } from "next/font/google"
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/contexts/cart-context"
-import { Info, ChevronUp, ChevronDown } from "lucide-react"
+import { Info, Plus, Minus } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -61,6 +61,36 @@ interface CaratWidth {
   displayWeight: string
   price: number
   url?: string
+}
+
+// Animated Toggle Button Component
+const AnimatedToggleButton = ({
+  isOpen,
+  onClick,
+  className = "",
+}: {
+  isOpen: boolean
+  onClick: (e: React.MouseEvent) => void
+  className?: string
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100 ${className}`}
+      aria-label={isOpen ? "Collapse" : "Expand"}
+    >
+      <span className={`absolute transition-transform duration-300 ${isOpen ? "rotate-0" : "rotate-90"}`}>
+        <Minus size={16} className={isOpen ? "opacity-100" : "opacity-0"} />
+      </span>
+      <span
+        className={`absolute transition-transform duration-300 ${
+          isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+        }`}
+      >
+        <Plus size={16} />
+      </span>
+    </button>
+  )
 }
 
 export default function Home({ params }: { params: Promise<{ product: string }> }) {
@@ -255,7 +285,12 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                     description: selectedGemstone.description,
                                   }
                                 : undefined,
-                              GemQuality: {id: selectedQuality?.id.toString() || "", name: selectedQuality?.name || "", grade: selectedQuality?.grade || "", price: selectedQuality?.price || 0},
+                              GemQuality: {
+                                id: selectedQuality?.id.toString() || "",
+                                name: selectedQuality?.name || "",
+                                grade: selectedQuality?.grade || "",
+                                price: selectedQuality?.price || 0,
+                              },
                               bands: activeBand
                                 ? {
                                     name: activeBand,
@@ -321,7 +356,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         Starting at <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                       </div>
 
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1 mt-2.5"
                         onClick={() => setIsShapeOpen(!isShapeOpen)}
@@ -329,19 +364,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         <div className="text-md">
                           <b>Shape:</b> {activeStone}
                         </div>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isShapeOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsShapeOpen(!isShapeOpen)
                           }}
-                        >
-                          {isShapeOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -434,7 +463,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                   {/* Explore More Options Section */}
                   {productcat?.GemStone && (
                     <div className="mb-2 md:mb-2">
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsGemstoneOpen(!isGemstoneOpen)}
@@ -455,19 +484,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             </TooltipContent>
                           </Tooltip>
                         </div>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isGemstoneOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsGemstoneOpen(!isGemstoneOpen)
                           }}
-                        >
-                          {isGemstoneOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -517,7 +540,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                     onClick={() => setSelectedGemstone(option)}
                                   >
                                     <Image
-                                      className="w-8 h-8 bg-gradient-to-br from-white to-gray-100 mb-2 flex items-center justify-center shadow-inner"
+                                      className="w-8 h-8 mb-2 flex items-center justify-center shadow-inner"
                                       src={option.url || "/placeholder.svg"}
                                       width={100}
                                       height={100}
@@ -558,7 +581,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.CaratWidth && (
                     <div className={`mb-2 md:mb-2 ${productcat?.CaratWidth ? "" : "hidden"}`}>
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsOpen(!isOpen)}
@@ -567,19 +590,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                           <div className="font-bold mr-1">Total Carat Weight</div>:{" "}
                           {selectedCarat?.displayWeight || "Not selected"}
                         </h3>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsOpen(!isOpen)
                           }}
-                        >
-                          {isOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -622,7 +639,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.metalType && (
                     <div className="mb-2 md:mb-2">
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsMetalTypeOpen(!isMetalTypeOpen)}
@@ -631,19 +648,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                           <div className="font-bold mr-1">Metal Type </div>:{" "}
                           {selectedMetal?.displayName || "Not selected"}
                         </h3>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isMetalTypeOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsMetalTypeOpen(!isMetalTypeOpen)
                           }}
-                        >
-                          {isMetalTypeOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -760,7 +771,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.bands && (
                     <div className="mb-2 md:mb-2">
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsBandOpen(!isBandOpen)}
@@ -768,19 +779,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         <div className="text-md font-medium">
                           <b>Band:</b> {activeBand}
                         </div>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isBandOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsBandOpen(!isBandOpen)
                           }}
-                        >
-                          {isBandOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -833,7 +838,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.bandWidth && (
                     <div className="mb-2 md:mb-2">
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsBandWidthOpen(!isBandWidthOpen)}
@@ -841,19 +846,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         <div className="text-md font-medium">
                           <b>Band Width:</b> {activeBandWidth}
                         </div>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isBandWidthOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsBandWidthOpen(!isBandWidthOpen)
                           }}
-                        >
-                          {isBandWidthOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -906,7 +905,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.sizes && (
                     <div className={`mb-2 md:mb-2 ${productcat?.sizes ? "" : "hidden"}`}>
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsSizeOpen(!isSizeOpen)}
@@ -914,19 +913,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         <div className="text-md">
                           <b>Select Size:</b> {activeSize} inch
                         </div>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isSizeOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsSizeOpen(!isSizeOpen)
                           }}
-                        >
-                          {isSizeOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -981,7 +974,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
                   {productcat?.length && (
                     <div className="mb-2 md:mb-2">
-                      {/* Title with Toggle Button */}
+                      {/* Title with Animated Toggle Button */}
                       <div
                         className="flex items-center justify-between cursor-pointer mb-1"
                         onClick={() => setIsLengthOpen(!isLengthOpen)}
@@ -989,19 +982,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                         <div className="text-md">
                           <b>Select Length:</b> {activeLength} inches
                         </div>
-                        <button
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                        <AnimatedToggleButton
+                          isOpen={isLengthOpen}
                           onClick={(e) => {
                             e.stopPropagation()
                             setIsLengthOpen(!isLengthOpen)
                           }}
-                        >
-                          {isLengthOpen ? (
-                            <ChevronUp className="w-5 h-5 text-gray-600" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-600" />
-                          )}
-                        </button>
+                        />
                       </div>
 
                       {/* Collapsible Content */}
@@ -1108,7 +1095,12 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             description: selectedGemstone.description,
                           }
                         : undefined,
-                      GemQuality: {id: selectedQuality?.id.toString() || "", name: selectedQuality?.name || "", grade: selectedQuality?.grade || "", price: selectedQuality?.price || 0},
+                      GemQuality: {
+                        id: selectedQuality?.id.toString() || "",
+                        name: selectedQuality?.name || "",
+                        grade: selectedQuality?.grade || "",
+                        price: selectedQuality?.price || 0,
+                      },
                       bands: activeBand
                         ? {
                             name: activeBand,
@@ -1176,7 +1168,12 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               : undefined,
                           }
                         : undefined,
-                      GemQuality: {id: selectedQuality?.id.toString() || "", name: selectedQuality?.name || "", grade: selectedQuality?.grade || "", price: selectedQuality?.price || 0},
+                      GemQuality: {
+                        id: selectedQuality?.id.toString() || "",
+                        name: selectedQuality?.name || "",
+                        grade: selectedQuality?.grade || "",
+                        price: selectedQuality?.price || 0,
+                      },
                       bands: activeBand
                         ? {
                             name: activeBand,
