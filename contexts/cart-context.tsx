@@ -12,6 +12,7 @@ interface CartItem {
   stone?: string
   length?: string
   GemStone?: { id: string; grade: string; price: number; url: string; description?: string }
+  GemQuality?: { id: string; name: string; grade: string; price: number; }
   bands?: { name: string; img: string }
   bandWidth?: { name: string; img: string }
   shape?: { id: number; name: string }
@@ -32,6 +33,7 @@ interface WishlistItem {
   stone?: string
   length?: string
   GemStone?: { id: string; grade: string; price: number; url: string; description?: string }
+  GemQuality?: { id: string; name: string; grade: string; price: number; }
   bands?: { name: string; img: string }
   bandWidth?: { name: string; img: string }
   shape?: { id: number; name: string }
