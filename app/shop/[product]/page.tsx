@@ -5,7 +5,7 @@ import { Be_Vietnam_Pro } from "next/font/google"
 import { Card, CardContent } from "@/components/ui/card"
 import { AnimatedSubscribeButton } from "@/components/magicui/animated-subscribe-button";7
 import { useCart } from "@/contexts/cart-context"
-import { Info, Plus, Minus } from "lucide-react"
+import { Info, Plus, Minus, MoveRight } from "lucide-react" 
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -1077,9 +1077,9 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
               <div className="">
                 <AnimatedSubscribeButton
-                  className=" mb-3 text-white rounded-none w-full pt-3 h-12 text-md"
+                  className=" mb-3 w-full pt-3 h-12 text-md group rounded-none flex items-center bg-black text-white px-4 py-3 transition-all duration-300 ease-in-out"
                 >
-                  <span className="-translate-y-1 px-35 md:px-45  py-2" onClick={() => {
+                  <span className="  py-2 flex items-center" onClick={() => {
                     addToCart({
                       id: productcat?.id?.toString() || "",
                       name: productcat?.title || "",
@@ -1217,8 +1217,9 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
                     })
-                  }}>Add to Bag</span>
-                  <span className="-translate-y-1">Added</span>
+                  }}><div className="ml-2 mr-1 w-20 md:w-20 group-hover:w-32 md:group-hover:w-35 transition-all duration-300 ease-in-out overflow-hidden whitespace-nowrap">Add to Bag</div>
+                  <div className="ml-2 group-hover:translate-x-1 transition-transform duration-300 ease-in-out"><MoveRight/></div></span>
+                  <span className="">Added</span>
                 </AnimatedSubscribeButton>
                 <Button className="rounded-none bg-white border-1 border-black hover:bg-gray-100 text-black w-full pt-3 h-12 text-md">
                   {" "}
