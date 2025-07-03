@@ -1079,7 +1079,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                 <AnimatedSubscribeButton
                   className=" mb-3 text-white rounded-none w-full pt-3 h-12 text-md"
                 >
-                  <span className="-translate-y-1 px-45 py-2" onClick={() => {
+                  <span className="-translate-y-1 px-35 md:px-45 border-white border py-2" onClick={() => {
                     addToCart({
                       id: productcat?.id?.toString() || "",
                       name: productcat?.title || "",
