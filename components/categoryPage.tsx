@@ -1,13 +1,13 @@
 "use client"
 
-import { Cormorant_Garamond } from "next/font/google"
+import { Cormorant_Garamond } from 'next/font/google'
 
 import { SlHandbag } from "react-icons/sl"
 import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Montserrat } from "next/font/google"
+import { Montserrat } from 'next/font/google'
 import { useCart } from "@/contexts/cart-context"
 
 // Initialize the Cormorant Garamond font
@@ -32,7 +32,7 @@ import { Switch } from "@/components/ui/switch"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { ChevronDown, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X } from "lucide-react"
+import { ChevronDown, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X, Plus, Minus } from 'lucide-react'
 import { cn } from "@/lib/utils"
 
 // Import data
@@ -111,7 +111,7 @@ const shimmerAnimation = `
 
 export default function EarringsPage() {
 
-  const  { addToCart,  addToWishlist, removeFromWishlist } = useCart()
+  const { addToCart, addToWishlist, removeFromWishlist } = useCart()
 
   const [activeCategory, setActiveCategory] = useState("Earrings")
   const [gridView, setGridView] = useState<"four" | "two" | "one">("four")
@@ -428,10 +428,20 @@ export default function EarringsPage() {
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className={`text-sm font-medium `}>PRICE</span>
-                          <ChevronDown
-                            className="h-5 w-5 chevron-rotate"
-                            data-state={openFilters.price ? "open" : "closed"}
-                          />
+                          <button
+                            className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
+                            aria-label={openFilters.price ? "Collapse" : "Expand"}
+                          >
+                            <span className={`absolute transition-transform duration-300 ${openFilters.price ? "rotate-0" : "rotate-90"}`}>
+                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            </span>
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.price ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                                }`}
+                            >
+                              <Plus size={16} color="gray" />
+                            </span>
+                          </button>
                         </CollapsibleTrigger>
                       </div>
                       <CollapsibleContent className="px-4 pb-4 overflow-hidden collapsible-content-open pt-4">
@@ -487,10 +497,20 @@ export default function EarringsPage() {
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className={`text-sm font-medium `}>SHAPE</span>
-                          <ChevronDown
-                            className="h-5 w-5 chevron-rotate"
-                            data-state={openFilters.stone ? "open" : "closed"}
-                          />
+                          <button
+                            className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
+                            aria-label={openFilters.stone ? "Collapse" : "Expand"}
+                          >
+                            <span className={`absolute transition-transform duration-300 ${openFilters.stone ? "rotate-0" : "rotate-90"}`}>
+                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            </span>
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.stone ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                                }`}
+                            >
+                              <Plus size={16} color="gray" />
+                            </span>
+                          </button>
                         </CollapsibleTrigger>
                       </div>
                       <CollapsibleContent className="px-3 pb-4 lg:mx-0 transition-all overflow-hidden collapsible-content-open">
@@ -515,7 +535,7 @@ export default function EarringsPage() {
                                   onClick={() => toggleStone(metal.name)}
                                 >
                                   <Image
-                                    src={metal.element}
+                                    src={metal.element || "/placeholder.svg"}
                                     alt={metal.name}
                                     width={40}
                                     height={40}
@@ -541,10 +561,20 @@ export default function EarringsPage() {
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className={`text-sm font-medium  `}>METALS</span>
-                          <ChevronDown
-                            className="h-5 w-5 chevron-rotate"
-                            data-state={openFilters.metal ? "open" : "closed"}
-                          />
+                          <button
+                            className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
+                            aria-label={openFilters.metal ? "Collapse" : "Expand"}
+                          >
+                            <span className={`absolute transition-transform duration-300 ${openFilters.metal ? "rotate-0" : "rotate-90"}`}>
+                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            </span>
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.metal ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                                }`}
+                            >
+                              <Plus size={16} color="gray" />
+                            </span>
+                          </button>
                         </CollapsibleTrigger>
                       </div>
                       <CollapsibleContent className="px-3 pb-4 overflow-hidden collapsible-content-open">
@@ -589,10 +619,20 @@ export default function EarringsPage() {
                       <div className="p-5 px-4 collapsible-section ">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className={`text-sm font-medium `}>METAL COLOUR</span>
-                          <ChevronDown
-                            className="h-5 w-5 chevron-rotate"
-                            data-state={openFilters.material ? "open" : "closed"}
-                          />
+                          <button
+                            className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
+                            aria-label={openFilters.material ? "Collapse" : "Expand"}
+                          >
+                            <span className={`absolute transition-transform duration-300 ${openFilters.material ? "rotate-0" : "rotate-90"}`}>
+                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            </span>
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.material ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                                }`}
+                            >
+                              <Plus size={16} color="gray" />
+                            </span>
+                          </button>
                         </CollapsibleTrigger>
                       </div>
                       <CollapsibleContent className="px-3 pb-4 lg:mx-19 transition-all overflow-hidden collapsible-content-open">
@@ -652,10 +692,20 @@ export default function EarringsPage() {
                       <div className="p-5 px-4 collapsible-section hover:bg-gray-50/80">
                         <CollapsibleTrigger className="flex w-full items-center justify-between">
                           <span className={`text-sm font-medium `}>STONE</span>
-                          <ChevronDown
-                            className="h-5 w-5 chevron-rotate"
-                            data-state={openFilters.shape ? "open" : "closed"}
-                          />
+                          <button
+                            className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
+                            aria-label={openFilters.shape ? "Collapse" : "Expand"}
+                          >
+                            <span className={`absolute transition-transform duration-300 ${openFilters.shape ? "rotate-0" : "rotate-90"}`}>
+                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            </span>
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.shape ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                                }`}
+                            >
+                              <Plus size={16} color="gray" />
+                            </span>
+                          </button>
                         </CollapsibleTrigger>
                       </div>
                       <CollapsibleContent className="px-3 pb-4 overflow-hidden collapsible-content-open">
@@ -777,50 +827,50 @@ export default function EarringsPage() {
                     onClick={() => toggleWishlist(product.id)}
                     aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
                   >
-                    <svg 
-                    width="18" 
-                    height="18" 
-                    viewBox="0 0 24 24" 
-                    onClick={()=> {
-                      wishlist.includes(product.id) ? removeFromWishlist(product.id.toString()) 
-                      : addToWishlist({
-                        id: product.id.toString(),
-                        name: product.name,
-                        price: product.price,
-                        image: product.images,
-                        material: product.material,
-                      })
-                      
-                    }}
-                    fill="red" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    
-                    <path d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z" 
-                    fill="white" 
-                    stroke="currentColor" 
-                    stroke-width="1.5" 
-                    stroke-miterlimit="10" 
-                    className={`svg-stroke svg-fill ${wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`}>
-                    </path>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      onClick={() => {
+                        wishlist.includes(product.id) ? removeFromWishlist(product.id.toString())
+                          : addToWishlist({
+                            id: product.id.toString(),
+                            name: product.name,
+                            price: product.price,
+                            image: product.images,
+                            material: product.material,
+                          })
+
+                      }}
+                      fill="red"
+                      xmlns="http://www.w3.org/2000/svg">
+
+                      <path d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z"
+                        fill="white"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        className={`svg-stroke svg-fill ${wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`}>
+                      </path>
 
                     </svg>
                   </button>
 
-                    <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
-                      {product.bestSeller && (
-                        <span className={`absolute font-mono top-2 left-2 bg-white md:text-[10px] text-[8.5px] px-2 py-1 z-5  ${montserrat.className} `}>
-                          BEST SELLING
-                        </span>
-                      )}
+                  <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
+                    {product.bestSeller && (
+                      <span className={`absolute font-mono top-2 left-2 bg-white md:text-[10px] text-[8.5px] px-2 py-1 z-5  ${montserrat.className} `}>
+                        BEST SELLING
+                      </span>
+                    )}
 
-                      {!product.bestSeller && ( // Using bestSeller as a proxy for inStock since inStock isn't in the data
-                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-5">
-                          <span className="text-white font-medium text-sm">Out of Stock</span>
-                        </div>
-                      )}
+                    {!product.bestSeller && ( // Using bestSeller as a proxy for inStock since inStock isn't in the data
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-5">
+                        <span className="text-white font-medium text-sm">Out of Stock</span>
+                      </div>
+                    )}
 
-                      {/* Default image */}
-                  <Link target="_blank" href={`/shop/${product.name.toString()}`}>
+                    {/* Default image */}
+                    <Link target="_blank" href={`/shop/${product.name.toString()}`}>
                       <Image
                         src={product.images || "/placeholder.svg?height=300&width=300"}
                         alt={product.name}
@@ -841,18 +891,18 @@ export default function EarringsPage() {
                       )}
                     </Link>
 
-                      {/* Add to bag button */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-white py-2 px-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        <button
-                          className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
-                          disabled={!product.bestSeller}
-                          onClick={() => addToCart({id: product.id.toString(), name: product.name, price: product.price, image: product.images, material: product.material, stone: product.stone})}
-                        >
-                          <SlHandbag size={16} />
-                          ADD TO BAG
-                        </button>
-                      </div>
+                    {/* Add to bag button */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-white py-2 px-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <button
+                        className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
+                        disabled={!product.bestSeller}
+                        onClick={() => addToCart({ id: product.id.toString(), name: product.name, price: product.price, image: product.images, material: product.material, stone: product.stone })}
+                      >
+                        <SlHandbag size={16} />
+                        ADD TO BAG
+                      </button>
                     </div>
+                  </div>
 
                   <Link target="_blank" href={`/shop/${product.name.toString()}`}>
                     <h3 className="font-medium text-md mb-0.5">{product.name}</h3>

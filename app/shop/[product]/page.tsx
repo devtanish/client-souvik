@@ -87,7 +87,7 @@ const AnimatedToggleButton = ({
           isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
         }`}
       >
-        <Plus size={16} />
+        <Plus size={16}  color="gray"/>
       </span>
     </button>
   )
