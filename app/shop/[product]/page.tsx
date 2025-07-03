@@ -3,6 +3,7 @@
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
 import { Card, CardContent } from "@/components/ui/card"
+import { AnimatedSubscribeButton } from "@/components/magicui/animated-subscribe-button";7
 import { useCart } from "@/contexts/cart-context"
 import { Info, Plus, Minus } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
@@ -1075,8 +1076,10 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               </div>
 
               <div className="">
-                <Button
-                  onClick={() => {
+                <AnimatedSubscribeButton
+                  className=" mb-3 text-white rounded-none w-full pt-3 h-12 text-md"
+                >
+                  <span className="-translate-y-1 px-45 py-2" onClick={() => {
                     addToCart({
                       id: productcat?.id?.toString() || "",
                       name: productcat?.title || "",
@@ -1214,11 +1217,9 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
                     })
-                  }}
-                  className=" mb-3 text-white rounded-none w-full pt-3 h-12 text-md"
-                >
-                  Add to Bag
-                </Button>
+                  }}>Add to Bag</span>
+                  <span className="-translate-y-1">Added</span>
+                </AnimatedSubscribeButton>
                 <Button className="rounded-none bg-white border-1 border-black hover:bg-gray-100 text-black w-full pt-3 h-12 text-md">
                   {" "}
                   <Image src={"/svg/cal.svg"} height={20} width={20} alt="calendar" className="ml-2 mb-1" /> Consult
