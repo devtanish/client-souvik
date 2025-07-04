@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Hind } from "next/font/google"
 import * as React from "react"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { ChevronLeft } from "lucide-react"
@@ -132,6 +132,22 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = scrollRef.current;
+    
+    if (!element) return; // Handle null case
+    
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      element.scrollLeft += e.deltaY;
+    };
+  
+    element.addEventListener('wheel', handleWheel, { passive: false });
+    return () => element.removeEventListener('wheel', handleWheel);
+  }, []);
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryScrollRef.current) {
@@ -1244,6 +1260,113 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     className="-translate-y-1 icon scale-50 "
                   />
                   Return policy
+                </div>
+              </div>
+
+              <div className="py-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="font-medium text-lg">Style With</h2>
+                  <button className="text-sm underline font-medium">VIEW ALL</button>
+                </div>
+
+                {/* Product Carousel */}
+                <div className="relative " >
+                  <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-4" ref={scrollRef}
+                    style={{ whiteSpace: 'nowrap' }}>
+                    <div className="flex-shrink-0 w-48">
+                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                        <Image
+                          src="/jwel/5.avif"
+                          alt="Gothic Letter Pendant"
+                          width={190}
+                          height={190}
+                          className=" rounded-lg object-contain"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-medium text-sm">Gothic Letter Pendant</h3>
+                        <div className="text-sm text-gray-600">
+                          <span className="mr-1">From</span>
+                          <span className="font-medium">$198</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex-shrink-0 w-48">
+                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                        <Image
+                          src="/jwel/4.avif"
+                          alt="Gothic Letter Pendant"
+                          width={190}
+                          height={190}
+                          className=" rounded-lg object-contain"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-medium text-sm">Diamond Number Charm</h3>
+                        <div className="text-sm text-gray-600">
+                          <span className="font-medium">$268</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex-shrink-0 w-48">
+                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                        <Image
+                          src="/jwel/3.avif"
+                          alt="Gothic Letter Pendant"
+                          width={190}
+                          height={190}
+                          className=" rounded-lg object-contain"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-medium text-sm">Star Pendant</h3>
+                        <div className="text-sm text-gray-600">
+                          <span className="font-medium">$156</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex-shrink-0 w-48">
+                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                        <Image
+                          src="/jwel/2.avif"
+                          alt="Gothic Letter Pendant"
+                          width={190}
+                          height={190}
+                          className=" rounded-lg object-contain"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-medium text-sm">Classic Chain Necklace</h3>
+                        <div className="text-sm text-gray-600">
+                          <span className="mr-1">From</span>
+                          <span className="font-medium">$89</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex-shrink-0 w-48">
+                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                        <Image
+                          src="/jwel/1.avif"
+                          alt="Gothic Letter Pendant"
+                          width={190}
+                          height={190}
+                          className=" rounded-lg object-contain"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="font-medium text-sm">Pearl Drop Earrings</h3>
+                        <div className="text-sm text-gray-600">
+                          <span className="font-medium">$145</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Navigation Arrows */}
                 </div>
               </div>
 
