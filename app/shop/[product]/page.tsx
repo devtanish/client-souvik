@@ -1277,7 +1277,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
                       <div key={index}>
                         <div className="flex-shrink-0 w-48">
-                          <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                          <div className="bg-gray-50 p-0 mb-3 aspect-square flex items-center justify-center">
                             <Image
                               src={item.imgURL}
                               alt="Gothic Letter Pendant"
