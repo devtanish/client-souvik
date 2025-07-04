@@ -137,14 +137,14 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
   useEffect(() => {
     const element = scrollRef.current;
-    
+
     if (!element) return; // Handle null case
-    
+
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       element.scrollLeft += e.deltaY;
     };
-  
+
     element.addEventListener('wheel', handleWheel, { passive: false });
     return () => element.removeEventListener('wheel', handleWheel);
   }, []);
@@ -547,8 +547,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                   <div
                                     key={option.id}
                                     className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                        ? "border-black bg-gray-100"
-                                        : "border-gray-200 hover:border-gray-300"
+                                      ? "border-black bg-gray-100"
+                                      : "border-gray-200 hover:border-gray-300"
                                       }`}
                                     onClick={() => setSelectedGemstone(option)}
                                   >
@@ -568,8 +568,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                   <div
                                     key={option.id}
                                     className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                        ? "border-black bg-gray-100"
-                                        : "border-gray-200 hover:border-gray-300"
+                                      ? "border-black bg-gray-100"
+                                      : "border-gray-200 hover:border-gray-300"
                                       }`}
                                     onClick={() => setSelectedGemstone(option)}
                                   >
@@ -626,8 +626,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               <div
                                 key={option.id}
                                 className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedCarat?.id === option.id
-                                    ? "border-black bg-gray-50"
-                                    : "border-gray-200 hover:border-gray-300"
+                                  ? "border-black bg-gray-50"
+                                  : "border-gray-200 hover:border-gray-300"
                                   }`}
                                 onClick={() => setSelectedCarat(option)}
                               >
@@ -755,8 +755,8 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                                 <div
                                   key={option.id}
                                   className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedMetal?.id === option.id
-                                      ? "border-black bg-gray-50"
-                                      : "border-gray-200 hover:border-gray-300"
+                                    ? "border-black bg-gray-50"
+                                    : "border-gray-200 hover:border-gray-300"
                                     }`}
                                   onClick={() => setSelectedMetal(option)}
                                 >
@@ -1079,7 +1079,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
               </div>
 
               <div className="">
-              <Button
+                <Button
                   onClick={() => {
                     addToCart({
                       id: productcat?.id?.toString() || "",
@@ -1092,49 +1092,49 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       length: activeLength || "",
                       GemStone: selectedGemstone
                         ? {
-                            id: selectedGemstone.id.toString(),
-                            grade: selectedGemstone.grade,
-                            price: selectedGemstone.price,
-                            url: selectedGemstone.url || "/placeholder.svg",
-                            description: selectedGemstone.description,
-                          }
+                          id: selectedGemstone.id.toString(),
+                          grade: selectedGemstone.grade,
+                          price: selectedGemstone.price,
+                          url: selectedGemstone.url || "/placeholder.svg",
+                          description: selectedGemstone.description,
+                        }
                         : undefined,
                       bands: activeBand
                         ? {
-                            name: activeBand,
-                            img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                          }
+                          name: activeBand,
+                          img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                        }
                         : undefined,
                       bandWidth: activeBandWidth
                         ? {
-                            name: activeBandWidth,
-                            img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                          }
+                          name: activeBandWidth,
+                          img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                        }
                         : undefined,
                       shape: activeStone
                         ? {
-                            id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                            name: activeStone,
-                          }
+                          id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                          name: activeStone,
+                        }
                         : undefined,
                       CaratWidth: selectedCarat
                         ? {
-                            id: selectedCarat.id.toString(),
-                            weight: selectedCarat.weight,
-                            displayWeight: selectedCarat.displayWeight,
-                            price: selectedCarat.price,
-                            url: selectedCarat.url,
-                          }
+                          id: selectedCarat.id.toString(),
+                          weight: selectedCarat.weight,
+                          displayWeight: selectedCarat.displayWeight,
+                          price: selectedCarat.price,
+                          url: selectedCarat.url,
+                        }
                         : undefined,
                       metalType: selectedMetal
                         ? {
-                            id: selectedMetal.id.toString(),
-                            name: selectedMetal.displayName,
-                            displayName: selectedMetal.displayName,
-                            price: 0,
-                            url: selectedMetal.url,
-                            color: selectedMetal.color,
-                          }
+                          id: selectedMetal.id.toString(),
+                          name: selectedMetal.displayName,
+                          displayName: selectedMetal.displayName,
+                          price: 0,
+                          url: selectedMetal.url,
+                          color: selectedMetal.color,
+                        }
                         : undefined,
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
@@ -1151,49 +1151,49 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                       length: activeLength || "",
                       GemStone: selectedGemstone
                         ? {
-                            id: selectedGemstone.id.toString(),
-                            grade: selectedGemstone.grade,
-                            price: selectedGemstone.price,
-                            url: selectedGemstone.url || "/placeholder.svg",
-                            description: selectedGemstone.description,
-                          }
+                          id: selectedGemstone.id.toString(),
+                          grade: selectedGemstone.grade,
+                          price: selectedGemstone.price,
+                          url: selectedGemstone.url || "/placeholder.svg",
+                          description: selectedGemstone.description,
+                        }
                         : undefined,
                       bands: activeBand
                         ? {
-                            name: activeBand,
-                            img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                          }
+                          name: activeBand,
+                          img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                        }
                         : undefined,
                       bandWidth: activeBandWidth
                         ? {
-                            name: activeBandWidth,
-                            img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                          }
+                          name: activeBandWidth,
+                          img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                        }
                         : undefined,
                       shape: activeStone
                         ? {
-                            id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                            name: activeStone,
-                          }
+                          id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                          name: activeStone,
+                        }
                         : undefined,
                       CaratWidth: selectedCarat
                         ? {
-                            id: selectedCarat.id.toString(),
-                            weight: selectedCarat.weight,
-                            displayWeight: selectedCarat.displayWeight,
-                            price: selectedCarat.price,
-                            url: selectedCarat.url,
-                          }
+                          id: selectedCarat.id.toString(),
+                          weight: selectedCarat.weight,
+                          displayWeight: selectedCarat.displayWeight,
+                          price: selectedCarat.price,
+                          url: selectedCarat.url,
+                        }
                         : undefined,
                       metalType: selectedMetal
                         ? {
-                            id: selectedMetal.id.toString(),
-                            name: selectedMetal.displayName,
-                            displayName: selectedMetal.displayName,
-                            price: 0,
-                            url: selectedMetal.url,
-                            color: selectedMetal.color,
-                          }
+                          id: selectedMetal.id.toString(),
+                          name: selectedMetal.displayName,
+                          displayName: selectedMetal.displayName,
+                          price: 0,
+                          url: selectedMetal.url,
+                          color: selectedMetal.color,
+                        }
                         : undefined,
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
@@ -1273,97 +1273,28 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                 <div className="relative " >
                   <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-4" ref={scrollRef}
                     style={{ whiteSpace: 'nowrap' }}>
-                    <div className="flex-shrink-0 w-48">
-                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
-                        <Image
-                          src="/jwel/5.avif"
-                          alt="Gothic Letter Pendant"
-                          width={190}
-                          height={190}
-                          className=" rounded-lg object-contain"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-sm">Gothic Letter Pendant</h3>
-                        <div className="text-sm text-gray-600">
-                          <span className="mr-1">From</span>
-                          <span className="font-medium">$198</span>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className="flex-shrink-0 w-48">
-                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
-                        <Image
-                          src="/jwel/4.avif"
-                          alt="Gothic Letter Pendant"
-                          width={190}
-                          height={190}
-                          className=" rounded-lg object-contain"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-sm">Diamond Number Charm</h3>
-                        <div className="text-sm text-gray-600">
-                          <span className="font-medium">$268</span>
+                    {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
+                      <div key={index}>
+                        <div className="flex-shrink-0 w-48">
+                          <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
+                            <Image
+                              src={item.imgURL}
+                              alt="Gothic Letter Pendant"
+                              width={190}
+                              height={190}
+                              className=" rounded-lg object-contain"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <h3 className="font-medium text-sm">{item.name}</h3>
+                            <div className="text-sm text-gray-600">
+                              <span className="font-medium">${item.price}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="flex-shrink-0 w-48">
-                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
-                        <Image
-                          src="/jwel/3.avif"
-                          alt="Gothic Letter Pendant"
-                          width={190}
-                          height={190}
-                          className=" rounded-lg object-contain"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-sm">Star Pendant</h3>
-                        <div className="text-sm text-gray-600">
-                          <span className="font-medium">$156</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex-shrink-0 w-48">
-                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
-                        <Image
-                          src="/jwel/2.avif"
-                          alt="Gothic Letter Pendant"
-                          width={190}
-                          height={190}
-                          className=" rounded-lg object-contain"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-sm">Classic Chain Necklace</h3>
-                        <div className="text-sm text-gray-600">
-                          <span className="mr-1">From</span>
-                          <span className="font-medium">$89</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex-shrink-0 w-48">
-                      <div className="bg-gray-50 rounded-lg p-0 mb-3 aspect-square flex items-center justify-center">
-                        <Image
-                          src="/jwel/1.avif"
-                          alt="Gothic Letter Pendant"
-                          width={190}
-                          height={190}
-                          className=" rounded-lg object-contain"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-sm">Pearl Drop Earrings</h3>
-                        <div className="text-sm text-gray-600">
-                          <span className="font-medium">$145</span>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
 
                   {/* Navigation Arrows */}

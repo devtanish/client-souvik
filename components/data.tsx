@@ -260,7 +260,43 @@ export const products = [
     set_components: ["Pendant", "Chain"],
     title: "The Classic Oval Engagement Ring",
     subtitle: "The Classic solitaire in 18k yellow gold with an oval diamond",
-    description: "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct"
+    description: "With clean fluid lines, the Classic solitaire engagement ring honors its moniker with a touch of modernity. Four curved prongs solely caress the center stone, allowing light to enter from all directions for maximum brilliance. An evolution of the signature solitaire, it's thoughtfully designed and meticulously perfected for ultimate comfort and wearability.<br/><br/><b>Band width:</b> 1.7mm <br/><b>Band depth:</b> 1.6mm <br/><b>Setting height:</b> 6.5mm <br/><b>Gold/Platinum metal weight:</b> 2.86g (Ring size 6) <br/><b>Pavé carat weight:</b> 0.18ctw<br/><b>Shown with center stone:</b> 1.5ct",
+    styleWith: [{
+      id: 1,
+      productId: 1,
+      name: "Gothic Letter Pendant",
+      price: 198,
+      imgURL: "/jwel/5.avif",
+    },
+    {
+      id:2,
+      productId: 2,
+      name: "Diamond Number Charm",
+      price: 268,
+      imgURL: "/jwel/4.avif",
+   },
+   {
+      id:3,
+      productId: 3,
+      name: "Star Pendant",
+      price: 156,
+      imgURL: "/jwel/3.avif",
+   },
+   {
+      id:4,
+      productId: 4,
+      name: "Classic Chain Necklace",
+      price: 89,
+      imgURL: "/jwel/2.avif",
+   },
+   {
+      id:5,
+      productId: 5,
+      name: "Pearl Drop Earrings",
+      price: 145,
+      imgURL: "/jwel/1.avif",
+   },
+  ]
   },
   {
     id: 2,
