@@ -267,6 +267,7 @@ export const products = [
       name: "Gothic Letter Pendant",
       price: 198,
       imgURL: "/jwel/5.avif",
+      url: "#",
     },
     {
       id:2,
@@ -274,6 +275,7 @@ export const products = [
       name: "Diamond Number Charm",
       price: 268,
       imgURL: "/jwel/4.avif",
+      url: "#",
    },
    {
       id:3,
@@ -281,6 +283,7 @@ export const products = [
       name: "Star Pendant",
       price: 156,
       imgURL: "/jwel/3.avif",
+      url: "#",
    },
    {
       id:4,
@@ -288,6 +291,7 @@ export const products = [
       name: "Classic Chain Necklace",
       price: 89,
       imgURL: "/jwel/2.avif",
+      url: "#",
    },
    {
       id:5,
@@ -295,6 +299,7 @@ export const products = [
       name: "Pearl Drop Earrings",
       price: 145,
       imgURL: "/jwel/1.avif",
+      url: "#",
    },
   ]
   },
@@ -907,14 +912,6 @@ interface GemstoneOption {
   origin?: string
   clarity?: string
   cut?: string
-}
-
-interface GemstoneExplorerTabProps {
-  isOpen: boolean
-  onClose: () => void
-  gemstones: GemstoneOption[]
-  onSelect: (gemstone: GemstoneOption) => void
-  selectedGemstone?: GemstoneOption | null
 }
 
 export const sampleGemstones: GemstoneOption[] = [

@@ -4,9 +4,8 @@
 import { Be_Vietnam_Pro } from "next/font/google"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react";
-import { AnimatedSubscribeButton } from "@/components/magicui/animated-subscribe-button"; 7
 import { useCart } from "@/contexts/cart-context"
-import { Info, Plus, Minus, MoveRight } from "lucide-react"
+import { Info, Plus, Minus } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,6 +21,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { products } from "../../../components/data"
 import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
+import Link from "next/link";
 
 const oswald = Hind({
   subsets: ["latin"],
@@ -1309,7 +1309,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     onScroll={handleScroll}
                   >
                     {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
-                      <div key={index}>
+                      <Link href={item.url} key={index}>
                         <div className="flex-shrink-0 w-48">
                           <div className="bg-gray-50 p-0 mb-3 aspect-square flex items-center justify-center">
                             <Image
@@ -1327,7 +1327,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
 
