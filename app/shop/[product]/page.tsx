@@ -3,6 +3,7 @@
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
 import { Card, CardContent } from "@/components/ui/card"
+import { ChevronRight } from "lucide-react";
 import { AnimatedSubscribeButton } from "@/components/magicui/animated-subscribe-button"; 7
 import { useCart } from "@/contexts/cart-context"
 import { Info, Plus, Minus, MoveRight } from "lucide-react"
@@ -227,6 +228,36 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
 
     return filtered
   }
+
+  const scrollRef1 = useRef<HTMLDivElement>(null); 
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const scrollLeft = () => {
+    if (scrollRef1.current) {
+      scrollRef1.current.scrollBy({
+        left: -200,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef1.current) {
+      scrollRef1.current.scrollBy({
+        left: 200,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleScroll = () => {
+    if (scrollRef1.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef1.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
 
   return (
     <TooltipProvider>
@@ -1270,10 +1301,13 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                 </div>
 
                 {/* Product Carousel */}
-                <div className="relative " >
-                  <div className="flex gap-1 overflow-x-auto scrollbar-hide pb-4" ref={scrollRef}
-                    style={{ whiteSpace: 'nowrap' }}>
-
+                <div className="relative group">
+                  <div
+                    className="flex gap-1 overflow-x-auto scrollbar-hide pb-4"
+                    ref={scrollRef1}
+                    style={{ whiteSpace: 'nowrap' }}
+                    onScroll={handleScroll}
+                  >
                     {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
                       <div key={index}>
                         <div className="flex-shrink-0 w-48">
@@ -1283,7 +1317,7 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                               alt="Gothic Letter Pendant"
                               width={190}
                               height={190}
-                              className=" rounded-lg object-contain"
+                              className="rounded-lg object-contain"
                             />
                           </div>
                           <div className="space-y-1">
@@ -1297,7 +1331,26 @@ export default function Home({ params }: { params: Promise<{ product: string }> 
                     ))}
                   </div>
 
-                  {/* Navigation Arrows */}
+                  {/* Navigation Arrows - Desktop/Laptop Only */}
+                  {showLeftArrow && (
+                    <button
+                      onClick={scrollLeft}
+                      className="hidden md:flex absolute left-2 top-3/7 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 z-10 items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200"
+                      aria-label="Scroll left"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-gray-600" />
+                    </button>
+                  )}
+
+                  {showRightArrow && (
+                    <button
+                      onClick={scrollRight}
+                      className="hidden md:flex absolute right-2 top-3/7 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 z-10 items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200"
+                      aria-label="Scroll right"
+                    >
+                      <ChevronRight className="w-5 h-5 text-gray-600" />
+                    </button>
+                  )}
                 </div>
               </div>
 
