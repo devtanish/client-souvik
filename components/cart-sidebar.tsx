@@ -1,6 +1,7 @@
 "use client"
 
 import { useCart } from "@/contexts/cart-context"
+import Link from "next/link"
 import { X, Minus, Plus, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -300,7 +301,9 @@ export default function CartSidebar() {
                 </div>
               </div>
 
-              <Button className=" rounded-none w-full mt-4 bg-black hover:bg-gray-900 text-white">CHECKOUT</Button>
+              <Link href="/cart/product"> 
+                <Button className=" rounded-none w-full mt-4 bg-black hover:bg-gray-900 text-white">CHECKOUT</Button>
+              </Link>
 
               <div className="text-xs text-center mt-2 text-gray-600">
                 4 payments of $42.00 with <strong>afterpay</strong> or <strong>Klarna.</strong>{" "}
