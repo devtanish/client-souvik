@@ -2,11 +2,11 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
-import { ScrollArea } from "./ui/scroll-area";
+import StyleWithSidebar from "./styleWithSidebar"
 import { Card, CardContent } from "@/components/ui/card"
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
-import { Info, Plus, Minus, X } from "lucide-react"
+import { Info, Plus, Minus } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,7 +22,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { products } from "../components/data"
 import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
-import Link from "next/link";
+import Link from "next/link"
 
 const oswald = Hind({
   subsets: ["latin"],
@@ -86,8 +86,9 @@ const AnimatedToggleButton = ({
         <Minus size={16} className={isOpen ? "opacity-100" : "opacity-0"} />
       </span>
       <span
-        className={`absolute transition-transform duration-300 ${isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-          }`}
+        className={`absolute transition-transform duration-300 ${
+          isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+        }`}
       >
         <Plus size={16} color="gray" />
       </span>
@@ -136,21 +137,21 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
 
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const element = scrollRef.current;
+    const element = scrollRef.current
 
-    if (!element) return; // Handle null case
+    if (!element) return // Handle null case
 
     const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      element.scrollLeft += e.deltaY;
-    };
+      e.preventDefault()
+      element.scrollLeft += e.deltaY
+    }
 
-    element.addEventListener('wheel', handleWheel, { passive: false });
-    return () => element.removeEventListener('wheel', handleWheel);
-  }, []);
+    element.addEventListener("wheel", handleWheel, { passive: false })
+    return () => element.removeEventListener("wheel", handleWheel)
+  }, [])
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryScrollRef.current) {
@@ -231,35 +232,35 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
     return filtered
   }
 
-  const scrollRef1 = useRef<HTMLDivElement>(null); 
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
+  const scrollRef1 = useRef<HTMLDivElement>(null)
+  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showRightArrow, setShowRightArrow] = useState(true)
 
   const scrollLeft = () => {
     if (scrollRef1.current) {
       scrollRef1.current.scrollBy({
         left: -200,
-        behavior: 'smooth'
-      });
+        behavior: "smooth",
+      })
     }
-  };
+  }
 
   const scrollRight = () => {
     if (scrollRef1.current) {
       scrollRef1.current.scrollBy({
         left: 200,
-        behavior: 'smooth'
-      });
+        behavior: "smooth",
+      })
     }
-  };
+  }
 
   const handleScroll = () => {
     if (scrollRef1.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef1.current;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef1.current
+      setShowLeftArrow(scrollLeft > 0)
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1)
     }
-  };
+  }
 
   return (
     <TooltipProvider>
@@ -317,69 +318,69 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                         setLiked(!liked)
                         !liked
                           ? addToWishlist({
-                            id: productcat?.id?.toString() || "",
-                            name: productcat?.title || "",
-                            price: productcat?.price || 0,
-                            image: productcat?.productImg?.[0] || "",
-                            material: selectedMetal?.displayName || "",
-                            sizes: activeSize || "",
-                            stone: activeStone || "",
-                            length: activeLength || "",
-                            GemStone: selectedGemstone
-                              ? {
-                                id: selectedGemstone.id.toString(),
-                                grade: selectedGemstone.grade,
-                                price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
-                                url: selectedGemstone.url || "/placeholder.svg",
-                                description: selectedGemstone.description,
-                              }
-                              : undefined,
-                            GemQuality: {
-                              id: selectedQuality?.id.toString() || "",
-                              name: selectedQuality?.name || "",
-                              grade: selectedQuality?.grade || "",
-                              price: selectedQuality?.price || 0,
-                            },
-                            bands: activeBand
-                              ? {
-                                name: activeBand,
-                                img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                              }
-                              : undefined,
-                            bandWidth: activeBandWidth
-                              ? {
-                                name: activeBandWidth,
-                                img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                              }
-                              : undefined,
-                            shape: activeStone
-                              ? {
-                                id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                                name: activeStone,
-                              }
-                              : undefined,
-                            CaratWidth: selectedCarat
-                              ? {
-                                id: selectedCarat.id.toString(),
-                                weight: selectedCarat.weight,
-                                displayWeight: selectedCarat.displayWeight,
-                                price: selectedCarat.price,
-                                url: selectedCarat.url,
-                              }
-                              : undefined,
-                            metalType: selectedMetal
-                              ? {
-                                id: selectedMetal.id.toString(),
-                                name: selectedMetal.displayName,
-                                displayName: selectedMetal.displayName,
-                                price: 0,
-                                url: selectedMetal.url,
-                                color: selectedMetal.color,
-                              }
-                              : undefined,
-                            diamond: selectedDiamond || "",
-                            backingOption: selectedBacking || "",
-                          })
+                              id: productcat?.id?.toString() || "",
+                              name: productcat?.title || "",
+                              price: productcat?.price || 0,
+                              image: productcat?.productImg?.[0] || "",
+                              material: selectedMetal?.displayName || "",
+                              sizes: activeSize || "",
+                              stone: activeStone || "",
+                              length: activeLength || "",
+                              GemStone: selectedGemstone
+                                ? {
+                                    id: selectedGemstone.id.toString(),
+                                    grade: selectedGemstone.grade,
+                                    price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
+                                    url: selectedGemstone.url || "/placeholder.svg",
+                                    description: selectedGemstone.description,
+                                  }
+                                : undefined,
+                              GemQuality: {
+                                id: selectedQuality?.id.toString() || "",
+                                name: selectedQuality?.name || "",
+                                grade: selectedQuality?.grade || "",
+                                price: selectedQuality?.price || 0,
+                              },
+                              bands: activeBand
+                                ? {
+                                    name: activeBand,
+                                    img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                                  }
+                                : undefined,
+                              bandWidth: activeBandWidth
+                                ? {
+                                    name: activeBandWidth,
+                                    img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                                  }
+                                : undefined,
+                              shape: activeStone
+                                ? {
+                                    id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                                    name: activeStone,
+                                  }
+                                : undefined,
+                              CaratWidth: selectedCarat
+                                ? {
+                                    id: selectedCarat.id.toString(),
+                                    weight: selectedCarat.weight,
+                                    displayWeight: selectedCarat.displayWeight,
+                                    price: selectedCarat.price,
+                                    url: selectedCarat.url,
+                                  }
+                                : undefined,
+                              metalType: selectedMetal
+                                ? {
+                                    id: selectedMetal.id.toString(),
+                                    name: selectedMetal.displayName,
+                                    displayName: selectedMetal.displayName,
+                                    price: 0,
+                                    url: selectedMetal.url,
+                                    color: selectedMetal.color,
+                                  }
+                                : undefined,
+                              diamond: selectedDiamond || "",
+                              backingOption: selectedBacking || "",
+                            })
                           : removeFromWishlist(productcat?.id?.toString() || "")
                       }}
                       viewBox="0 0 24 24"
@@ -424,8 +425,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isShapeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isShapeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className=" h-12">
                           <div className="mx-3 -translate-y-4 relative">
@@ -543,8 +545,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isGemstoneOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isGemstoneOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="pt-2">
                           <div className="flex gap-2 mb-2">
@@ -579,10 +582,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 productcat?.labGrownGemstones?.map((option) => (
                                   <div
                                     key={option.id}
-                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                      ? "border-black bg-gray-100"
-                                      : "border-gray-200 hover:border-gray-300"
-                                      }`}
+                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                      selectedGemstone?.id === option.id
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-200 hover:border-gray-300"
+                                    }`}
                                     onClick={() => setSelectedGemstone(option)}
                                   >
                                     <Image
@@ -600,10 +604,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 productcat?.naturalGemstones?.map((option) => (
                                   <div
                                     key={option.id}
-                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                      ? "border-black bg-gray-100"
-                                      : "border-gray-200 hover:border-gray-300"
-                                      }`}
+                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                      selectedGemstone?.id === option.id
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-200 hover:border-gray-300"
+                                    }`}
                                     onClick={() => setSelectedGemstone(option)}
                                   >
                                     <Image
@@ -646,8 +651,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="relative pt-2">
                           <div
@@ -658,10 +664,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                             {productcat?.CaratWidth.map((option) => (
                               <div
                                 key={option.id}
-                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedCarat?.id === option.id
-                                  ? "border-black bg-gray-50"
-                                  : "border-gray-200 hover:border-gray-300"
-                                  }`}
+                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                  selectedCarat?.id === option.id
+                                    ? "border-black bg-gray-50"
+                                    : "border-gray-200 hover:border-gray-300"
+                                }`}
                                 onClick={() => setSelectedCarat(option)}
                               >
                                 <Image
@@ -702,8 +709,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isMetalTypeOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isMetalTypeOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="pt-2">
                           {/* Metal Type Sorting Buttons */}
@@ -787,10 +795,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                               {getFilteredMetals().map((option) => (
                                 <div
                                   key={option.id}
-                                  className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedMetal?.id === option.id
-                                    ? "border-black bg-gray-50"
-                                    : "border-gray-200 hover:border-gray-300"
-                                    }`}
+                                  className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                    selectedMetal?.id === option.id
+                                      ? "border-black bg-gray-50"
+                                      : "border-gray-200 hover:border-gray-300"
+                                  }`}
                                   onClick={() => setSelectedMetal(option)}
                                 >
                                   <Image
@@ -831,8 +840,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isBandOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isBandOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-10.5">
                           <div className="mx-3 -translate-y-4 relative">
@@ -856,7 +866,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
                                       className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBand === category.name && "border-black border rounded-4xl "}`}
-                                      onClick={()=> {
+                                      onClick={() => {
                                         console.log(category.name)
                                       }}
                                     >
@@ -899,8 +909,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isBandWidthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isBandWidthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-10.5">
                           <div className="mx-3 -translate-y-4 relative">
@@ -965,8 +976,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isSizeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isSizeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-11">
                           <div className="mx-3 -translate-y-4 relative">
@@ -1033,8 +1045,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isLengthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isLengthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-11.5">
                           <div className="mx-3 -translate-y-4 relative">
@@ -1127,49 +1140,49 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                       length: activeLength || "",
                       GemStone: selectedGemstone
                         ? {
-                          id: selectedGemstone.id.toString(),
-                          grade: selectedGemstone.grade,
-                          price: selectedGemstone.price,
-                          url: selectedGemstone.url || "/placeholder.svg",
-                          description: selectedGemstone.description,
-                        }
+                            id: selectedGemstone.id.toString(),
+                            grade: selectedGemstone.grade,
+                            price: selectedGemstone.price,
+                            url: selectedGemstone.url || "/placeholder.svg",
+                            description: selectedGemstone.description,
+                          }
                         : undefined,
                       bands: activeBand
                         ? {
-                          name: activeBand,
-                          img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                        }
+                            name: activeBand,
+                            img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                          }
                         : undefined,
                       bandWidth: activeBandWidth
                         ? {
-                          name: activeBandWidth,
-                          img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                        }
+                            name: activeBandWidth,
+                            img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                          }
                         : undefined,
                       shape: activeStone
                         ? {
-                          id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                          name: activeStone,
-                        }
+                            id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                            name: activeStone,
+                          }
                         : undefined,
                       CaratWidth: selectedCarat
                         ? {
-                          id: selectedCarat.id.toString(),
-                          weight: selectedCarat.weight,
-                          displayWeight: selectedCarat.displayWeight,
-                          price: selectedCarat.price,
-                          url: selectedCarat.url,
-                        }
+                            id: selectedCarat.id.toString(),
+                            weight: selectedCarat.weight,
+                            displayWeight: selectedCarat.displayWeight,
+                            price: selectedCarat.price,
+                            url: selectedCarat.url,
+                          }
                         : undefined,
                       metalType: selectedMetal
                         ? {
-                          id: selectedMetal.id.toString(),
-                          name: selectedMetal.displayName,
-                          displayName: selectedMetal.displayName,
-                          price: 0,
-                          url: selectedMetal.url,
-                          color: selectedMetal.color,
-                        }
+                            id: selectedMetal.id.toString(),
+                            name: selectedMetal.displayName,
+                            displayName: selectedMetal.displayName,
+                            price: 0,
+                            url: selectedMetal.url,
+                            color: selectedMetal.color,
+                          }
                         : undefined,
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
@@ -1186,49 +1199,49 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                       length: activeLength || "",
                       GemStone: selectedGemstone
                         ? {
-                          id: selectedGemstone.id.toString(),
-                          grade: selectedGemstone.grade,
-                          price: selectedGemstone.price,
-                          url: selectedGemstone.url || "/placeholder.svg",
-                          description: selectedGemstone.description,
-                        }
+                            id: selectedGemstone.id.toString(),
+                            grade: selectedGemstone.grade,
+                            price: selectedGemstone.price,
+                            url: selectedGemstone.url || "/placeholder.svg",
+                            description: selectedGemstone.description,
+                          }
                         : undefined,
                       bands: activeBand
                         ? {
-                          name: activeBand,
-                          img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                        }
+                            name: activeBand,
+                            img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                          }
                         : undefined,
                       bandWidth: activeBandWidth
                         ? {
-                          name: activeBandWidth,
-                          img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                        }
+                            name: activeBandWidth,
+                            img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                          }
                         : undefined,
                       shape: activeStone
                         ? {
-                          id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                          name: activeStone,
-                        }
+                            id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                            name: activeStone,
+                          }
                         : undefined,
                       CaratWidth: selectedCarat
                         ? {
-                          id: selectedCarat.id.toString(),
-                          weight: selectedCarat.weight,
-                          displayWeight: selectedCarat.displayWeight,
-                          price: selectedCarat.price,
-                          url: selectedCarat.url,
-                        }
+                            id: selectedCarat.id.toString(),
+                            weight: selectedCarat.weight,
+                            displayWeight: selectedCarat.displayWeight,
+                            price: selectedCarat.price,
+                            url: selectedCarat.url,
+                          }
                         : undefined,
                       metalType: selectedMetal
                         ? {
-                          id: selectedMetal.id.toString(),
-                          name: selectedMetal.displayName,
-                          displayName: selectedMetal.displayName,
-                          price: 0,
-                          url: selectedMetal.url,
-                          color: selectedMetal.color,
-                        }
+                            id: selectedMetal.id.toString(),
+                            name: selectedMetal.displayName,
+                            displayName: selectedMetal.displayName,
+                            price: 0,
+                            url: selectedMetal.url,
+                            color: selectedMetal.color,
+                          }
                         : undefined,
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
@@ -1301,7 +1314,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
               <div className="py-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="font-medium text-lg">Style With</h2>
-                  <button className="text-sm underline font-medium" onClick={()=> setShowSidebar(true)}>VIEW ALL</button>
+                  <button className="text-sm underline font-medium" onClick={() => setShowSidebar(true)}>
+                    VIEW ALL
+                  </button>
                 </div>
 
                 {/* Product Carousel */}
@@ -1309,30 +1324,31 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                   <div
                     className="flex gap-1 overflow-x-auto scrollbar-hide pb-4"
                     ref={scrollRef1}
-                    style={{ whiteSpace: 'nowrap' }}
+                    style={{ whiteSpace: "nowrap" }}
                     onScroll={handleScroll}
                   >
-                    {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
-                      <Link href={item.url} key={index}>
-                        <div className="flex-shrink-0 w-48">
-                          <div className="bg-gray-50 p-0 mb-3 aspect-square flex items-center justify-center">
-                            <Image
-                              src={item.imgURL}
-                              alt="Gothic Letter Pendant"
-                              width={190}
-                              height={190}
-                              className="rounded-lg object-contain"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <h3 className="font-medium text-sm">{item.name}</h3>
-                            <div className="text-sm text-gray-600">
-                              <span className="font-medium">${item.price}</span>
+                    {productcat?.styleWith &&
+                      productcat?.styleWith.map((item, index) => (
+                        <Link href={item.url} key={index}>
+                          <div className="flex-shrink-0 w-48">
+                            <div className="bg-gray-50 p-0 mb-3 aspect-square flex items-center justify-center">
+                              <Image
+                                src={item.imgURL || "/placeholder.svg"}
+                                alt="Gothic Letter Pendant"
+                                width={190}
+                                height={190}
+                                className="rounded-lg object-contain"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <h3 className="font-medium text-sm">{item.name}</h3>
+                              <div className="text-sm text-gray-600">
+                                <span className="font-medium">${item.price}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    ))}
+                        </Link>
+                      ))}
                   </div>
 
                   {/* Navigation Arrows - Desktop/Laptop Only */}
@@ -1383,61 +1399,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
             <div></div>
           </div>
         </div>
-        {showSidebar && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
-            onClick={() => setShowSidebar(false)}
-          />
-
-          {/* Sidebar */}
-          <div
-            className={`fixed top-0 right-0 bottom-0 bg-white z-50 transform transition-transform duration-300 ease-out ${
-              showSidebar ? "translate-x-0" : "translate-x-full"
-            } shadow-2xl w-full max-w-lg`}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b sticky top-0 bg-white rounded-tl-2xl">
-              <h2 className="font-semibold text-lg">Style With ({productcat?.styleWith && productcat?.styleWith.length} items)</h2>
-              <Button onClick={() => setShowSidebar(false)} size="icon" variant="ghost" className="rounded-full">
-                <X className="w-5 h-5" />
-              </Button>
-            </div>
-
-            {/* Content */}
-            <ScrollArea className="flex-1 h-[calc(100vh-80px)]">
-              <div className="p-4">
-                <div className="grid grid-cols-2 gap-4">
-                  {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
-                    <Link href={item.url} key={index} onClick={() => setShowSidebar(false)}>
-                      <div className="group cursor-pointer">
-                        <div className="bg-gray-50 p-2 mb-3 aspect-square flex items-center justify-center group-hover:bg-gray-100 transition-colors">
-                          <Image
-                            src={item.imgURL || "/placeholder.svg"}
-                            alt={item.name}
-                            width={150}
-                            height={150}
-                            className=" object-contain w-full h-full"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <h3 className="font-medium text-sm group-hover:text-gray-600 transition-colors line-clamp-2">
-                            {item.name}
-                          </h3>
-                          <div className="text-sm text-gray-600">
-                            <span className="font-medium">${item.price}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </ScrollArea>
-          </div>
-        </>
-      )}
+        <StyleWithSidebar productcat={productcat} setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
 
         {/* Ring Size Guide Sidebar (First size guide - unchanged) */}
         <RingSizeGuideSidebar isOpen={isSizeGuideOpen} onClose={() => setIsSizeGuideOpen(false)} />

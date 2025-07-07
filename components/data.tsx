@@ -268,6 +268,11 @@ export const products = [
       price: 198,
       imgURL: "/jwel/5.avif",
       url: "#",
+      hoverImage: "/jwel/3.avif",
+      bestSeller: true,
+      colors: [metalscolor[0].color, metalscolor[1].color],
+      inStock: true,
+      material: "18kt Gold"
     },
     {
       id:2,
@@ -276,6 +281,11 @@ export const products = [
       price: 268,
       imgURL: "/jwel/4.avif",
       url: "#",
+      hoverImage: "/jwel/3.avif",
+      bestSeller: false,
+      colors: [metalscolor[0].color, metalscolor[1].color],
+      inStock: false,
+      material: "18kt Gold"
    },
    {
       id:3,
@@ -284,6 +294,11 @@ export const products = [
       price: 156,
       imgURL: "/jwel/3.avif",
       url: "#",
+      hoverImage: "/jwel/2.avif",
+      bestSeller: true,
+      colors: [metalscolor[0].color, metalscolor[1].color],
+      inStock: true,
+      material: "18kt Gold"
    },
    {
       id:4,
@@ -292,6 +307,11 @@ export const products = [
       price: 89,
       imgURL: "/jwel/2.avif",
       url: "#",
+      hoverImage: "/jwel/3.avif",
+      bestSeller: false,
+      colors: [metalscolor[0].color, metalscolor[1].color],
+      inStock: true,
+      material: "18kt Gold"
    },
    {
       id:5,
@@ -300,6 +320,11 @@ export const products = [
       price: 145,
       imgURL: "/jwel/1.avif",
       url: "#",
+      hoverImage: "/jwel/3.avif",
+      bestSeller: true,
+      colors: [metalscolor[0].color, metalscolor[1].color],
+      inStock: true,
+      material: "18kt Gold"
    },
   ]
   },
