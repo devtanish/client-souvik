@@ -2,10 +2,11 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
+import { ScrollArea } from "./ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react";
 import { useCart } from "@/contexts/cart-context"
-import { Info, Plus, Minus } from "lucide-react"
+import { Info, Plus, Minus, X } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -99,6 +100,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
   const { product } = React.use(params)
 
+  const [showSidebar, setShowSidebar] = React.useState(false)
   const originalValue = product.replaceAll("%20", " ")
   const productcat = products.find((p) => p.name === originalValue)
 
@@ -848,13 +850,15 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     activeBand === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
                                   )}
                                   onClick={() => {
-                                    console.log(category)
                                     setActiveBand(category.name)
                                   }}
                                 >
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
                                       className={`${oswald.className}  h-9 w-9  text-center  mt-6 ml-[1.6rem] ${activeBand === category.name && "border-black border rounded-4xl "}`}
+                                      onClick={()=> {
+                                        console.log(category.name)
+                                      }}
                                     >
                                       <Image
                                         src={category.img || "/placeholder.svg"}
@@ -1297,7 +1301,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
               <div className="py-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="font-medium text-lg">Style With</h2>
-                  <button className="text-sm underline font-medium">VIEW ALL</button>
+                  <button className="text-sm underline font-medium" onClick={()=> setShowSidebar(true)}>VIEW ALL</button>
                 </div>
 
                 {/* Product Carousel */}
@@ -1379,6 +1383,61 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
             <div></div>
           </div>
         </div>
+        {showSidebar && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
+            onClick={() => setShowSidebar(false)}
+          />
+
+          {/* Sidebar */}
+          <div
+            className={`fixed top-0 right-0 bottom-0 bg-white z-50 transform transition-transform duration-300 ease-out ${
+              showSidebar ? "translate-x-0" : "translate-x-full"
+            } shadow-2xl w-full max-w-lg`}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b sticky top-0 bg-white rounded-tl-2xl">
+              <h2 className="font-semibold text-lg">Style With ({productcat?.styleWith && productcat?.styleWith.length} items)</h2>
+              <Button onClick={() => setShowSidebar(false)} size="icon" variant="ghost" className="rounded-full">
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+
+            {/* Content */}
+            <ScrollArea className="flex-1 h-[calc(100vh-80px)]">
+              <div className="p-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {productcat?.styleWith && productcat?.styleWith.map((item, index) => (
+                    <Link href={item.url} key={index} onClick={() => setShowSidebar(false)}>
+                      <div className="group cursor-pointer">
+                        <div className="bg-gray-50 p-2 mb-3 aspect-square flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                          <Image
+                            src={item.imgURL || "/placeholder.svg"}
+                            alt={item.name}
+                            width={150}
+                            height={150}
+                            className=" object-contain w-full h-full"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <h3 className="font-medium text-sm group-hover:text-gray-600 transition-colors line-clamp-2">
+                            {item.name}
+                          </h3>
+                          <div className="text-sm text-gray-600">
+                            <span className="font-medium">${item.price}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </ScrollArea>
+          </div>
+        </>
+      )}
 
         {/* Ring Size Guide Sidebar (First size guide - unchanged) */}
         <RingSizeGuideSidebar isOpen={isSizeGuideOpen} onClose={() => setIsSizeGuideOpen(false)} />
