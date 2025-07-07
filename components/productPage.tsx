@@ -400,7 +400,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                 {/* Shape Section */}
                 <div>
                   {productcat?.shape && (
-                    <div className="mb-2">
+                    <div className="pb-3">
                       <div className="mt-0 font-bold text-xl flex">
                         Starting at <div className={` text-lg ml-1 translate-y-0.5`}> ${productcat?.price}</div>
                       </div>
@@ -427,7 +427,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                         className={`overflow-hidden transition-all duration-300 ease-in-out ${isShapeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
                           }`}
                       >
-                        <div className=" h-10">
+                        <div className=" h-12">
                           <div className="mx-3 -translate-y-4 relative">
                             <button
                               onClick={() => scrollCategories("left")}
@@ -447,7 +447,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                   key={index}
                                   className={cn(
                                     "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all -translate-y-0.5",
-                                    "lg:w-1/10 sm:w-1/10 w-1/7",
+                                    "lg:w-1/9 sm:w-1/10 w-1/7",
                                     activeStone === category.name ? "opacity-100 " : "opacity-80 hover:opacity-100",
                                   )}
                                   onClick={() => {
@@ -455,7 +455,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     setActiveStone(category.name)
                                   }}
                                 >
-                                  <div className={`relative h-20 w-20`}>
+                                  <div className={`relative h-20 w-20 `}>
                                     <Image
                                       src={category.element || "/placeholder.svg"}
                                       alt={category.name}
@@ -464,7 +464,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     />
                                   </div>
                                   {activeStone === category.name && (
-                                    <div className="border-1 w-7 border-black transition-transform duration-300 -translate-y-4.5"></div>
+                                    <div className="border-1 w-11 h-11 border-black transition-transform duration-300 -translate-y-15.5 rounded-4xl"></div>
                                   )}
                                 </div>
                               ))}
