@@ -465,7 +465,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     setActiveStone(category.name)
                                   }}
                                 >
-                                  <div className="relative h-20 w-20 transition-transform duration-300 ease-out group-hover:scale-110">
+                                  <div className={`relative h-20 w-20 transition-transform duration-300 ease-out group-hover:scale-130 ${activeStone === category.name && "scale-130"}`}>
                                     <Image
                                       src={category.element || "/placeholder.svg"}
                                       alt={category.name}
@@ -474,7 +474,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     />
                                   </div>
                                   {activeStone === category.name && (
-                                    <div className="border-1 w-11 h-11 border-black transition-all duration-300 ease-out -translate-y-15.5 rounded-4xl animate-pulse"></div>
+                                    <div className=" w-11 h-11 transition-all duration-300 ease-out -translate-y-15.5  animate-pulse"></div>
                                   )}
                                 </div>
                               ))}
