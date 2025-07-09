@@ -3,12 +3,12 @@
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
 import localFont from "next/font/local"
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import StyleWithSidebar from "./styleWithSidebar"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { Info, Plus, Minus } from "lucide-react"
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Hind } from "next/font/google"
@@ -279,35 +279,72 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
     }
   }
 
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
   return (
     <TooltipProvider>
       <div className="mt-13.5 md:mt-28 lg:mt-36 w-full mb-20">
         <div className="md:mt-0 lg:mx-2.5 md:mx-6 mx-0">
           <div className="grid gap-1.5 grid-cols-1 md:grid-cols-3 lg:grid-cols-11 ">
             <div className="flex justify-center lg:hidden col-span-full -mx-4 md:mx-0 -mb-9 md:-mb-2 lg:mb-6">
-              <Carousel className="w-full max-w-2xl md:max-w-3xl flex lg:hidden">
-                <CarouselContent className="border-none">
-                  {productcat?.productImg?.map((img, index) => (
-                    <CarouselItem key={index}>
-                      <div className="px-0 md:px-2">
-                        <Card className="border-none shadow-none">
-                          <CardContent className="border-none shadow-none flex items-center justify-center p-1">
-                            <div className="w-full aspect-[3/3] md:aspect-[4/3] flex items-center justify-center overflow-hidden ">
-                              <Image
-                                src={img || "/placeholder.svg"}
-                                alt="product"
-                                className="cursor-crosshair w-full h-full object-cover"
-                                width={800}
-                                height={600}
-                              />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
+              <div className="relative w-full max-w-2xl md:max-w-3xl">
+                <Carousel className="w-full flex lg:hidden" setApi={setApi}>
+                  <CarouselContent className="border-none">
+                    {productcat?.productImg?.map((img, index) => (
+                      <CarouselItem key={index}>
+                        <div className="px-0 md:px-2">
+                          <Card className="border-none shadow-none">
+                            <CardContent className="border-none shadow-none flex items-center justify-center p-1">
+                              <div className="w-full aspect-[3/3] md:aspect-[4/3] flex items-center justify-center overflow-hidden">
+                                <Image
+                                  src={img || "/placeholder.svg"}
+                                  alt="product"
+                                  className="cursor-crosshair w-full h-full object-cover"
+                                  width={800}
+                                  height={600}
+                                />
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+
+                {/* Image indicators positioned at bottom right */}
+                <div className="absolute bottom-8 right-5 flex flex-col items-end gap-2">
+                  {/* Dots indicator */}
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: count }).map((_, index) => (
+                      <button
+                        key={index}
+                        className={`text-lg font-bold transition-all duration-200 ${index === current - 1 ? "text-[#010614] scale-110" : "text-blue-200 hover:text-white/70"
+                          }`}
+                        onClick={() => api?.scrollTo(index)}
+                        aria-label={`Go to slide ${index + 1}`}
+                      >
+                        •
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="col-span-8 space-y-1.5 flex-wrap hidden lg:flex">
               {productcat?.productImg?.map((img, index) => (
