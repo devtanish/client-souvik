@@ -334,7 +334,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                     {Array.from({ length: count }).map((_, index) => (
                       <button
                         key={index}
-                        className={`text-lg font-bold transition-all duration-200 ${index === current - 1 ? "text-[#010614] scale-110" : "text-blue-200 hover:text-white/70"
+                        className={`text-lg font-bold transition-all duration-200 ${index === current - 1 ? "text-[#010614] scale-110" : "text-white/70 hover:text-white/70"
                           }`}
                         onClick={() => api?.scrollTo(index)}
                         aria-label={`Go to slide ${index + 1}`}
