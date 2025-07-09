@@ -2,6 +2,7 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
+import localFont from "next/font/local"
 import StyleWithSidebar from "./styleWithSidebar"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
@@ -23,6 +24,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { products } from "../components/data"
 import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
 import Link from "next/link"
+
+const fontLocal = localFont({
+  src: "../public/fonts/ciguatera.otf", // use relative path if inside project folder
+  display: "swap", // optional but recommended
+  weight: "900",
+});
 
 const oswald = Hind({
   subsets: ["latin"],
@@ -1000,7 +1007,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 >
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
-                                      className={`${beVietnamPro.className}  h-9 w-11 items-center text-xs pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
+                                      className={`${fontLocal.className} text-sm  h-9 w-11 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
                                     >
                                       <div className=" translate-y-1">{category}</div>
                                     </div>
@@ -1066,7 +1073,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     setActiveLength(category)
                                   }}
                                 >
-                                  <div className={`relative h-20 w-20 ${oswald.className} `}>
+                                  <div className={`relative h-20 w-20 ${fontLocal.className} `}>
                                     <div
                                       className={`h-9 w-15 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeLength === category && "border-black border"}`}
                                     >
