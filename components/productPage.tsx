@@ -93,8 +93,9 @@ const AnimatedToggleButton = ({
         <Minus size={16} className={isOpen ? "opacity-100" : "opacity-0"} />
       </span>
       <span
-        className={`absolute transition-transform duration-300 ${isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-          }`}
+        className={`absolute transition-transform duration-300 ${
+          isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+        }`}
       >
         <Plus size={16} color="gray" />
       </span>
@@ -328,23 +329,66 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                   </CarouselContent>
                 </Carousel>
 
-                {/* Image indicators positioned at bottom right */}
-                <div className="absolute bottom-8 right-5 flex flex-col items-end gap-2">
-                  {/* Dots indicator */}
-                  <div className="flex items-center gap-1">
+                {/* Enhanced Image indicators positioned at bottom center */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+                  {/* Enhanced Dots indicator */}
+                  <div className="flex items-center gap-1.5">
                     {Array.from({ length: count }).map((_, index) => (
                       <button
                         key={index}
-                        className={`text-lg font-bold transition-all duration-200 ${index === current - 1 ? "text-[#010614] scale-110" : "text-white/70 hover:text-white/70"
-                          }`}
+                        className={`pagination-dot ${index === current - 1 ? "active" : ""}`}
                         onClick={() => api?.scrollTo(index)}
                         aria-label={`Go to slide ${index + 1}`}
                       >
-                        •
+                        <span className="sr-only">Go to slide {index + 1}</span>
                       </button>
                     ))}
                   </div>
                 </div>
+
+                <style jsx>{`
+                  .pagination-dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                    background: transparent;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                  }
+
+                  .pagination-dot:hover {
+                    border-color: rgba(255, 255, 255, 0.8);
+                    transform: scale(1.2);
+                  }
+
+                  .pagination-dot.active {
+                    background: white;
+                    border-color: white;
+                    transform: scale(1.3);
+                  }
+
+                  .pagination-dot.active::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 100%;
+                    height: 100%;
+                    background: white;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    animation: fillDot 0.3s ease forwards;
+                  }
+
+                  @keyframes fillDot {
+                    to {
+                      transform: translate(-50%, -50%) scale(1);
+                    }
+                  }
+                `}</style>
               </div>
             </div>
             <div className="col-span-8 space-y-1.5 flex-wrap hidden lg:flex">
@@ -373,69 +417,69 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                         setLiked(!liked)
                         !liked
                           ? addToWishlist({
-                            id: productcat?.id?.toString() || "",
-                            name: productcat?.title || "",
-                            price: productcat?.price || 0,
-                            image: productcat?.productImg?.[0] || "",
-                            material: selectedMetal?.displayName || "",
-                            sizes: activeSize || "",
-                            stone: activeStone || "",
-                            length: activeLength || "",
-                            GemStone: selectedGemstone
-                              ? {
-                                id: selectedGemstone.id.toString(),
-                                grade: selectedGemstone.grade,
-                                price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
-                                url: selectedGemstone.url || "/placeholder.svg",
-                                description: selectedGemstone.description,
-                              }
-                              : undefined,
-                            GemQuality: {
-                              id: selectedQuality?.id.toString() || "",
-                              name: selectedQuality?.name || "",
-                              grade: selectedQuality?.grade || "",
-                              price: selectedQuality?.price || 0,
-                            },
-                            bands: activeBand
-                              ? {
-                                name: activeBand,
-                                img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                              }
-                              : undefined,
-                            bandWidth: activeBandWidth
-                              ? {
-                                name: activeBandWidth,
-                                img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                              }
-                              : undefined,
-                            shape: activeStone
-                              ? {
-                                id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                                name: activeStone,
-                              }
-                              : undefined,
-                            CaratWidth: selectedCarat
-                              ? {
-                                id: selectedCarat.id.toString(),
-                                weight: selectedCarat.weight,
-                                displayWeight: selectedCarat.displayWeight,
-                                price: selectedCarat.price,
-                                url: selectedCarat.url,
-                              }
-                              : undefined,
-                            metalType: selectedMetal
-                              ? {
-                                id: selectedMetal.id.toString(),
-                                name: selectedMetal.displayName,
-                                displayName: selectedMetal.displayName,
-                                price: 0,
-                                url: selectedMetal.url,
-                                color: selectedMetal.color,
-                              }
-                              : undefined,
-                            diamond: selectedDiamond || "",
-                            backingOption: selectedBacking || "",
-                          })
+                              id: productcat?.id?.toString() || "",
+                              name: productcat?.title || "",
+                              price: productcat?.price || 0,
+                              image: productcat?.productImg?.[0] || "",
+                              material: selectedMetal?.displayName || "",
+                              sizes: activeSize || "",
+                              stone: activeStone || "",
+                              length: activeLength || "",
+                              GemStone: selectedGemstone
+                                ? {
+                                    id: selectedGemstone.id.toString(),
+                                    grade: selectedGemstone.grade,
+                                    price: selectedGemstone.price + (selectedQuality?.price || 0), // Include quality price
+                                    url: selectedGemstone.url || "/placeholder.svg",
+                                    description: selectedGemstone.description,
+                                  }
+                                : undefined,
+                              GemQuality: {
+                                id: selectedQuality?.id.toString() || "",
+                                name: selectedQuality?.name || "",
+                                grade: selectedQuality?.grade || "",
+                                price: selectedQuality?.price || 0,
+                              },
+                              bands: activeBand
+                                ? {
+                                    name: activeBand,
+                                    img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                                  }
+                                : undefined,
+                              bandWidth: activeBandWidth
+                                ? {
+                                    name: activeBandWidth,
+                                    img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                                  }
+                                : undefined,
+                              shape: activeStone
+                                ? {
+                                    id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                                    name: activeStone,
+                                  }
+                                : undefined,
+                              CaratWidth: selectedCarat
+                                ? {
+                                    id: selectedCarat.id.toString(),
+                                    weight: selectedCarat.weight,
+                                    displayWeight: selectedCarat.displayWeight,
+                                    price: selectedCarat.price,
+                                    url: selectedCarat.url,
+                                  }
+                                : undefined,
+                              metalType: selectedMetal
+                                ? {
+                                    id: selectedMetal.id.toString(),
+                                    name: selectedMetal.displayName,
+                                    displayName: selectedMetal.displayName,
+                                    price: 0,
+                                    url: selectedMetal.url,
+                                    color: selectedMetal.color,
+                                  }
+                                : undefined,
+                              diamond: selectedDiamond || "",
+                              backingOption: selectedBacking || "",
+                            })
                           : removeFromWishlist(productcat?.id?.toString() || "")
                       }}
                       viewBox="0 0 24 24"
@@ -480,8 +524,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isShapeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isShapeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-12">
                           <div className="mx-3 -translate-y-4 relative">
@@ -600,8 +645,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isGemstoneOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isGemstoneOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="pt-2">
                           <div className="flex gap-2 mb-2">
@@ -636,10 +682,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 productcat?.labGrownGemstones?.map((option) => (
                                   <div
                                     key={option.id}
-                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                      ? "border-black bg-gray-100"
-                                      : "border-gray-200 hover:border-gray-300"
-                                      }`}
+                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                      selectedGemstone?.id === option.id
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-200 hover:border-gray-300"
+                                    }`}
                                     onClick={() => setSelectedGemstone(option)}
                                   >
                                     <Image
@@ -657,10 +704,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 productcat?.naturalGemstones?.map((option) => (
                                   <div
                                     key={option.id}
-                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${selectedGemstone?.id === option.id
-                                      ? "border-black bg-gray-100"
-                                      : "border-gray-200 hover:border-gray-300"
-                                      }`}
+                                    className={`min-w-[85px] border -translate-x-6.5 p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                      selectedGemstone?.id === option.id
+                                        ? "border-black bg-gray-100"
+                                        : "border-gray-200 hover:border-gray-300"
+                                    }`}
                                     onClick={() => setSelectedGemstone(option)}
                                   >
                                     <Image
@@ -703,8 +751,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="relative pt-2">
                           <div
@@ -715,10 +764,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                             {productcat?.CaratWidth.map((option) => (
                               <div
                                 key={option.id}
-                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedCarat?.id === option.id
-                                  ? "border-black bg-gray-50"
-                                  : "border-gray-200 hover:border-gray-300"
-                                  }`}
+                                className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                  selectedCarat?.id === option.id
+                                    ? "border-black bg-gray-50"
+                                    : "border-gray-200 hover:border-gray-300"
+                                }`}
                                 onClick={() => setSelectedCarat(option)}
                               >
                                 <Image
@@ -759,8 +809,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isMetalTypeOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isMetalTypeOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="pt-2">
                           {/* Metal Type Sorting Buttons */}
@@ -844,10 +895,11 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                               {getFilteredMetals().map((option) => (
                                 <div
                                   key={option.id}
-                                  className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${selectedMetal?.id === option.id
-                                    ? "border-black bg-gray-50"
-                                    : "border-gray-200 hover:border-gray-300"
-                                    }`}
+                                  className={`min-w-[80px] border p-3 flex flex-col items-center cursor-pointer transition-all ${
+                                    selectedMetal?.id === option.id
+                                      ? "border-black bg-gray-50"
+                                      : "border-gray-200 hover:border-gray-300"
+                                  }`}
                                   onClick={() => setSelectedMetal(option)}
                                 >
                                   <Image
@@ -888,8 +940,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isBandOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isBandOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-10.5">
                           <div className="mx-3 -translate-y-4 relative">
@@ -956,8 +1009,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isBandWidthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isBandWidthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-10.5">
                           <div className="mx-3 -translate-y-4 relative">
@@ -1022,8 +1076,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isSizeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isSizeOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-11">
                           <div className="mx-3 -translate-y-4 relative">
@@ -1090,8 +1145,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isLengthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isLengthOpen ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="h-11.5">
                           <div className="mx-3 -translate-y-4 relative">
@@ -1184,49 +1240,49 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                       length: activeLength || "",
                       GemStone: selectedGemstone
                         ? {
-                          id: selectedGemstone.id.toString(),
-                          grade: selectedGemstone.grade,
-                          price: selectedGemstone.price,
-                          url: selectedGemstone.url || "/placeholder.svg",
-                          description: selectedGemstone.description,
-                        }
+                            id: selectedGemstone.id.toString(),
+                            grade: selectedGemstone.grade,
+                            price: selectedGemstone.price,
+                            url: selectedGemstone.url || "/placeholder.svg",
+                            description: selectedGemstone.description,
+                          }
                         : undefined,
                       bands: activeBand
                         ? {
-                          name: activeBand,
-                          img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                        }
+                            name: activeBand,
+                            img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                          }
                         : undefined,
                       bandWidth: activeBandWidth
                         ? {
-                          name: activeBandWidth,
-                          img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                        }
+                            name: activeBandWidth,
+                            img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                          }
                         : undefined,
                       shape: activeStone
                         ? {
-                          id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                          name: activeStone,
-                        }
+                            id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                            name: activeStone,
+                          }
                         : undefined,
                       CaratWidth: selectedCarat
                         ? {
-                          id: selectedCarat.id.toString(),
-                          weight: selectedCarat.weight,
-                          displayWeight: selectedCarat.displayWeight,
-                          price: selectedCarat.price,
-                          url: selectedCarat.url,
-                        }
+                            id: selectedCarat.id.toString(),
+                            weight: selectedCarat.weight,
+                            displayWeight: selectedCarat.displayWeight,
+                            price: selectedCarat.price,
+                            url: selectedCarat.url,
+                          }
                         : undefined,
                       metalType: selectedMetal
                         ? {
-                          id: selectedMetal.id.toString(),
-                          name: selectedMetal.displayName,
-                          displayName: selectedMetal.displayName,
-                          price: 0,
-                          url: selectedMetal.url,
-                          color: selectedMetal.color,
-                        }
+                            id: selectedMetal.id.toString(),
+                            name: selectedMetal.displayName,
+                            displayName: selectedMetal.displayName,
+                            price: 0,
+                            url: selectedMetal.url,
+                            color: selectedMetal.color,
+                          }
                         : undefined,
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
@@ -1243,49 +1299,49 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                       length: activeLength || "",
                       GemStone: selectedGemstone
                         ? {
-                          id: selectedGemstone.id.toString(),
-                          grade: selectedGemstone.grade,
-                          price: selectedGemstone.price,
-                          url: selectedGemstone.url || "/placeholder.svg",
-                          description: selectedGemstone.description,
-                        }
+                            id: selectedGemstone.id.toString(),
+                            grade: selectedGemstone.grade,
+                            price: selectedGemstone.price,
+                            url: selectedGemstone.url || "/placeholder.svg",
+                            description: selectedGemstone.description,
+                          }
                         : undefined,
                       bands: activeBand
                         ? {
-                          name: activeBand,
-                          img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
-                        }
+                            name: activeBand,
+                            img: productcat?.bands?.find((b) => b.name === activeBand)?.img || "",
+                          }
                         : undefined,
                       bandWidth: activeBandWidth
                         ? {
-                          name: activeBandWidth,
-                          img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
-                        }
+                            name: activeBandWidth,
+                            img: productcat?.bandWidth?.find((b) => b.name === activeBandWidth)?.img || "",
+                          }
                         : undefined,
                       shape: activeStone
                         ? {
-                          id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
-                          name: activeStone,
-                        }
+                            id: productcat?.activeStones?.find((s) => s.name === activeStone)?.id || 0,
+                            name: activeStone,
+                          }
                         : undefined,
                       CaratWidth: selectedCarat
                         ? {
-                          id: selectedCarat.id.toString(),
-                          weight: selectedCarat.weight,
-                          displayWeight: selectedCarat.displayWeight,
-                          price: selectedCarat.price,
-                          url: selectedCarat.url,
-                        }
+                            id: selectedCarat.id.toString(),
+                            weight: selectedCarat.weight,
+                            displayWeight: selectedCarat.displayWeight,
+                            price: selectedCarat.price,
+                            url: selectedCarat.url,
+                          }
                         : undefined,
                       metalType: selectedMetal
                         ? {
-                          id: selectedMetal.id.toString(),
-                          name: selectedMetal.displayName,
-                          displayName: selectedMetal.displayName,
-                          price: 0,
-                          url: selectedMetal.url,
-                          color: selectedMetal.color,
-                        }
+                            id: selectedMetal.id.toString(),
+                            name: selectedMetal.displayName,
+                            displayName: selectedMetal.displayName,
+                            price: 0,
+                            url: selectedMetal.url,
+                            color: selectedMetal.color,
+                          }
                         : undefined,
                       diamond: selectedDiamond || "",
                       backingOption: selectedBacking || "",
@@ -1326,8 +1382,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
 
                       {/* Collapsible Content */}
                       <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isProductDetailsOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
-                          }`}
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          isProductDetailsOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
+                        }`}
                       >
                         <div className="">
                           <div className="text-xl font-medium mb-3">The Classic Design</div>
@@ -1462,8 +1519,6 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                   <Button className="h-9 rounded-none mt-1 w-fit">Submit</Button>
                 </div>
               </div>
-
-
             </div>
             <div></div>
           </div>
