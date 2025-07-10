@@ -29,7 +29,7 @@ const fontLocal = localFont({
   src: "../public/fonts/ciguatera.otf", // use relative path if inside project folder
   display: "swap", // optional but recommended
   weight: "900",
-});
+})
 
 const oswald = Hind({
   subsets: ["latin"],
@@ -140,6 +140,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
   const [isGemstoneExplorerOpen, setIsGemstoneExplorerOpen] = useState(false)
   const [selectedQuality, setSelectedQuality] = useState<GemStone | null>(null)
   const [qualityTabSource, setQualityTabSource] = useState<"natural" | "lab-grown" | null>(null)
+  const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(true)
 
   const gemstoneScrollRef = useRef<HTMLDivElement>(null)
   const metalScrollRef = useRef<HTMLDivElement>(null)
@@ -509,7 +510,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                     setActiveStone(category.name)
                                   }}
                                 >
-                                  <div className={`relative h-20 w-20 transition-transform duration-300 ease-out group-hover:scale-130 ${activeStone === category.name && "scale-130"}`}>
+                                  <div
+                                    className={`relative h-20 w-20 transition-transform duration-300 ease-out group-hover:scale-130 ${activeStone === category.name && "scale-130"}`}
+                                  >
                                     <Image
                                       src={category.element || "/placeholder.svg"}
                                       alt={category.name}
@@ -1300,15 +1303,48 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
               </div>
 
               <div className="mt-6">
-                <div className="-translate-x-1 flex text-[15px] font-light">
-                  <Image
-                    src={"/svg/dimand.svg"}
-                    height={8}
-                    width={30}
-                    alt="diamond"
-                    className=" icon scale-55 mr-0.5 -translate-y-0.5"
-                  />
-                  RAYA created diamonds <span className="font-bold ml-2 text-sm mt-0.5"> &#9432;</span>
+                <div className="-translate-x-1 flex text-[15px] font-light ml-2">
+                  <div>
+                    <div className="">
+                      {/* Product Details Section with Diamond Icon */}
+                      <div
+                        className="flex items-center justify-between cursor-pointer "
+                        onClick={() => setIsProductDetailsOpen(!isProductDetailsOpen)}
+                      >
+                        <div className="flex items-center gap-2">
+                          <Image src={"/svg/dimand.svg"} height={16} width={16} alt="diamond" className="icon" />
+                          <div className="text-md ">Product Details</div>
+                        </div>
+                        <AnimatedToggleButton
+                          isOpen={isProductDetailsOpen}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setIsProductDetailsOpen(!isProductDetailsOpen)
+                          }}
+                        />
+                      </div>
+
+                      {/* Collapsible Content */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isProductDetailsOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
+                          }`}
+                      >
+                        <div className="">
+                          <div className="text-xl font-medium mb-3">The Classic Design</div>
+
+                          <div className="text-gray-700">{productcat?.subtitle}</div>
+
+                          {/* Used to convert productcat?.description which is in String format to HTML format */}
+                          {productcat?.description && (
+                            <div
+                              className="mb-6 text-gray-700"
+                              dangerouslySetInnerHTML={{ __html: productcat.description }}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className=" flex text-[15px] font-light">
                   <Image
@@ -1427,15 +1463,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                 </div>
               </div>
 
-              <div>
-                <div className="text-2xl mt-6">The Classic Design</div>
-                <div className="text-lg mt-3">{productcat?.subtitle}</div>
 
-                {/* //used to convert productcat?.description which is in String format to HTML format */}
-                {productcat?.description && (
-                  <div className="mt-3" dangerouslySetInnerHTML={{ __html: productcat.description }} />
-                )}
-              </div>
             </div>
             <div></div>
           </div>
