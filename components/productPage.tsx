@@ -1102,9 +1102,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 >
                                   <div className={`relative h-20 w-20 ${oswald.className} `}>
                                     <div
-                                      className={`${fontLocal.className} text-sm  h-9 w-11 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
+                                      className={`${fontLocal.className} text-md  h-9 w-11 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeSize === category && "border-black border"}`}
                                     >
-                                      <div className=" translate-y-1">{category}</div>
+                                      <div className=" translate-y-[0.01rem]">{category}</div>
                                     </div>
                                   </div>
                                 </div>
@@ -1171,7 +1171,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                                 >
                                   <div className={`relative h-20 w-20 ${fontLocal.className} `}>
                                     <div
-                                      className={`h-9 w-15 items-center pt-1.5 text-center mt-6 ml-[1.6rem] ${activeLength === category && "border-black border"}`}
+                                      className={`h-9 w-15 items-center pt-1.5 text-md text-center mt-6 ml-[1.6rem] ${activeLength === category && "border-black border"}`}
                                     >
                                       {category}
                                     </div>
