@@ -405,7 +405,7 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
                 </div>
               ))}
             </div>
-            <div className={` col-span-3 mx-2 md:mx-4 sticky`}>
+            <div className="col-span-3 mx-2 md:mx-4 sticky top-20 md:top-28 lg:top-36 self-start max-h-full overflow-y-auto">
               <div className="col-span-1 mb-5">
                 <div className="flex justify-between wrap-normal">
                   <div className="text-2xl mt-5 md:mt-0 font-semibold">{productcat?.title}</div>
