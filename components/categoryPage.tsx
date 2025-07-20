@@ -319,20 +319,13 @@ export default function EarringsPage() {
         </div>
 
         <div className="relative md:mb-4 mb-2 lg:mx-12 md:mx-10 mx-3">
-          <button
-            onClick={() => scrollCategories("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={20} />
-          </button>
-
+          {/* The original scroll buttons are removed as per the request */}
           <div
             ref={categoryScrollRef}
             className="flex overflow-x-auto scrollbar-hide gap-4 px-0 pb-0 py-0 scroll-smooth -translate-x-0 mt-8"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <div
                 key={category.name}
                 className={cn(
@@ -340,7 +333,7 @@ export default function EarringsPage() {
                   "w-[225px] sm:w-[300px]",
                   activeCategory === category.name ? "opacity-100" : "opacity-80 hover:opacity-100",
                 )}
-                onClick={() => setActiveCategory(category.name)}
+                onClick={() => setActiveCategory(category.name)} // Updated to use scrollToCategory
               >
                 <div
                   className={cn(
@@ -357,7 +350,7 @@ export default function EarringsPage() {
                 </div>
                 <span
                   className={cn(
-                    `text-sm text-center -translate-y-10 ${cormorantGaramond.className}`,
+                    `text-sm text-center -translate-y-10 font-serif`, // Using font-serif as a placeholder for cormorantGaramond.className
                     activeCategory === category.name ? " font-medium" : "",
                   )}
                 >
@@ -367,14 +360,20 @@ export default function EarringsPage() {
               </div>
             ))}
           </div>
-
-          <button
-            onClick={() => scrollCategories("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={20} />
-          </button>
+          {/* Pagination dots */}
+          <div className="flex justify-center gap-2 md:-translate-y-1 -translate-y-2  mt-0">
+            {categories.map((_, index) => (
+              <button
+                key={index}
+                className={cn(
+                  "w-1 h-1 size-[0.3rem] rounded-full transition-colors",
+                  activeCategory === categories[index].name ? "bg-black" : "bg-gray-300 hover:bg-gray-400",
+                )}
+                onClick={() => setActiveCategory(categories[index].name)}
+                aria-label={`Go to category ${categories[index].name}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Sort and view options */}
