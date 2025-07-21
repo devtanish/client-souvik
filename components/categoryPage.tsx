@@ -111,6 +111,8 @@ const shimmerAnimation = `
 
 export default function EarringsPage() {
 
+  const [centerTrackedCategory, setCenterTrackedCategory] = useState(categories[0].name)
+
   const { addToCart, addToWishlist, removeFromWishlist } = useCart()
 
   const [activeCategory, setActiveCategory] = useState("Earrings")
@@ -141,6 +143,55 @@ export default function EarringsPage() {
   const [pickupOnly] = React.useState(false)
 
   const filterCount = Object.values(selectedFilters).flat().length + (pickupOnly ? 1 : 0)
+
+  const scrollToCategory = (index: number) => {
+    if (categoryScrollRef.current) {
+      const targetElement = categoryScrollRef.current.children[index] as HTMLElement
+      if (targetElement) {
+        // Set the clicked category as the active one (for visual selection)
+        setActiveCategory(categories[index].name)
+      }
+    }
+  }
+
+  //strted used for dot selection tracker of middel image
+  useEffect(() => {
+    const handleScroll = () => {
+      if (categoryScrollRef.current) {
+        const scrollContainer = categoryScrollRef.current
+        const children = Array.from(scrollContainer.children) as HTMLElement[]
+
+        // Calculate the center of the visible scroll area
+        const containerCenter = scrollContainer.scrollLeft + scrollContainer.offsetWidth / 2
+
+        let closestCategoryIndex = 0
+        let minDistance = Number.POSITIVE_INFINITY
+
+        // Find the category closest to the center of the scroll container
+        children.forEach((child, index) => {
+          const childCenter = child.offsetLeft + child.offsetWidth / 2
+          const distance = Math.abs(containerCenter - childCenter)
+
+          if (distance < minDistance) {
+            minDistance = distance
+            closestCategoryIndex = index
+          }
+        })
+        // Update the tracked category, but this does NOT affect activeCategory
+        if (centerTrackedCategory !== categories[closestCategoryIndex].name) {
+          setCenterTrackedCategory(categories[closestCategoryIndex].name)
+        }
+      }
+    }
+
+    const scrollContainer = categoryScrollRef.current
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll)
+      // Call handleScroll once on mount to set initial tracked category
+      handleScroll()
+      return () => scrollContainer.removeEventListener("scroll", handleScroll)
+    }
+  }, [categories, centerTrackedCategory])
 
   // Check if mobile on mount
   useEffect(() => {
@@ -319,7 +370,6 @@ export default function EarringsPage() {
         </div>
 
         <div className="relative md:mb-4 mb-2 lg:mx-12 md:mx-10 mx-3">
-          {/* The original scroll buttons are removed as per the request */}
           <div
             ref={categoryScrollRef}
             className="flex overflow-x-auto scrollbar-hide gap-4 px-0 pb-0 py-0 scroll-smooth -translate-x-0 mt-8"
@@ -331,13 +381,15 @@ export default function EarringsPage() {
                 className={cn(
                   "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all",
                   "w-[225px] sm:w-[300px]",
+                  // Visuals (opacity) are still tied to activeCategory, not centerTrackedCategory
                   activeCategory === category.name ? "opacity-100" : "opacity-80 hover:opacity-100",
                 )}
-                onClick={() => setActiveCategory(category.name)} // Updated to use scrollToCategory
+                onClick={() => scrollToCategory(index)} // Clicking scrolls and sets activeCategory
               >
                 <div
                   className={cn(
                     "relative w-full aspect-square mb-2 overflow-hidden md:h-[400px] h-[300px] shadow-md",
+                    // Visuals (shadow) are still tied to activeCategory
                     activeCategory === category.name ? "" : "",
                   )}
                 >
@@ -351,26 +403,33 @@ export default function EarringsPage() {
                 <span
                   className={cn(
                     `text-sm text-center -translate-y-10 font-serif`, // Using font-serif as a placeholder for cormorantGaramond.className
+                    // Visuals (font-weight) are still tied to activeCategory
                     activeCategory === category.name ? " font-medium" : "",
                   )}
                 >
                   {category.name.toUpperCase()}
                 </span>
+                {/* Visual (black bar) is still tied to activeCategory */}
                 {activeCategory === category.name && <div className="h-0.5 w-10 bg-black -translate-y-10 mt-1"></div>}
               </div>
             ))}
           </div>
           {/* Pagination dots */}
-          <div className="flex justify-center gap-2 md:-translate-y-1 -translate-y-2  mt-0">
-            {categories.map((_, index) => (
+          <div className="flex justify-center gap-2 mt-0 -translate-y-2.5 md:-translate-y-1">
+            {categories.map((category, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-1 h-1 size-[0.3rem] rounded-full transition-colors",
-                  activeCategory === categories[index].name ? "bg-black" : "bg-gray-300 hover:bg-gray-400",
+                  "w-1.5 h-1.5 rounded-full transition-colors",
+                  // Dot styling: black if activeCategory, gray-600 if center-tracked (but not active), else gray-300
+                  centerTrackedCategory === category.name
+                    ? "bg-black" // Explicitly selected by click
+                    : centerTrackedCategory === category.name
+                      ? "bg-gray-600" // Center-tracked by scroll, but not the active one
+                      : "bg-gray-300 hover:bg-gray-400", // Default
                 )}
-                onClick={() => setActiveCategory(categories[index].name)}
-                aria-label={`Go to category ${categories[index].name}`}
+                onClick={() => scrollToCategory(index)} // Clicking scrolls and sets activeCategory
+                aria-label={`Go to category ${category.name}`}
               />
             ))}
           </div>
