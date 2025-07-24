@@ -370,6 +370,13 @@ export default function EarringsPage() {
         </div>
 
         <div className="relative md:mb-4 mb-2 lg:mx-12 md:mx-10 mx-3">
+          <button
+            onClick={() => scrollCategories("left")}
+            className="md:flex hidden absolute left-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={20} />
+          </button>
           <div
             ref={categoryScrollRef}
             className="flex overflow-x-auto scrollbar-hide gap-4 px-0 pb-0 py-0 scroll-smooth -translate-x-0 mt-8"
@@ -433,6 +440,13 @@ export default function EarringsPage() {
               />
             ))}
           </div>
+          <button
+            onClick={() => scrollCategories("right")}
+            className=" md:flex hidden absolute right-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
 
         {/* Sort and view options */}
