@@ -427,10 +427,10 @@ export default function EarringsPage() {
               <button
                 key={index}
                 className={cn(
-                  "w-1.5 h-1.5 rounded-full transition-colors",
+                  "w-1.5 h-1.5 size-[4.5px] md:size-[5px] rounded-full transition-colors",
                   // Dot styling: black if activeCategory, gray-600 if center-tracked (but not active), else gray-300
                   centerTrackedCategory === category.name
-                    ? "bg-black" // Explicitly selected by click
+                    ? "bg-[#696969]" // Explicitly selected by click
                     : centerTrackedCategory === category.name
                       ? "bg-gray-600" // Center-tracked by scroll, but not the active one
                       : "bg-gray-300 hover:bg-gray-400", // Default
