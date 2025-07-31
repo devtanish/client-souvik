@@ -4,6 +4,7 @@
 import { Be_Vietnam_Pro } from "next/font/google"
 import localFont from "next/font/local"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
+import { UICraftGrid } from "@/components/ui-craft-grid";
 import StyleWithSidebar from "./styleWithSidebar"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronRight } from "lucide-react"
@@ -24,6 +25,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { products } from "../components/data"
 import { GemstoneExplorerTab } from "@/components/gemstone-explorer-tab"
 import Link from "next/link"
+import { CustomerReviews } from "@/components/customer-reviews"
 
 const fontLocal = localFont({
   src: "../public/fonts/ciguatera.otf", // use relative path if inside project folder
@@ -103,7 +105,7 @@ const AnimatedToggleButton = ({
   )
 }
 
-export default function ProductPage({ params }: { params: Promise<{ product: string }> }) {
+export default function ProductPageWithReviews({ params }: { params: Promise<{ product: string }> }) {
   const { addToCart, removeFromWishlist, addToWishlist } = useCart()
 
   const { product } = React.use(params)
@@ -1524,6 +1526,8 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
             <div></div>
           </div>
         </div>
+
+
         <StyleWithSidebar productcat={productcat} setShowSidebar={setShowSidebar} showSidebar={showSidebar} />
 
         {/* Ring Size Guide Sidebar (First size guide - unchanged) */}
@@ -1555,6 +1559,9 @@ export default function ProductPage({ params }: { params: Promise<{ product: str
           onQualityTabSourceChange={setQualityTabSource}
         />
       </div>
+
+      <UICraftGrid/>
+      <CustomerReviews/>
     </TooltipProvider>
   )
 }

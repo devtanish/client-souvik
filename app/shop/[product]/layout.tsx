@@ -1,6 +1,5 @@
 import type React from "react"
 import { Cormorant_Garamond } from "next/font/google";
-import { UICraftGrid } from "@/components/ui-craft-grid";
 import { ThemeProvider } from "@/components/theme-provider";
 import "../../globals.css";
 
@@ -22,7 +21,9 @@ export default function RootLayout({
       >
         <ThemeProvider defaultTheme="light">
           <main className="">{children}</main>   
-          <UICraftGrid/>
+          {/* Customer Reviews Section - Added at the end of the product page */}
+          {/* <UICraftGrid/> */}
+          {/* <CustomerReviews /> */}
         </ThemeProvider>
       </body>
     </html>
