@@ -186,7 +186,7 @@ export function UICraftGrid() {
   }
 
   return (
-    <div className="w-full flex items-center justify-center p-4 bg-black h-screen">
+    <div className="w-full flex items-center justify-center p-4 bg-black h-full py-10">
       <ul
         ref={listRef}
         className="list-none p-0 m-0 w-full max-w-15/16 h-196"
