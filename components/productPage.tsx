@@ -532,16 +532,9 @@ export default function ProductPageWithReviews({ params }: { params: Promise<{ p
                       >
                         <div className="h-12">
                           <div className="mx-3 -translate-y-4 relative">
-                            <button
-                              onClick={() => scrollCategories("left")}
-                              className="absolute -left-5 top-1/2 -translate-y-2/3 -translate-x-2 z-10 bg-white/80 rounded-full p-1 shadow-md opacity-15 lg:flex hidden hover:opacity-30 transition-opacity duration-200"
-                              aria-label="Scroll left"
-                            >
-                              <ChevronLeft size={20} />
-                            </button>
                             <div
                               ref={categoryScrollRef}
-                              className="flex overflow-x-auto scrollbar-hide gap-1 px-0 pb-0 py-0 scroll-smooth -translate-x-3"
+                              className="flex overflow-x-auto scrollbar-hide gap-1 pl-4 pb-0 py-0 scroll-smooth -translate-x-3"
                               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                             >
                               {productcat.activeStones.map((category, index) => (
@@ -549,7 +542,7 @@ export default function ProductPageWithReviews({ params }: { params: Promise<{ p
                                   key={index}
                                   className={cn(
                                     "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all duration-300 ease-out -translate-y-0.5 group",
-                                    "lg:w-1/9 sm:w-1/10 w-1/7",
+                                    "lg:w-1/6 sm:w-1/10 w-1/7",
                                     activeStone === category.name ? "opacity-100" : "opacity-80 hover:opacity-100",
                                   )}
                                   onClick={() => {
@@ -558,13 +551,13 @@ export default function ProductPageWithReviews({ params }: { params: Promise<{ p
                                   }}
                                 >
                                   <div
-                                    className={`relative h-20 w-20 transition-transform duration-300 ease-out group-hover:scale-130 ${activeStone === category.name && "scale-130"}`}
+                                    className={`relative h-20 w-20 transition-transform -translate-x-4 duration-300 ease-out group-hover:scale-130 ${activeStone === category.name && "scale-130"}`}
                                   >
                                     <Image
                                       src={category.element || "/placeholder.svg"}
                                       alt={category.name}
                                       fill
-                                      className="scale-40 transition-all duration-300 group-hover:brightness-110"
+                                      className="scale-40 transition-all -translate-x-0 duration-300 group-hover:brightness-20"
                                     />
                                   </div>
                                   {activeStone === category.name && (
