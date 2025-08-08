@@ -8,7 +8,10 @@ import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Montserrat } from 'next/font/google'
-import { useCart } from "@/contexts/cart-context"
+import { useCart } from "@/contexts/cart-context" // Assuming this context is available
+
+// Import the new ProductGridItem component
+import ProductGridItem from "@/components/product-grid-item"
 
 // Initialize the Cormorant Garamond font
 const cormorantGaramond = Cormorant_Garamond({
@@ -35,7 +38,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { ChevronDown, LayoutGrid, Columns2, ChevronRight, ChevronLeft, SlidersHorizontal, X, Plus, Minus } from 'lucide-react'
 import { cn } from "@/lib/utils"
 
-// Import data
+// Import data (assuming these files exist in the same directory or accessible path)
 import { categories, metalscolor, shapes, products, stone } from "./data"
 
 // Add keyframes for subtle shimmer effect
@@ -892,112 +895,17 @@ export default function EarringsPage() {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <div key={product.id} className="group relative">
-                  {/* Wishlist button */}
-                  <button
-                    className={cn("absolute top-2 right-2 z-5 p-1.5 rounded-full ", "transition-all duration-300")}
-                    onClick={() => toggleWishlist(product.id)}
-                    aria-label={wishlist.includes(product.id) ? "Remove from wishlist" : "Add to wishlist"}
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      onClick={() => {
-                        wishlist.includes(product.id) ? removeFromWishlist(product.id.toString())
-                          : addToWishlist({
-                            id: product.id.toString(),
-                            name: product.name,
-                            price: product.price,
-                            image: product.images,
-                            material: product.material,
-                          })
-
-                      }}
-                      fill="red"
-                      xmlns="http://www.w3.org/2000/svg">
-
-                      <path d="M14.12 17.95L20.02 11.3C20.63 10.53 21 9.56 21 8.5C21 6.01 18.99 4 16.5 4C14.01 4 12 6.01 12 8.5C12 6.01 9.99 4 7.5 4C5.01 4 3 6.01 3 8.5C3 9.56 3.37 10.53 3.98 11.3L9.88 17.95L12 20.34L14.12 17.95Z"
-                        fill="white"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeMiterlimit="10"
-                        className={`svg-stroke svg-fill ${wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`}>
-                      </path>
-
-                    </svg>
-                  </button>
-
-                  <div className="relative mb-2 bg-gray-50 aspect-[5/6] md:aspect-square overflow-hidden">
-                    {product.bestSeller && (
-                      <span className={`absolute font-mono top-2 left-2 bg-white md:text-[10px] text-[8.5px] px-2 py-1 z-5  ${montserrat.className} `}>
-                        BEST SELLING
-                      </span>
-                    )}
-
-                    {!product.bestSeller && ( // Using bestSeller as a proxy for inStock since inStock isn't in the data
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-5">
-                        <span className="text-white font-medium text-sm">Out of Stock</span>
-                      </div>
-                    )}
-
-                    {/* Default image */}
-                    <Link target="_blank" href={`/shop/${product.name.toString()}`}>
-                      <Image
-                        src={product.images || "/placeholder.svg?height=300&width=300"}
-                        alt={product.name}
-                        fill
-                        className={cn(
-                          "object-cover transition-opacity duration-300 ",
-                          product.hoverImage ? "group-hover:opacity-0" : "",
-                        )}
-                      />
-                      {/* Hover image (model wearing) */}
-                      {product.hoverImage && (
-                        <Image
-                          src={product.hoverImage || "/placeholder.svg?height=300&width=300"}
-                          alt={`${product.name} worn`}
-                          fill
-                          className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        />
-                      )}
-                    </Link>
-
-                    {/* Add to bag button */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-white py-2 px-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <button
-                        className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
-                        disabled={!product.bestSeller}
-                        onClick={() => addToCart({ id: product.id.toString(), name: product.name, price: product.price, image: product.images, material: product.material, stone: product.stone })}
-                      >
-                        <SlHandbag size={16} />
-                        ADD TO BAG
-                      </button>
-                    </div>
-                  </div>
-
-                  <Link target="_blank" href={`/shop/${product.name.toString()}`}>
-                    <h3 className="font-medium text-md mb-0.5">{product.name}</h3>
-                    <p className="text-gray-700 text-sm mb-0.5">${product.price}</p>
-
-                    <div className="flex gap-1 mb-0.5">
-                      {product.colors.map((color, index) => (
-                        <button
-                          key={index}
-                          className={cn(
-                            "w-4 h-4 rounded-full border hover:ring-1 hover:ring-offset-1 hover:ring-gray-400",
-                            isMobile ? "w-3 h-3" : "w-4 h-4",
-                          )}
-                          style={{ backgroundImage: color }}
-                          aria-label={`Color: ${color}`}
-                        />
-                      ))}
-                    </div>
-                    <p className={cn("text-xs text-gray-500", `${cormorantGaramond.className}`, isMobile ? "text-[15px]" : "text-xs")}>
-                      {product.material}
-                    </p>
-                  </Link>
-                </div>
+                <ProductGridItem
+                  key={product.id}
+                  product={product}
+                  wishlist={wishlist}
+                  addToCart={addToCart}
+                  addToWishlist={addToWishlist}
+                  removeFromWishlist={removeFromWishlist}
+                  cormorantGaramondClassName={cormorantGaramond.className}
+                  montserratClassName={montserrat.className}
+                  isMobile={isMobile} // Pass the isMobile state
+                />
               ))
             )}
           </div>
