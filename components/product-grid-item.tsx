@@ -78,7 +78,7 @@ export default function ProductGridItem({
           </span>
         )}
         {!product.bestSeller && (
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-2">
             <span className="text-white font-medium text-sm">Out of Stock</span>
           </div>
         )}
