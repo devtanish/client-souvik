@@ -248,7 +248,7 @@ export default function ProductCard({
                   />
                 ))}
               </div>
-              <div className="text-xl pb-3.5 font-semibold text-gray-800">$150,000 - $200,000</div>
+              <div className="text-xl pb-3.5 font-semibold text-gray-800">${product.price}</div>
             </div>
           </Link>
         </div>

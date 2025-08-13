@@ -881,7 +881,7 @@ export default function EarringsPage() {
           {/* Product Grid */}
           <div
             className={cn(
-              "grid md:gap-4 gap-0 lg:mx-12 md:mx-10 mx-3",
+              "grid md:gap-4 gap-1 lg:mx-12 md:mx-10 mx-3",
               gridView === "four"
                 ? "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                 : gridView === "two"
