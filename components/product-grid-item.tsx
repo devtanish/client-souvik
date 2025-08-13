@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Heart } from 'lucide-react'
 import { SlHandbag } from "react-icons/sl" // Assuming this is installed
 import { cn } from "@/lib/utils" // Assuming this utility is available
+import { Button } from "./ui/button"
 
 // Define types for product and cart actions based on your provided file
 interface Product {
@@ -20,6 +21,7 @@ interface Product {
 
 interface ProductGridItemProps {
   product: Product
+  productImages: string[]
   wishlist: number[]
   addToCart: (item: { id: string; name: string; price: number; image: string; material: string; stone: string }) => void
   addToWishlist: (item: { id: string; name: string; price: number; image: string; material: string }) => void
@@ -31,6 +33,7 @@ interface ProductGridItemProps {
 
 export default function ProductGridItem({
   product,
+  productImages,
   wishlist,
   addToCart,
   addToWishlist,
@@ -47,9 +50,9 @@ export default function ProductGridItem({
   return (
     <div key={product.id} className="group relative bg-white rounded-none overflow-hidden">
       {/* Wishlist button */}
-      <button
+      <Button
         className={cn(
-          "absolute top-2 right-2 z-2 p-1.5 rounded-full text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300", // Added opacity and group-hover classes
+          "absolute top-2 right-2 z-2 p-1.5 hover:bg-accent rounded-full bg-accent text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300", // Added opacity and group-hover classes
         )}
         onClick={() => {
           wishlist.includes(product.id)
@@ -70,7 +73,7 @@ export default function ProductGridItem({
             wishlist.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"
           )}
         />
-      </button>
+      </Button>
       <div className="relative mb-2 bg-gray-50 aspect-[4/6] md:aspect-[5/6] overflow-hidden">
         {product.bestSeller && (
           <span className={cn(`absolute font-mono top-2 left-2  md:text-[10px] text-[8.5px] px-2 py-1 z-2`, montserratClassName)}>
@@ -104,14 +107,15 @@ export default function ProductGridItem({
         </Link>
         {/* Add to bag button */}
         <div className="absolute bottom-0 left-0 right-0 bg-white py-2 px-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-          <button
-            className="w-full text-center text-sm font-medium flex items-center justify-center gap-2"
+          <Button
+            variant={"ghost"}
+            className="w-full hover:bg-white text-center text-sm bg-white shadow-none text-black font-medium flex items-center justify-center gap-2"
             disabled={!product.bestSeller}
             onClick={() => addToCart({ id: product.id.toString(), name: product.name, price: product.price, image: product.images, material: product.material, stone: product.stone })}
           >
             <SlHandbag size={16} />
             ADD TO BAG
-          </button>
+          </Button>
         </div>
       </div>
       <div className="px-3 pb-3">

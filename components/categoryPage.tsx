@@ -3,6 +3,7 @@
 import { Cormorant_Garamond } from 'next/font/google'
 
 import { SlHandbag } from "react-icons/sl"
+import ProductCard from './product-card'
 import * as React from "react"
 import { useState, useRef, useEffect, useMemo } from "react"
 import Image from "next/image"
@@ -880,7 +881,7 @@ export default function EarringsPage() {
           {/* Product Grid */}
           <div
             className={cn(
-              "grid md:gap-4 gap-2 lg:mx-12 md:mx-10 mx-3",
+              "grid md:gap-4 gap-0 lg:mx-12 md:mx-10 mx-3",
               gridView === "four"
                 ? "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                 : gridView === "two"
@@ -895,17 +896,34 @@ export default function EarringsPage() {
               </div>
             ) : (
               filteredProducts.map((product) => (
-                <ProductGridItem
-                  key={product.id}
-                  product={product}
-                  wishlist={wishlist}
-                  addToCart={addToCart}
-                  addToWishlist={addToWishlist}
-                  removeFromWishlist={removeFromWishlist}
-                  cormorantGaramondClassName={cormorantGaramond.className}
-                  montserratClassName={montserrat.className}
-                  isMobile={isMobile} // Pass the isMobile state
-                />
+                gridView === "four" || gridView === "two" ? (
+                  <ProductGridItem
+                    key={product.id}
+                    product={product}
+                    wishlist={wishlist}
+                    addToCart={addToCart}
+                    addToWishlist={addToWishlist}
+                    removeFromWishlist={removeFromWishlist}
+                    productImages={product.productImg}
+                    cormorantGaramondClassName={cormorantGaramond.className}
+                    montserratClassName={montserrat.className}
+                    isMobile={isMobile}
+                  />
+                ) : (
+                  // Covers both "one" and "two"
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    wishlist={wishlist}
+                    addToCart={addToCart}
+                    addToWishlist={addToWishlist}
+                    removeFromWishlist={removeFromWishlist}
+                    productImages={product.productImg}
+                    cormorantGaramondClassName={cormorantGaramond.className}
+                    montserratClassName={montserrat.className}
+                    isMobile={isMobile}
+                  />
+                )
               ))
             )}
           </div>
