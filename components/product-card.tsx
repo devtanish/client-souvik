@@ -206,7 +206,7 @@ export default function ProductCard({
         </div>
       </div>
 
-      <CardContent className="p-0">
+      <CardContent className="p-0 mt-0">
         {/* 2. Title Section - Enhanced with Mobile Touch Support */}
         <div className="w-full px-2.5 pb-0 pt-0">
           <Link href={`/shop/${product.name.toString()}`}>
