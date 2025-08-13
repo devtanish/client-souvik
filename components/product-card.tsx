@@ -155,7 +155,7 @@ export default function ProductCard({
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-1 right-2 z-10 h-12 w-12 rounded-full"
+              className="absolute top-1 right-2 z-2 h-12 w-12 rounded-full"
               onClick={(e) => {
                 e.preventDefault()
                 wishlist.includes(product.id)
