@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { Gem, Film, Filter, ScrollText, Palette, Wrench, Timer } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -62,36 +63,6 @@ const items = [
   },
 ]
 
-// Custom Image component (since shadcn/ui doesn't have one)
-interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  src: string
-  alt: string
-  className?: string
-  style?: React.CSSProperties
-  crossOrigin?: "anonymous" | "use-credentials" | ""
-}
-
-const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
-  src, 
-  alt, 
-  className, 
-  style, 
-  crossOrigin, 
-  ...props 
-}) => {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className={className}
-      style={style}
-      crossOrigin={crossOrigin}
-      loading="lazy"
-      {...props}
-    />
-  )
-}
-
 export function UICraftGrid() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -149,15 +120,17 @@ export function UICraftGrid() {
               }}
             >
               <div className="relative h-64 overflow-hidden border-white border">
-                <OptimizedImage
+                <Image
                   src={item.image || "/placeholder.svg"}
                   alt=""
-                  className="w-full h-full object-cover transition-all duration-500"
+                  fill
+                  className="object-cover transition-all duration-500"
                   style={{
                     filter: isActive ? "grayscale(0) brightness(1)" : "grayscale(0.8) brightness(1.2)",
                     scale: isActive ? "1" : "1.05",
                   }}
-                  crossOrigin="anonymous"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
@@ -216,15 +189,17 @@ export function UICraftGrid() {
             >
               <div className="relative w-full h-full">
                 {/* Background Image */}
-                <OptimizedImage
+                <Image
                   src={item.image || "/placeholder.svg"}
                   alt=""
-                  className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
+                  fill
+                  className="object-cover transition-all duration-500"
                   style={{
                     filter: isActive ? "brightness(0.4)" : "brightness(0.2)",
                     transform: isActive ? "scale(1)" : "scale(1.05)",
                   }}
-                  crossOrigin="anonymous"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  unoptimized
                 />
                 
                 {/* Content Overlay */}

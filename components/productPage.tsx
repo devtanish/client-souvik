@@ -2,6 +2,7 @@
 
 // DOMPurify used to convert productcat?.description which is in String format to HTML format
 import { Be_Vietnam_Pro } from "next/font/google"
+import AnimatedText from "./animated-text"
 import localFont from "next/font/local"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import { UICraftGrid } from "@/components/ui-craft-grid";
@@ -1351,9 +1352,10 @@ export default function ProductPageWithReviews({ params }: { params: Promise<{ p
                   <Image src={"/svg/cal.svg"} height={20} width={20} alt="calendar" className="ml-2 mb-1" /> Consult
                   with a diamond expert online{" "}
                 </Button>
+                <AnimatedText/>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-0">
                 <div className="-translate-x-1 flex text-[15px] font-light ml-2">
                   <div>
                     <div className="">
