@@ -88,7 +88,7 @@ export default function AnimatedText() {
   return (
     <div className={`relative h-8 overflow-hidden my-4 bg-gradient-to-r  rounded-lg ${indieFlower.className}`}>
       <div className="flex items-center h-full justify-center px-6">
-        <span className="text-md text-foreground">
+        <span className="text-md text-[#690303]">
           {renderText()}
           {(isTyping || isDisappearing) && <span className="animate-pulse"></span>}
         </span>
