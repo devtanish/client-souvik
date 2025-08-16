@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Gem, Film, Filter, ScrollText, Palette, Wrench, Timer } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+
 const items = [
   {
     id: "craft",
@@ -159,7 +160,7 @@ export function UICraftGrid() {
   }
 
   return (
-    <div className="w-full flex items-center justify-center p-4 bg-black h-full py-10">
+    <div className={`w-full flex items-center justify-center p-4 bg-black h-full py-10`}>
       <ul
         ref={listRef}
         className="list-none p-0 m-0 w-full max-w-15/16 h-196"

@@ -1,6 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Nothing_You_Could_Do } from "next/font/google"; 
+
+const indieFlower = Nothing_You_Could_Do({
+  weight: "400", // Indie Flower has only one weight
+  subsets: ["latin"],
+});
 
 export default function AnimatedText() {
   const [visibleChars, setVisibleChars] = useState(0)
@@ -80,9 +86,9 @@ export default function AnimatedText() {
   }
 
   return (
-    <div className="relative h-8 overflow-hidden my-4 bg-gradient-to-r  rounded-lg ">
+    <div className={`relative h-8 overflow-hidden my-4 bg-gradient-to-r  rounded-lg ${indieFlower.className}`}>
       <div className="flex items-center h-full justify-center px-6">
-        <span className="text-xl font-semibold text-foreground">
+        <span className="text-md text-foreground">
           {renderText()}
           {(isTyping || isDisappearing) && <span className="animate-pulse"></span>}
         </span>
