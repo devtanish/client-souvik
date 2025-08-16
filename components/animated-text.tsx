@@ -55,7 +55,7 @@ export default function AnimatedText() {
       }, 100)
 
       return () => clearInterval(typeInterval)
-    }, isTyping ? 3000 : 5000)
+    }, 3000)
 
     return () => clearInterval(interval)
   }, [currentMessageIndex, messages])
