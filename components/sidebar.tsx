@@ -19,6 +19,15 @@ import { IoSearchOutline } from "react-icons/io5"
 import { LanguagesIcon } from "lucide-react"
 import { SlHandbag } from "react-icons/sl"
 import { usePathname } from "next/navigation"
+import { Cormorant_Garamond } from "next/font/google"
+
+
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
 
 // Define the data structure for our categories
 type SubCategory = {
@@ -203,7 +212,7 @@ export default function Sidebar() {
   const currentCategories = activeTab === "women" ? womenCategories : menCategories
 
   return (
-    <>
+    <div className={`${cormorantGaramond.className}`}>
     {(showLoginPopup || showOtpPopup) && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 backdrop-blur-sm transition-all">
           <div
@@ -250,7 +259,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 md:pt-40 w-screen left-0 md:w-[40rem] bg-white border-gray-200 z-20 transition-transform duration-300 ease-in-out ${
+        className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 md:pt-40 w-screen left-0 md:w-[40rem] bg-white border-gray-200 z-20 transition-transform duration-300 ease-in-out  ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -433,6 +442,6 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -24,7 +24,7 @@
   line-height: 1.6;
   font-weight: 400;
   color: var(--offblack);
-  text-align: end;
+  /* text-align: end; */
   hyphens: auto;
 }
 

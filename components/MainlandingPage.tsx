@@ -169,7 +169,7 @@ export default function ArtistryPortfolio() {
                     alt="Portrait" 
                 />
                 <div className="flex items-start md:items-end">
-                    <p className={`${styles.heroText} text-right md:text-left mr-2`}>
+                    <p className={`${styles.heroText} text-center md:text-right mr-2`}>
                         I am a visual artist exploring the intersection of mental landscapes and creative expression. 
                         Creating art as a therapeutic journey, my work embodies the transformation of internal chaos 
                         into external beauty. Through deliberate practice and intuitive creation, I find that art 
@@ -215,7 +215,7 @@ export default function ArtistryPortfolio() {
                                 />
                             </div>
                         </div>
-                        <div className={`${styles.galleryDescription} gallery-caption`}>
+                        <div className={`md:px-[20%]`}>
                             <p>
                                 When the mind becomes a labyrinth of anxious thoughts, art offers a thread to follow. 
                                 The act of creation becomes rebellion against internal chaos—each finished piece a victory 
