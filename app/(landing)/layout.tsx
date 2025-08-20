@@ -37,7 +37,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CartProvider>
-          <Header />
+          <Header bg={true} />
           <Sidebar />
           <Tooltip />
           <div className="">
@@ -46,7 +46,6 @@ export default function RootLayout({
           <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
 
           <Footer />
-          <main className="pt-20">{children}</main>
           <CartSidebar />
         </CartProvider>
       </body>

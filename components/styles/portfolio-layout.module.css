@@ -1,0 +1,99 @@
+/* Creating separate CSS module for refined layout adjustments */
+.heroSection {
+  display: grid;
+  grid-template-columns: 38% 44%;
+  gap: 40%;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 2rem;
+}
+
+.heroImageContainer {
+  position: relative;
+  aspect-ratio: 2 / 4;
+  width: 100%;
+}
+
+.heroTextContainer {
+  display: flex;
+  justify-content: end;
+}
+
+.heroText {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--offblack);
+  text-align: end;
+  hyphens: auto;
+}
+
+.gallerySection {
+  padding: 6rem 1rem;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.galleryItem {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.galleryDescription {
+  max-width: 100%;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: justify;
+  font-weight: 400;
+  color: var(--offblack);
+  columns: 2;
+  column-gap: 4rem;
+  hyphens: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .heroSection {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .heroTextContainer {
+    padding-left: 0;
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .galleryDescription {
+    columns: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .heroSection {
+    padding: 0 1rem;
+  }
+
+  .gallerySection {
+    padding: 4rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -24,7 +24,7 @@ export const questrial = Questrial({
   variable: "--font-inconsolata",
 })
 
-export default function Header() {
+export default function Header({bg}: {bg: boolean}) {
   const { setIsCartOpen, getCartCount, setActiveTab, getWishlistCount } = useCart()
 
   const handleCartClick = () => {
@@ -38,7 +38,7 @@ export default function Header() {
   }
 
   return (
-    <div className="fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none bg-white md:bg-transparent">
+    <div className={`fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none ${bg ? "": "bg-white"} md:bg-transparent`}>
       <Link href={"/"}>
         <Image
           src={"/logo2.png"}

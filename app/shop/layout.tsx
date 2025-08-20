@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${cormorantGaramond.className}`}
       >
         <CartProvider>
-          <Header />
+          <Header bg={false}/>
           <Sidebar />
           <Tooltip />
           <main className="">{children}</main>
