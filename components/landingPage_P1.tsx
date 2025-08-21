@@ -144,7 +144,7 @@ export default function ArtistryPortfolio() {
     return (
         <div className="wrapper">
             {/* TOP SVG - Animates on page load */}
-            <section className="top-section">
+            {/* <section className="top-section">
                 <div className="top-svg-container">
                     <svg width="100%" height="auto" viewBox="0 0 113 19" xmlns="http://www.w3.org/2000/svg">
                         <g className="top-svg-paths" fill="var(--offblack)">
@@ -159,7 +159,7 @@ export default function ArtistryPortfolio() {
                         </g>
                     </svg>
                 </div>
-            </section>
+            </section> */}
 
             {/* Hero Section */}
             <div className="block md:flex w-screen items-start md:items-end gap-[25%]">
