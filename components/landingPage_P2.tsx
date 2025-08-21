@@ -69,8 +69,8 @@ export default function JewelryCustomizer() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center  bg-white " >
-      <div className="customizer-container" ref={containerRef}>
+    <div className="min-h-screen flex items-center justify-center  bg-[#eaebe5] " >
+      <div className="text-center my-10" ref={containerRef}>
         <div className="customizer-sentence">
           <div className="sentence-part">
             I want to create a
@@ -103,13 +103,13 @@ export default function JewelryCustomizer() {
             for
             <div className="dropdown-wrapper">
               <button
-                className={`dropdown-btn ${dropdownStates.recipient ? "open" : ""}`}
+                className={`dropdown-btn  ${dropdownStates.recipient ? "open" : ""}`}
                 onClick={() => toggleDropdown("recipient")}
               >
                 <span>{selections.recipient}</span>
-                <i className="icon-arrow"></i>
+                <i className="icon-arrow "></i>
               </button>
-              <div className={`dropdown-menu ${dropdownStates.recipient ? "show" : ""}`}>
+              <div className={`dropdown-menu  ${dropdownStates.recipient ? "show" : ""}`}>
                 {["Myself", "My Partner", "My Parent(s)", "My Sibling", "My Best Friend"].map((item) => (
                   <a key={item} onClick={() => handleSingleSelect("recipient", item)}>
                     {item}
@@ -191,7 +191,7 @@ export default function JewelryCustomizer() {
           </div>
         </div>
 
-        <button className="show-inspiration-btn" onClick={handleShowInspiration}>
+        <button className="show-inspiration-btn bg-black" onClick={handleShowInspiration}>
           Discover My Creation
         </button>
 

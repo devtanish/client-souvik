@@ -9,8 +9,8 @@ export default function Shop() {
         <div className="">
             <div className=" md:pt-40 pt-20 pb-10 bg-[#eaebe5]">
                 <LandingPage/>
-            {/* <JewelryCustomizer/> */}
             </div>
+            <JewelryCustomizer/>
         </div>
     )
 } 

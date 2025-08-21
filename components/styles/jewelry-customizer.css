@@ -3,7 +3,6 @@
 .customizer-container {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
-  padding: 60px 70px;
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
   text-align: center;
@@ -172,7 +171,7 @@
   text-transform: uppercase;
   letter-spacing: 1.5px;
   padding: 16px 35px;
-  background: #b8860b;
+  background: black;
   color: white;
   border: none;
   border-radius: 50px;
@@ -183,7 +182,7 @@
 }
 
 .show-inspiration-btn:hover {
-  background-color: #a37000;
+  background-color: gray;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
 }
