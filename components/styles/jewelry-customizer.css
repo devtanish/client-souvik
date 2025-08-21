@@ -53,7 +53,8 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: inline-flex;
   align-items: center;
-  white-space: nowrap;
+  /* This is why white space is coming because of white-space:nowrap property */
+  /* white-space: nowrap; */
 }
 
 .dropdown-btn:hover {
