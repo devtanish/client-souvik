@@ -181,7 +181,7 @@ export default function ArtistryPortfolio() {
             </div>
 
             <section id="gallery" className="gallery justify-center flex">
-                <div className="container">
+                <div className="">
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
                             <div className={`${styles.galleryItem} gallery-item`}>
