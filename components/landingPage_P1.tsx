@@ -5,6 +5,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
 import Lenis from "@studio-freight/lenis"
 import styles from "../components/styles/portfolio-layout.module.css"
+import { Nothing_You_Could_Do } from "next/font/google"
+
+const nothingYouCouldDo = Nothing_You_Could_Do({
+    subsets: ["latin"],
+    weight: "400", // this font only has 400 weight
+});
 
 export default function ArtistryPortfolio() {
     useEffect(() => {
@@ -163,18 +169,18 @@ export default function ArtistryPortfolio() {
 
             {/* Hero Section */}
             <div className="block md:flex w-screen items-start md:items-end gap-[25%]">
-                <img 
-                    src="https://cdn.cosmos.so/2200c8e1-2901-4fdb-806c-a2596b3e9c49?format=jpeg" 
-                    className="md:w-[45%] w-[100%]" 
-                    alt="Portrait" 
+                <img
+                    src="https://cdn.cosmos.so/2200c8e1-2901-4fdb-806c-a2596b3e9c49?format=jpeg"
+                    className="md:w-[45%] w-[100%]"
+                    alt="Portrait"
                 />
                 <div className="flex items-start md:items-end">
-                    <p className={`${styles.heroText} text-center md:text-right mr-2`}>
-                        I am a visual artist exploring the intersection of mental landscapes and creative expression. 
-                        Creating art as a therapeutic journey, my work embodies the transformation of internal chaos 
-                        into external beauty. Through deliberate practice and intuitive creation, I find that art 
-                        provides structure in times of uncertainty and offers a rare clarity when thoughts become 
-                        overwhelming. Each piece becomes both mirror and window—reflecting inner states while allowing 
+                    <p className={`${styles.heroText} text-center md:text-right mr-2 `}>
+                        I am a visual artist exploring the intersection of mental landscapes and creative expression.
+                        Creating art as a therapeutic journey, my work embodies the transformation of internal chaos
+                        into external beauty. Through deliberate practice and intuitive creation, I find that art
+                        provides structure in times of uncertainty and offers a rare clarity when thoughts become
+                        overwhelming. Each piece becomes both mirror and window—reflecting inner states while allowing
                         glimpses into possible futures.
                     </p>
                 </div>
@@ -185,49 +191,49 @@ export default function ArtistryPortfolio() {
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
                             <div className={`${styles.galleryItem} gallery-item`}>
-                                <img 
-                                    src="https://cdn.cosmos.so/3be2e4e2-4ba8-47c2-9bd7-6b09cc6b82e3?format=jpeg" 
-                                    alt="Gallery image 1" 
+                                <img
+                                    src="https://cdn.cosmos.so/3be2e4e2-4ba8-47c2-9bd7-6b09cc6b82e3?format=jpeg"
+                                    alt="Gallery image 1"
                                 />
                                 <div className=" text-center">Fading Embrace</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
-                                <img 
-                                    src="https://cdn.cosmos.so/91da03b4-8f72-40bd-9531-ce101ecb9508?format=jpeg" 
-                                    alt="Gallery image 2" 
+                                <img
+                                    src="https://cdn.cosmos.so/91da03b4-8f72-40bd-9531-ce101ecb9508?format=jpeg"
+                                    alt="Gallery image 2"
                                 />
                                 <div className=" text-center">Fractured Motion</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
-                                <img 
-                                    src="https://cdn.cosmos.so/9dbf17e4-d4fa-4095-98dd-d6527d4bb53a?format=jpeg" 
-                                    alt="Gallery image 3" 
+                                <img
+                                    src="https://cdn.cosmos.so/9dbf17e4-d4fa-4095-98dd-d6527d4bb53a?format=jpeg"
+                                    alt="Gallery image 3"
                                 />
                                 <div className=" text-center">Echo of Touch</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
-                                <img 
-                                    src="https://cdn.cosmos.so/bed49b37-4a4a-4cec-ac80-86f5d2edbb8d?format=jpeg" 
-                                    alt="Gallery image 4" 
+                                <img
+                                    src="https://cdn.cosmos.so/bed49b37-4a4a-4cec-ac80-86f5d2edbb8d?format=jpeg"
+                                    alt="Gallery image 4"
                                 />
                                 <div className=" text-center">Shattered Light</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
-                                <img 
-                                    src="https://cdn.cosmos.so/031178f7-7078-4866-9de3-c80062188a2b?format=jpeg" 
-                                    alt="Gallery image 5" 
+                                <img
+                                    src="https://cdn.cosmos.so/031178f7-7078-4866-9de3-c80062188a2b?format=jpeg"
+                                    alt="Gallery image 5"
                                 />
                                 <div className=" text-center">Dissolving Form</div>
                             </div>
                         </div>
-                        <div className={`md:px-[20%]`}>
-                            <p>
-                                When the mind becomes a labyrinth of anxious thoughts, art offers a thread to follow. 
-                                The act of creation becomes rebellion against internal chaos—each finished piece a victory 
-                                over the voices that whisper you cannot. Through repetitive artistic practice—the mixing 
-                                of colors, the careful composition, the patient observation—we create rhythm where there 
-                                was discord. This rhythm becomes a meditation, and within this meditation, we uncover parts 
-                                of ourselves previously obscured by noise. Art does not remove our struggles but transforms 
+                        <div className={`md:px-[20%] text-center`}>
+                            <p className={`${nothingYouCouldDo.className} text-[#690303]`}>
+                                When the mind becomes a labyrinth of anxious thoughts, art offers a thread to follow.
+                                The act of creation becomes rebellion against internal chaos—each finished piece a victory
+                                over the voices that whisper you cannot. Through repetitive artistic practice—the mixing
+                                of colors, the careful composition, the patient observation—we create rhythm where there
+                                was discord. This rhythm becomes a meditation, and within this meditation, we uncover parts
+                                of ourselves previously obscured by noise. Art does not remove our struggles but transforms
                                 them into something we can hold, examine, and eventually release.
                             </p>
                         </div>
