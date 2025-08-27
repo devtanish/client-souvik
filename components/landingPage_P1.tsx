@@ -1,6 +1,8 @@
 "use client"
 import { useEffect } from "react"
 import { gsap } from "gsap"
+import { cn } from "@/lib/utils"
+import { useState, useRef } from "react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
 import Lenis from "@studio-freight/lenis"
@@ -13,6 +15,84 @@ const nothingYouCouldDo = Nothing_You_Could_Do({
 });
 
 export default function ArtistryPortfolio() {
+
+
+    const galleryItems = [
+    {
+      id: 1,
+      src: "https://cdn.cosmos.so/3be2e4e2-4ba8-47c2-9bd7-6b09cc6b82e3?format=jpeg",
+      alt: "Fading Embrace - Abstract artistic photography",
+      title: "Fading Embrace"
+    },
+    {
+      id: 2,
+      src: "https://cdn.cosmos.so/91da03b4-8f72-40bd-9531-ce101ecb9508?format=jpeg",
+      alt: "Fractured Motion - Abstract artistic photography",
+      title: "Fractured Motion"
+    },
+    {
+      id: 3,
+      src: "https://cdn.cosmos.so/9dbf17e4-d4fa-4095-98dd-d6527d4bb53a?format=jpeg",
+      alt: "Echo of Touch - Abstract artistic photography",
+      title: "Echo of Touch"
+    },
+    {
+      id: 4,
+      src: "https://cdn.cosmos.so/bed49b37-4a4a-4cec-ac80-86f5d2edbb8d?format=jpeg",
+      alt: "Shattered Light - Abstract artistic photography",
+      title: "Shattered Light"
+    },
+    {
+      id: 5,
+      src: "https://cdn.cosmos.so/031178f7-7078-4866-9de3-c80062188a2b?format=jpeg",
+      alt: "Dissolving Form - Abstract artistic photography",
+      title: "Dissolving Form"
+    }
+  ];
+
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [centerTrackedIndex, setCenterTrackedIndex] = useState(0);
+
+  const scrollToItem = (index: number) => {
+    if (galleryScrollRef.current) {
+      const container = galleryScrollRef.current;
+      const itemWidth = container.children[0]?.clientWidth || 0;
+      const scrollPosition = index * (itemWidth + 16); // 16px for gap
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth"
+      });
+      setActiveIndex(index);
+    }
+  };
+
+  const scrollGallery = (direction: "left" | "right") => {
+    const newIndex = direction === "left" 
+      ? Math.max(0, activeIndex - 1)
+      : Math.min(galleryItems.length - 1, activeIndex + 1);
+    scrollToItem(newIndex);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (galleryScrollRef.current) {
+        const container = galleryScrollRef.current;
+        const itemWidth = container.children[0]?.clientWidth || 0;
+        const scrollLeft = container.scrollLeft;
+        const centerIndex = Math.round(scrollLeft / (itemWidth + 16));
+        setCenterTrackedIndex(Math.min(Math.max(0, centerIndex), galleryItems.length - 1));
+      }
+    };
+
+    const container = galleryScrollRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+      return () => container.removeEventListener("scroll", handleScroll);
+    }
+  }, [galleryItems.length]);
+
+
     useEffect(() => {
         // Initialize Lenis for smooth scrolling with GSAP integration
         const lenis = new Lenis()
@@ -186,7 +266,62 @@ export default function ArtistryPortfolio() {
                 </div>
             </div>
 
-            <section id="gallery" className="gallery justify-center flex">
+
+            <section id="gallery" className="py-16 pt-0 px-4 md:px-8 md:hidden block">
+                <div className="gallery-container">
+                    <div className="relative md:mb-4 mb-[3rem] lg:mx-12 md:mx-10 ">
+
+                        <div
+                            ref={galleryScrollRef}
+                            className="flex overflow-x-auto scrollbar-hide gap-0 px-0 pb-0 py-0 scroll-smooth mt-8 snap-x snap-mandatory"
+                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                        >
+                            {galleryItems.map((item, index) => (
+                                <div
+                                    key={item.id}
+                                    className={cn(
+                                        "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all snap-start",
+                                        "w-full mr-1",
+                                    )}
+                                    onClick={() => scrollToItem(index)}
+                                >
+                                    <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[500px] shadow-md ">
+                                        <img
+                                            src={item.src}
+                                            alt={item.alt}
+                                            className="w-full h-full object-cover"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <span
+                                        className={cn(
+                                            "text-sm text-center -translate-y-0 font-serif text-black",
+                                            activeIndex === index ? "font-medium" : ""
+                                        )}
+                                    >
+                                        {item.title.toUpperCase()}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className={`md:px-[20%] text-center ${nothingYouCouldDo.className} `}>
+                        <p className={` text-[#690303] text-7xl md:text-7xl`}>
+                            <p className="">
+                                Taste is more then prefrence
+                            </p>
+                            <p className={``}>
+                                Its your nervous system
+                            </p>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
+            {/* for desktop only  */}
+            <section id="gallery" className="gallery justify-center md:flex hidden">
                 <div className="">
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
