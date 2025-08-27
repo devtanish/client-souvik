@@ -280,7 +280,7 @@ export default function ArtistryPortfolio() {
                                 <div
                                     key={item.id}
                                     className={cn(
-                                        "flex-shrink-0 flex flex-col items-center cursor-pointer transition-all snap-start",
+                                        "flex-shrink-0 -translate-x-3 flex flex-col items-center cursor-pointer transition-all snap-start",
                                         "w-full mr-1",
                                     )}
                                     onClick={() => scrollToItem(index)}
@@ -330,35 +330,35 @@ export default function ArtistryPortfolio() {
                                     src="https://cdn.cosmos.so/3be2e4e2-4ba8-47c2-9bd7-6b09cc6b82e3?format=jpeg"
                                     alt="Gallery image 1"
                                 />
-                                <div className=" text-center font-bold">Fading Embrace</div>
+                                <div className=" text-center ">Fading Embrace</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
                                 <img
                                     src="https://cdn.cosmos.so/91da03b4-8f72-40bd-9531-ce101ecb9508?format=jpeg"
                                     alt="Gallery image 2"
                                 />
-                                <div className=" text-center font-bold">Fractured Motion</div>
+                                <div className=" text-center ">Fractured Motion</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
                                 <img
                                     src="https://cdn.cosmos.so/9dbf17e4-d4fa-4095-98dd-d6527d4bb53a?format=jpeg"
                                     alt="Gallery image 3"
                                 />
-                                <div className=" text-center font-bold">Echo of Touch</div>
+                                <div className=" text-center ">Echo of Touch</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
                                 <img
                                     src="https://cdn.cosmos.so/bed49b37-4a4a-4cec-ac80-86f5d2edbb8d?format=jpeg"
                                     alt="Gallery image 4"
                                 />
-                                <div className=" text-center font-bold">Shattered Light</div>
+                                <div className=" text-center ">Shattered Light</div>
                             </div>
                             <div className={`${styles.galleryItem} gallery-item`}>
                                 <img
                                     src="https://cdn.cosmos.so/031178f7-7078-4866-9de3-c80062188a2b?format=jpeg"
                                     alt="Gallery image 5"
                                 />
-                                <div className=" text-center font-bold">Dissolving Form</div>
+                                <div className=" text-center ">Dissolving Form</div>
                             </div>
                         </div>
                         <div className={`md:px-[20%] text-center ${nothingYouCouldDo.className} `}>
