@@ -254,14 +254,10 @@ export default function ArtistryPortfolio() {
                     className="md:w-[45%] w-[100%]"
                     alt="Portrait"
                 />
-                <div className="flex items-start md:items-end">
+                <div className="flex items-start md:items-end mx-10 md:mx-0">
                     <p className={`${styles.heroText} text-center md:text-right mr-2 `}>
                         I am a visual artist exploring the intersection of mental landscapes and creative expression.
                         Creating art as a therapeutic journey, my work embodies the transformation of internal chaos
-                        into external beauty. Through deliberate practice and intuitive creation, I find that art
-                        provides structure in times of uncertainty and offers a rare clarity when thoughts become
-                        overwhelming. Each piece becomes both mirror and window—reflecting inner states while allowing
-                        glimpses into possible futures.
                     </p>
                 </div>
             </div>
