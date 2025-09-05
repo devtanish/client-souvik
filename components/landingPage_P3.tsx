@@ -30,10 +30,10 @@ export default function LandingPage_P3() {
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
                         <h3 className="text-white text-xl font-semibold mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
-                            Women Bracelet
+                            Women Earrings
                         </h3>
                         <p className="text-white/90 text-xl opacity-0 group-hover:opacity-100 mb-4 transition-opacity duration-700 delay-300">
-                            Men Brecelet
+                            Men Earrings
                         </p>
                     </div>
                 </div>
