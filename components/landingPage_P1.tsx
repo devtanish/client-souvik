@@ -1,6 +1,8 @@
 "use client"
 import { useEffect } from "react"
 import { gsap } from "gsap"
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 import { cn } from "@/lib/utils"
 import { useState, useRef } from "react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -53,6 +55,9 @@ export default function ArtistryPortfolio() {
   const galleryScrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [centerTrackedIndex, setCenterTrackedIndex] = useState(0);
+
+  const [array, setArray] = useState([1, 2, 3, 4, 5]);
+  const [place, setPlace] = useState<number>(array[0]);
 
   const scrollToItem = (index: number) => {
     if (galleryScrollRef.current) {
@@ -227,6 +232,35 @@ export default function ArtistryPortfolio() {
         }
     }, [])
 
+    const [frontImageIndex, setFrontImageIndex] = useState(1);
+
+    // Add this useEffect to track scroll position and determine front image
+    useEffect(() => {
+        const scrollContainer = galleryScrollRef.current;
+        if (!scrollContainer) return;
+
+        const handleScroll = () => {
+            const scrollLeft = scrollContainer.scrollLeft;
+            const containerWidth = scrollContainer.clientWidth;
+            const itemWidth = containerWidth; // Since each item is w-full
+            
+            // Calculate which image is in front based on scroll position
+            const currentIndex = Math.round(scrollLeft / itemWidth);
+            setFrontImageIndex(Math.min(currentIndex, galleryItems.length - 1));
+        };
+
+        scrollContainer.addEventListener('scroll', handleScroll);
+        
+        // Set initial front image
+        handleScroll();
+
+        return () => {
+            if (scrollContainer) {
+                scrollContainer.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [galleryItems.length]);
+
     return (
         <div className="wrapper">
             {/* TOP SVG - Animates on page load */}
@@ -262,6 +296,21 @@ export default function ArtistryPortfolio() {
                 </div>
             </div>
 
+            <div className={`justify-center items-center text-center flex md:hidden translate-y-3`}>
+                <IoIosArrowBack/>
+                <div className={`border-1 ${frontImageIndex+1 === 1 && "w-8"} ${frontImageIndex+1 === array[array.length-1] && "w-25"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
+                    setPlace((cur) => cur === 1 ? 1 : cur - 1);
+                    console.log(frontImageIndex);
+                    scrollGallery("left")
+                }}></div>
+                <div className="text-sm mx-3">{frontImageIndex+1}/{array.length}</div>
+                <div className={`border-1 ${frontImageIndex+1 === 1 && "w-25"} ${frontImageIndex+1 === array[array.length-1] && "w-8"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 translate-x-2.5`} onClick={()=> {
+                    setPlace((cur) => cur === 5 ? 5 : cur + 1);
+                    console.log(frontImageIndex);
+                    scrollGallery("right")
+                }}></div>
+                <IoIosArrowForward/>
+            </div>
 
             <section id="gallery" className="py-16 pt-0 px-4 md:px-8 md:hidden block">
                 <div className="gallery-container">
@@ -274,12 +323,16 @@ export default function ArtistryPortfolio() {
                         >
                             {galleryItems.map((item, index) => (
                                 <div
-                                    key={item.id}
-                                    className={cn(
-                                        "flex-shrink-0 -translate-x-3 flex flex-col items-center cursor-pointer transition-all snap-start",
-                                        "w-full mr-1",
-                                    )}
-                                    onClick={() => scrollToItem(index)}
+                                key={item.id}
+                                className={cn(
+                                    "flex-shrink-0  flex flex-col items-center cursor-pointer transition-all snap-start",
+                                    "w-full mr-1",
+                                )}
+                                onClick={() => {
+                                    scrollToItem(index);
+                                    setFrontImageIndex(index); // Update front image when clicked
+                                    console.log(index);
+                                }}
                                 >
                                     <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[500px] shadow-md ">
                                         <img
@@ -314,7 +367,6 @@ export default function ArtistryPortfolio() {
                     </div>
                 </div>
             </section>
-
 
             {/* for desktop only  */}
             <section id="gallery" className="gallery justify-center md:flex hidden">
