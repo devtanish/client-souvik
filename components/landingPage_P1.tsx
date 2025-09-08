@@ -288,25 +288,23 @@ export default function ArtistryPortfolio() {
                     className="md:w-[45%] w-[100%]"
                     alt="Portrait"
                 />
-                <div className="flex items-start md:items-end mx-10 md:mx-0">
-                    <p className={`${styles.heroText} text-center md:text-right mr-2 `}>
+                <div className="flex items-start md:items-end mx-4 md:mx-0">
+                    <p className={`${styles.heroText} text-start mr-[40%] md:text-right `}>
                         I am a visual artist exploring the intersection of mental landscapes and creative expression.
                         Creating art as a therapeutic journey, my work embodies the transformation of internal chaos
                     </p>
                 </div>
             </div>
 
-            <div className={`justify-center items-center text-center flex md:hidden translate-y-3`}>
+            <div className={`justify-end mr-4 items-center text-center flex md:hidden translate-y-3`}>
                 <IoIosArrowBack/>
-                <div className={`border-1 ${frontImageIndex+1 === 1 && "w-8"} ${frontImageIndex+1 === array[array.length-1] && "w-25"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
+                <div className={`border-1 transition-all duration-500 ease-initial ${frontImageIndex+1 === 1 && "w-8"} ${frontImageIndex+1 === array[array.length-1] && "w-25"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
                     setPlace((cur) => cur === 1 ? 1 : cur - 1);
-                    console.log(frontImageIndex);
                     scrollGallery("left")
                 }}></div>
                 <div className="text-sm mx-3">{frontImageIndex+1}/{array.length}</div>
-                <div className={`border-1 ${frontImageIndex+1 === 1 && "w-25"} ${frontImageIndex+1 === array[array.length-1] && "w-8"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 translate-x-2.5`} onClick={()=> {
+                <div className={`border-1 transition-all duration-500 ease-initial ${frontImageIndex+1 === 1 && "w-25"} ${frontImageIndex+1 === array[array.length-1] && "w-8"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 translate-x-2.5`} onClick={()=> {
                     setPlace((cur) => cur === 5 ? 5 : cur + 1);
-                    console.log(frontImageIndex);
                     scrollGallery("right")
                 }}></div>
                 <IoIosArrowForward/>
@@ -331,7 +329,6 @@ export default function ArtistryPortfolio() {
                                 onClick={() => {
                                     scrollToItem(index);
                                     setFrontImageIndex(index); // Update front image when clicked
-                                    console.log(index);
                                 }}
                                 >
                                     <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[500px] shadow-md ">
