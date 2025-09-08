@@ -289,7 +289,7 @@ export default function ArtistryPortfolio() {
                     alt="Portrait"
                 />
                 <div className="flex items-start md:items-end mx-4 md:mx-0">
-                    <p className={`${styles.heroText} text-start mr-[40%] md:text-right `}>
+                    <p className={`${styles.heroText} text-start mr-2 md:text-right `}>
                         I am a visual artist exploring the intersection of mental landscapes and creative expression.
                         Creating art as a therapeutic journey, my work embodies the transformation of internal chaos
                     </p>
