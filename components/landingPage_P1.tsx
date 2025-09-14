@@ -52,50 +52,46 @@ export default function ArtistryPortfolio() {
     }
   ];
 
-  const galleryScrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [centerTrackedIndex, setCenterTrackedIndex] = useState(0);
-
-  const [array, setArray] = useState([1, 2, 3, 4, 5]);
-  const [place, setPlace] = useState<number>(array[0]);
+    const galleryScrollRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
 
   const scrollToItem = (index: number) => {
-    if (galleryScrollRef.current) {
-      const container = galleryScrollRef.current;
-      const itemWidth = container.children[0]?.clientWidth || 0;
-      const scrollPosition = index * (itemWidth + 16); // 16px for gap
-      container.scrollTo({
-        left: scrollPosition,
-        behavior: "smooth"
-      });
-      setActiveIndex(index);
-    }
+        if (galleryScrollRef.current) {
+            const container = galleryScrollRef.current;
+            const itemWidth = container.children[0]?.clientWidth || 0;
+            const scrollPosition = index * (itemWidth + 16); // 16px for gap
+            container.scrollTo({
+                left: scrollPosition,
+                behavior: "smooth"
+            });
+            setActiveIndex(index);
+        }
   };
 
   const scrollGallery = (direction: "left" | "right") => {
-    const newIndex = direction === "left" 
-      ? Math.max(0, activeIndex - 1)
-      : Math.min(galleryItems.length - 1, activeIndex + 1);
-    scrollToItem(newIndex);
+        const newIndex = direction === "left" 
+            ? Math.max(0, activeIndex - 1)
+            : Math.min(galleryItems.length - 1, activeIndex + 1);
+        scrollToItem(newIndex);
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (galleryScrollRef.current) {
+        // Only update activeIndex on scroll
+        const handleScroll = () => {
+            if (galleryScrollRef.current) {
+                const container = galleryScrollRef.current;
+                const itemWidth = container.children[0]?.clientWidth || 0;
+                const scrollLeft = container.scrollLeft;
+                const centerIndex = Math.round(scrollLeft / (itemWidth + 16));
+                setActiveIndex(Math.min(Math.max(0, centerIndex), galleryItems.length - 1));
+            }
+        };
         const container = galleryScrollRef.current;
-        const itemWidth = container.children[0]?.clientWidth || 0;
-        const scrollLeft = container.scrollLeft;
-        const centerIndex = Math.round(scrollLeft / (itemWidth + 16));
-        setCenterTrackedIndex(Math.min(Math.max(0, centerIndex), galleryItems.length - 1));
-      }
-    };
-
-    const container = galleryScrollRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-      return () => container.removeEventListener("scroll", handleScroll);
-    }
-  }, [galleryItems.length]);
+        if (container) {
+            container.addEventListener("scroll", handleScroll);
+            return () => container.removeEventListener("scroll", handleScroll);
+        }
+    }, [galleryItems.length]);
 
 
     useEffect(() => {
@@ -106,6 +102,8 @@ export default function ArtistryPortfolio() {
         lenis.on("scroll", (e: any) => {
             ScrollTrigger.update()
         })
+
+        
 
         // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
         gsap.ticker.add((time) => {
@@ -232,35 +230,42 @@ export default function ArtistryPortfolio() {
         }
     }, [])
 
-    const [frontImageIndex, setFrontImageIndex] = useState(1);
+    // Add this useEffect after your existing useEffects in the component
 
-    // Add this useEffect to track scroll position and determine front image
+    const isAutoScrolling = useRef(false);
+
     useEffect(() => {
-        const scrollContainer = galleryScrollRef.current;
-        if (!scrollContainer) return;
+        const interval = setInterval(() => {
+            setActiveIndex((prevIndex) => {
+                const nextIndex = prevIndex >= galleryItems.length - 1 ? 0 : prevIndex + 1;
+                
+                // Set flag to prevent scroll handler interference
+                isAutoScrolling.current = true;
+                
+                // Scroll directly without calling scrollToItem
+                if (galleryScrollRef.current) {
+                    const container = galleryScrollRef.current;
+                    const itemWidth = container.children[0]?.clientWidth || 0;
+                    const scrollPosition = nextIndex * (itemWidth + 16);
+                    container.scrollTo({
+                        left: scrollPosition,
+                        behavior: "smooth"
+                    });
+                    
+                    // Reset flag after scroll animation completes (smooth scroll takes ~300ms)
+                    setTimeout(() => {
+                        isAutoScrolling.current = false;
+                    }, 400);
+                }
+                
+                return nextIndex;
+            });
+        }, 5000);
 
-        const handleScroll = () => {
-            const scrollLeft = scrollContainer.scrollLeft;
-            const containerWidth = scrollContainer.clientWidth;
-            const itemWidth = containerWidth; // Since each item is w-full
-            
-            // Calculate which image is in front based on scroll position
-            const currentIndex = Math.round(scrollLeft / itemWidth);
-            setFrontImageIndex(Math.min(currentIndex, galleryItems.length - 1));
-        };
+        return () => clearInterval(interval);
+    }, []);
 
-        scrollContainer.addEventListener('scroll', handleScroll);
-        
-        // Set initial front image
-        handleScroll();
-
-        return () => {
-            if (scrollContainer) {
-                scrollContainer.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [galleryItems.length]);
-
+    // Remove frontImageIndex and related interval logic
     return (
         <div className="wrapper">
             {/* TOP SVG - Animates on page load */}
@@ -282,7 +287,7 @@ export default function ArtistryPortfolio() {
             </section> */}
 
             {/* Hero Section */}
-            <div className="block md:flex w-screen items-start md:items-end gap-[25%]">
+            <div className="block md:flex w-screen items-start md:items-end gap-[25%] ">
                 <img
                     src="https://cdn.cosmos.so/2200c8e1-2901-4fdb-806c-a2596b3e9c49?format=jpeg"
                     className="md:w-[45%] w-[100%]"
@@ -298,7 +303,22 @@ export default function ArtistryPortfolio() {
 
             <div className={`justify-end mr-4 items-center text-center flex md:hidden translate-y-3`}>
                 <IoIosArrowBack/>
-                <div className={`border-1 transition-all duration-500 ease-initial ${frontImageIndex+1 === 1 && "w-8"} ${frontImageIndex+1 === array[array.length-1] && "w-25"} ${(frontImageIndex+1 != array[array.length-1] && frontImageIndex+1 != array[0]) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
+                {/* <div className={`border-1 transition-all duration-500 ease-initial border-gray-500 -translate-x-2.5`} onClick={()=> scrollGallery("left")}></div> */}
+                <div className={`border-1 transition-all duration-500 ease-initial ${activeIndex+1 === 1 && "w-8"} ${activeIndex+1 === galleryItems[galleryItems.length-1].id && "w-25"} ${(activeIndex+1 != galleryItems[galleryItems.length-1].id && activeIndex+1 != galleryItems[0].id) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
+                    setActiveIndex((cur) => cur === 1 ? 1 : cur - 1);
+                    scrollGallery("left")
+                }}></div>
+                <div className="text-sm mx-3">{activeIndex+1}/{galleryItems.length}</div>
+                <div className={`border-1 transition-all duration-500 ease-initial ${activeIndex+1 === 1 && "w-25"} ${activeIndex+1 === galleryItems[galleryItems.length-1].id && "w-8"} ${(activeIndex+1 != galleryItems[galleryItems.length-1].id && activeIndex+1 != galleryItems[0].id) && "w-16.5"} border-gray-500 translate-x-2.5`} onClick={()=> {
+                    setActiveIndex((cur) => cur === 5 ? 5 : cur + 1);
+                    scrollGallery("right")
+                }}></div>
+                <IoIosArrowForward/>
+            </div>
+
+            {/* <div className={`justify-end mr-4 items-center text-center flex md:hidden translate-y-3`}>
+                <IoIosArrowBack/>
+                <div className={`border-1 transition-all duration-500 ease-initial ${frontImageIndex+1 === 1 && "w-8"} ${frontImageIndex+1 === array[array.length-1] && "w-25"} ${(frontImageIndex+1 != galleryItems[galleryItems.length-1].id && frontImageIndex+1 != galleryItems[0].id) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
                     setPlace((cur) => cur === 1 ? 1 : cur - 1);
                     scrollGallery("left")
                 }}></div>
@@ -308,7 +328,7 @@ export default function ArtistryPortfolio() {
                     scrollGallery("right")
                 }}></div>
                 <IoIosArrowForward/>
-            </div>
+            </div> */}
 
             <section id="gallery" className="py-16 pt-0 px-4 md:px-8 md:hidden block">
                 <div className="gallery-container">
@@ -328,7 +348,6 @@ export default function ArtistryPortfolio() {
                                 )}
                                 onClick={() => {
                                     scrollToItem(index);
-                                    setFrontImageIndex(index); // Update front image when clicked
                                 }}
                                 >
                                     <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[500px] shadow-md ">
