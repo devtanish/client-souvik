@@ -2,6 +2,7 @@
 import { useEffect } from "react"
 import { gsap } from "gsap"
 import { IoIosArrowBack } from "react-icons/io";
+import ScrollFloat from "./animations/ScrollFloat";
 import { IoIosArrowForward } from "react-icons/io";
 import { cn } from "@/lib/utils"
 import { useState, useRef } from "react"
@@ -298,6 +299,7 @@ export default function ArtistryPortfolio() {
                         I am a visual artist exploring the intersection of mental landscapes and creative expression.
                         Creating art as a therapeutic journey, my work embodies the transformation of internal chaos
                     </p>
+                    
                 </div>
             </div>
 
@@ -425,19 +427,32 @@ export default function ArtistryPortfolio() {
                                 <div className=" text-center ">Dissolving Form</div>
                             </div>
                         </div>
-                        <div className={`md:px-[20%] text-center ${nothingYouCouldDo.className} `}>
-                            <p className={` text-[#690303] text-7xl md:text-7xl`}>
-                                <p className="">
-                                    Taste is more then prefrence
-                                </p>
-                                <p className={``}>
-                                    Its your nervous system
-                                </p>
-                            </p>
-                        </div>
                     </div>
                 </div>
             </section>
+
+            <div className={` md:px-[0%] text-center ${nothingYouCouldDo.className} mb-30 hidden md:block`}>
+                <ScrollFloat
+                textClassName={` ${nothingYouCouldDo.className} md:px-[20%] text-center text-[#690303] text-7xl md:text-7xl`}
+                animationDuration={1}
+                ease='back.inOut(2)'
+                scrollStart='center bottom+=50%'
+                scrollEnd='bottom bottom-=60%'
+                stagger={0.03}
+                >
+                    Taste is more then prefrence
+                </ScrollFloat>
+                <ScrollFloat
+                textClassName={` ${nothingYouCouldDo.className} md:px-[20%] text-center text-[#690303] text-7xl md:text-7xl`}
+                animationDuration={1}
+                ease='back.inOut(2)'
+                scrollStart='center bottom+=50%'
+                scrollEnd='bottom bottom-=60%'
+                stagger={0.03}
+                >
+                    Its your nervous system
+                </ScrollFloat>
+            </div>
 
             {/* BOTTOM SVG - Animates only when footer comes into view */}
             <section id="footer" className="footer">

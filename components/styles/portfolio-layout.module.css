@@ -29,7 +29,8 @@
 }
 
 .gallerySection {
-  padding: 6rem 1rem;
+  padding: 0rem 1rem;
+  padding-top: 6rem;
 }
 
 .galleryGrid {
