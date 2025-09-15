@@ -301,7 +301,7 @@ export default function ArtistryPortfolio() {
                 </div>
             </div>
 
-            <div className={`justify-end mr-4 items-center text-center flex md:hidden translate-y-3`}>
+            <div className={`justify-end mr-4 items-center text-center flex md:hidden translate-y-5`}>
                 <IoIosArrowBack/>
                 {/* <div className={`border-1 transition-all duration-500 ease-initial border-gray-500 -translate-x-2.5`} onClick={()=> scrollGallery("left")}></div> */}
                 <div className={`border-1 transition-all duration-500 ease-initial ${activeIndex+1 === 1 && "w-8"} ${activeIndex+1 === galleryItems[galleryItems.length-1].id && "w-25"} ${(activeIndex+1 != galleryItems[galleryItems.length-1].id && activeIndex+1 != galleryItems[0].id) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
@@ -344,13 +344,13 @@ export default function ArtistryPortfolio() {
                                 key={item.id}
                                 className={cn(
                                     "flex-shrink-0  flex flex-col items-center cursor-pointer transition-all snap-start",
-                                    "w-full mr-1",
+                                    "w-[70%] mr-1",
                                 )}
                                 onClick={() => {
                                     scrollToItem(index);
                                 }}
                                 >
-                                    <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[500px] shadow-md ">
+                                    <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[400px] shadow-md ">
                                         <img
                                             src={item.src}
                                             alt={item.alt}
