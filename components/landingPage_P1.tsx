@@ -431,27 +431,27 @@ export default function ArtistryPortfolio() {
                 </div>
             </section>
 
-            <div className={` md:px-[0%] text-center wrap-break-word ${nothingYouCouldDo.className} mb-30 hidden md:block`}>
+            <div className={` md:px-[0%] text-center ${nothingYouCouldDo.className} mb-30 hidden md:block`}>
                 <ScrollFloat
-                textClassName={` ${nothingYouCouldDo.className} md:px-[20%] text-center text-[#690303] text-7xl md:text-7xl`}
+                textClassName={` ${nothingYouCouldDo.className} md:px-[10%]  text-center text-[#690303] text-7xl md:text-7xl`}
                 animationDuration={1}
                 ease='back.inOut(2)'
                 scrollStart='center bottom+=50%'
                 scrollEnd='bottom bottom-=60%'
                 stagger={0.03}
                 >
-                    Taste is more then prefrence Its your nervous system
+                    Taste is more then prefrence 
                 </ScrollFloat>
-                {/* <ScrollFloat
-                textClassName={` ${nothingYouCouldDo.className} md:px-[20%] text-center text-[#690303] text-7xl md:text-7xl`}
+                <ScrollFloat
+                textClassName={` ${nothingYouCouldDo.className} md:px-[10%] text-center text-[#690303] text-7xl md:text-7xl`}
                 animationDuration={1}
                 ease='back.inOut(2)'
                 scrollStart='center bottom+=50%'
                 scrollEnd='bottom bottom-=60%'
                 stagger={0.03}
                 >
-                    
-                </ScrollFloat> */}
+                    Its your nervous system
+                </ScrollFloat>
             </div>
 
             {/* BOTTOM SVG - Animates only when footer comes into view */}
