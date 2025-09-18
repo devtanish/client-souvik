@@ -73,21 +73,21 @@ export default function JewelryCustomizer() {
   }
 
   return (
-    <div id="landingPage2" className="min-h-screen flex items-center justify-center bg-[#eaebe5] scroll-mt-16">
+    <div id="landingPage2" className="min-h-screen flex items-center justify-center bg-[#eaebe5] scroll-mt-16 ">
       <div className="text-center my-10" ref={containerRef}>
         <div className="customizer-sentence">
-          <div className="sentence-part">
+          <div className="sentence-part md:text-[2rem] text-[1.7rem] mx-1">
             I want to create a
-            <div className="dropdown-wrapper multi-select">
+            <div className="dropdown-wrapper multi-select mx-0">
               <button
-                className={`dropdown-btn ${dropdownStates.jewelryPiece ? "open" : ""}`}
+                className={`dropdown-btn md:text-[2rem] text-[1.7rem] ${dropdownStates.jewelryPiece ? "open" : ""}`}
                 onClick={() => toggleDropdown("jewelryPiece")}
               >
                 <span>{selections.jewelryPiece}</span>
                 <i className="icon-arrow"></i>
               </button>
               <div className={`dropdown-menu ${dropdownStates.jewelryPiece ? "show" : ""}`}>
-                <div className="menu-header">Select one or more</div>
+                <div className="menu-header ">Select one or more</div>
                 {["Ring", "Earrings", "Necklace", "Bracelet", "Charm"].map((item) => (
                   <label key={item}>
                     <input
@@ -120,11 +120,11 @@ export default function JewelryCustomizer() {
                   </a>
                 ))}
               </div>
+              to celebrate
             </div>
           </div>
 
-          <div className="sentence-part">
-            to celebrate
+          <div className="sentence-part md:text-[2rem] text-[1.7rem]">
             <div className="dropdown-wrapper">
               <button
                 className={`dropdown-btn ${dropdownStates.occasion ? "open" : ""}`}
@@ -163,7 +163,7 @@ export default function JewelryCustomizer() {
             .
           </div>
 
-          <div className="sentence-part optional-part">
+          <div className="sentence-part optional-part text-[1.7rem] md:text-[2rem]">
             <span className="optional-text">(Optional)</span>
             They are a proud
             <div className="dropdown-wrapper multi-select">
