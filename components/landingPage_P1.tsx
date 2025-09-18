@@ -407,12 +407,11 @@ export default function ArtistryPortfolio() {
             </section>
 
             <BlurText
-            text="Taste is more then prefrence 
-                        Its your nervous system"
+            text="Taste is more then prefrence Its your nervous system"
             delay={150}
             animateBy="words"
             direction="top"
-            className={`text-7xl text-[#690303] md:hidden px-[10%] text-center ${nothingYouCouldDo.className} mb-30 md:block flex justify-center`}
+            className={`text-7xl text-[#690303] md:hidden translate-x-3 text-center ${nothingYouCouldDo.className} mb-20 md:block flex justify-center -translate-y-5`}
             />
 
             {/* for desktop only  */}
