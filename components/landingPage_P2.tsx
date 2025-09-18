@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import "../components/styles/jewelry-customizer.css"
 
 export default function JewelryCustomizer() {
+  // State management
   const [dropdownStates, setDropdownStates] = useState<{ [key: string]: boolean }>({})
   const [selections, setSelections] = useState({
     jewelryPiece: "Jewelry Piece",
@@ -17,6 +18,7 @@ export default function JewelryCustomizer() {
     personalTouches: [],
   })
 
+  // Refs
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Close all dropdowns when clicking outside
@@ -44,9 +46,11 @@ export default function JewelryCustomizer() {
   }
 
   const handleMultiSelectConfirm = (key: string) => {
-    const selectedValues = multiSelectValues[key]
-    if (selectedValues.length > 0) {
-      setSelections((prev) => ({ ...prev, [key]: selectedValues.join(", ") }))
+    if (multiSelectValues[key]?.length > 0) {
+      setSelections((prev) => ({
+        ...prev,
+        [key]: multiSelectValues[key].join(", ")
+      }))
     }
     setDropdownStates({})
   }
@@ -69,7 +73,7 @@ export default function JewelryCustomizer() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center  bg-[#eaebe5] " >
+    <div id="landingPage2" className="min-h-screen flex items-center justify-center bg-[#eaebe5] scroll-mt-16">
       <div className="text-center my-10" ref={containerRef}>
         <div className="customizer-sentence">
           <div className="sentence-part">

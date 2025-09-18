@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function LandingPage_P3() {
     return (
-        <div>
+        <div id="landingPage3" className="scroll-mt-16">
             <div className="sm:h-[150vh] h-[100vh] w-screen grid grid-cols-4 md:grid-cols-6 grid-rows-8 gap-0 mt-[5vh] md:mt-[10vh]">
                 <div className="col-start-1 col-end-3 row-start-1 row-end-5 relative group overflow-hidden">
                     <Image

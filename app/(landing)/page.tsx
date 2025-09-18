@@ -8,10 +8,16 @@ import LandingPage_P3 from "@/components/landingPage_P3"
 export default function Shop() {
     return (
         <div className="">
-            <div className=" md:pt-8 pt-7 pb-10 bg-[#eaebe5]">
-                <LandingPage/>
-                <LandingPage_P3/>
-                <JewelryCustomizer/>
+            <div className="md:pt-8 pt-7 pb-10 bg-[#eaebe5]">
+                <div id="hero">
+                    <LandingPage/>
+                </div>
+                <div id="landingPage3">
+                    <LandingPage_P3/>
+                </div>
+                <div id="landingPage2">
+                    <JewelryCustomizer/>
+                </div>
             </div>
         </div>
     )

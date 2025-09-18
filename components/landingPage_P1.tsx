@@ -18,7 +18,8 @@ const nothingYouCouldDo = Nothing_You_Could_Do({
 });
 
 export default function ArtistryPortfolio() {
-
+    const [activeIndex, setActiveIndex] = useState(0);
+    const galleryScrollRef = useRef<HTMLDivElement>(null);
 
     const galleryItems = [
     {
@@ -53,20 +54,41 @@ export default function ArtistryPortfolio() {
     }
   ];
 
-    const galleryScrollRef = useRef<HTMLDivElement>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const scrollToSection = (index: number) => {
+        const sections = ['landingPage3', 'landingPage2', 'hero'];
+        const sectionId = sections[index];
+        
+        if (sectionId) {
+            const targetElement = document.getElementById(sectionId);
+      if (targetElement) {
+        const yOffset = -100;
+        const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset + 75;
+        
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
 
   const scrollToItem = (index: number) => {
-        if (galleryScrollRef.current) {
-            const container = galleryScrollRef.current;
-            const itemWidth = container.children[0]?.clientWidth || 0;
-            const scrollPosition = index * (itemWidth + 16); // 16px for gap
-            container.scrollTo({
-                left: scrollPosition,
-                behavior: "smooth"
-            });
-            setActiveIndex(index);
-        }
+    if (galleryScrollRef.current) {
+      const container = galleryScrollRef.current;
+      const itemWidth = container.children[0]?.clientWidth || 0;
+      const scrollPosition = index * (itemWidth + 16);
+      
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth"
+      });
+      setActiveIndex(index);
+      
+      // Add a small delay before scrolling to section
+      setTimeout(() => {
+        scrollToSection(index);
+      }, 300);
+    }
   };
 
   const scrollGallery = (direction: "left" | "right") => {
@@ -335,7 +357,6 @@ export default function ArtistryPortfolio() {
             <section id="gallery" className="py-16 pt-0 px-4 md:px-8 md:hidden block">
                 <div className="gallery-container">
                     <div className="relative md:mb-4 mb-[3rem] lg:mx-12 md:mx-10 ">
-
                         <div
                             ref={galleryScrollRef}
                             className="flex overflow-x-auto scrollbar-hide gap-0 px-0 pb-0 py-0 scroll-smooth mt-8 snap-x snap-mandatory"
@@ -348,9 +369,7 @@ export default function ArtistryPortfolio() {
                                     "flex-shrink-0  flex flex-col items-center cursor-pointer transition-all snap-start",
                                     "w-[70%] mr-1",
                                 )}
-                                onClick={() => {
-                                    scrollToItem(index);
-                                }}
+                                onClick={() => scrollToItem(index)}
                                 >
                                     <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[400px] shadow-md ">
                                         <img
@@ -391,41 +410,20 @@ export default function ArtistryPortfolio() {
                 <div className="">
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
-                            <div className={`${styles.galleryItem} gallery-item`}>
-                                <img
-                                    src="https://cdn.cosmos.so/3be2e4e2-4ba8-47c2-9bd7-6b09cc6b82e3?format=jpeg"
-                                    alt="Gallery image 1"
-                                />
-                                <div className=" text-center ">Fading Embrace</div>
-                            </div>
-                            <div className={`${styles.galleryItem} gallery-item`}>
-                                <img
-                                    src="https://cdn.cosmos.so/91da03b4-8f72-40bd-9531-ce101ecb9508?format=jpeg"
-                                    alt="Gallery image 2"
-                                />
-                                <div className=" text-center ">Fractured Motion</div>
-                            </div>
-                            <div className={`${styles.galleryItem} gallery-item`}>
-                                <img
-                                    src="https://cdn.cosmos.so/9dbf17e4-d4fa-4095-98dd-d6527d4bb53a?format=jpeg"
-                                    alt="Gallery image 3"
-                                />
-                                <div className=" text-center ">Echo of Touch</div>
-                            </div>
-                            <div className={`${styles.galleryItem} gallery-item`}>
-                                <img
-                                    src="https://cdn.cosmos.so/bed49b37-4a4a-4cec-ac80-86f5d2edbb8d?format=jpeg"
-                                    alt="Gallery image 4"
-                                />
-                                <div className=" text-center ">Shattered Light</div>
-                            </div>
-                            <div className={`${styles.galleryItem} gallery-item`}>
-                                <img
-                                    src="https://cdn.cosmos.so/031178f7-7078-4866-9de3-c80062188a2b?format=jpeg"
-                                    alt="Gallery image 5"
-                                />
-                                <div className=" text-center ">Dissolving Form</div>
-                            </div>
+                            {galleryItems.map((item, index) => (
+                                <div 
+                                    key={item.id}
+                                    className={`${styles.galleryItem} gallery-item`}
+                                    onClick={() => scrollToItem(index)}
+                                >
+                                    <img
+                                        src={item.src}
+                                        alt={item.alt}
+                                        loading="lazy"
+                                    />
+                                    <div className="text-center">{item.title}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
