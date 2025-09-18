@@ -411,7 +411,7 @@ export default function ArtistryPortfolio() {
             delay={150}
             animateBy="words"
             direction="top"
-            className={`text-7xl text-[#690303] md:hidden translate-x-3 text-center ${nothingYouCouldDo.className} mb-20 md:block flex justify-center -translate-y-5`}
+            className={`text-7xl text-[#690303] md:hidden translate-x-3 text-center ${nothingYouCouldDo.className} mb-5 md:block flex justify-center -translate-y-10`}
             />
 
             {/* for desktop only  */}
