@@ -1,5 +1,6 @@
 "use client"
 import { useEffect } from "react"
+import BlurText from "./animations/BlurText";
 import { gsap } from "gsap"
 import { IoIosArrowBack } from "react-icons/io";
 import ScrollFloat from "./animations/ScrollFloat";
@@ -392,7 +393,7 @@ export default function ArtistryPortfolio() {
                         </div>
                     </div>
 
-                    <div className={`md:px-[20%] text-center ${nothingYouCouldDo.className} `}>
+                    {/* <div className={`md:px-[20%] text-center ${nothingYouCouldDo.className} `}>
                         <p className={` text-[#690303] text-7xl md:text-7xl`}>
                             <p className="">
                                 Taste is more then prefrence
@@ -401,9 +402,18 @@ export default function ArtistryPortfolio() {
                                 Its your nervous system
                             </p>
                         </p>
-                    </div>
+                    </div> */}
                 </div>
             </section>
+
+            <BlurText
+            text="Taste is more then prefrence 
+                        Its your nervous system"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            className={`text-7xl text-[#690303] md:hidden px-[10%] text-center ${nothingYouCouldDo.className} mb-30 md:block flex justify-center`}
+            />
 
             {/* for desktop only  */}
             <section id="gallery" className="gallery justify-center md:flex hidden">
