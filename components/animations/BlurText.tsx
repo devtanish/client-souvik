@@ -45,27 +45,35 @@ const BlurText: React.FC<BlurTextProps> = ({
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
+  const lastY = useRef(0);
 
   useEffect(() => {
     if (!ref.current) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Only check scroll direction when element first enters viewport
+          const currentY = entry.boundingClientRect.y;
+          setIsScrollingUp(currentY < lastY.current);
+          lastY.current = currentY;
           setInView(true);
-          observer.unobserve(ref.current as Element);
+        } else {
+          setInView(false);
         }
       },
       { threshold, rootMargin }
     );
     observer.observe(ref.current);
+
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
 
   const defaultFrom = useMemo(
-    () =>
-      direction === 'top' ? { filter: 'blur(10px)', opacity: 0, y: -50 } : { filter: 'blur(10px)', opacity: 0, y: 50 },
-    [direction]
+    () => ({ filter: 'blur(10px)', opacity: 0 }),
+    []
   );
 
   const defaultTo = useMemo(
@@ -73,11 +81,11 @@ const BlurText: React.FC<BlurTextProps> = ({
       {
         filter: 'blur(5px)',
         opacity: 0.5,
-        y: direction === 'top' ? 5 : -5
+        y: 0
       },
       { filter: 'blur(0px)', opacity: 1, y: 0 }
     ],
-    [direction]
+    []
   );
 
   const fromSnapshot = animationFrom ?? defaultFrom;
@@ -90,13 +98,18 @@ const BlurText: React.FC<BlurTextProps> = ({
   return (
     <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
+        // Set initial animation direction based on how element entered viewport
+        const initialY = isScrollingUp ? 50 : -50;
+        const customFrom = { ...fromSnapshot, y: initialY };
+        const animateKeyframes = buildKeyframes(customFrom, toSnapshots);
 
         const spanTransition: Transition = {
           duration: totalDuration,
           times,
-          delay: (index * delay) / 1000,
-          ease: easing
+          // Animation sequence based on initial entry direction
+          delay: (isScrollingUp ? (elements.length - 1 - index) : index) * delay / 1000,
+          ease: easing,
+          repeat: 0
         };
 
         return (
