@@ -165,15 +165,14 @@
 
 .show-inspiration-btn {
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  padding: 16px 35px;
+  padding: 15px 30px;
   background: black;
   color: white;
   border: none;
-  border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 5px 20px rgba(184, 134, 11, 0.2);
