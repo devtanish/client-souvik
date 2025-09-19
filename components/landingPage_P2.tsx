@@ -76,7 +76,7 @@ export default function JewelryCustomizer() {
     <div id="landingPage2" className="min-h-screen flex items-center justify-center bg-[#eaebe5] scroll-mt-16 ">
       <div className="text-center my-10" ref={containerRef}>
         <div className="customizer-sentence">
-          <div className="sentence-part md:text-[2.7rem] text-[1.7rem] mx-1">
+          <div className="sentence-part md:text-[2.7rem] text-[1.5rem] mx-1">
             I want to create a
             <div className="dropdown-wrapper multi-select mx-0">
               <button
@@ -124,7 +124,7 @@ export default function JewelryCustomizer() {
             </div>
           </div>
 
-          <div className="sentence-part md:text-[2.7rem] text-[1.7rem]">
+          <div className="sentence-part md:text-[2.7rem] text-[1.5rem]">
             <div className="dropdown-wrapper">
               <button
                 className={`dropdown-btn ${dropdownStates.occasion ? "open" : ""}`}
@@ -163,7 +163,7 @@ export default function JewelryCustomizer() {
             .
           </div>
 
-          <div className="sentence-part optional-part text-[1.7rem] md:text-[2.7rem]">
+          <div className="sentence-part optional-part text-[1.5rem] md:text-[2.7rem]">
             <span className="optional-text">(Optional)</span>
             They are a proud
             <div className="dropdown-wrapper multi-select">

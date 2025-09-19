@@ -393,16 +393,6 @@ export default function ArtistryPortfolio() {
                         </div>
                     </div>
 
-                    {/* <div className={`md:px-[20%] text-center ${nothingYouCouldDo.className} `}>
-                        <p className={` text-[#690303] text-7xl md:text-7xl`}>
-                            <p className="">
-                                Taste is more then prefrence
-                            </p>
-                            <p className={``}>
-                                Its your nervous system
-                            </p>
-                        </p>
-                    </div> */}
                 </div>
             </section>
 
@@ -411,7 +401,7 @@ export default function ArtistryPortfolio() {
             delay={150}
             animateBy="words"
             direction="top"
-            className={`text-7xl text-[#690303] md:hidden translate-x-3 text-center ${nothingYouCouldDo.className} mb-5 md:block flex justify-center -translate-y-10`}
+            className={`text-7xl text-[#690303] md:hidden ml-8 text-center ${nothingYouCouldDo.className} mb-5 md:block flex justify-center -translate-y-10`}
             />
 
             {/* for desktop only  */}
