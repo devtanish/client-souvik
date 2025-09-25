@@ -195,7 +195,7 @@ export default function JewelryCustomizer() {
           </div>
         </div>
 
-        <button className="show-inspiration-btn bg-black" onClick={handleShowInspiration}>
+        <button className="show-inspiration-btn bg-[#925c40]" onClick={handleShowInspiration}>
           Discover My Creation
         </button>
 

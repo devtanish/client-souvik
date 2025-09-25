@@ -170,7 +170,7 @@
   text-transform: uppercase;
   letter-spacing: 1.5px;
   padding: 15px 30px;
-  background: black;
+  /* background: black; */
   color: white;
   border: none;
   cursor: pointer;
@@ -180,7 +180,7 @@
 }
 
 .show-inspiration-btn:hover {
-  background-color: gray;
+  background-color: #b0947f;
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
 }
