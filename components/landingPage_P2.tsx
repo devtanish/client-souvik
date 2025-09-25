@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import "../components/styles/jewelry-customizer.css"
+import "@/components/styles/jewelry-customizer.css"
 
 export default function JewelryCustomizer() {
   // State management
