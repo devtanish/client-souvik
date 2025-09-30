@@ -100,7 +100,7 @@ const JewelryCustomizer: React.FC = () => {
   );
 
   const SelectionPanel: React.FC<SelectionPanelProps> = ({ panelId, isActive, options, type, currentValue, onClose }) => (
-    <div className={`w-full md:w-[50vh] transition-all duration-500 ease-in-out bg-[#eaebe5] rounded-xl mt-4 transform origin-top shadow-lg ${
+    <div className={`w-full md:w-[100vh] transition-all duration-500 ease-in-out bg-[#eaebe5] rounded-xl mt-4 transform origin-top shadow-lg ${
       isActive 
         ? 'opacity-100 scale-y-100 translate-y-0' 
         : 'max-h-0 opacity-0 scale-y-90 -translate-y-4 pointer-events-none overflow-hidden'
@@ -168,7 +168,7 @@ const JewelryCustomizer: React.FC = () => {
   );
 
   return (
-    <div className="min-h-[100vh] bg-[#eaebe5] flex justify-center items-center p-4 font-sans text-gray-800 transition-colors duration-300">
+    <div className="min-h-[80vh] py-[25vh] bg-[#eaebe5] flex justify-center items-center p-4 font-sans text-gray-800 transition-colors duration-300">
       {/* Message Box Modal */}
       {showMessageBox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-out">
@@ -202,7 +202,7 @@ const JewelryCustomizer: React.FC = () => {
       >
       {/* <div className='h-50vh'> hello</div> */}
 
-        <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full flex flex-wrap items-baseline justify-start md:justify-center gap-y-2">
+        <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full flex flex-wrap items-baseline justify-start md:justify-center ">
           <span className="mr-2">Customize my</span>
           
           <CustomTrigger
