@@ -168,7 +168,7 @@ const JewelryCustomizer: React.FC = () => {
   );
 
   return (
-    <div className="min-h-[80vh] py-[20vh] bg-[#eaebe5] flex justify-center items-center p-4 font-sans text-gray-800 transition-colors duration-300">
+    <div className="min-h-[80vh] py-[20vh] bg-[#eaebe5] flex justify-center items-center font-sans text-gray-800 transition-colors duration-300">
       {/* Message Box Modal */}
       {showMessageBox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ease-out">
