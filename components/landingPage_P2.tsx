@@ -203,7 +203,7 @@ const JewelryCustomizer: React.FC = () => {
       {/* <div className='h-50vh'> hello</div> */}
 
         <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full flex flex-wrap items-baseline justify-start md:justify-center ">
-          <span className="mr-2">Customize my</span>
+          <span className="mr-2">Help me pick a </span>
           
           <CustomTrigger
             panelId="jewelry-type"
@@ -221,7 +221,7 @@ const JewelryCustomizer: React.FC = () => {
             onClose={closePanel}
           />
           
-          <span className="mr-2">which I want to gift to</span>
+          <span className="mr-2">for</span>
           
           <CustomTrigger
             panelId="recipient"
@@ -239,7 +239,7 @@ const JewelryCustomizer: React.FC = () => {
             onClose={closePanel}
           />
           
-          <span className="mr-2">because I&apos;m a proud</span>
+          <span className="mr-2">inspired by </span>
           
           <CustomTrigger
             panelId="trait"
