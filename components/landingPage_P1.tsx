@@ -311,10 +311,10 @@ export default function ArtistryPortfolio() {
             </section> */}
 
             {/* Hero Section */}
-            <div className="block md:flex w-screen items-start md:items-end gap-[25%] ">
+            <div className="block lg:flex w-screen items-start md:items-end gap-[25%] ">
                 <img
                     src="https://cdn.cosmos.so/2200c8e1-2901-4fdb-806c-a2596b3e9c49?format=jpeg"
-                    className="md:w-[45%] w-[100%]"
+                    className="lg:w-[45%] w-[100%]"
                     alt="Portrait"
                 />
                 <div className="flex items-start md:items-end mx-4 md:mx-0">
@@ -326,7 +326,7 @@ export default function ArtistryPortfolio() {
                 </div>
             </div>
 
-            <div className={`justify-end mr-4 items-center text-center flex md:hidden translate-y-5`}>
+            <div className={`justify-end mr-4 items-center text-center flex lg:hidden translate-y-5`}>
                 <IoIosArrowBack/>
                 {/* <div className={`border-1 transition-all duration-500 ease-initial border-gray-500 -translate-x-2.5`} onClick={()=> scrollGallery("left")}></div> */}
                 <div className={`border-1 transition-all duration-500 ease-initial ${activeIndex+1 === 1 && "w-8"} ${activeIndex+1 === galleryItems[galleryItems.length-1].id && "w-25"} ${(activeIndex+1 != galleryItems[galleryItems.length-1].id && activeIndex+1 != galleryItems[0].id) && "w-16.5"} border-gray-500 -translate-x-2.5`} onClick={()=> {
@@ -355,7 +355,7 @@ export default function ArtistryPortfolio() {
                 <IoIosArrowForward/>
             </div> */}
 
-            <section id="gallery" className="py-16 pt-0 px-4 md:px-8 md:hidden block">
+            <section id="gallery" className="py-16 pt-0 px-4 lg:px-8 lg:hidden block">
                 <div className="gallery-container">
                     <div className="relative md:mb-4 mb-[3rem] lg:mx-12 md:mx-10 ">
                         <div
@@ -372,7 +372,7 @@ export default function ArtistryPortfolio() {
                                 )}
                                 onClick={() => scrollToItem(index)}
                                 >
-                                    <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden md:h-[400px] h-[400px] shadow-md ">
+                                    <div className="relative w-full max-w-md mx-auto aspect-square mb-2 overflow-hidden sm:h-[400px] md:h-[600px] h-[400px] shadow-md ">
                                         <img
                                             src={item.src}
                                             alt={item.alt}
@@ -405,7 +405,7 @@ export default function ArtistryPortfolio() {
             />
 
             {/* for desktop only  */}
-            <section id="gallery" className="gallery justify-center md:flex hidden">
+            <section id="gallery" className="gallery justify-center lg:flex hidden">
                 <div className="">
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
