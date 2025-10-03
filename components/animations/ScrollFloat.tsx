@@ -31,9 +31,20 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
 
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : '';
-    return text.split('').map((char, index) => (
-      <span className="inline-block word" key={index}>
-        {char === ' ' ? '\u00A0' : char}
+    const words = text.split(' ');
+    
+    return words.map((word, wordIndex) => (
+      <span key={wordIndex} className="inline-block whitespace-nowrap word-wrapper">
+        {word.split('').map((char, charIndex) => (
+          <span className="inline-block char" key={`${wordIndex}-${charIndex}`}>
+            {char}
+          </span>
+        ))}
+        {wordIndex < words.length - 1 && (
+          <span className="inline-block char" key={`${wordIndex}-space`}>
+            {'\u00A0'}
+          </span>
+        )}
       </span>
     ));
   }, [children]);
@@ -44,7 +55,7 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
 
     const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
 
-    const charElements = el.querySelectorAll('.inline-block');
+    const charElements = el.querySelectorAll('.char');
 
     gsap.fromTo(
       charElements,
@@ -77,7 +88,9 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
 
   return (
     <h2 ref={containerRef} className={`my-5 overflow-hidden ${containerClassName}`}>
-      <span className={`inline-block text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] ${textClassName}`}>{splitText}</span>
+      <span className={`block text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] ${textClassName}`}>
+        {splitText}
+      </span>
     </h2>
   );
 };

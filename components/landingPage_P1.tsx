@@ -428,7 +428,7 @@ export default function ArtistryPortfolio() {
                 </div>
             </section>
 
-            <div className={` md:px-[0%] text-center ${nothingYouCouldDo.className} mb-30 hidden md:block`}>
+            <div className={` md:px-[0%] text-center ${nothingYouCouldDo.className} mb-30 hidden lg:block`}>
                 <ScrollFloat
                 textClassName={` ${nothingYouCouldDo.className} md:px-[10%]  text-center text-[#690303] text-7xl md:text-7xl`}
                 animationDuration={1}
@@ -445,6 +445,28 @@ export default function ArtistryPortfolio() {
                 ease='back.inOut(2)'
                 scrollStart='center bottom+=50%'
                 scrollEnd='bottom bottom-=60%'
+                stagger={0.03}
+                >
+                    Its your nervous system
+                </ScrollFloat>
+            </div>
+            <div className={` md:px-[0%] text-center ${nothingYouCouldDo.className} mb-30 hidden md:block lg:hidden`}>
+                <ScrollFloat
+                textClassName={` ${nothingYouCouldDo.className} md:px-[10%]  text-center text-[#690303] text-7xl md:text-7xl`}
+                animationDuration={1}
+                ease='back.inOut(2)'
+                scrollStart='center bottom+=40%'
+                scrollEnd='bottom bottom-=40%'
+                stagger={0.03}
+                >
+                    Taste is more then prefrence 
+                </ScrollFloat>
+                <ScrollFloat
+                textClassName={` ${nothingYouCouldDo.className} md:px-[10%] text-center text-[#690303] text-7xl md:text-7xl`}
+                animationDuration={1}
+                ease='back.inOut(2)'
+                scrollStart='center bottom+=40%'
+                scrollEnd='bottom bottom-=40%'
                 stagger={0.03}
                 >
                     Its your nervous system
