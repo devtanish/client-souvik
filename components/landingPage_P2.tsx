@@ -104,7 +104,7 @@ const JewelryCustomizer: React.FC = () => {
             }`}
             onClick={() => togglePanel('jewelry-type')}
           >
-            {getDisplayText('jewelry-type')}
+            {getDisplayText('jewelry-type') ? getDisplayText('jewelry-type') : 'Jewelry'}
             {activePanel !== 'jewelry-type' && (
               <span className="absolute left-0 bottom-0 w-full h-0.5 bg-amber-800 transition-transform origin-left hover:scale-x-0" />
             )}
