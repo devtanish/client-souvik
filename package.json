@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@heroui/drawer": "^2.2.23",
     "@heroui/input": "^2.4.19",
     "@mui/material": "^7.2.0",
     "@radix-ui/react-checkbox": "^1.1.5",
