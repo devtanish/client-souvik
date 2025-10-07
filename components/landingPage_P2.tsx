@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import BottomDrawer from './subCompo/BottomDrawer';
+import { Cormorant_Garamond } from 'next/font/google';
+import { Plus, Minus } from 'lucide-react';
 
 interface Selections {
   'jewelry-type': string[];
   recipient: string;
   trait: string;
 }
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
 
 type PanelId = keyof Selections;
 
@@ -29,7 +37,7 @@ const JewelryCustomizer: React.FC = () => {
       type: 'radio' as const
     },
     trait: {
-      options: ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'],
+      options: [],
       type: 'radio' as const
     }
   };
@@ -74,53 +82,266 @@ const JewelryCustomizer: React.FC = () => {
       : selections[key] === value;
   };
 
+  const [activeTab, setActiveTab] = useState<"product" | "for" | "inspiration">("product");
+  const [expandedSections, setExpandedSections] = useState({
+    brand: true,
+    productType: false
+  });
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+  const brands = [
+    { name: 'WES CASUALS', count: 340 },
+    { name: 'NUON', count: 251 },
+    { name: 'ETA', count: 248 },
+    { name: 'WES FORMALS', count: 191 },
+    { name: 'ASCOT', count: 150 },
+    { name: 'STUDIOFIT', count: 127 },
+    { name: 'WES LOUNGE', count: 63 },
+    { name: 'KALA BY ETA', count: 23 }
+  ];
+
+  const productTypes = [
+    'Shirts',
+    'T-Shirts',
+    'Trousers',
+    'Jeans',
+    'Jackets',
+    'Blazers'
+  ];
+
+  const toggleSection = (section: 'brand' | 'productType') => {
+    setExpandedSections(prev => {
+      // If clicking the same section, just toggle it
+      if (prev[section]) {
+        return {
+          ...prev,
+          [section]: false
+        };
+      }
+      // If opening a new section, close all others and open this one
+      return {
+        brand: section === 'brand',
+        productType: section === 'productType'
+      };
+    });
+  };
+
+  const toggleBrand = (brandName: string) => {
+    setSelectedBrands(prev => 
+      prev.includes(brandName) 
+        ? prev.filter(b => b !== brandName)
+        : [...prev, brandName]
+    );
+  };
+
   function DrawerContent(){
     return (
       <>
-        <div className="space-y-6">
-          <div className="text-center">
-            <span className="text-6xl mb-4 block">♌</span>
-            <h3 className="text-3xl font-bold text-amber-800 mb-2">Leo</h3>
-            <p className="text-sm text-gray-600 tracking-wide">July 23 - August 22</p>
+        <div className={`w-full h-full bg-transparent p-0 sm:p-2 lg:p-4 ${cormorantGaramond.className}`}>
+          {/* Header */}
+          <div className="mb-6  sticky top-0 bg-gradient-to-b from-amber-50 to-amber-50 z-10  pb-2">
+            <div className="mb-4">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Leo</h2>
+            </div>
+            <div className="flex gap-4 sm:gap-6 lg:text-xl justify-around">
+              <button
+                onClick={() => setActiveTab("product")}
+                className={`pb-2 font-medium transition-colors ${
+                  activeTab === "product" 
+                    ? "text-gray-900 border-b-2 border-amber-500" 
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                product
+              </button>
+              <button
+                onClick={() => setActiveTab("for")}
+                className={`pb-2 font-medium transition-colors ${
+                  activeTab === "for" 
+                    ? "text-gray-900 border-b-2 border-amber-500" 
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                For
+              </button>
+              <button
+                onClick={() => setActiveTab("inspiration")}
+                className={`pb-2 font-medium transition-colors ${
+                  activeTab === "inspiration" 
+                    ? "text-gray-900 border-b-2 border-amber-500" 
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                Inspiration
+              </button>
+            </div>
+            <div className='border-gray-200 border-b -translate-x-100 w-[96.5vh] sm:w-[137vh] lg:w-[166vh] xl:w-[216vh] 2xl:w-[260vh]'></div>
           </div>
 
-          <div className="bg-amber-100/50 p-4 rounded-lg">
-            <h4 className="font-bold text-amber-900 mb-2">Key Traits</h4>
-            <div className="flex flex-wrap gap-2">
-              {['Confident', 'Bold', 'Creative', 'Generous', 'Loyal', 'Passionate'].map(trait => (
-                <span key={trait} className="bg-amber-200 text-amber-900 px-3 py-1 rounded-full text-sm">
-                  {trait}
-                </span>
-              ))}
-            </div>
+          {/* Tab Content */}
+          <div className="mb-6">
+            {activeTab === "product" && (
+              <>
+                {/* Brand Section */}
+                <div className="mb-6 transition-all duration-500 ease-in-out">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-800">Brand</h3>
+                    <button
+                      onClick={() => toggleSection('brand')}
+                      className="relative flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 text-black focus:outline-none transition-all duration-300 ease-in-out"
+                      aria-label={expandedSections.brand ? "Collapse" : "Expand"}
+                    >
+                      <span
+                        className={`absolute transition-transform duration-300 ${
+                          expandedSections.brand ? "rotate-0" : "rotate-90"
+                        }`}
+                      >
+                        <Minus
+                          size={16}
+                          className={expandedSections.brand ? "opacity-100" : "opacity-0"}
+                        />
+                      </span>
+                      <span
+                        className={`absolute transition-transform duration-300 ${
+                          expandedSections.brand ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                        }`}
+                      >
+                        <Plus size={16} />
+                      </span>
+                    </button>
+                  </div>
+
+                  <div 
+                    className="grid transition-all duration-500 ease-in-out"
+                    style={{
+                      gridTemplateRows: expandedSections.brand ? '1fr' : '0fr',
+                    }}
+                  >
+                    <div className="overflow-hidden">
+                      <div className={`pt-2 space-y-0 transition-opacity duration-300 ${
+                        expandedSections.brand ? 'opacity-100' : 'opacity-0'
+                      }`}>
+                        {brands.map((brand, index) => (
+                          <label
+                            key={brand.name}
+                            className={`flex items-center justify-between cursor-pointer hover:bg-amber-100/50 p-2  transition-all duration-300 ${
+                              expandedSections.brand
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-4 opacity-0"
+                            }`}
+                            style={{
+                              transitionDelay: expandedSections.brand ? `${index * 50}ms` : "0ms",
+                            }}
+                          >
+                            <div className="flex items-center gap-2 sm:gap-3">
+                              <input
+                                type="checkbox"
+                                checked={selectedBrands.includes(brand.name)}
+                                onChange={() => toggleBrand(brand.name)}
+                                className="w-3 h-3 sm:w-4 sm:h-4 accent-amber-300  border-gray-300 text-amber-500 focus:ring-amber-500"
+                              />
+                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">
+                                {brand.name}
+                              </span>
+                            </div>
+                            <span className="text-xs sm:text-sm text-gray-500">
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Type Section */}
+                <div className="mb-6 transition-all duration-500 ease-in-out">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-800">Product Type</h3>
+                    <button
+                      onClick={() => toggleSection('productType')}
+                      className="relative flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8  text-black focus:outline-none transition-all duration-300 ease-in-out"
+                      aria-label={expandedSections.productType ? "Collapse" : "Expand"}
+                    >
+                      <span
+                        className={`absolute transition-transform duration-300 ${
+                          expandedSections.productType ? "rotate-0" : "rotate-90"
+                        }`}
+                      >
+                        <Minus
+                          size={16}
+                          className={expandedSections.productType ? "opacity-100" : "opacity-0"}
+                        />
+                      </span>
+                      <span
+                        className={`absolute transition-transform duration-300 ${
+                          expandedSections.productType ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                        }`}
+                      >
+                        <Plus size={16} />
+                      </span>
+                    </button>
+                  </div>
+
+                  <div 
+                    className="grid transition-all duration-500 ease-in-out"
+                    style={{
+                      gridTemplateRows: expandedSections.productType ? '1fr' : '0fr',
+                    }}
+                  >
+                    <div className="overflow-hidden">
+                      <div className={`pt-2 space-y-0 transition-opacity duration-300 ${
+                        expandedSections.productType ? 'opacity-100' : 'opacity-0'
+                      }`}>
+                        {productTypes.map((type, index) => (
+                          <label
+                            key={type}
+                            className={`flex items-center cursor-pointer hover:bg-amber-100/50 p-2 transition-all duration-300 ${
+                              expandedSections.productType
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-4 opacity-0"
+                            }`}
+                            style={{
+                              transitionDelay: expandedSections.productType ? `${index * 50}ms` : "0ms",
+                            }}
+                          >
+                            <div className="flex items-center gap-2 sm:gap-3">
+                              <input
+                                type="checkbox"
+                                className="w-3 h-3 sm:w-4 sm:h-4 border-gray-300 accent-amber-300  text-amber-500 focus:ring-amber-500"
+                              />
+                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">
+                                {type}
+                              </span>
+                            </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeTab === "for" && (
+              <div className="py-6 sm:py-8 lg:py-12 text-center text-gray-500">
+                <p className="text-sm sm:text-base lg:text-lg">Select who you&apos;re shopping for...</p>
+              </div>
+            )}
+
+            {activeTab === "inspiration" && (
+              <div className="py-6 sm:py-8 lg:py-12 text-center text-gray-500">
+                <p className="text-sm sm:text-base lg:text-lg">Browse inspiration and trends...</p>
+              </div>
+            )}
           </div>
 
-          <div>
-            <h4 className="font-bold text-gray-800 mb-2">Perfect Jewelry Style</h4>
-            <p className="text-gray-600 leading-relaxed">
-              Leos love to shine and express their bold personality. Choose statement pieces with 
-              warm gold tones, sun motifs, and bold designs that capture their radiant energy and 
-              natural confidence.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <p className="font-semibold text-gray-700">Element</p>
-              <p className="text-gray-600">Fire 🔥</p>
-            </div>
-            <div>
-              <p className="font-semibold text-gray-700">Ruling Planet</p>
-              <p className="text-gray-600">Sun ☀️</p>
-            </div>
-            <div>
-              <p className="font-semibold text-gray-700">Lucky Gem</p>
-              <p className="text-gray-600">Ruby</p>
-            </div>
-            <div>
-              <p className="font-semibold text-gray-700">Metal</p>
-              <p className="text-gray-600">Gold</p>
-            </div>
+          {/* Action Footer */}
+          <div className="pt-4 border-t border-gray-200">
+            <button className="w-full bg-black p-2 sm:p-3 lg:p-4 text-center hover:bg-gray-800 transition-colors cursor-pointer">
+              <p className="text-white font-bold tracking-wide text-xs sm:text-sm lg:text-base">
+                Done
+              </p>
+            </button>
           </div>
         </div>
       </>
@@ -156,9 +377,9 @@ const JewelryCustomizer: React.FC = () => {
       <BottomDrawer
         isOpen={showLeoDrawer}
         onClose={() => setShowLeoDrawer(false)}
-        title="Leo Information"
+        title=""
         height="70vh"
-        className="bg-gradient-to-b from-amber-50 to-white"
+        className=""
       >
         {DrawerContent()}
       </BottomDrawer>
@@ -311,15 +532,11 @@ const JewelryCustomizer: React.FC = () => {
                     : 'text-[#925c40] hover:text-amber-900 hover:scale-105 relative'
                 }`}
                 onClick={() => {
-                  if (selections.trait === 'Leo' && activePanel !== 'trait') {
-                    setTimeout(() => setShowLeoDrawer(true), 300);
-                  }
+                    setShowLeoDrawer(true);
                 }}
               >
                 {selections.trait}
-                {activePanel !== 'trait' && (
                   <span className="absolute left-0 bottom-0 w-full h-0.5 bg-amber-800 transition-transform origin-left hover:scale-x-0" />
-                )}
               </span>
             </div>
           </div>

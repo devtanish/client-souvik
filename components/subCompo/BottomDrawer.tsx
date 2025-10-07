@@ -1,18 +1,21 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
-import { X } from 'lucide-react';
+"use client"
+
+import type React from "react"
+import { type ReactNode, useEffect, useRef } from "react"
+import { X } from "lucide-react"
 
 interface BottomDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
-  title?: string;
-  showHandle?: boolean;
-  showCloseButton?: boolean;
-  height?: string;
-  className?: string;
-  overlayClassName?: string;
-  contentClassName?: string;
-  closeOnOverlayClick?: boolean;
+  isOpen: boolean
+  onClose: () => void
+  children: ReactNode
+  title?: string
+  showHandle?: boolean
+  showCloseButton?: boolean
+  height?: string
+  className?: string
+  overlayClassName?: string
+  contentClassName?: string
+  closeOnOverlayClick?: boolean
 }
 
 const BottomDrawer: React.FC<BottomDrawerProps> = ({
@@ -22,48 +25,101 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
   title,
   showHandle = true,
   showCloseButton = true,
-  height = '50vh',
-  className = '',
-  overlayClassName = '',
-  contentClassName = '',
+  height = "50vh",
+  className = "",
+  overlayClassName = "",
+  contentClassName = "",
   closeOnOverlayClick = true,
 }) => {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null)
 
   // Disable background scroll when drawer is open
   useEffect(() => {
+    const html = document.documentElement
+    const prev = {
+      bodyOverflow: document.body.style.overflow,
+      bodyPosition: document.body.style.position,
+      bodyTop: document.body.style.top,
+      htmlOverflow: html.style.overflow,
+    }
+
+    let scrollY = 0
+
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      scrollY = window.scrollY
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.position = "fixed"
+      document.body.style.overflow = "hidden"
+      html.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = '';
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.overflow = ""
+      html.style.overflow = ""
     }
 
     return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+      const top = document.body.style.top
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.overflow = prev.bodyOverflow
+      html.style.overflow = prev.htmlOverflow
+
+      // restore scroll position if it was locked
+      if (top) {
+        const y = Number.parseInt(top || "0", 10) * -1
+        window.scrollTo(0, y)
+      }
+    }
+  }, [isOpen])
+
+  // Add global wheel/touch lock while open, except inside drawer content
+  useEffect(() => {
+    if (!isOpen) return
+
+    const preventOutside = (e: WheelEvent | TouchEvent) => {
+      const el = contentRef.current
+      // If we don't have the content node, block scrolling globally
+      if (!el) {
+        e.preventDefault()
+        return
+      }
+      const target = e.target as Node
+      // Allow default only when the event originated inside the drawer content;
+      // the drawer content will handle its own scroll (and edge cases) below.
+      if (el.contains(target)) return
+
+      // Otherwise, prevent so the background never scrolls.
+      e.preventDefault()
+    }
+
+    window.addEventListener("wheel", preventOutside, { passive: false })
+    window.addEventListener("touchmove", preventOutside, { passive: false })
+
+    return () => {
+      window.removeEventListener("wheel", preventOutside as EventListener)
+      window.removeEventListener("touchmove", preventOutside as EventListener)
+    }
+  }, [isOpen])
 
   // Prevent scroll propagation from drawer to body
   const handleWheel = (e: React.WheelEvent) => {
-    const el = contentRef.current;
-    if (!el) return;
+    const el = contentRef.current
+    if (!el) return
 
-    const { scrollTop, scrollHeight, clientHeight } = el;
-    const delta = e.deltaY;
+    const { scrollTop, scrollHeight, clientHeight } = el
+    const delta = e.deltaY
 
-    if (
-      (delta > 0 && scrollTop + clientHeight >= scrollHeight) ||
-      (delta < 0 && scrollTop <= 0)
-    ) {
-      e.preventDefault(); // Stop scrolling beyond content
+    if ((delta > 0 && scrollTop + clientHeight >= scrollHeight) || (delta < 0 && scrollTop <= 0)) {
+      e.preventDefault() // Stop scrolling beyond content
     }
-  };
+  }
 
   const handleOverlayClick = () => {
     if (closeOnOverlayClick) {
-      onClose();
+      onClose()
     }
-  };
+  }
 
   return (
     <>
@@ -71,22 +127,24 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
       {isOpen && (
         <div
           onClick={handleOverlayClick}
-          className={`fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300 ${overlayClassName}`}
+          onWheel={(e) => e.preventDefault()}
+          onTouchMove={(e) => e.preventDefault()}
+          className={` fixed inset-0 bg-black/30 backdrop-blur-xs z-40 transition-opacity duration-300 ${overlayClassName}`}
         />
       )}
 
       {/* Drawer */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-50 transition-transform duration-300 ease-out ${
-          isOpen ? 'translate-y-0' : 'translate-y-full'
+        className={`bg-gradient-to-b from-amber-50 to-white fixed bottom-0 left-0 right-0 bg-transparent  shadow-2xl z-50 transition-transform duration-300 ease-out ${
+          isOpen ? "translate-y-0" : "translate-y-full"
         } ${className}`}
         style={{ height }}
       >
         <div className="flex flex-col h-full">
           {/* Drawer Handle */}
           {showHandle && (
-            <div className="flex justify-center pt-3 pb-2">
-              <div className="w-12 h-1.5 bg-gray-300 rounded-full" />
+            <div className="">
+              <div className="" />
             </div>
           )}
 
@@ -94,7 +152,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
           {showCloseButton && (
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
+              className="absolute top-3 z-40 right-3 p-2 hover:bg-gray-100 transition-colors"
               aria-label="Close drawer"
             >
               <X size={24} className="text-gray-600" />
@@ -103,7 +161,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
 
           {/* Title */}
           {title && (
-            <div className="px-6 pt-4 pb-2 shrink-0">
+            <div className="px-6 pt-0 pb-2 shrink-0">
               <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
             </div>
           )}
@@ -112,14 +170,15 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
           <div
             ref={contentRef}
             onWheel={handleWheel}
-            className={`flex-1 px-6 py-4 overflow-y-auto pb-8 ${contentClassName}`}
+            style={{ overscrollBehavior: "contain" }}
+            className={`flex-1 px-4 lg:px-6 mt-1 py-4 overflow-y-auto pb-8 ${contentClassName}`}
           >
             {children}
           </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default BottomDrawer;
+export default BottomDrawer
