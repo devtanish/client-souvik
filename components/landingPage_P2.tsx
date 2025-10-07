@@ -139,7 +139,7 @@ const JewelryCustomizer: React.FC = () => {
       <>
         <div className={`w-full h-full bg-transparent p-0 sm:p-2 lg:p-4 ${cormorantGaramond.className}`}>
           {/* Header */}
-          <div className="mb-6  sticky top-0 bg-gradient-to-b from-amber-50 to-amber-50 z-10  pb-2">
+          <div className="mb-6  sticky top-0 bg-gradient-to-b z-10  pb-2">
             <div className="mb-4">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Leo</h2>
             </div>
@@ -338,7 +338,7 @@ const JewelryCustomizer: React.FC = () => {
           {/* Action Footer */}
           <div className="pt-4 border-t border-gray-200">
             <button className="w-full bg-black p-2 sm:p-3 lg:p-4 text-center hover:bg-gray-800 transition-colors cursor-pointer">
-              <p className="text-white font-bold tracking-wide text-xs sm:text-sm lg:text-base">
+              <p className="text-white font-bold tracking-wide text-sm sm:text-md lg:text-lg">
                 Done
               </p>
             </button>
