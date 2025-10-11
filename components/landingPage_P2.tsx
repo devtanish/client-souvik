@@ -141,7 +141,7 @@ const JewelryCustomizer: React.FC = () => {
           {/* Header */}
           <div className="mb-6  sticky top-0 bg-gradient-to-b z-10  pb-2">
             <div className="mb-4">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Help me pick a</h2>
+              <h2 className="text-xl w-screen flex sm:text-2xl lg:text-3xl font-bold text-gray-800 flex-wrap gap-1">Help me pick {selectedBrands.map(items => <div key={items} className='pl-2 lowercase text-gray-400'>{`${items}, `}</div>)}</h2>
             </div>
             <div className="flex gap-4 sm:gap-6 lg:text-lg justify-around">
               <button
