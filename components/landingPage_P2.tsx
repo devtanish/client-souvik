@@ -137,13 +137,13 @@ const JewelryCustomizer: React.FC = () => {
   function DrawerContent(){
     return (
       <>
-        <div className={`w-full h-full bg-transparent p-0 sm:p-2 lg:p-4 ${cormorantGaramond.className}`}>
+         <div className={`w-full h-full bg-transparent p-0 sm:p-2 lg:p-4 animate-slideDown ${cormorantGaramond.className}`}>
           {/* Header */}
           <div className="mb-6  sticky top-0 bg-gradient-to-b z-10  pb-2">
             <div className="mb-4">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Leo</h2>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Help me pick a</h2>
             </div>
-            <div className="flex gap-4 sm:gap-6 lg:text-xl justify-around">
+            <div className="flex gap-4 sm:gap-6 lg:text-lg justify-around">
               <button
                 onClick={() => setActiveTab("product")}
                 className={`pb-2 font-medium transition-colors ${
@@ -240,7 +240,7 @@ const JewelryCustomizer: React.FC = () => {
                                 onChange={() => toggleBrand(brand.name)}
                                 className="w-3 h-3 sm:w-4 sm:h-4 accent-amber-300  border-gray-300 text-amber-500 focus:ring-amber-500"
                               />
-                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">
+                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-xs">
                                 {brand.name}
                               </span>
                             </div>
@@ -309,7 +309,7 @@ const JewelryCustomizer: React.FC = () => {
                                 type="checkbox"
                                 className="w-3 h-3 sm:w-4 sm:h-4 border-gray-300 accent-amber-300  text-amber-500 focus:ring-amber-500"
                               />
-                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">
+                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-xs">
                                 {type}
                               </span>
                             </div>
@@ -337,7 +337,7 @@ const JewelryCustomizer: React.FC = () => {
 
           {/* Action Footer */}
           <div className="pt-4 border-t border-gray-200">
-            <button className="w-full bg-black p-2 sm:p-3 lg:p-4 text-center hover:bg-gray-800 transition-colors cursor-pointer">
+            <button className="w-full bg-black p-2 sm:p-3 mb-5 lg:py-2 text-center hover:bg-gray-800 transition-colors cursor-pointer">
               <p className="text-white font-bold tracking-wide text-sm sm:text-md lg:text-lg">
                 Done
               </p>
@@ -388,22 +388,24 @@ const JewelryCustomizer: React.FC = () => {
       <div className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-2xl w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}>
         <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full flex flex-wrap items-baseline justify-start md:justify-center">
           <div className='justify-start md:justify-center flex flex-wrap max-w-3xl text-3xl'>
-            <span className="mr-2">Help me pick a</span>
-            
-            {/* Jewelry Type Trigger */}
-            <span
-              className={`italic font-bold cursor-pointer pb-0.5 transition-all whitespace-nowrap mr-2 ${
-                activePanel === 'jewelry-type'
-                  ? 'text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105' 
-                  : 'text-[#925c40] hover:text-amber-900 hover:scale-105 relative'
-              }`}
-              onClick={() => togglePanel('jewelry-type')}
-            >
-              {getDisplayText('jewelry-type') ? getDisplayText('jewelry-type') : 'Jewelry'}
-              {activePanel !== 'jewelry-type' && (
-                <span className="absolute left-0 bottom-0 w-full h-0.5 bg-amber-800 transition-transform origin-left hover:scale-x-0" />
-              )}
-            </span>
+            <div className='transition-all duration-500 delay-50 '>
+              <span className="mr-2 ">Help me pick a</span>
+              
+              {/* Jewelry Type Trigger */}
+              <span
+                className={`italic font-bold cursor-pointer pb-0.5 transition-all whitespace-nowrap mr-2 ${
+                  activePanel === 'jewelry-type'
+                    ? 'text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105' 
+                    : 'text-[#925c40] hover:text-amber-900 hover:scale-105 relative'
+                }`}
+                onClick={() => togglePanel('jewelry-type')}
+              >
+                {getDisplayText('jewelry-type') ? getDisplayText('jewelry-type') : 'Jewelry'}
+                {activePanel !== 'jewelry-type' && (
+                  <span className="absolute left-0 bottom-0 w-full h-0.5 bg-amber-800 transition-transform origin-left hover:scale-x-0" />
+                )}
+              </span>
+            </div>
             
             {/* Jewelry Type Panel */}
             <div className={`w-full md:w-[100vh] transition-all duration-500 bg-[#eaebe5] rounded-xl mt-4 shadow-lg origin-top ${
