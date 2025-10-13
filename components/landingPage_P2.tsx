@@ -201,7 +201,7 @@ const JewelryCustomizer: React.FC = () => {
                 Lio
               </button>
             </div>
-            <div className="border-gray-200 border-b w-[96.5vh] sm:w-[137vh] lg:w-[166vh] xl:w-[216vh] 2xl:w-[260vh]"></div>
+            <div className="border-gray-200 border-b -translate-x-10 w-[54.5vh] xs:w-0 sm:w-[137vh] md:w-[96vh] lg:w-[126.5vh] xl:w-[176vh] 2xl:w-[221vh]"></div>
           </div>
 
           {/* Tab Content */}
