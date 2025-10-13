@@ -403,19 +403,6 @@ const JewelryCustomizer: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-2">
-                  <button
-                    onClick={handleDoneAll}
-                    className="w-full bg-black p-2 sm:p-3 mb-5 lg:py-2 text-center hover:bg-gray-800 transition-colors cursor-pointer"
-                  >
-                    <p className="text-white font-bold tracking-wide text-sm sm:text-md lg:text-lg">Done</p>
-                  </button>
-                </div>
-
-                {/* Browse inspiration and trends */}
-                <div className="py-6 sm:py-8 lg:py-12 text-center text-gray-500">
-                  <p className="text-sm sm:text-base lg:text-lg">Browse inspiration and trends...</p>
-                </div>
               </>
             )}
           </div>
