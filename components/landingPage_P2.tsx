@@ -329,7 +329,7 @@ const JewelryCustomizer: React.FC = () => {
                                 onChange={() => toggleBrand(brand.name)}
                                 className="w-3 h-3 sm:w-4 sm:h-4 accent-amber-300 border-gray-300 text-amber-500 focus:ring-amber-500"
                               />
-                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-xs">
+                              <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-xs uppercase">
                                 {brand.name}
                               </span>
                             </div>
