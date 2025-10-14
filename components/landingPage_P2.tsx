@@ -263,7 +263,7 @@ const JewelryCustomizer: React.FC = () => {
                             onChange={() => handleSelection("recipient", option)}
                             className="w-3 h-3 sm:w-4 sm:h-4 border-0 focus:border-0 accent-amber-300 text-amber-500 focus:ring-amber-500"
                           />
-                          <span className="text-gray-700 font-medium text-sm sm:text-sm lg:text-sm">{option}</span>
+                          <span className="text-gray-700 font-medium text-sm sm:text-sm lg:text-sm flex">{option}</span>
                         </div>
                       </label>
                     ))}
@@ -315,7 +315,7 @@ const JewelryCustomizer: React.FC = () => {
                         {brands.map((brand, index) => (
                           <label
                             key={brand.name}
-                            className={`flex items-center justify-between cursor-pointer hover:bg-amber-100/50 p-2  transition-all duration-300 ${
+                            className={`flex items-center justify-between cursor-pointer hover:bg-amber-100/50 p-2 wrap-break-word transition-all duration-300 ${
                               expandedSections.brand ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                             }`}
                             style={{
@@ -330,10 +330,10 @@ const JewelryCustomizer: React.FC = () => {
                                 className="w-3 h-3 sm:w-4 sm:h-4 accent-amber-300 border-gray-300 text-amber-500 focus:ring-amber-500"
                               />
                               <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-xs uppercase">
-                                {brand.name}
+                                {brand ? brand.name : "Leo"}
                               </span>
                             </div>
-                            <span className="text-xs sm:text-sm text-gray-500"></span>
+                            <span className="text-xs sm:text-sm text-gray-500 flex"></span>
                           </label>
                         ))}
                       </div>
@@ -450,26 +450,24 @@ const JewelryCustomizer: React.FC = () => {
       <div
         className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-2xl w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}
       >
-        <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full flex flex-wrap items-baseline justify-start md:justify-center">
-          <div className="justify-start md:justify-center flex flex-wrap max-w-3xl text-3xl">
-            <div className="transition-all duration-500 delay-50 ">
-              <span className="mr-2 ">Help me pick a</span>
+        <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full">
+          <div className="flex flex-wrap items-baseline max-w-full text-3xl">
+            <span className="mr-2">Help me pick a</span>
 
-              {/* Jewelry Type Trigger */}
-              <span
-                className={`italic font-bold cursor-pointer pb-0.5 transition-all mr-2 ${
-                  activePanel === "jewelry-type"
-                    ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
-                    : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
-                }`}
-                onClick={() => {
-                  setActiveTab("ring")
-                  setShowLeoDrawer(true)
-                }}
-              >
-                {getDisplayText("jewelry-type") ? getDisplayText("jewelry-type") : "Jewelry"}
-              </span>
-            </div>
+            {/* Jewelry Type Trigger */}
+            <span
+              className={`italic font-bold cursor-pointer pb-0.5 transition-all mr-2 break-words ${
+                activePanel === "jewelry-type"
+                  ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
+                  : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
+              }`}
+              onClick={() => {
+                setActiveTab("ring")
+                setShowLeoDrawer(true)
+              }}
+            >
+              {getDisplayText("jewelry-type") ? getDisplayText("jewelry-type") : "Jewelry"}
+            </span>
 
             {/* Jewelry Type Panel */}
             <div
@@ -586,24 +584,22 @@ const JewelryCustomizer: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex justify-center space-y-2">
-              <span className="mr-2">inspired by</span>
+            <span className="mr-2">inspired by</span>
 
-              {/* Trait Trigger */}
-              <span
-                className={`italic font-bold cursor-pointer pb-0.5 transition-all whitespace-nowrap mr-2 ${
-                  activePanel === "trait"
-                    ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
-                    : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
-                }`}
-                onClick={() => {
-                  setActiveTab("lio")
-                  setShowLeoDrawer(true)
-                }}
-              >
-                {selections.trait}
-              </span>
-            </div>
+            {/* Trait Trigger */}
+            <span
+              className={`italic font-bold cursor-pointer pb-0.5 transition-all break-words mr-2 ${
+                activePanel === "trait"
+                  ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
+                  : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
+              }`}
+              onClick={() => {
+                setActiveTab("lio")
+                setShowLeoDrawer(true)
+              }}
+            >
+              {selections.trait}
+            </span>
           </div>
 
           <button
