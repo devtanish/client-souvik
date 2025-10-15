@@ -451,7 +451,7 @@ const JewelryCustomizer: React.FC = () => {
         className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-2xl w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}
       >
         <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full">
-          <div className="flex flex-wrap items-baseline max-w-full text-3xl">
+          <div className="flex md:justify-center flex-wrap items-baseline max-w-full text-3xl">
             <span className="mr-2">Help me pick a</span>
 
             {/* Jewelry Type Trigger */}
