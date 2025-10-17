@@ -419,7 +419,7 @@ const JewelryCustomizer: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 bg-[#eaebe5] flex justify-center items-center font-sans text-gray-800">
+    <div className="min-h-screen py-20 bg-[#eaebe5] flex justify-center md:items-center font-sans text-gray-800">
       {/* Message Box Modal */}
       {showMessageBox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -451,7 +451,7 @@ const JewelryCustomizer: React.FC = () => {
         className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-2xl w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}
       >
         <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full">
-          <div className="flex md:justify-center flex-wrap items-baseline max-w-full text-3xl">
+          <div className="flex md:justify-center flex-wrap items-baseline max-w-full text-3xl md:text-5xl">
             <span className="mr-2">Help me pick a</span>
 
             {/* Jewelry Type Trigger */}
@@ -604,7 +604,7 @@ const JewelryCustomizer: React.FC = () => {
 
           <button
             onClick={() => setShowMessageBox(true)}
-            className="block mt-8 mx-auto font-medium text-lg px-8 md:px-8 py-2 bg-[#925c40] text-white rounded shadow-lg transition-all hover:bg-[#b0947f] hover:-translate-y-1 hover:shadow-2xl hover:scale-105 uppercase tracking-wider"
+            className="block mt-8 mx-auto font-medium text-lg md:text-3xl px-8 md:px-8 py-2 bg-[#925c40] text-white shadow-lg transition-all hover:bg-[#b0947f] hover:-translate-y-1 hover:shadow-2xl hover:scale-105 uppercase tracking-wider"
           >
             Show Me My Inspiration
           </button>
