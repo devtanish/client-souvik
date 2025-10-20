@@ -113,6 +113,52 @@ const shimmerAnimation = `
   }
 `
 
+// Scroll direction hook with threshold element
+const useScrollDirection = (thresholdRef: React.RefObject<HTMLDivElement>) => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Calculate if the threshold element (green line/category section) is out of view
+      if (thresholdRef.current) {
+        const thresholdRect = thresholdRef.current.getBoundingClientRect();
+        const thresholdBottom = thresholdRect.bottom;
+        
+        // Check if the green line section has scrolled out of view (completely above viewport)
+        const hasScrolledPastGreenLine = thresholdBottom < 0;
+        
+        // Only apply hide/show logic if green line is out of view
+        if (hasScrolledPastGreenLine) {
+          // Scrolling down - hide filter bar
+          if (currentScrollY > lastScrollY) {
+            setIsVisible(false);
+          } 
+          // Scrolling up - show filter bar
+          else if (currentScrollY < lastScrollY) {
+            setIsVisible(true);
+          }
+        } else {
+          // Green line still visible - always show filter bar
+          setIsVisible(true);
+        }
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, thresholdRef]);
+
+  return isVisible;
+};
+
 export default function EarringsPage() {
 
   const [centerTrackedCategory, setCenterTrackedCategory] = useState(categories[0].name)
@@ -129,7 +175,11 @@ export default function EarringsPage() {
   const [selectedStones, setSelectedStones] = useState<string[]>([])
   const [wishlist, setWishlist] = useState<number[]>([])
   const categoryScrollRef = useRef<HTMLDivElement>(null)
+  const categoryContainerRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+
+  // Scroll direction hook for filter visibility (pass the category container ref as threshold)
+  const isFilterVisible = useScrollDirection(categoryContainerRef as React.RefObject<HTMLDivElement>);
 
   // State to track open filter sections
   type FilterSection = "price" | "material" | "shape" | "metal" | "stone"
@@ -373,7 +423,7 @@ export default function EarringsPage() {
           </p>
         </div>
 
-        <div className="relative md:mb-4 mb-2 lg:mx-12 md:mx-10 mx-3">
+        <div ref={categoryContainerRef} className="relative md:mb-4 mb-2 lg:mx-12 md:mx-10 mx-3">
           <button
             onClick={() => scrollCategories("left")}
             className="md:flex hidden absolute left-0 top-1/2 -translate-y-1/2 z-8 bg-white/80 rounded-full p-1 shadow-md"
@@ -457,8 +507,9 @@ export default function EarringsPage() {
         <div className="">
           <div
             className={cn(
-              "flex sticky bg-white md:top-32 top-19 z-10 flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0  w-full ",
+              "flex sticky bg-white md:top-32 top-19 z-10 flex-wrap justify-between items-center gap-4 mb-6 border-t border-b py-3 md:-translate-x-0 w-full transition-all duration-300 ease-in-out",
               isMobile ? "py-2" : "border-t border-b py-3",
+              !isFilterVisible ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
             )}
           >
             <Sheet open={open} onOpenChange={setOpen}>
