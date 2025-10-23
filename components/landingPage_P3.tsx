@@ -12,12 +12,15 @@ export default function LandingPage_P3() {
                         fill
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white text-xl font-semibold mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
-                            Women Bracelet
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
+                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold  opacity-0 py-6 hover:opacity-100 group-hover:opacity-50 ">
+                            Ring
                         </h3>
-                        <p className="text-white/90 text-xl opacity-0 group-hover:opacity-100 mb-4 transition-opacity duration-700 delay-300">
-                            Men Brecelet
+                        <p className="text-white/90 bg-[#2b0934] py-6 text-xl opacity-0 hover:opacity-100 group-hover:opacity-50 ">
+                            Men
+                        </p>
+                        <p className="text-white/90 bg-[#2b0934] py-6 text-xl opacity-0 hover:opacity-100 group-hover:opacity-50  ">
+                            Women
                         </p>
                     </div>
                 </div>
@@ -28,11 +31,11 @@ export default function LandingPage_P3() {
                         fill
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white text-xl font-semibold mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
+                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
                             Women Braclet 
                         </h3>
-                        <p className="text-white/90 text-xl opacity-0 group-hover:opacity-100 mb-4 transition-opacity duration-700 delay-300">
+                        <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
                             Men Braclet 
                         </p>
                     </div>
@@ -44,11 +47,11 @@ export default function LandingPage_P3() {
                         fill
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white text-xl font-semibold mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent  transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
+                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
                             Women Earrings 
                         </h3>
-                        <p className="text-white/90 text-xl opacity-0 group-hover:opacity-100 mb-4 transition-opacity duration-700 delay-300">
+                        <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
                             Men Earrings 
                         </p>
                     </div>
@@ -60,11 +63,11 @@ export default function LandingPage_P3() {
                         fill
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white text-xl font-semibold mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
+                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
                             Women Necklace
                         </h3>
-                        <p className="text-white/90 text-xl opacity-0 group-hover:opacity-100 mb-4 transition-opacity duration-700 delay-300">
+                        <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
                             Men Necklace
                         </p>
                     </div>
@@ -76,8 +79,8 @@ export default function LandingPage_P3() {
                         fill
                         style={{ objectFit: "cover" }}
                     />
-                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white text-xl font-semibold mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
+                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-5 opacity-0 hover:opacity-100 group-hover:opacity-50">
                             Boby & More
                         </h3>
                     </div>
