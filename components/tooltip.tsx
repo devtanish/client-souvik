@@ -9,6 +9,13 @@ import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Cormorant_Garamond } from "next/font/google"
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
 
 export default function Header() {
 
@@ -78,7 +85,7 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={` font-sans  w-full md:fixed fixed top-0 z-40`}>
+        <header className={` font-sans  w-full md:fixed fixed top-0 z-40 ${cormorantGaramond.className}`}>
             {/* Top black bar */}
             <div className="bg-[#010614] text-[#FFFFFF] py-1.5 sm:py-2 px-4 flex justify-between items-center text-xs">
                 <div className="items-center flex space-x-2 w-screen ">
