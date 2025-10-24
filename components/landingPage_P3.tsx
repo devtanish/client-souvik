@@ -1,8 +1,15 @@
 import Image from "next/image";
+import { Cormorant_Garamond } from "next/font/google";
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: [ "400", "500", "600", "700"],
+  display: "swap",
+})
 
 export default function LandingPage_P3() {
     return (
-        <div id="landingPage3" className="scroll-mt-16">
+        <div id="landingPage3" className={`scroll-mt-16 ${cormorantGaramond.className}`}>
             <div className="sm:h-[150vh] h-[100vh] w-screen grid grid-cols-4 lg:grid-cols-6 grid-rows-8 gap-0 mt-[5vh] lg:mt-[10vh]">
                 <div className="col-start-1 col-end-3 row-start-1 row-end-5 relative group overflow-hidden">
                     <Image
@@ -16,12 +23,6 @@ export default function LandingPage_P3() {
                         <h3 className="text-white bg-[#2b0934] text-xl font-semibold  opacity-0 py-6 hover:opacity-100 group-hover:opacity-50 ">
                             Ring
                         </h3>
-                        <p className="text-white/90 bg-[#2b0934] py-6 text-xl opacity-0 hover:opacity-100 group-hover:opacity-50 ">
-                            Men
-                        </p>
-                        <p className="text-white/90 bg-[#2b0934] py-6 text-xl opacity-0 hover:opacity-100 group-hover:opacity-50  ">
-                            Women
-                        </p>
                     </div>
                 </div>
                 <div className="col-start-1 col-end-3 row-start-5 row-end-9 relative group overflow-hidden">
@@ -35,9 +36,6 @@ export default function LandingPage_P3() {
                         <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
                             Women Braclet 
                         </h3>
-                        <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
-                            Men Braclet 
-                        </p>
                     </div>
                 </div>
                 <div className="col-start-3 col-end-5 row-start-1 row-end-5 relative group overflow-hidden">
@@ -48,9 +46,6 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent  transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
-                            Women Earrings 
-                        </h3>
                         <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
                             Men Earrings 
                         </p>
@@ -64,9 +59,6 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
-                            Women Necklace
-                        </h3>
                         <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
                             Men Necklace
                         </p>

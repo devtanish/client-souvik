@@ -12,6 +12,13 @@ import { CustomEase } from "gsap/CustomEase"
 import Lenis from "@studio-freight/lenis"
 import styles from "../components/styles/portfolio-layout.module.css"
 import { Nothing_You_Could_Do } from "next/font/google"
+import { Cormorant_Garamond } from "next/font/google";
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: [ "400", "500", "600", "700"],
+  display: "swap",
+})
 
 const nothingYouCouldDo = Nothing_You_Could_Do({
     subsets: ["latin"],
@@ -355,7 +362,7 @@ export default function ArtistryPortfolio() {
                 <IoIosArrowForward/>
             </div> */}
 
-            <section id="gallery" className="py-16 pt-0 px-4 lg:px-8 lg:hidden block">
+            <section id="gallery" className={`py-16 pt-0 px-4 lg:px-8 lg:hidden block ${cormorantGaramond.className}`}>
                 <div className="gallery-container">
                     <div className="relative md:mb-4 mb-[3rem] lg:mx-12 md:mx-10 ">
                         <div
@@ -382,7 +389,7 @@ export default function ArtistryPortfolio() {
                                     </div>
                                     <span
                                         className={cn(
-                                            "text-sm text-center -translate-y-0 font-serif text-black",
+                                            `text-sm font-semibold text-center -translate-y-0  text-black `,
                                             activeIndex === index ? "font-medium" : ""
                                         )}
                                     >
@@ -405,7 +412,7 @@ export default function ArtistryPortfolio() {
             />
 
             {/* for desktop only  */}
-            <section id="gallery" className="gallery justify-center lg:flex hidden">
+            <section id="gallery" className={`gallery justify-center lg:flex hidden `}>
                 <div className="">
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
@@ -420,7 +427,7 @@ export default function ArtistryPortfolio() {
                                         alt={item.alt}
                                         loading="lazy"
                                     />
-                                    <div className="text-center">{item.title}</div>
+                                    <div className={`text-center uppercase font-semibold ${cormorantGaramond.className}`}>{item.title}</div>
                                 </div>
                             ))}
                         </div>
