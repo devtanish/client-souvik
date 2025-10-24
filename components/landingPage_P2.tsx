@@ -419,7 +419,7 @@ const JewelryCustomizer: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 bg-[#eaebe5] flex justify-center md:items-center font-sans text-gray-800">
+    <div className={`min-h-screen py-20 bg-[#eaebe5] flex justify-center md:items-center font-sans text-gray-800 ${cormorantGaramond.className}`}>
       {/* Message Box Modal */}
       {showMessageBox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -450,7 +450,7 @@ const JewelryCustomizer: React.FC = () => {
       <div
         className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-2xl w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}
       >
-        <h2 className="font-serif text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full">
+        <h2 className=" text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full">
           <div className="flex md:justify-center flex-wrap items-baseline max-w-full text-3xl md:text-5xl">
             <span className="mr-2">Help me pick a</span>
 
