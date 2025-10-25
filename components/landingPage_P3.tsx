@@ -20,7 +20,7 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold  opacity-0 py-6 hover:opacity-100 group-hover:opacity-50 ">
+                        <h3 className="text-black bg-white text-xl font-semibold  opacity-0 py-6 hover:opacity-100 group-hover:opacity-100 ">
                             Ring
                         </h3>
                     </div>
@@ -33,7 +33,7 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-50">
+                        <h3 className="text-black bg-white text-xl font-semibold py-4 opacity-0 hover:opacity-100 group-hover:opacity-100">
                             Women Braclet 
                         </h3>
                     </div>
@@ -46,7 +46,7 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent  transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
+                        <p className="text-black bg-white text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-100">
                             Men Earrings 
                         </p>
                     </div>
@@ -59,7 +59,7 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <p className="text-white/90 bg-[#2b0934] text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-50">
+                        <p className="text-black bg-white text-xl opacity-0 py-4 hover:opacity-100 group-hover:opacity-100">
                             Men Necklace
                         </p>
                     </div>
@@ -72,7 +72,7 @@ export default function LandingPage_P3() {
                         style={{ objectFit: "cover" }}
                     />
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out text-center">
-                        <h3 className="text-white bg-[#2b0934] text-xl font-semibold py-5 opacity-0 hover:opacity-100 group-hover:opacity-50">
+                        <h3 className="text-black bg-white text-xl font-semibold py-5 opacity-0 hover:opacity-100 group-hover:opacity-100">
                             Boby & More
                         </h3>
                     </div>
