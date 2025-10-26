@@ -55,7 +55,7 @@ export default function LandingPage_P3() {
     return (
         <div id="landingPage3" className={`scroll-mt-16 ${cormorantGaramond.className}`} ref={containerRef}>
             <div className="sm:h-[150vh] h-[100vh] w-screen grid grid-cols-4 lg:grid-cols-6 grid-rows-8 gap-0 mt-[5vh] lg:mt-[10vh]">
-                <div className="col-start-1 col-end-3 row-start-1 row-end-5 relative group overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-1 col-end-3 row-start-1 row-end-5 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/1.png"
@@ -65,18 +65,18 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center items-center pointer-events-none">
-                        <h3 className="parallax-text text-white font-bold text-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out" style={{ 
+                    <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
+                        <h3 className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
                             textShadow: '0 10px 30px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3)'
                         }}>
                             Ring
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-1 col-end-3 row-start-5 row-end-9 relative group overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-1 col-end-3 row-start-5 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/2.png"
@@ -85,18 +85,18 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center items-center pointer-events-none">
-                        <h3 className="parallax-text text-white font-bold text-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out" style={{ 
+                    <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
+                        <h3 className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
                             textShadow: '0 10px 30px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3)'
                         }}>
                             Women Braclet 
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-3 col-end-5 row-start-1 row-end-5 relative group overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-3 col-end-5 row-start-1 row-end-5 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/3.png"
@@ -105,18 +105,18 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center items-center pointer-events-none">
-                        <p className="parallax-text text-white font-bold text-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out" style={{ 
+                    <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
+                        <p className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
                             textShadow: '0 10px 30px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3)'
                         }}>
                             Men Earrings 
                         </p>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-3 col-end-5 row-start-5 row-end-9 relative group overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-3 col-end-5 row-start-5 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/4.png"
@@ -125,18 +125,18 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center items-center pointer-events-none">
-                        <p className="parallax-text text-white font-bold text-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out" style={{ 
+                    <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
+                        <p className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
                             textShadow: '0 10px 30px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3)'
                         }}>
                             Men Necklace
                         </p>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-5 col-end-7 row-start-1 row-end-9 relative group overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-5 col-end-7 row-start-1 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/5.png"
@@ -145,15 +145,15 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex justify-center items-center pointer-events-none">
-                        <h3 className="parallax-text text-white font-bold text-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out" style={{ 
+                    <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
+                        <h3 className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
                             textShadow: '0 10px 30px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3)'
                         }}>
                             Boby & More
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
                 </div>
             </div>
             <div className="w-screen h-[100vh] relative flex lg:hidden">
