@@ -35,7 +35,7 @@ export default function LandingPage_P3() {
                     
                     if (text && image) {
                         // Text moves faster (creates depth)
-                        const textOffset = (scrollProgress - 0.5) * -300;
+                        const textOffset = (scrollProgress - 0.5) * -200;
                         text.style.transform = `translateY(${textOffset}px) translateZ(50px)`;
                         
                         // Image moves slower
@@ -73,7 +73,7 @@ export default function LandingPage_P3() {
                             Ring
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
+                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
                 <div className="col-start-1 col-end-3 row-start-5 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
@@ -93,7 +93,7 @@ export default function LandingPage_P3() {
                             Women Braclet 
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
+                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
                 <div className="col-start-3 col-end-5 row-start-1 row-end-5 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
@@ -113,7 +113,7 @@ export default function LandingPage_P3() {
                             Men Earrings 
                         </p>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
+                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
                 <div className="col-start-3 col-end-5 row-start-5 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
@@ -133,7 +133,7 @@ export default function LandingPage_P3() {
                             Men Necklace
                         </p>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
+                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
                 <div className="col-start-5 col-end-7 row-start-1 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
@@ -153,7 +153,7 @@ export default function LandingPage_P3() {
                             Boby & More
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-7 right-7 size-5"/>
+                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
             </div>
             <div className="w-screen h-[100vh] relative flex lg:hidden">

@@ -375,7 +375,7 @@ export default function ArtistryPortfolio() {
                                 key={item.id}
                                 className={cn(
                                     "flex-shrink-0  flex flex-col items-center cursor-pointer transition-all snap-start",
-                                    "w-[70%] mr-1",
+                                    "w-[70%] mr-0",
                                 )}
                                 onClick={() => scrollToItem(index)}
                                 >
@@ -389,8 +389,8 @@ export default function ArtistryPortfolio() {
                                     </div>
                                     <span
                                         className={cn(
-                                            `text-sm font-semibold text-center -translate-y-0  text-black `,
-                                            activeIndex === index ? "font-medium" : ""
+                                            `text-sm font-bold text-center -translate-y-0  text-black `,
+                                            activeIndex === index ? "font-bold" : "font-bold"
                                         )}
                                     >
                                         {item.title.toUpperCase()}
