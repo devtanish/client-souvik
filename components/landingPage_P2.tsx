@@ -458,15 +458,17 @@ const JewelryCustomizer: React.FC = () => {
             <span
               className={`italic font-bold cursor-pointer pb-0.5 transition-all mr-2 break-words ${
                 activePanel === "jewelry-type"
-                  ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
-                  : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
+                  ? "text-[#eaebe5] bg-[#000844] px-2.5 rounded scale-105"
+                  : "text-[#000844] hover:text-gray-600 hover:scale-105 relative"
               }`}
               onClick={() => {
                 setActiveTab("ring")
                 setShowLeoDrawer(true)
               }}
-            >
+            > 
+            <div className="-translate-x-1">
               {getDisplayText("jewelry-type") ? getDisplayText("jewelry-type") : "Jewelry"}
+            </div>
             </span>
 
             {/* Jewelry Type Panel */}
@@ -528,15 +530,17 @@ const JewelryCustomizer: React.FC = () => {
             <span
               className={`italic font-bold cursor-pointer pb-0.5 transition-all whitespace-nowrap mr-2 ${
                 activePanel === "recipient"
-                  ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
-                  : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
+                  ? "text-[#eaebe5] bg-[#000844] px-2.5 rounded scale-105"
+                  : "text-[#000844] hover:text-gray-600 hover:scale-105 relative"
               }`}
               onClick={() => {
                 setActiveTab("myself")
                 setShowLeoDrawer(true)
               }}
             >
-              {selections.recipient}
+              <div className="-translate-x-1">
+                {selections.recipient}
+              </div>
             </span>
 
             {/* Recipient Panel */}
@@ -590,21 +594,23 @@ const JewelryCustomizer: React.FC = () => {
             <span
               className={`italic font-bold cursor-pointer pb-0.5 transition-all break-words mr-2 ${
                 activePanel === "trait"
-                  ? "text-[#eaebe5] bg-[#925c40] px-2.5 rounded scale-105"
-                  : "text-[#925c40] hover:text-amber-900 hover:scale-105 relative"
+                  ? "text-[#eaebe5] bg-[#000844] px-2.5 rounded scale-105"
+                  : "text-[#000844] hover:text-gray-600 hover:scale-105 relative"
               }`}
               onClick={() => {
                 setActiveTab("lio")
                 setShowLeoDrawer(true)
               }}
             >
-              {selections.trait}
+              <div className="-translate-x-1">
+                {selections.trait}
+              </div>
             </span>
           </div>
 
           <button
             onClick={() => setShowMessageBox(true)} 
-            className="block mt-8 mx-auto font-medium text-lg md:text-3xl px-8 md:px-8 py-2 bg-[#925c40] text-white shadow-lg transition-all hover:bg-[#b0947f] hover:-translate-y-1 hover:shadow-2xl hover:scale-105 uppercase tracking-wider"
+            className="block mt-8 mx-auto font-medium text-lg md:text-3xl px-8 md:px-8 py-2 bg-[#000108] text-white shadow-lg transition-all hover:bg-gray-600 hover:-translate-y-1 hover:shadow-2xl hover:scale-105 uppercase tracking-wider"
           >
             Show Me My Inspiration
           </button>
@@ -612,7 +618,7 @@ const JewelryCustomizer: React.FC = () => {
 
         <p className="mt-8 text-sm text-gray-600">
           ...or,{" "}
-          <a href="#" className="text-amber-800 font-semibold transition-all hover:underline hover:text-amber-900">
+          <a href="#" className="text-[#000108] font-semibold transition-all hover:underline hover:text-gray-600">
             speak to us
           </a>{" "}
           and share your inspiration so our team can get back to you with a mood board.
