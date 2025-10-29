@@ -481,20 +481,45 @@ export default function ArtistryPortfolio() {
             </div>
 
             {/* BOTTOM SVG - Animates only when footer comes into view */}
-            <section id="footer" className="footer">
-                <div className="footer-svg-container">
-                    <svg width="100%" height="auto" viewBox="0 0 78 19" xmlns="http://www.w3.org/2000/svg">
-                        <g className="footer-svg-paths" fill="var(--offblack)">
-                            <path d="m62.7985 18v-17.159973h4.32l6 10.199973h.048v-10.199973h4.32v17.159973h-4.32l-6-10.19997h-.048v10.19997z" />
-                            <path d="m52.8726 18.384c-5.448 0-8.496-3.792-8.496-8.97601 0-5.16 3.048-8.951996 8.496-8.951996 5.4 0 8.496 3.791996 8.496 8.951996 0 5.18401-3.096 8.97601-8.496 8.97601zm-4.08-8.97601c0 3.00001.936 5.44801 4.08 5.44801 3.12 0 4.08-2.448 4.08-5.44801 0-2.976-.96-5.424-4.08-5.424-3.144 0-4.08 2.448-4.08 5.424z" />
-                            <path d="m38.6212 18v-17.159973h4.32v17.159973z" />
-                            <path d="m30.4798 18.384c-4.488 0-7.872-2.28-7.872-6.216h4.368c0 1.992 1.512 2.736 3.456 2.736 1.608 0 2.424-.648 2.424-1.536 0-1.464-1.704-1.848-4.08-2.568-2.976-.91201-5.64-2.06401-5.64-5.13601 0-3.744 2.928-5.207996 6.624-5.207996 4.008 0 7.152 2.111996 7.272 5.591996h-4.368c-.192-1.32-1.248-2.112-2.904-2.112-1.296 0-2.208.432-2.208 1.416 0 1.152.96 1.536 3.144 2.184 3.24.96 6.576 1.872 6.576 5.42401 0 3.288-2.496 5.424-6.792 5.424z" />
-                            <path d="m17.0925 18v-17.159973h4.32v17.159973z" />
-                            <path d="m6.10183 18-5.711998-17.159973h4.728008l3.23999 12.023973h.048l3.26397-12.023973h4.56l-5.568 17.159973z" />
-                        </g>
+           <svg viewBox="0 0 1560 300" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                    <defs>
+                        <style>
+                        {`
+                            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
+                            
+                            .explore-text {
+                            opacity: 0;
+                            animation: fadeInUp 1.2s ease-out forwards;
+                            }
+                            
+                            @keyframes fadeInUp {
+                            0% {
+                                opacity: 0;
+                                transform: translateY(30px);
+                            }
+                            100% {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                            }
+                        `}
+                        </style>
+                    </defs>
+                    <rect width="1560" height="300" fill="#e8e4df"/>
+                    <text 
+                        className="explore-text"
+                        x="780" 
+                        y="260" 
+                        fontFamily="'Playfair Display', serif" 
+                        fontSize="325" 
+                        fontWeight="900" 
+                        fill="#000000" 
+                        textAnchor="middle" 
+                        letterSpacing="-5"
+                    >
+                        EXPLORE
+                    </text>
                     </svg>
-                </div>
-            </section>
         </div>
     )
 }
