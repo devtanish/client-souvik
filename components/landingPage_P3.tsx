@@ -54,8 +54,41 @@ export default function LandingPage_P3() {
 
     return (
         <div id="landingPage3" className={`scroll-mt-16 ${cormorantGaramond.className}`} ref={containerRef}>
+            <style jsx>{`
+                .glass-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(
+                        135deg,
+                        rgba(255, 255, 255, 0.15) 0%,
+                        rgba(255, 255, 255, 0.05) 100%
+                    );
+                    backdrop-filter: blur(12px) saturate(150%);
+                    -webkit-backdrop-filter: blur(12px) saturate(150%);
+                    opacity: 0;
+                    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    pointer-events: none;
+                    border: 1px solid rgba(255, 255, 255, 0.25);
+                    box-shadow: 
+                        inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                        0 8px 32px rgba(0, 0, 0, 0.2);
+                }
+                
+                .parallax-container:hover .glass-overlay {
+                    opacity: 1;
+                }
+                
+                .parallax-container:hover .arrow-icon {
+                    transform: translate(5px, -5px);
+                }
+                
+                .arrow-icon {
+                    transition: transform 0.4s ease;
+                }
+            `}</style>
+            
             <div className="sm:h-[150vh] h-[100vh] w-screen grid grid-cols-4 lg:grid-cols-6 grid-rows-8 gap-0 mt-[5vh] lg:mt-[10vh]">
-                <div className="col-start-1 col-end-3 row-start-1 row-end-5 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-1 col-end-3 row-start-1 row-end-5 relative overflow-hidden parallax-container cursor-pointer" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/1.png"
@@ -65,6 +98,7 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
+                    <div className="glass-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
                         <h3 className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
@@ -73,10 +107,10 @@ export default function LandingPage_P3() {
                             Ring
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
+                    <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-1 col-end-3 row-start-5 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-1 col-end-3 row-start-5 row-end-9 relative overflow-hidden parallax-container cursor-pointer" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/2.png"
@@ -85,6 +119,7 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
+                    <div className="glass-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
                         <h3 className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
@@ -93,10 +128,10 @@ export default function LandingPage_P3() {
                             Women Braclet 
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
+                    <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-3 col-end-5 row-start-1 row-end-5 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-3 col-end-5 row-start-1 row-end-5 relative overflow-hidden parallax-container cursor-pointer" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/3.png"
@@ -105,6 +140,7 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
+                    <div className="glass-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
                         <p className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
@@ -113,10 +149,10 @@ export default function LandingPage_P3() {
                             Men Earrings 
                         </p>
                     </div>
-                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
+                    <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-3 col-end-5 row-start-5 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-3 col-end-5 row-start-5 row-end-9 relative overflow-hidden parallax-container cursor-pointer" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/4.png"
@@ -125,6 +161,7 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
+                    <div className="glass-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
                         <p className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
@@ -133,10 +170,10 @@ export default function LandingPage_P3() {
                             Men Necklace
                         </p>
                     </div>
-                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
+                    <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
                 
-                <div className="col-start-5 col-end-7 row-start-1 row-end-9 relative overflow-hidden parallax-container" style={{ perspective: '1000px' }}>
+                <div className="col-start-5 col-end-7 row-start-1 row-end-9 relative overflow-hidden parallax-container cursor-pointer" style={{ perspective: '1000px' }}>
                     <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
                         <Image
                             src="/landingPage/5.png"
@@ -145,6 +182,7 @@ export default function LandingPage_P3() {
                             style={{ objectFit: "cover" }}
                         />
                     </div>
+                    <div className="glass-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
                         <h3 className="parallax-text text-white font-bold text-xl" style={{ 
                             transformStyle: 'preserve-3d',
@@ -153,7 +191,7 @@ export default function LandingPage_P3() {
                             Boby & More
                         </h3>
                     </div>
-                    <ArrowSvg className="absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
+                    <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
             </div>
             <div className="w-screen h-[100vh] relative flex lg:hidden">
