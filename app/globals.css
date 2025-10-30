@@ -65,6 +65,9 @@
 
 /* ==== Root Variables (OKLCH + Fallback HSL) ==== */
 :root {
+
+  --font-fradesty: "Fradesty", sans-serif;
+  --font-ciguatera: "Ciguatera", sans-serif;
   --radius: 0.625rem;
 
   /* OKLCH */
@@ -107,6 +110,26 @@
   --font-ratio-max: 1.33;
   --font-width-min: 375;
   --font-width-max: 1500;
+}
+
+.font-ciguatera {
+  font-family: var(--font-ciguatera);
+}
+
+.font-fradesty {
+  font-family: var(--font-fradesty);
+}
+
+.font-paradise {
+  font-family: var(--font-paradise);
+}
+
+.font-paradiseR {
+  font-family: var(--font-paradiseR);
+}
+
+.font-stylish {
+  font-family: var(--font-stylish);
 }
 
 /* ==== Dark Mode Variables ==== */

@@ -510,7 +510,7 @@ export default function ArtistryPortfolio() {
                         className="explore-text"
                         x="780" 
                         y="260" 
-                        fontFamily="'Playfair Display', serif" 
+                        fontFamily={`'Playfair Display', serif`} 
                         fontSize="325" 
                         fontWeight="900" 
                         fill="#000000" 
