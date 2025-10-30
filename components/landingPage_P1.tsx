@@ -505,7 +505,7 @@ export default function ArtistryPortfolio() {
                         `}
                         </style>
                     </defs>
-                    <rect width="1560" height="300" fill="#e8e4df"/>
+                    <rect width="1560" height="300" fill="transparent"/>
                     <text 
                         className="explore-text"
                         x="780" 
