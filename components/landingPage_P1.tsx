@@ -13,6 +13,7 @@ import Lenis from "@studio-freight/lenis"
 import styles from "../components/styles/portfolio-layout.module.css"
 import { Nothing_You_Could_Do } from "next/font/google"
 import { Cormorant_Garamond } from "next/font/google";
+import { ParadiseR } from "./subCompo/fonts";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -481,7 +482,7 @@ export default function ArtistryPortfolio() {
             </div>
 
             {/* BOTTOM SVG - Animates only when footer comes into view */}
-           <svg viewBox="0 0 1560 300" xmlns="http://www.w3.org/2000/svg" className="w-full">
+           <svg viewBox="0 0 1560 470" xmlns="http://www.w3.org/2000/svg" className="w-full">
                     <defs>
                         <style>
                         {`
@@ -509,9 +510,9 @@ export default function ArtistryPortfolio() {
                     <text 
                         className="explore-text"
                         x="780" 
-                        y="260" 
-                        fontFamily={`'Playfair Display', serif`} 
-                        fontSize="325" 
+                        y="435" 
+                        fontFamily={` ${ParadiseR.style.fontFamily}`} 
+                        fontSize="525" 
                         fontWeight="900" 
                         fill="#000000" 
                         textAnchor="middle" 
