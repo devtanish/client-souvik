@@ -116,6 +116,10 @@
   font-family: var(--font-ciguatera);
 }
 
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
+
 .font-fradesty {
   font-family: var(--font-fradesty);
 }

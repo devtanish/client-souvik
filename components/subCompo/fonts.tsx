@@ -1,5 +1,11 @@
 import localFont from "next/font/local";
 
+export const Montserrat = localFont({
+  src: "../../public/fonts/Claremonts-Regular-Exfontb6dd.otf",
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
 export const Stylish = localFont({
   src: "../../public/fonts/StylishMothers.otf",
   variable: "--font-stylish",
