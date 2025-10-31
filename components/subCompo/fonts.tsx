@@ -6,6 +6,12 @@ export const Montserrat = localFont({
   display: "swap",
 });
 
+export const Lamoric = localFont({
+  src: "../../public/fonts/LamoricRowenTTF.ttf",
+  variable: "--font-Lamorice",
+  display: "swap",
+});
+
 export const Stylish = localFont({
   src: "../../public/fonts/StylishMothers.otf",
   variable: "--font-stylish",

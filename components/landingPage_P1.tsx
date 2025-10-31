@@ -13,7 +13,7 @@ import Lenis from "@studio-freight/lenis"
 import styles from "../components/styles/portfolio-layout.module.css"
 import { Nothing_You_Could_Do } from "next/font/google"
 import { Cormorant_Garamond } from "next/font/google";
-import { ParadiseR, Montserrat } from "./subCompo/fonts";
+import { ParadiseR, Montserrat, Lamoric } from "./subCompo/fonts";
 
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -414,7 +414,7 @@ export default function ArtistryPortfolio() {
             />
 
             {/* for desktop only  */}
-            <section id="gallery" className={`gallery justify-center lg:flex hidden `}>
+            <section id="gallery" className={`gallery justify-center lg:flex hidden`}>
                 <div className="">
                     <div className={styles.gallerySection}>
                         <div className={`${styles.galleryGrid} gallery-wrapper`}>
@@ -512,7 +512,7 @@ export default function ArtistryPortfolio() {
                         className="explore-text"
                         x="780" 
                         y="270" 
-                        fontFamily={` ${Montserrat.style.fontFamily}`} 
+                        fontFamily={` ${Lamoric.style.fontFamily}`} 
                         fontSize="375" 
                         fontWeight="900" 
                         fill="#000000" 
