@@ -510,7 +510,7 @@ export default function ArtistryPortfolio() {
                     <rect width="1560" height="300" fill="transparent"/>
                     <text 
                         className="explore-text"
-                        x="780" 
+                        x="680" 
                         y="270" 
                         fontFamily={` ${Lamoric.style.fontFamily}`} 
                         fontSize="375" 
@@ -519,7 +519,20 @@ export default function ArtistryPortfolio() {
                         textAnchor="middle" 
                         letterSpacing="-5"
                     >
-                        EXPLORE
+                        EXPLOR
+                    </text>
+                    <text 
+                        className="explore-text"
+                        x="1435" 
+                        y="270" 
+                        fontFamily={` ${Lamoric.style.fontFamily}`} 
+                        fontSize="375" 
+                        fontWeight="900" 
+                        fill="#000000" 
+                        textAnchor="middle" 
+                        letterSpacing="-5"
+                    >
+                        E
                     </text>
                     </svg>
         </div>
