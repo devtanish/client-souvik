@@ -194,14 +194,26 @@ export default function LandingPage_P3() {
                     <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
                 </div>
             </div>
-            <div className="w-screen h-[100vh] relative flex lg:hidden">
-                <Image
-                    className=""
-                    src="/landingPage/5.png"
-                    alt="Image 5"
-                    fill
-                    style={{ objectFit: "cover" }}
-                />
+            <div className="w-screen h-[100vh] relative flex lg:hidden parallax-container">
+                <div className="parallax-image absolute inset-0 transition-transform duration-300 ease-out" style={{ transformStyle: 'preserve-3d' }}>
+                    <Image
+                        className=""
+                        src="/landingPage/5.png"
+                        alt="Image 5"
+                        fill
+                        style={{ objectFit: "cover" }}
+                    />
+                </div>
+                <div className="glass-overlay"></div>
+                <div className="absolute inset-0 bg-gradient-to-t to-transparent flex justify-center items-center pointer-events-none">
+                    <h3 className="parallax-text text-white font-bold text-xl" style={{ 
+                        transformStyle: 'preserve-3d',
+                        textShadow: '0 10px 30px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.3)'
+                    }}>
+                        Boby & More
+                    </h3>
+                </div>
+                <ArrowSvg className="arrow-icon absolute bottom-1 md:bottom-7 right-1 md:right-7 size-5"/>
             </div>
         </div>
     );
