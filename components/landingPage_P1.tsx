@@ -488,15 +488,17 @@ export default function ArtistryPortfolio() {
       <section id="gallery" className={`gallery justify-center lg:flex hidden`}>
         <div className="">
           <div className={styles.gallerySection}>
-            <div className={`${styles.galleryGrid} gallery-wrapper`}>
-              {galleryItems.map((item, index) => (
-                <div key={item.id} className={`${styles.galleryItem} gallery-item`} onClick={() => scrollToItem(index)}>
-                  <img src={item.src || "/placeholder.svg"} alt={item.alt} loading="lazy" />
-                  <div className={`text-center uppercase font-semibold ${cormorantGaramond.className}`}>
-                    {item.title}
+            <div className="grid place-items-center">
+              <div className={`${styles.galleryGrid} gallery-wrapper`}>
+                {galleryItems.map((item, index) => (
+                  <div key={item.id} className={`${styles.galleryItem} gallery-item`} onClick={() => scrollToItem(index)}>
+                    <img src={item.src || "/placeholder.svg"} alt={item.alt} loading="lazy" />
+                    <div className={`text-center uppercase font-semibold ${cormorantGaramond.className}`}>
+                      {item.title}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

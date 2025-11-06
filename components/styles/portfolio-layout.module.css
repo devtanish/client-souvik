@@ -38,7 +38,7 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 0;
   margin-bottom: 3rem;
-  width: 100%;
+  width: 90%;
 }
 
 .galleryItem {
