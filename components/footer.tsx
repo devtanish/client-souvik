@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Cormorant_Garamond } from "next/font/google"
 import { Be_Vietnam_Pro } from "next/font/google"
 import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
@@ -10,6 +11,12 @@ import { Plus, Minus } from "lucide-react"
 const robotoMedium = Be_Vietnam_Pro({
   subsets: ["latin"],
   weight: ["300"],
+  display: "swap",
+})
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 })
 
@@ -53,14 +60,14 @@ export default function Footer() {
   }
 
   return (
-    <footer className={`w-full border-t text-white border-t-black ${robotoMedium.className}`}>
+    <footer className={`w-full border-t text-white border-t-black ${cormorantGaramond.className}`}>
       <div className="md:mx-15 py-10">
         <div className="grid grid-cols-1 md:gap-7 gap-7 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
           {/* Newsletter Signup */}
           <div className="col-span-1 md:col-span-3">
-            <h3 className={`mb-4 text-xl ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
+            <h3 className={`mb-4 text-xl `}>Sign up to Our Newsletter</h3>
             <div className="space-y-2">
-              <label htmlFor="email" className={`text-sm ${robotoBold.className}`}>
+              <label htmlFor="email" className={`text-sm `}>
                 Email<span className="text-black pb-1">*</span>
               </label>
               <div className="flex w-full max-w-sm flex-col space-y-2 gap-2.5 mt-2">
@@ -82,7 +89,7 @@ export default function Footer() {
           {/* Shop Links - Collapsible */}
           <div className="md:mt-6">
             <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
-              <h3 className="mb-2 text-lg font-medium text-[#081336] lg:pb-0">Shop</h3>
+              <h3 className="mb-2 text-lg text-[#081336] lg:pb-0 font-bold">Shop</h3>
               <button
                 onClick={() => toggleSection("Shop")}
                 className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
@@ -124,7 +131,7 @@ export default function Footer() {
           {/* Service Links - Collapsible */}
           <div className="md:mt-6 md:-translate-x-3 translate-x-0">
             <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
-              <h3 className="mb-2 text-lg font-medium text-[#081336]">Service</h3>
+              <h3 className="mb-2 text-lg font-bold text-[#081336]">Service</h3>
               <button
                 onClick={() => toggleSection("Service")}
                 className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
@@ -166,7 +173,7 @@ export default function Footer() {
           {/* Company Links - Collapsible */}
           <div className="md:mt-6">
             <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
-              <h3 className="mb-2 text-lg font-medium text-[#081336]">Company</h3>
+              <h3 className={`mb-2 text-lg font-bold text-[#081336] ${cormorantGaramond.style.fontFamily}`}>Company</h3>
               <button
                 onClick={() => toggleSection("Company")}
                 className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
