@@ -88,7 +88,7 @@ export default function Footer() {
 
           {/* Shop Links - Collapsible */}
           <div className="md:mt-6">
-            <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
+            <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg text-[#081336] lg:pb-0 font-bold">Shop</h3>
               <button
                 onClick={() => toggleSection("Shop")}
@@ -130,7 +130,7 @@ export default function Footer() {
 
           {/* Service Links - Collapsible */}
           <div className="md:mt-6 md:-translate-x-3 translate-x-0">
-            <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
+            <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg font-bold text-[#081336]">Service</h3>
               <button
                 onClick={() => toggleSection("Service")}
@@ -172,7 +172,7 @@ export default function Footer() {
 
           {/* Company Links - Collapsible */}
           <div className="md:mt-6">
-            <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
+            <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
               <h3 className={`mb-2 text-lg font-bold text-[#081336] ${cormorantGaramond.style.fontFamily}`}>Company</h3>
               <button
                 onClick={() => toggleSection("Company")}
