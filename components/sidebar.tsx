@@ -227,7 +227,7 @@ export default function Sidebar() {
     <div className={`${cormorantGaramond.className}`}>
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-10 bg-black/30 backdrop-blur-sm"
+          className="fixed inset-0 z-10 "
           onClick={handleBackdropClick}
           aria-label="Close sidebar"
           role="button"
