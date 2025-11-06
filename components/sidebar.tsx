@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,8 +22,6 @@ import { LanguagesIcon } from "lucide-react"
 import { SlHandbag } from "react-icons/sl"
 import { usePathname } from "next/navigation"
 import { Cormorant_Garamond } from "next/font/google"
-
-
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -158,13 +158,12 @@ const menCategories: Category[] = [
 ]
 
 export default function Sidebar() {
-
   const [showLoginPopup, setShowLoginPopup] = useState(false)
   const [showOtpPopup, setShowOtpPopup] = useState(false)
 
   const handleLoginClick = () => {
     setShowLoginPopup(true)
-  } 
+  }
 
   const handleVerifyClick = () => {
     setShowLoginPopup(false)
@@ -184,36 +183,47 @@ export default function Sidebar() {
     setShowOtpPopup(false)
   }
 
-  // State for active tab (Women or Men)
   const [currentCurrency, setCurrentCurrency] = useState<string>("USD")
   const pathname = usePathname()
   const [currentLanguage, setCurrentLanguage] = useState<string>("EN")
   const [activeTab, setActiveTab] = useState<"women" | "men">("women")
-
-  // State for expanded categories
   const [expandedCategories, setExpandedCategories] = useState<string[]>(["RINGS"])
-
-  // State for sidebar visibility
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  // Toggle category expansion
   const toggleCategory = (categoryName: string) => {
     setExpandedCategories((prev) =>
       prev.includes(categoryName) ? prev.filter((name) => name !== categoryName) : [...prev, categoryName],
     )
   }
 
-  // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
 
-  // Get current categories based on active tab
+  const handleBackdropClick = () => {
+    setIsSidebarOpen(false)
+  }
+
+  const handleSidebarWheel = (e: React.WheelEvent) => {
+    e.stopPropagation()
+  }
+
   const currentCategories = activeTab === "women" ? womenCategories : menCategories
 
   return (
     <div className={`${cormorantGaramond.className}`}>
-    {(showLoginPopup || showOtpPopup) && (
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-10 bg-black/30 backdrop-blur-sm"
+          onClick={handleBackdropClick}
+          aria-label="Close sidebar"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Escape" && handleBackdropClick()}
+        />
+      )}
+
+      {(showLoginPopup || showOtpPopup) && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 backdrop-blur-sm transition-all">
           <div
             className={`transform transition-all duration-300 ease-in-out ${
@@ -225,7 +235,7 @@ export default function Sidebar() {
           </div>
         </div>
       )}
-      {/* Toggle Button - Always visible */}
+
       <button
         onClick={toggleSidebar}
         className="fixed md:top-8 md:left-10.5 top-8 -left-2.5 z-50 p-2 rounded-md focus:outline-none transition-all duration-200"
@@ -262,6 +272,7 @@ export default function Sidebar() {
         className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed top-0 md:pt-40 w-screen left-0 md:w-[40rem] bg-white border-gray-200 z-20 transition-transform duration-300 ease-in-out  ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        onWheel={handleSidebarWheel}
       >
         <div>
           {/* Tab Navigation */}
@@ -318,6 +329,7 @@ export default function Sidebar() {
         className={`scrollbar-hide overflow-y-scroll hide-scrollbar flex flex-col justify-between fixed md:top-5 top-28 md:pt-50 left-0 w-screen md:w-[40rem] h-full bg-white border-r border-gray-200 shadow-lg z-15 transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        onWheel={handleSidebarWheel}
       >
         <div className="py-9">
           <div className="px-6 mb-4 text-sm font-medium text-gray-500">SHOP BY</div>
@@ -402,7 +414,12 @@ export default function Sidebar() {
         </div>
         <div className="md:mb-8 mb-30 w-full flex flex-col items-center">
           <div className="mb-5">
-            <Button className="mb-1 w-[300px] text-lg rounded-none bg-[#01081c] justify-center mt-2" onClick={handleLoginClick}>SIGN IN</Button>
+            <Button
+              className="mb-1 w-[300px] text-lg rounded-none bg-[#01081c] justify-center mt-2"
+              onClick={handleLoginClick}
+            >
+              SIGN IN
+            </Button>
             <p className="text-[#01081c] text-center">
               New to Raya?{" "}
               <Link href={"sign-up"} className="text-[#01081c] underline cursor-pointer">
