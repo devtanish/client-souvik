@@ -53,7 +53,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className={`w-full border-t text-white border-t-black ${robotoMedium.className} px-1 md:px-0`}>
+    <footer className={`w-full border-t text-white border-t-black ${robotoMedium.className}`}>
       <div className="md:mx-15 py-10">
         <div className="grid grid-cols-1 md:gap-7 gap-7 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
           {/* Newsletter Signup */}
@@ -81,11 +81,11 @@ export default function Footer() {
 
           {/* Shop Links - Collapsible */}
           <div className="md:mt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg font-medium text-[#081336] lg:pb-0">Shop</h3>
               <button
                 onClick={() => toggleSection("Shop")}
-                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300 md:hidden"
+                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
                 aria-label={expandedSections.includes("Shop") ? "Collapse" : "Expand"}
               >
                 <span
@@ -93,19 +93,19 @@ export default function Footer() {
                     expandedSections.includes("Shop") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
                   }`}
                 >
-                  <Minus size={16} />
+                  <Minus size={16} className="-translate-y-1"/>
                 </span>
                 <span
                   className={`absolute transition-transform duration-300 ${
                     expandedSections.includes("Shop") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
                   }`}
                 >
-                  <Plus size={16} />
+                  <Plus size={16} className="-translate-y-1"/>
                 </span>
               </button>
             </div>
             <ul
-              className={`overflow-hidden transition-all duration-500 ease-in-out md:max-h-[500px] md:opacity-100 ${
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
                 expandedSections.includes("Shop") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
               }`}
             >
@@ -123,11 +123,11 @@ export default function Footer() {
 
           {/* Service Links - Collapsible */}
           <div className="md:mt-6 md:-translate-x-3 translate-x-0">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg font-medium text-[#081336]">Service</h3>
               <button
                 onClick={() => toggleSection("Service")}
-                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300 md:hidden"
+                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
                 aria-label={expandedSections.includes("Service") ? "Collapse" : "Expand"}
               >
                 <span
@@ -135,19 +135,19 @@ export default function Footer() {
                     expandedSections.includes("Service") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
                   }`}
                 >
-                  <Minus size={16} />
+                  <Minus size={16} className="-translate-y-1"/>
                 </span>
                 <span
                   className={`absolute transition-transform duration-300 ${
                     expandedSections.includes("Service") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
                   }`}
                 >
-                  <Plus size={16} />
+                  <Plus size={16} className="-translate-y-1"/>
                 </span>
               </button>
             </div>
             <ul
-              className={`overflow-hidden transition-all duration-500 ease-in-out md:max-h-[500px] md:opacity-100 ${
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
                 expandedSections.includes("Service") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
               }`}
             >
@@ -165,11 +165,11 @@ export default function Footer() {
 
           {/* Company Links - Collapsible */}
           <div className="md:mt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg font-medium text-[#081336]">Company</h3>
               <button
                 onClick={() => toggleSection("Company")}
-                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300 md:hidden"
+                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
                 aria-label={expandedSections.includes("Company") ? "Collapse" : "Expand"}
               >
                 <span
@@ -177,19 +177,19 @@ export default function Footer() {
                     expandedSections.includes("Company") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
                   }`}
                 >
-                  <Minus size={16} />
+                  <Minus size={16} className="-translate-y-1"/>
                 </span>
                 <span
                   className={`absolute transition-transform duration-300 ${
                     expandedSections.includes("Company") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
                   }`}
                 >
-                  <Plus size={16} />
+                  <Plus size={16} className="-translate-y-1"/>
                 </span>
               </button>
             </div>
             <ul
-              className={`overflow-hidden transition-all duration-500 ease-in-out md:max-h-[500px] md:opacity-100 ${
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${
                 expandedSections.includes("Company") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
               }`}
             >

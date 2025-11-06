@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { useEffect } from "react"
 
 import {
   DropdownMenu,
@@ -189,6 +190,18 @@ export default function Sidebar() {
   const [activeTab, setActiveTab] = useState<"women" | "men">("women")
   const [expandedCategories, setExpandedCategories] = useState<string[]>(["RINGS"])
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isSidebarOpen])
 
   const toggleCategory = (categoryName: string) => {
     setExpandedCategories((prev) =>
