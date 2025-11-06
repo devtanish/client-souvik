@@ -1,8 +1,11 @@
+"use client"
+
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { shop, customeService, company } from "./interface-contents/footerContents"
 import { Be_Vietnam_Pro } from "next/font/google"
+import { useState } from "react"
+import { Plus, Minus } from "lucide-react"
 
 const robotoMedium = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -16,20 +19,57 @@ const robotoBold = Be_Vietnam_Pro({
   display: "swap",
 })
 
+// Mock data - replace with your actual data
+const shopLinks = [
+  { name: "Ring", href: "/ring" },
+  { name: "Earring", href: "/earring" },
+  { name: "Necklace", href: "/necklace" },
+  { name: "New", href: "/new" },
+  { name: "Sale", href: "/sale" },
+]
+
+const serviceLinks = [
+  { name: "Shipping & Returns", href: "/shipping" },
+  { name: "Store Policy", href: "/policy" },
+  { name: "Payment Methods", href: "/payment" },
+  { name: "FAQ", href: "/faq" },
+]
+
+const companyLinks = [
+  { name: "Blog", href: "/blog" },
+  { name: "About Us", href: "/about" },
+  { name: "Careers", href: "/careers" },
+  { name: "Customer Stories", href: "/stories" },
+  { name: "Contact", href: "/contact" },
+]
+
 export default function Footer() {
+  const [expandedSections, setExpandedSections] = useState<string[]>(["Shop", "Service", "Company"])
+
+  const toggleSection = (sectionName: string) => {
+    setExpandedSections((prev) =>
+      prev.includes(sectionName) ? prev.filter((name) => name !== sectionName) : [...prev, sectionName],
+    )
+  }
+
   return (
-    <footer className={`w-full border-t text-white border-t-black ${robotoMedium.className}`}>
-      <div className=" md:mx-15 py-10">
+    <footer className={`w-full border-t text-white border-t-black ${robotoMedium.className} px-1 md:px-0`}>
+      <div className="md:mx-15 py-10">
         <div className="grid grid-cols-1 md:gap-7 gap-7 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
           {/* Newsletter Signup */}
-          <div className="col-span-1 md:col-span-3 ">
-            <h3 className={`mb-4 text-xl ${robotoMedium.className} `}>Sign up to Our Newsletter</h3>
+          <div className="col-span-1 md:col-span-3">
+            <h3 className={`mb-4 text-xl ${robotoMedium.className}`}>Sign up to Our Newsletter</h3>
             <div className="space-y-2">
-              <label htmlFor="email" className={`text-sm ${robotoBold.className} `}>
+              <label htmlFor="email" className={`text-sm ${robotoBold.className}`}>
                 Email<span className="text-black pb-1">*</span>
               </label>
-              <div className="flex w-full max-w-sm flex-col space-y-2  gap-2.5 mt-2 ">
-                <Input type="email" id="email" placeholder="Email" className="h-10 w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black" />
+              <div className="flex w-full max-w-sm flex-col space-y-2 gap-2.5 mt-2">
+                <Input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  className="h-10 w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black"
+                />
                 <Button variant="outline" className="w-fit bg-[#ffffff] border-black rounded-none px-8 py-5">
                   Submit
                 </Button>
@@ -37,70 +77,155 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="sm:visible hidden">
+          <div className="sm:visible hidden" />
 
-          </div>
-
-          {/* Shop Links */}
+          {/* Shop Links - Collapsible */}
           <div className="md:mt-6">
-            <h3 className="mb-2 text-lg font-medium text-[#081336] lg:pb-0">Shop</h3>
-            <ul className="space-y-2 text-sm text-[#081336]">
-              {shop.map((items, key) => (
-                <li key={key}>
-                  <Link href={items.href ? `${items.href}` : `/${(items.name).toLowerCase().replace(/\s+/g, "-")}`} className="hover:underline">
-                    {items.name}
-                  </Link>
-                </li>
-              ))}
+            <div className="flex items-center justify-between">
+              <h3 className="mb-2 text-lg font-medium text-[#081336] lg:pb-0">Shop</h3>
+              <button
+                onClick={() => toggleSection("Shop")}
+                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300 md:hidden"
+                aria-label={expandedSections.includes("Shop") ? "Collapse" : "Expand"}
+              >
+                <span
+                  className={`absolute transition-transform duration-300 ${
+                    expandedSections.includes("Shop") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
+                  }`}
+                >
+                  <Minus size={16} />
+                </span>
+                <span
+                  className={`absolute transition-transform duration-300 ${
+                    expandedSections.includes("Shop") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                  }`}
+                >
+                  <Plus size={16} />
+                </span>
+              </button>
+            </div>
+            <ul
+              className={`overflow-hidden transition-all duration-500 ease-in-out md:max-h-[500px] md:opacity-100 ${
+                expandedSections.includes("Shop") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="space-y-2 text-sm text-[#081336]">
+                {shopLinks.map((items, key) => (
+                  <li key={key}>
+                    <Link href={items.href} className="hover:underline">
+                      {items.name}
+                    </Link>
+                  </li>
+                ))}
+              </div>
             </ul>
           </div>
 
-          {/* Customer Service Links */}
+          {/* Service Links - Collapsible */}
           <div className="md:mt-6 md:-translate-x-3 translate-x-0">
-            <h3 className="mb-2 text-lg font-medium text-[#081336]">Service</h3>
-            <ul className="space-y-2 text-sm text-[#081336]">
-              {customeService.map((items, key) => (
-                <li key={key}>
-                  <Link href={items.href ? `${items.href}` : `/${(items.name).replace(/\s+/g, "-").toLowerCase()}`} className="hover:underline">
-                    {items.name}
-                  </Link>
-                </li>
-              ))}
+            <div className="flex items-center justify-between">
+              <h3 className="mb-2 text-lg font-medium text-[#081336]">Service</h3>
+              <button
+                onClick={() => toggleSection("Service")}
+                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300 md:hidden"
+                aria-label={expandedSections.includes("Service") ? "Collapse" : "Expand"}
+              >
+                <span
+                  className={`absolute transition-transform duration-300 ${
+                    expandedSections.includes("Service") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
+                  }`}
+                >
+                  <Minus size={16} />
+                </span>
+                <span
+                  className={`absolute transition-transform duration-300 ${
+                    expandedSections.includes("Service") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                  }`}
+                >
+                  <Plus size={16} />
+                </span>
+              </button>
+            </div>
+            <ul
+              className={`overflow-hidden transition-all duration-500 ease-in-out md:max-h-[500px] md:opacity-100 ${
+                expandedSections.includes("Service") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="space-y-2 text-sm text-[#081336]">
+                {serviceLinks.map((items, key) => (
+                  <li key={key}>
+                    <Link href={items.href} className="hover:underline">
+                      {items.name}
+                    </Link>
+                  </li>
+                ))}
+              </div>
             </ul>
           </div>
 
-          {/* About Links */}
-          <div className="md:mt-6 ">
-            <h3 className="mb-2 text-lg font-medium text-[#081336]">Company</h3>
-            <ul className="space-y-2 text-sm text-[#081336]">
-              {company.map((items, key) => (
-                <li key={key}>
-                  <Link href={items.href ? `${items.href}` : `/${(items.name).replace(/\s+/g, "-").toLowerCase()}`} className="hover:underline">
-                    {items.name}
-                  </Link>
-                </li>
-              ))}
+          {/* Company Links - Collapsible */}
+          <div className="md:mt-6">
+            <div className="flex items-center justify-between">
+              <h3 className="mb-2 text-lg font-medium text-[#081336]">Company</h3>
+              <button
+                onClick={() => toggleSection("Company")}
+                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300 md:hidden"
+                aria-label={expandedSections.includes("Company") ? "Collapse" : "Expand"}
+              >
+                <span
+                  className={`absolute transition-transform duration-300 ${
+                    expandedSections.includes("Company") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
+                  }`}
+                >
+                  <Minus size={16} />
+                </span>
+                <span
+                  className={`absolute transition-transform duration-300 ${
+                    expandedSections.includes("Company") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                  }`}
+                >
+                  <Plus size={16} />
+                </span>
+              </button>
+            </div>
+            <ul
+              className={`overflow-hidden transition-all duration-500 ease-in-out md:max-h-[500px] md:opacity-100 ${
+                expandedSections.includes("Company") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="space-y-2 text-sm text-[#081336]">
+                {companyLinks.map((items, key) => (
+                  <li key={key}>
+                    <Link href={items.href} className="hover:underline">
+                      {items.name}
+                    </Link>
+                  </li>
+                ))}
+              </div>
             </ul>
           </div>
         </div>
-
-
 
         {/* Bottom Section with Logo and Social Icons */}
         <div className="md:mt-12 mt-2 align-middle border-t pt-8 text-black">
           <div className="flex space-x-4 justify-center align-middle">
             <Link target="_blank" href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                width="20" 
-                height="20" 
-                fill="currentColor" 
-                className="bi bi-facebook" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                className="bi bi-facebook"
                 viewBox="0 0 16 16"
               >
                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
               </svg>
             </Link>
-            <Link target="_blank" href="https://www.instagram.com/raya_stories?igsh=bGgydXZoNzE2M253" aria-label="Instagram">
+            <Link
+              target="_blank"
+              href="https://www.instagram.com/raya_stories?igsh=bGgydXZoNzE2M253"
+              aria-label="Instagram"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -119,14 +244,17 @@ export default function Footer() {
               </svg>
             </Link>
             <Link target="_blank" href="https://pin.it/6nY94OeoY" aria-label="Pinterest">
-            <svg 
-              height="20" 
-              width="20" 
-              version="1.1" 
-              id="Layer_1" 
-              xmlns="http://www.w3.org/2000/svg" 
-	            viewBox="0 0 511.998 511.998" >
-                <path className="fill-[#0a0a0a]" d="M405.017,52.467C369.774,18.634,321.001,0,267.684,0C186.24,0,136.148,33.385,108.468,61.39
+              <svg
+                height="20"
+                width="20"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 511.998 511.998"
+              >
+                <path
+                  className="fill-[#0a0a0a]"
+                  d="M405.017,52.467C369.774,18.634,321.001,0,267.684,0C186.24,0,136.148,33.385,108.468,61.39
                 	c-34.114,34.513-53.675,80.34-53.675,125.732c0,56.993,23.839,100.737,63.76,117.011c2.68,1.098,5.377,1.651,8.021,1.651
                 	c8.422,0,15.095-5.511,17.407-14.35c1.348-5.071,4.47-17.582,5.828-23.013c2.906-10.725,0.558-15.884-5.78-23.353
                 	c-11.546-13.662-16.923-29.817-16.923-50.842c0-62.451,46.502-128.823,132.689-128.823c68.386,0,110.866,38.868,110.866,101.434
@@ -135,15 +263,17 @@ export default function Footer() {
                 	c0-30.632-18.832-51.215-46.857-51.215c-35.616,0-63.519,36.174-63.519,82.354c0,22.648,6.019,39.588,8.744,46.092
                 	c-4.487,19.01-31.153,132.03-36.211,153.342c-2.925,12.441-20.543,110.705,8.618,118.54c32.764,8.803,62.051-86.899,65.032-97.713
                 	c2.416-8.795,10.869-42.052,16.049-62.495c15.817,15.235,41.284,25.535,66.064,25.535c46.715,0,88.727-21.022,118.298-59.189
-                	c28.679-37.02,44.474-88.618,44.474-145.282C457.206,127.983,438.182,84.311,405.017,52.467z"/>
-                </svg>
+                	c28.679-37.02,44.474-88.618,44.474-145.282C457.206,127.983,438.182,84.311,405.017,52.467z"
+                />
+              </svg>
             </Link>
             <Link target="_blank" href="https://x.com/raya_stories?t=0Vtsc_NnsdYBjFGn7a2NnQ&s=09" aria-label="Twitter">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                width="19" 
-                height="19" 
-                fill="currentColor" 
-                className=" bi bi-twitter-x" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                fill="currentColor"
+                className="bi bi-twitter-x"
                 viewBox="0 0 16 16"
               >
                 <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
