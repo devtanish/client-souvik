@@ -62,9 +62,9 @@ export default function Footer() {
   return (
     <footer className={`w-full border-t text-white border-t-black ${cormorantGaramond.className}`}>
       <div className="md:mx-15 py-10">
-        <div className="grid grid-cols-1 md:gap-7 gap-7 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
+        <div className="grid grid-cols-1 md:gap-7 gap-0 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
           {/* Newsletter Signup */}
-          <div className="col-span-1 md:col-span-3">
+          <div className="col-span-1 md:col-span-3 mb-7">
             <h3 className={`mb-4 text-xl `}>Sign up to Our Newsletter</h3>
             <div className="space-y-2">
               <label htmlFor="email" className={`text-sm `}>
@@ -87,7 +87,7 @@ export default function Footer() {
           <div className="sm:visible hidden" />
 
           {/* Shop Links - Collapsible */}
-          <div className="md:mt-6">
+          <div className="md:mt-6 md:mb-0 mb-3.5">
             <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg text-[#081336] lg:pb-0 font-bold">Shop</h3>
               <button
@@ -100,14 +100,14 @@ export default function Footer() {
                     expandedSections.includes("Shop") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
                   }`}
                 >
-                  <Minus size={16} className="-translate-y-1"/>
+                  <Minus size={16} className="-translate-y-1" color="black"/>
                 </span>
                 <span
                   className={`absolute transition-transform duration-300 ${
                     expandedSections.includes("Shop") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
                   }`}
                 >
-                  <Plus size={16} className="-translate-y-1"/>
+                  <Plus size={16} className="-translate-y-1" color="black"/>
                 </span>
               </button>
             </div>
@@ -129,7 +129,7 @@ export default function Footer() {
           </div>
 
           {/* Service Links - Collapsible */}
-          <div className="md:mt-6 md:-translate-x-3 translate-x-0">
+          <div className="md:mt-6 md:-translate-x-3 translate-x-0 border-y md:border-0 md:border-y-0 py-3.5 md:py-0 border-gray-400 mb-3.5 md:mb-0">
             <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
               <h3 className="mb-2 text-lg font-bold text-[#081336]">Service</h3>
               <button
@@ -142,14 +142,14 @@ export default function Footer() {
                     expandedSections.includes("Service") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
                   }`}
                 >
-                  <Minus size={16} className="-translate-y-1"/>
+                  <Minus size={16} className="-translate-y-1" color="black"/>
                 </span>
                 <span
                   className={`absolute transition-transform duration-300 ${
                     expandedSections.includes("Service") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
                   }`}
                 >
-                  <Plus size={16} className="-translate-y-1"/>
+                  <Plus size={16} className="-translate-y-1" color="black"/>
                 </span>
               </button>
             </div>
@@ -171,7 +171,7 @@ export default function Footer() {
           </div>
 
           {/* Company Links - Collapsible */}
-          <div className="md:mt-6">
+          <div className="md:mt-6 ">
             <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
               <h3 className={`mb-2 text-lg font-bold text-[#081336] ${cormorantGaramond.style.fontFamily}`}>Company</h3>
               <button
@@ -184,14 +184,14 @@ export default function Footer() {
                     expandedSections.includes("Company") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
                   }`}
                 >
-                  <Minus size={16} className="-translate-y-1"/>
+                  <Minus size={16} className="-translate-y-1" color="black"/>
                 </span>
                 <span
                   className={`absolute transition-transform duration-300 ${
                     expandedSections.includes("Company") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
                   }`}
                 >
-                  <Plus size={16} className="-translate-y-1"/>
+                  <Plus size={16} className="-translate-y-1" color="black"/>
                 </span>
               </button>
             </div>
