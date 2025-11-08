@@ -2,11 +2,18 @@
 
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
+import { DM_Sans } from "next/font/google"
 import { Button } from "@/components/ui/button"
 import { Cormorant_Garamond } from "next/font/google"
 import { Be_Vietnam_Pro } from "next/font/google"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Plus, Minus } from "lucide-react"
+
+const DmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+})
 
 const robotoMedium = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -51,7 +58,23 @@ const companyLinks = [
 ]
 
 export default function Footer() {
-  const [expandedSections, setExpandedSections] = useState<string[]>(["Shop", "Service", "Company"])
+  const [expandedSections, setExpandedSections] = useState<string[]>([])
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+      // On desktop, keep sections collapsed by default. On mobile, they remain collapsed.
+      if (!mobile) {
+        setExpandedSections([])
+      }
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   const toggleSection = (sectionName: string) => {
     setExpandedSections((prev) =>
@@ -60,22 +83,22 @@ export default function Footer() {
   }
 
   return (
-    <footer className={`w-full border-t text-white border-t-black ${cormorantGaramond.className}`}>
-      <div className="md:mx-15 py-10">
-        <div className="grid grid-cols-1 md:gap-7 gap-0 xl:grid-cols-7 lg:grid-cols-6 md:grid-cols-6 pb-6 text-[#081336] pl-1">
+    <footer className={`w-full border-t text-white border-t-black ${DmSans.className}`}>
+      <div className="md:mx-15 py-10 px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-16 pb-0 text-[#081336]">
           {/* Newsletter Signup */}
-          <div className="col-span-1 md:col-span-3 mb-7">
-            <h3 className={`mb-4 text-xl `}>Sign up to Our Newsletter</h3>
+          <div className="mb-7 md:mb-0">
+            <h3 className="mb-4 text-xl">Sign up to Our Newsletter</h3>
             <div className="space-y-2">
-              <label htmlFor="email" className={`text-sm `}>
+              <label htmlFor="email" className="text-sm">
                 Email<span className="text-black pb-1">*</span>
               </label>
-              <div className="flex w-full max-w-sm flex-col space-y-2 gap-2.5 mt-2">
+              <div className="flex flex-col space-y-2 gap-2.5 mt-2">
                 <Input
                   type="email"
                   id="email"
                   placeholder="Email"
-                  className="h-10 w-20/21 lg:w-21/21 md:w-6/7 xl:w-20/17 rounded-none border-black"
+                  className="h-10 max-w-full md:max-w-[70%] rounded-none border-black"
                 />
                 <Button variant="outline" className="w-fit bg-[#ffffff] border-black rounded-none px-8 py-5">
                   Submit
@@ -84,136 +107,137 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="sm:visible hidden" />
-
-          {/* Shop Links - Collapsible */}
-          <div className="md:mt-6 md:mb-0 mb-3.5">
-            <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
-              <h3 className="mb-2 text-lg text-[#081336] lg:pb-0 font-bold">Shop</h3>
-              <button
-                onClick={() => toggleSection("Shop")}
-                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
-                aria-label={expandedSections.includes("Shop") ? "Collapse" : "Expand"}
-              >
-                <span
-                  className={`absolute transition-transform duration-300 ${
-                    expandedSections.includes("Shop") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-                  }`}
+          {/* Collapsible Sections Container */}
+          <div className="space-y-0">
+            {/* Shop Links - Collapsible */}
+            <div className=" border-gray-300 py-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-base text-[#081336] font-medium">Shop</h3>
+                <button
+                  onClick={() => toggleSection("Shop")}
+                  className="relative flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none transition-all duration-300"
+                  aria-label={expandedSections.includes("Shop") ? "Collapse" : "Expand"}
                 >
-                  <Minus size={16} className="-translate-y-1" color="black"/>
-                </span>
-                <span
-                  className={`absolute transition-transform duration-300 ${
-                    expandedSections.includes("Shop") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                  }`}
-                >
-                  <Plus size={16} className="-translate-y-1" color="black"/>
-                </span>
-              </button>
-            </div>
-            <ul
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                expandedSections.includes("Shop") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="space-y-2 text-sm text-[#081336]">
-                {shopLinks.map((items, key) => (
-                  <li key={key}>
-                    <Link href={items.href} className="hover:underline">
-                      {items.name}
-                    </Link>
-                  </li>
-                ))}
+                  <span
+                    className={`absolute transition-transform duration-300 ${
+                      expandedSections.includes("Shop") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
+                    }`}
+                  >
+                    <Minus size={20} color="black" />
+                  </span>
+                  <span
+                    className={`absolute transition-transform duration-300 ${
+                      expandedSections.includes("Shop") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                    }`}
+                  >
+                    <Plus size={20} color="black" />
+                  </span>
+                </button>
               </div>
-            </ul>
-          </div>
-
-          {/* Service Links - Collapsible */}
-          <div className="md:mt-6 md:-translate-x-3 translate-x-0 border-y md:border-0 md:border-y-0 py-3.5 md:py-0 border-gray-400 mb-3.5 md:mb-0">
-            <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
-              <h3 className="mb-2 text-lg font-bold text-[#081336]">Service</h3>
-              <button
-                onClick={() => toggleSection("Service")}
-                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
-                aria-label={expandedSections.includes("Service") ? "Collapse" : "Expand"}
+              <ul
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  expandedSections.includes("Shop") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                }`}
               >
-                <span
-                  className={`absolute transition-transform duration-300 ${
-                    expandedSections.includes("Service") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-                  }`}
-                >
-                  <Minus size={16} className="-translate-y-1" color="black"/>
-                </span>
-                <span
-                  className={`absolute transition-transform duration-300 ${
-                    expandedSections.includes("Service") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                  }`}
-                >
-                  <Plus size={16} className="-translate-y-1" color="black"/>
-                </span>
-              </button>
+                <div className="space-y-2 text-sm text-[#081336]">
+                  {shopLinks.map((items, key) => (
+                    <li key={key}>
+                      <Link href={items.href} className="hover:underline">
+                        {items.name}
+                      </Link>
+                    </li>
+                  ))}
+                </div>
+              </ul>
             </div>
-            <ul
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                expandedSections.includes("Service") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="space-y-2 text-sm text-[#081336]">
-                {serviceLinks.map((items, key) => (
-                  <li key={key}>
-                    <Link href={items.href} className="hover:underline">
-                      {items.name}
-                    </Link>
-                  </li>
-                ))}
-              </div>
-            </ul>
-          </div>
 
-          {/* Company Links - Collapsible */}
-          <div className="md:mt-6 ">
-            <div className="flex items-center justify-between md:justify-start md:gap-[30%]">
-              <h3 className={`mb-2 text-lg font-bold text-[#081336] ${cormorantGaramond.style.fontFamily}`}>Company</h3>
-              <button
-                onClick={() => toggleSection("Company")}
-                className="relative flex items-center justify-center w-6 h-6 rounded-full text-[#081336] focus:outline-none transition-all duration-300"
-                aria-label={expandedSections.includes("Company") ? "Collapse" : "Expand"}
-              >
-                <span
-                  className={`absolute transition-transform duration-300 ${
-                    expandedSections.includes("Company") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-                  }`}
+            {/* Service Links - Collapsible */}
+            <div className="border-t border-gray-300 py-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-base font-medium text-[#081336]">Service</h3>
+                <button
+                  onClick={() => toggleSection("Service")}
+                  className="relative flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none transition-all duration-300"
+                  aria-label={expandedSections.includes("Service") ? "Collapse" : "Expand"}
                 >
-                  <Minus size={16} className="-translate-y-1" color="black"/>
-                </span>
-                <span
-                  className={`absolute transition-transform duration-300 ${
-                    expandedSections.includes("Company") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                  }`}
-                >
-                  <Plus size={16} className="-translate-y-1" color="black"/>
-                </span>
-              </button>
-            </div>
-            <ul
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                expandedSections.includes("Company") ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              <div className="space-y-2 text-sm text-[#081336]">
-                {companyLinks.map((items, key) => (
-                  <li key={key}>
-                    <Link href={items.href} className="hover:underline">
-                      {items.name}
-                    </Link>
-                  </li>
-                ))}
+                  <span
+                    className={`absolute transition-transform duration-300 ${
+                      expandedSections.includes("Service") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
+                    }`}
+                  >
+                    <Minus size={20} color="black" />
+                  </span>
+                  <span
+                    className={`absolute transition-transform duration-300 ${
+                      expandedSections.includes("Service") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                    }`}
+                  >
+                    <Plus size={20} color="black" />
+                  </span>
+                </button>
               </div>
-            </ul>
+              <ul
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  expandedSections.includes("Service") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="space-y-2 text-sm text-[#081336]">
+                  {serviceLinks.map((items, key) => (
+                    <li key={key}>
+                      <Link href={items.href} className="hover:underline">
+                        {items.name}
+                      </Link>
+                    </li>
+                  ))}
+                </div>
+              </ul>
+            </div>
+
+            {/* Company Links - Collapsible */}
+            <div className="border-t border-gray-300 py-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-base font-medium text-[#081336]">Company</h3>
+                <button
+                  onClick={() => toggleSection("Company")}
+                  className="relative flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none transition-all duration-300"
+                  aria-label={expandedSections.includes("Company") ? "Collapse" : "Expand"}
+                >
+                  <span
+                    className={`absolute transition-transform duration-300 ${
+                      expandedSections.includes("Company") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
+                    }`}
+                  >
+                    <Minus size={20} color="black" />
+                  </span>
+                  <span
+                    className={`absolute transition-transform duration-300 ${
+                      expandedSections.includes("Company") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                    }`}
+                  >
+                    <Plus size={20} color="black" />
+                  </span>
+                </button>
+              </div>
+              <ul
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  expandedSections.includes("Company") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="space-y-2 text-sm text-[#081336]">
+                  {companyLinks.map((items, key) => (
+                    <li key={key}>
+                      <Link href={items.href} className="hover:underline">
+                        {items.name}
+                      </Link>
+                    </li>
+                  ))}
+                </div>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section with Logo and Social Icons */}
+        {/* Bottom Section with Social Icons */}
         <div className="md:mt-12 mt-2 align-middle border-t pt-8 text-black">
           <div className="flex space-x-4 justify-center align-middle">
             <Link target="_blank" href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
