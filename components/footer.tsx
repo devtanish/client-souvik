@@ -82,7 +82,7 @@ export default function Footer() {
             </Button>
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">
-            We'll update you by email • SMS and you can unsubscribe at any time •{" "}
+            We&apos;ll update you by email • SMS and you can unsubscribe at any time •{" "}
             <Link href="/privacy" className="underline">
               Privacy Policy
             </Link>
