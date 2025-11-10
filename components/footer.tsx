@@ -1,39 +1,21 @@
 "use client"
 
+import Image from "next/image"
+import { GoArrowUpRight } from "react-icons/go";
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
-import { DM_Sans } from "next/font/google"
 import { Button } from "@/components/ui/button"
-import { Cormorant_Garamond } from "next/font/google"
-import { Be_Vietnam_Pro } from "next/font/google"
 import { useState, useEffect } from "react"
 import { Plus, Minus } from "lucide-react"
+import { Nothing_You_Could_Do } from "next/font/google"
+import { company } from "./interface-contents/footerContents";
 
-const DmSans = DM_Sans({
+const nothingYouCouldDo = Nothing_You_Could_Do({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
+  weight: "400", // this font only has 400 weight
 })
 
-const robotoMedium = Be_Vietnam_Pro({
-  subsets: ["latin"],
-  weight: ["300"],
-  display: "swap",
-})
-
-const cormorantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-})
-
-const robotoBold = Be_Vietnam_Pro({
-  subsets: ["latin"],
-  weight: ["500"],
-  display: "swap",
-})
-
-// Mock data - replace with your actual data
+// Mock data
 const shopLinks = [
   { name: "Ring", href: "/ring" },
   { name: "Earring", href: "/earring" },
@@ -65,8 +47,7 @@ export default function Footer() {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768
       setIsMobile(mobile)
-      // On desktop, keep sections collapsed by default. On mobile, they remain collapsed.
-      if (!mobile) {
+      if (mobile) {
         setExpandedSections([])
       }
     }
@@ -83,170 +64,152 @@ export default function Footer() {
   }
 
   return (
-    <footer className={`w-full border-t text-white border-t-black ${DmSans.className}`}>
-      <div className="md:mx-15 py-10 px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-16 pb-0 text-[#081336]">
-          {/* Newsletter Signup */}
-          <div className="mb-7 md:mb-0">
-            <h3 className="mb-4 text-xl">Sign up to Our Newsletter</h3>
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm">
-                Email<span className="text-black pb-1">*</span>
-              </label>
-              <div className="flex flex-col space-y-2 gap-2.5 mt-2">
-                <Input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  className="h-10 max-w-full md:max-w-[70%] rounded-none border-black"
-                />
-                <Button variant="outline" className="w-fit bg-[#ffffff] border-black rounded-none px-8 py-5">
-                  Submit
-                </Button>
-              </div>
-            </div>
+    <footer className="w-screen overflow-hidden">
+      {/* Newsletter Section */}
+      <div className="w-screen bg-[#1a1a1a] text-white py-17 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className={`text-center text-lg md:text-2xl mb-6 italic font-light ${nothingYouCouldDo.className}`}>
+            Join MV Circle for early sale access, birthday treats, a discount on your first order, and more.
+          </h2>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <Input
+              type="email"
+              placeholder="EMAIL ADDRESS"
+              className="w-full md:w-64 h-10 rounded-none border-gray-400 bg-white text-black placeholder:text-gray-500"
+            />
+            <Button className="w-full md:w-auto bg-transparent border border-white text-white rounded-none px-8 py-2 hover:bg-white hover:text-black transition-colors">
+              JOIN NOW →
+            </Button>
           </div>
+          <p className="text-center text-xs text-gray-400 mt-4">
+            We'll update you by email • SMS and you can unsubscribe at any time •{" "}
+            <Link href="/privacy" className="underline">
+              Privacy Policy
+            </Link>
+          </p>
+        </div>
+      </div>
 
-          {/* Collapsible Sections Container */}
-          <div className="space-y-0">
-            {/* Shop Links - Collapsible */}
-            <div className=" border-gray-300 py-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base text-[#081336] font-medium">Shop</h3>
-                <button
-                  onClick={() => toggleSection("Shop")}
-                  className="relative flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none transition-all duration-300"
-                  aria-label={expandedSections.includes("Shop") ? "Collapse" : "Expand"}
-                >
-                  <span
-                    className={`absolute transition-transform duration-300 ${
-                      expandedSections.includes("Shop") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-                    }`}
-                  >
-                    <Minus size={20} color="black" />
-                  </span>
-                  <span
-                    className={`absolute transition-transform duration-300 ${
-                      expandedSections.includes("Shop") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                    }`}
-                  >
-                    <Plus size={20} color="black" />
-                  </span>
-                </button>
-              </div>
-              <ul
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  expandedSections.includes("Shop") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="space-y-2 text-sm text-[#081336]">
-                  {shopLinks.map((items, key) => (
-                    <li key={key}>
-                      <Link href={items.href} className="hover:underline">
-                        {items.name}
-                      </Link>
-                    </li>
-                  ))}
-                </div>
-              </ul>
+      {/* Main Footer Section */}
+      <div className="w-screen bg-white text-[#081336] border-t border-b border-gray-200">
+        <div className="py-10 px-4 md:px-8 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Logo Section */}
+            <div className="lg:col-span-3 flex justify-center lg:justify-start">
+              <Image 
+                alt="Logo" 
+                src="/logo2.png" 
+                height={200} 
+                width={200} 
+                className="object-contain"
+              />
             </div>
 
-            {/* Service Links - Collapsible */}
-            <div className="border-t border-gray-300 py-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base font-medium text-[#081336]">Service</h3>
-                <button
-                  onClick={() => toggleSection("Service")}
-                  className="relative flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none transition-all duration-300"
-                  aria-label={expandedSections.includes("Service") ? "Collapse" : "Expand"}
-                >
-                  <span
-                    className={`absolute transition-transform duration-300 ${
-                      expandedSections.includes("Service") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-                    }`}
+            {/* Links Section */}
+            <div className="lg:col-span-8 space-y-0">
+              {/* Shop Section */}
+              <div className="border-b border-gray-200 pb-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base text-[#081336] font-medium">Shop</h3>
+                  <button
+                    onClick={() => toggleSection("Shop")}
+                    className="flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none"
+                    aria-label={expandedSections.includes("Shop") ? "Collapse" : "Expand"}
                   >
-                    <Minus size={20} color="black" />
-                  </span>
-                  <span
-                    className={`absolute transition-transform duration-300 ${
-                      expandedSections.includes("Service") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                    }`}
-                  >
-                    <Plus size={20} color="black" />
-                  </span>
-                </button>
-              </div>
-              <ul
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  expandedSections.includes("Service") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="space-y-2 text-sm text-[#081336]">
-                  {serviceLinks.map((items, key) => (
-                    <li key={key}>
-                      <Link href={items.href} className="hover:underline">
-                        {items.name}
-                      </Link>
-                    </li>
-                  ))}
+                    {expandedSections.includes("Shop") ? <Minus size={20} /> : <Plus size={20} />}
+                  </button>
                 </div>
-              </ul>
-            </div>
+                <ul
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                    expandedSections.includes("Shop") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="ml-5 mr-1 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm text-gray-700">
+                    {shopLinks.map((items, key) => (
+                      <li key={key} className="border-b pb-2 flex justify-between">
+                        <Link href={items.href} className="text-gray-700 hover:underline">
+                          {items.name}
+                        </Link>
+                        <GoArrowUpRight/>
+                      </li>
+                    ))}
+                  </div>
+                </ul>
+              </div>
 
-            {/* Company Links - Collapsible */}
-            <div className="border-t border-gray-300 py-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-base font-medium text-[#081336]">Company</h3>
-                <button
-                  onClick={() => toggleSection("Company")}
-                  className="relative flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none transition-all duration-300"
-                  aria-label={expandedSections.includes("Company") ? "Collapse" : "Expand"}
-                >
-                  <span
-                    className={`absolute transition-transform duration-300 ${
-                      expandedSections.includes("Company") ? "rotate-0 opacity-100" : "rotate-90 opacity-0"
-                    }`}
+              {/* Service Section */}
+              <div className="border-b border-gray-200 pb-6 pt-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-medium text-[#081336]">Service</h3>
+                  <button
+                    onClick={() => toggleSection("Service")}
+                    className="flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none"
+                    aria-label={expandedSections.includes("Service") ? "Collapse" : "Expand"}
                   >
-                    <Minus size={20} color="black" />
-                  </span>
-                  <span
-                    className={`absolute transition-transform duration-300 ${
-                      expandedSections.includes("Company") ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                    }`}
-                  >
-                    <Plus size={20} color="black" />
-                  </span>
-                </button>
-              </div>
-              <ul
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  expandedSections.includes("Company") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="space-y-2 text-sm text-[#081336]">
-                  {companyLinks.map((items, key) => (
-                    <li key={key}>
-                      <Link href={items.href} className="hover:underline">
-                        {items.name}
-                      </Link>
-                    </li>
-                  ))}
+                    {expandedSections.includes("Service") ? <Minus size={20} /> : <Plus size={20} />}
+                  </button>
                 </div>
-              </ul>
+                <ul
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                    expandedSections.includes("Service") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="ml-5 mr-1 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm text-gray-700">
+                    {serviceLinks.map((items, key) => (
+                      <li key={key} className="border-b pb-2 flex justify-between">
+                        <Link href={items.href} className="text-gray-700 hover:underline">
+                          {items.name}
+                        </Link>
+                        <GoArrowUpRight/>
+                      </li>
+                    ))}
+                  </div>
+                </ul>
+              </div>
+
+              {/* Company Section */}
+              <div className="pt-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-medium text-[#081336]">Company</h3>
+                  <button
+                    onClick={() => toggleSection("Company")}
+                    className="flex items-center justify-center w-6 h-6 text-[#081336] focus:outline-none"
+                    aria-label={expandedSections.includes("Company") ? "Collapse" : "Expand"}
+                  >
+                    {expandedSections.includes("Company") ? <Minus size={20} /> : <Plus size={20} />}
+                  </button>
+                </div>
+                <ul
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                    expandedSections.includes("Company") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="ml-5 mr-1 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm text-gray-700">
+                    {companyLinks.map((items, key) => (
+                      <li key={key} className="border-b pb-2 flex justify-between">
+                        <Link href={items.href} className="text-gray-700 hover:underline">
+                          {items.name}
+                        </Link>
+                        <GoArrowUpRight/>
+                      </li>
+                    ))}
+                  </div>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section with Social Icons */}
-        <div className="md:mt-12 mt-2 align-middle border-t pt-8 text-black">
-          <div className="flex space-x-4 justify-center align-middle">
+        {/* Social Icons Section */}
+        <div className="border-t border-gray-200 pt-8 pb-8">
+          <div className="flex space-x-6 justify-center items-center">
             <Link target="_blank" href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"
                 fill="currentColor"
-                className="bi bi-facebook"
+                className="bi bi-facebook hover:opacity-70 transition-opacity"
                 viewBox="0 0 16 16"
               >
                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
@@ -267,7 +230,7 @@ export default function Footer() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="h-5 w-5"
+                className="h-5 w-5 hover:opacity-70 transition-opacity"
               >
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
@@ -279,12 +242,12 @@ export default function Footer() {
                 height="20"
                 width="20"
                 version="1.1"
-                id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 511.998 511.998"
+                className="hover:opacity-70 transition-opacity"
               >
                 <path
-                  className="fill-[#0a0a0a]"
+                  fill="#081336"
                   d="M405.017,52.467C369.774,18.634,321.001,0,267.684,0C186.24,0,136.148,33.385,108.468,61.39
                 	c-34.114,34.513-53.675,80.34-53.675,125.732c0,56.993,23.839,100.737,63.76,117.011c2.68,1.098,5.377,1.651,8.021,1.651
                 	c8.422,0,15.095-5.511,17.407-14.35c1.348-5.071,4.47-17.582,5.828-23.013c2.906-10.725,0.558-15.884-5.78-23.353
@@ -304,7 +267,7 @@ export default function Footer() {
                 width="19"
                 height="19"
                 fill="currentColor"
-                className="bi bi-twitter-x"
+                className="bi bi-twitter-x hover:opacity-70 transition-opacity"
                 viewBox="0 0 16 16"
               >
                 <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
@@ -313,15 +276,15 @@ export default function Footer() {
             <Link target="_blank" href="https://youtube.com/@raya_stories?si=9GyNacZKoyVW2K9z" aria-label="YouTube">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="27"
-                height="27"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="h-5 w-5"
+                className="h-5 w-5 hover:opacity-70 transition-opacity"
               >
                 <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
                 <path d="m10 15 5-3-5-3z" />
