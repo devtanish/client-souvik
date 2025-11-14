@@ -63,6 +63,13 @@ export default function Footer() {
     )
   }
 
+  function borderLog(key: number, length: number): boolean {
+    const itemsInLastRow = length % 3 || 3; // If divisible by 3, last row has 3 items
+    const isInLastRow = key >= length - itemsInLastRow;
+    
+    return !isInLastRow; // Return true if NOT in last row (show border)
+  }
+
   return (
     <footer className="w-screen overflow-hidden">
       {/* Newsletter Section */}
@@ -75,10 +82,13 @@ export default function Footer() {
             <Input
               type="email"
               placeholder="EMAIL ADDRESS"
-              className="w-full md:w-64 h-10 rounded-none border-gray-400 bg-white text-black placeholder:text-gray-500"
+              className="w-full md:w-64 h-10 font-bold rounded-none border-gray-400 bg-white text-black placeholder:text-gray-500"
             />
             <Button className="w-full md:w-auto bg-transparent border border-white text-white rounded-none px-8 py-2 hover:bg-white hover:text-black transition-colors">
-              JOIN NOW →
+              JOIN NOW 
+              <div className="-translate-y-[0.17rem]">
+                →
+              </div>
             </Button>
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">
@@ -93,22 +103,22 @@ export default function Footer() {
       {/* Main Footer Section */}
       <div className="w-screen bg-white text-[#081336] border-t border-b border-gray-200">
         <div className="py-10 px-4 md:px-8 overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-13 gap-8 lg:gap-0">
             {/* Logo Section */}
-            <div className="lg:col-span-3 flex justify-center lg:justify-start">
+            <div className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 flex justify-center lg:justify-start">
               <Image 
                 alt="Logo" 
                 src="/logo2.png" 
-                height={200} 
-                width={200} 
+                height={100} 
+                width={100} 
                 className="object-contain"
               />
             </div>
 
             {/* Links Section */}
-            <div className="lg:col-span-8 space-y-0">
+            <div className="lg:col-start-7 lg:col-end-13 lg:row-start-1 lg:row-end-2 space-y-0">
               {/* Shop Section */}
-              <div className="border-b border-gray-200 pb-6">
+              <div className={`border-b border-gray-200 pb-6 transition delay-150 duration-1000 ease-in-out`}>
                 <div className="flex items-center justify-between">
                   <h3 className="text-base text-[#081336] font-medium">Shop</h3>
                   <button
@@ -124,9 +134,9 @@ export default function Footer() {
                     expandedSections.includes("Shop") ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="ml-5 mr-1 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm text-gray-700">
+                  <div className="ml-3 mr-1.5 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-700">
                     {shopLinks.map((items, key) => (
-                      <li key={key} className="border-b pb-2 flex justify-between">
+                      <li key={key} className={`${borderLog(key, shopLinks.length) ? "md:border-b" : "md:border-0"} ${key === shopLinks.length-1 ? "border-0" : "border-b"} pb-2 flex justify-between`}>
                         <Link href={items.href} className="text-gray-700 hover:underline">
                           {items.name}
                         </Link>
@@ -138,7 +148,7 @@ export default function Footer() {
               </div>
 
               {/* Service Section */}
-              <div className="border-b border-gray-200 pb-6 pt-6">
+              <div className={`border-b border-gray-200 py-6 transition delay-150 duration-300 ease-in-out`}>
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-medium text-[#081336]">Service</h3>
                   <button
@@ -156,7 +166,7 @@ export default function Footer() {
                 >
                   <div className="ml-5 mr-1 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm text-gray-700">
                     {serviceLinks.map((items, key) => (
-                      <li key={key} className="border-b pb-2 flex justify-between">
+                      <li key={key} className={`${borderLog(key, serviceLinks.length) ? "md:border-b" : "md:border-0"} ${key === serviceLinks.length-1 ? "border-0" : "border-b"} pb-2 flex justify-between`}>
                         <Link href={items.href} className="text-gray-700 hover:underline">
                           {items.name}
                         </Link>
@@ -168,7 +178,7 @@ export default function Footer() {
               </div>
 
               {/* Company Section */}
-              <div className="pt-6">
+              <div className={`pb-6 pt-6 transition delay-150 duration-1000 ease-in-out`}>
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-medium text-[#081336]">Company</h3>
                   <button
@@ -186,7 +196,7 @@ export default function Footer() {
                 >
                   <div className="ml-5 mr-1 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm text-gray-700">
                     {companyLinks.map((items, key) => (
-                      <li key={key} className="border-b pb-2 flex justify-between">
+                      <li key={key} className={`${borderLog(key, companyLinks.length) ? "md:border-b" : "md:border-0"} ${key === companyLinks.length-1 ? "border-0" : "border-b"} pb-2 flex justify-between`}>
                         <Link href={items.href} className="text-gray-700 hover:underline">
                           {items.name}
                         </Link>
