@@ -45,11 +45,7 @@ export default function Footer() {
 
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768
-      setIsMobile(mobile)
-      if (mobile) {
-        setExpandedSections([])
-      }
+      setIsMobile(window.innerWidth < 768)
     }
 
     checkMobile()
