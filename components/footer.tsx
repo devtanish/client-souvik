@@ -82,7 +82,7 @@ export default function Footer() {
             />
             <Button className="w-full md:w-auto bg-transparent border border-white text-white rounded-none px-8 py-2 hover:bg-white hover:text-black transition-colors">
               JOIN NOW 
-              <div className="-translate-y-[0.1rem]">
+              <div className="-translate-y-[0.05rem]">
                 →
               </div>
             </Button>
