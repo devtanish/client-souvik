@@ -134,7 +134,7 @@ export default function Footer() {
                   src="/footerImg/1.jpeg" 
                   height={1000} 
                   width={1000} 
-                  className={`object-cover h-47 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border transition-all duration-700 ${
+                  className={`object-cover h-47 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border-t border-l transition-all duration-700 ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '300ms' }}
@@ -144,7 +144,7 @@ export default function Footer() {
                   src="/footerImg/2.jpeg" 
                   height={1000} 
                   width={1000} 
-                  className={`object-cover h-47 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all border-y border-r duration-700 ${
+                  className={`object-cover h-47 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all border-t border-r duration-700 ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '600ms' }}
@@ -154,7 +154,7 @@ export default function Footer() {
                   src="/footerImg/3.jpeg" 
                   height={1000} 
                   width={1000} 
-                  className={`object-cover h-40 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 border-r hidden lg:block ${
+                  className={`object-cover h-40 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 border-l  hidden lg:block ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '900ms' }}
@@ -164,7 +164,7 @@ export default function Footer() {
                   src="/footerImg/5.jpeg" 
                   height={1000} 
                   width={1000} 
-                  className={`object-cover h-40 w-auto md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden lg:block ${
+                  className={`object-cover h-40 w-auto border-r md:h-48 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden lg:block ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '1200ms' }}
