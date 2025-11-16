@@ -134,7 +134,7 @@ export default function Footer() {
                   src="/footerImg/1.jpeg" 
                   height={1000}
                   width={1000}
-                  className={`object-cover h-36 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border-t md:border-0 border-l lg:border-t lg:border-l transition-all duration-700 ${
+                  className={`object-cover h-40 min-[300px]:h-35 min-[330px]:h-40 min-[380px]:h-47 xs:h-50 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border-t md:border-0 border-l lg:border-t lg:border-l transition-all duration-700 ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '300ms' }}
@@ -144,7 +144,7 @@ export default function Footer() {
                   src="/footerImg/2.jpeg" 
                   height={1000}
                   width={1000}
-                  className={`object-cover h-36 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all md:border-0 lg:border-t lg:border-r border-t border-r duration-700 ${
+                  className={`object-cover h-40 w-auto min-[300px]:h-35 min-[330px]:h-40 min-[380px]:h-47 sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all md:border-0 lg:border-t lg:border-r border-t border-r duration-700 ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '600ms' }}
@@ -154,7 +154,7 @@ export default function Footer() {
                   src="/footerImg/3.jpeg" 
                   height={1000}
                   width={1000}
-                  className={`object-cover h-36 w-auto sm:h-40 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 md:border-0 border-l lg:border-l hidden md:block ${
+                  className={`object-cover h-40 w-auto sm:h-40 min-[380px]:h-50 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 md:border-0 border-l lg:border-l hidden md:block ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '900ms' }}
@@ -164,7 +164,7 @@ export default function Footer() {
                   src="/footerImg/5.jpeg" 
                   height={1000}
                   width={1000}
-                  className={`object-cover h-36 w-auto sm:h-40 md:border-0 border-r lg:border-r md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden md:block ${
+                  className={`object-cover h-40 w-auto sm:h-40 min-[380px]:h-50 md:border-0 border-r lg:border-r md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden md:block ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
                   style={{ transitionDelay: '1200ms' }}
@@ -174,7 +174,7 @@ export default function Footer() {
 
 
             {/* Links Section */}
-            <div className="lg:col-start-7 mt-23 md:mt-33 lg:mt-0 lg:col-end-13 lg:row-start-1 lg:row-end-2 space-y-0">
+            <div className="lg:col-start-7 mt-23 min-[380px]:mt-35 md:mt-33 lg:mt-0 lg:col-end-13 lg:row-start-1 lg:row-end-2 space-y-0">
               {/* Shop Section */}
               <div className={`border-b border-gray-200 pb-6 transition delay-150 duration-1000 ease-in-out`}>
                 <div className="flex items-center justify-between">
