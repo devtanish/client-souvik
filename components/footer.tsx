@@ -128,49 +128,49 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-13 gap-8 lg:gap-0">
             {/* Logo Section */}
             <div className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 lg:absolute absolute -translate-y-22 sm:-translate-y-20 lg:-translate-y-26 left-0 lg:left-[5%] lg:translate-x-0 w-full lg:w-auto mb-8 lg:mb-0">
-          <div className="flex justify-center lg:grid lg:grid-cols-2 gap-0 max-w-fit mx-auto border-0 md:border lg:border-0 lg:max-w-none lg:mx-0">
-            <Image 
-              alt="Jewelry showcase 1" 
-              src="/footerImg/1.jpeg" 
-              height={1000}
-              width={1000}
-              className={`object-cover h-36 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border-t md:border-0 border-l lg:border-t lg:border-l transition-all duration-700 ${
-                imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-              }`}
-              style={{ transitionDelay: '300ms' }}
-            />
-            <Image 
-              alt="Jewelry showcase 2" 
-              src="/footerImg/2.jpeg" 
-              height={1000}
-              width={1000}
-              className={`object-cover h-36 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all md:border-0 lg:border-t lg:border-r border-t border-r duration-700 ${
-                imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-              }`}
-              style={{ transitionDelay: '600ms' }}
-            />
-            <Image 
-              alt="Jewelry showcase 3" 
-              src="/footerImg/3.jpeg" 
-              height={1000}
-              width={1000}
-              className={`object-cover h-36 w-auto sm:h-40 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 md:border-0 border-l lg:border-l hidden md:block ${
-                imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-              }`}
-              style={{ transitionDelay: '900ms' }}
-            />
-            <Image 
-              alt="Jewelry showcase 4" 
-              src="/footerImg/5.jpeg" 
-              height={1000}
-              width={1000}
-              className={`object-cover h-36 w-auto sm:h-40 md:border-0 border-r lg:border-r md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden md:block ${
-                imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-              }`}
-              style={{ transitionDelay: '1200ms' }}
-            />
-          </div>
-        </div>
+              <div className="flex justify-center lg:grid lg:grid-cols-2 gap-0 max-w-fit mx-auto border-0 md:border lg:border-0 lg:max-w-none lg:mx-0">
+                <Image 
+                  alt="Jewelry showcase 1" 
+                  src="/footerImg/1.jpeg" 
+                  height={1000}
+                  width={1000}
+                  className={`object-cover h-36 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border-t md:border-0 border-l lg:border-t lg:border-l transition-all duration-700 ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '300ms' }}
+                />
+                <Image 
+                  alt="Jewelry showcase 2" 
+                  src="/footerImg/2.jpeg" 
+                  height={1000}
+                  width={1000}
+                  className={`object-cover h-36 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all md:border-0 lg:border-t lg:border-r border-t border-r duration-700 ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '600ms' }}
+                />
+                <Image 
+                  alt="Jewelry showcase 3" 
+                  src="/footerImg/3.jpeg" 
+                  height={1000}
+                  width={1000}
+                  className={`object-cover h-36 w-auto sm:h-40 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 md:border-0 border-l lg:border-l hidden md:block ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '900ms' }}
+                />
+                <Image 
+                  alt="Jewelry showcase 4" 
+                  src="/footerImg/5.jpeg" 
+                  height={1000}
+                  width={1000}
+                  className={`object-cover h-36 w-auto sm:h-40 md:border-0 border-r lg:border-r md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden md:block ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '1200ms' }}
+                />
+              </div>
+            </div>
 
 
             {/* Links Section */}
