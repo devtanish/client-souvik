@@ -128,7 +128,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-13 gap-8 lg:gap-0">
             {/* Logo Section */}
             <div className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 lg:absolute absolute -translate-y-22 sm:-translate-y-20 lg:-translate-y-26 left-0 lg:left-[5%] lg:translate-x-0 w-full lg:w-auto mb-8 lg:mb-0">
-              <div className="flex justify-center lg:grid lg:grid-cols-2 gap-0 max-w-fit mx-auto border-0 md:border lg:border-0 lg:max-w-none lg:mx-0">
+              <div className="flex justify-center lg:grid lg:grid-cols-2 gap-0 max-w-fit mx-auto border-0 md:border border-white lg:border-0 lg:max-w-none lg:mx-0">
                 <Image 
                   alt="Jewelry showcase 1" 
                   src="/footerImg/1.jpeg" 
@@ -169,6 +169,18 @@ export default function Footer() {
                   }`}
                   style={{ transitionDelay: '1200ms' }}
                 />
+              </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-3">
+                <div 
+                  className="min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[2.5rem] text-center text-white whitespace-nowrap"
+                  style={{
+                    fontFamily: "'Nothing You Could Do', cursive",
+                    textShadow: '2px 2px 8px rgba(153, 37, 151, 0.8), 0px 0px 12px rgba(153, 37, 151, 0.6), 1px 1px 3px rgba(153, 37, 151, 0.9)',
+                    // filter: 'drop-shadow(0 3px 6px rgba(153, 37, 151, 0.4))',
+                  }}
+                >
+                  Timeless Luxury Playfully Told
+                </div>
               </div>
             </div>
 

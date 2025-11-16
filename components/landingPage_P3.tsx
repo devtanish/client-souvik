@@ -37,10 +37,6 @@ export default function LandingPage_P3() {
                         // Text moves faster (creates depth)
                         const textOffset = (scrollProgress - 0.5) * -200;
                         text.style.transform = `translateY(${textOffset}px) translateZ(50px)`;
-                        
-                        // Image moves slower
-                        const imageOffset = (scrollProgress - 0.5) * -0.1;
-                        image.style.transform = `translateY(${imageOffset}px) scale(${1 + scrollProgress * 0.05})`;
                     }
                 }
             });
