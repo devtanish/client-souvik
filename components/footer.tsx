@@ -8,11 +8,10 @@ import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { Plus, Minus } from "lucide-react"
 import { Nothing_You_Could_Do } from "next/font/google"
-import { company } from "./interface-contents/footerContents";
 
 const nothingYouCouldDo = Nothing_You_Could_Do({
   subsets: ["latin"],
-  weight: "400", // this font only has 400 weight
+  weight: "400",
 })
 
 // Mock data
@@ -40,8 +39,9 @@ const companyLinks = [
 ]
 
 export default function Footer() {
-  const [expandedSections, setExpandedSections] = useState<string[]>([])
+  const [expandedSections, setExpandedSections] = useState<string[]>(["Shop"])
   const [isMobile, setIsMobile] = useState(false)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -53,6 +53,32 @@ export default function Footer() {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !imagesLoaded) {
+            setImagesLoaded(true)
+          }
+        })
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the footer is visible
+      }
+    )
+
+    const footerElement = document.querySelector('footer')
+    if (footerElement) {
+      observer.observe(footerElement)
+    }
+
+    return () => {
+      if (footerElement) {
+        observer.unobserve(footerElement)
+      }
+    }
+  }, [imagesLoaded])
+
   const toggleSection = (sectionName: string) => {
     setExpandedSections((prev) =>
       prev.includes(sectionName) ? prev.filter((name) => name !== sectionName) : [...prev, sectionName],
@@ -60,10 +86,10 @@ export default function Footer() {
   }
 
   function borderLog(key: number, length: number): boolean {
-    const itemsInLastRow = length % 3 || 3; // If divisible by 3, last row has 3 items
+    const itemsInLastRow = length % 3 || 3;
     const isInLastRow = key >= length - itemsInLastRow;
     
-    return !isInLastRow; // Return true if NOT in last row (show border)
+    return !isInLastRow;
   }
 
   return (
@@ -101,18 +127,54 @@ export default function Footer() {
         <div className="py-10 px-4 md:px-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-13 gap-8 lg:gap-0">
             {/* Logo Section */}
-            <div className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 flex justify-center lg:justify-start">
-              <Image 
-                alt="Logo" 
-                src="/logo2.png" 
-                height={100} 
-                width={100} 
-                className="object-contain"
-              />
+            <div className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 lg:absolute absolute -translate-y-20 lg:-translate-y-26 left-0 lg:left-[5%] lg:translate-x-0 w-full lg:w-auto mb-8 lg:mb-0">
+              <div className="flex justify-center lg:grid lg:grid-cols-2 gap-0 max-w-fit mx-auto lg:max-w-none lg:mx-0">
+                <Image 
+                  alt="Jewelry showcase 1" 
+                  src="/footerImg/1.jpeg" 
+                  height={1000} 
+                  width={1000} 
+                  className={`object-cover h-47 w-auto md:h-48 lg:h-52 lg:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '300ms' }}
+                />
+                <Image 
+                  alt="Jewelry showcase 2" 
+                  src="/footerImg/2.jpeg" 
+                  height={1000} 
+                  width={1000} 
+                  className={`object-cover h-47 w-auto md:h-48 lg:h-52 lg:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '600ms' }}
+                />
+                <Image 
+                  alt="Jewelry showcase 3" 
+                  src="/footerImg/3.jpeg" 
+                  height={1000} 
+                  width={1000} 
+                  className={`object-cover h-40 w-auto md:h-48 lg:h-52 lg:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden lg:block ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '900ms' }}
+                />
+                <Image 
+                  alt="Jewelry showcase 4" 
+                  src="/footerImg/5.jpeg" 
+                  height={1000} 
+                  width={1000} 
+                  className={`object-cover h-40 w-auto md:h-48 lg:h-52 lg:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden lg:block ${
+                    imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                  }`}
+                  style={{ transitionDelay: '1200ms' }}
+                />
+              </div>
             </div>
 
+
             {/* Links Section */}
-            <div className="lg:col-start-7 lg:col-end-13 lg:row-start-1 lg:row-end-2 space-y-0">
+            <div className="lg:col-start-7 mt-35 lg:mt-0 lg:col-end-13 lg:row-start-1 lg:row-end-2 space-y-0">
               {/* Shop Section */}
               <div className={`border-b border-gray-200 pb-6 transition delay-150 duration-1000 ease-in-out`}>
                 <div className="flex items-center justify-between">
