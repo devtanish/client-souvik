@@ -172,12 +172,13 @@ export default function Footer() {
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-3">
                 <div 
-                  className="min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[2.5rem] text-center text-white whitespace-nowrap"
-                  style={{
-                    fontFamily: "'Nothing You Could Do', cursive",
-                    textShadow: '2px 2px 8px rgba(153, 37, 151, 0.8), 0px 0px 12px rgba(153, 37, 151, 0.6), 1px 1px 3px rgba(153, 37, 151, 0.9)',
-                    // filter: 'drop-shadow(0 3px 6px rgba(153, 37, 151, 0.4))',
-                  }}
+                  className="min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[2.5rem] text-center text-white whitespace-nowrap" 
+  style={{ 
+    fontFamily: "'Nothing You Could Do', cursive",
+    textShadow: '2px 2px 4px #000108',
+    // textShadow: '2px 2px 8px rgba(153, 37, 151, 0.8), 0px 0px 12px rgba(153, 37, 151, 0.6), 1px 1px 3px rgba(153, 37, 151, 0.9)',
+    // filter: 'drop-shadow(0 3px 6px rgba(153, 37, 151, 0.4))',
+  }}
                 >
                   Timeless Luxury Playfully Told
                 </div>
