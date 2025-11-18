@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { GoArrowUpRight } from "react-icons/go";
+import { useRef } from "react"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -42,6 +43,20 @@ export default function Footer() {
   const [expandedSections, setExpandedSections] = useState<string[]>(["Shop"])
   const [isMobile, setIsMobile] = useState(false)
   const [imagesLoaded, setImagesLoaded] = useState(false)
+
+  const ref = useRef(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setActive(true);
+      },
+      { threshold: 0.4 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -137,7 +152,7 @@ export default function Footer() {
                   className={`object-cover h-40 min-[300px]:h-35 min-[330px]:h-40 min-[380px]:h-47 xs:h-50 w-auto sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 border-t md:border-0 border-l lg:border-t lg:border-l transition-all duration-700 ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
-                  style={{ transitionDelay: '300ms' }}
+                  style={{ transitionDelay: '100ms' }}
                 />
                 <Image 
                   alt="Jewelry showcase 2" 
@@ -147,7 +162,7 @@ export default function Footer() {
                   className={`object-cover h-40 w-auto min-[300px]:h-35 min-[330px]:h-40 min-[380px]:h-47 sm:h-47 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all md:border-0 lg:border-t lg:border-r border-t border-r duration-700 ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
-                  style={{ transitionDelay: '600ms' }}
+                  style={{ transitionDelay: '400ms' }}
                 />
                 <Image 
                   alt="Jewelry showcase 3" 
@@ -157,7 +172,7 @@ export default function Footer() {
                   className={`object-cover h-40 w-auto sm:h-40 min-[380px]:h-50 md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 md:border-0 border-l lg:border-l hidden md:block ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
-                  style={{ transitionDelay: '900ms' }}
+                  style={{ transitionDelay: '700ms' }}
                 />
                 <Image 
                   alt="Jewelry showcase 4" 
@@ -167,22 +182,28 @@ export default function Footer() {
                   className={`object-cover h-40 w-auto sm:h-40 min-[380px]:h-50 md:border-0 border-r lg:border-r md:h-45 lg:h-50 lg:w-50 xl:h-52 xl:w-60 filter grayscale hover:grayscale-0 transition-all duration-700 hidden md:block ${
                     imagesLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                   }`}
-                  style={{ transitionDelay: '1200ms' }}
+                  style={{ transitionDelay: '1000ms' }}
                 />
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-3">
                 <div 
-                  className="min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[2.5rem] text-center text-white whitespace-nowrap" 
+                  className="min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[1.90rem] xl:text-[2.5rem] text-center text-white whitespace-nowrap [animation:reveal_4s_ease-out_forwards] [clip-path:inset(0_100%_0_0)]" 
                   style={{ 
                     fontFamily: "'Nothing You Could Do', cursive",
                     textShadow: '2px 2px 4px #000108',
-                    // textShadow: '2px 2px 8px rgba(153, 37, 151, 0.8), 0px 0px 12px rgba(153, 37, 151, 0.6), 1px 1px 3px rgba(153, 37, 151, 0.9)',
-                    // filter: 'drop-shadow(0 3px 6px rgba(153, 37, 151, 0.4))',
                   }}
                 >
                   Timeless Luxury Playfully Told
                 </div>
               </div>
+              
+              <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+                
+                @keyframes reveal {
+                  to { clip-path: inset(0 0% 0 0); }
+                }
+              `}</style>
             </div>
 
 
