@@ -57,7 +57,7 @@ export default function ArtistryPortfolio() {
       },
     })
 
-    tl.to([...letters].reverse(), {
+    tl.to([...letters], {
       y: 0,
       opacity: 1,
       filter: "blur(0px)",
