@@ -43,20 +43,23 @@ export default function Footer() {
   const [expandedSections, setExpandedSections] = useState<string[]>(["Shop"])
   const [isMobile, setIsMobile] = useState(false)
   const [imagesLoaded, setImagesLoaded] = useState(false)
+  const [textAnimationActive, setTextAnimationActive] = useState(false)
 
   const ref = useRef(null);
-  const [active, setActive] = useState(false);
+  const textRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setActive(true);
+        if (entry.isIntersecting && !textAnimationActive) {
+          setTextAnimationActive(true);
+        }
       },
       { threshold: 0.4 }
     );
-    if (ref.current) observer.observe(ref.current);
+    if (textRef.current) observer.observe(textRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [textAnimationActive]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -78,7 +81,7 @@ export default function Footer() {
         })
       },
       {
-        threshold: 0.1, // Trigger when 10% of the footer is visible
+        threshold: 0.1,
       }
     )
 
@@ -142,7 +145,7 @@ export default function Footer() {
         <div className="py-10 px-4 md:px-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-13 gap-8 lg:gap-0">
             {/* Logo Section */}
-            <div className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 lg:absolute absolute -translate-y-22 sm:-translate-y-20 lg:-translate-y-26 left-0 lg:left-[5%] lg:translate-x-0 w-full lg:w-auto mb-8 lg:mb-0">
+            <div ref={textRef} className="lg:col-start-2 lg:col-end-7 lg:row-start-1 lg:row-end-2 lg:absolute absolute -translate-y-22 sm:-translate-y-20 lg:-translate-y-26 left-0 lg:left-[5%] lg:translate-x-0 w-full lg:w-auto mb-8 lg:mb-0">
               <div className="flex justify-center lg:grid lg:grid-cols-2 gap-0 max-w-fit mx-auto border-0 md:border border-white lg:border-0 lg:max-w-none lg:mx-0">
                 <Image 
                   alt="Jewelry showcase 1" 
@@ -187,10 +190,13 @@ export default function Footer() {
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-3">
                 <div 
-                  className="w-[102%] -translate-x-2 min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[1.90rem] xl:text-[2.5rem] text-center text-white whitespace-nowrap [animation:reveal_5s_ease-out_forwards] [clip-path:inset(0_100%_0_0)]" 
+                  className={`w-[102%] -translate-x-2 min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[1.90rem] xl:text-[2.5rem] text-center text-white whitespace-nowrap ${
+                    textAnimationActive ? 'animate-reveal' : ''
+                  }`}
                   style={{ 
                     fontFamily: "'Nothing You Could Do', cursive",
                     textShadow: '2px 2px 4px #000108',
+                    clipPath: textAnimationActive ? undefined : 'inset(0 100% 0 0)',
                   }}
                 >
                   Timeless Luxury Playfully Told
@@ -201,7 +207,12 @@ export default function Footer() {
                 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
                 
                 @keyframes reveal {
+                  from { clip-path: inset(0 100% 0 0); }
                   to { clip-path: inset(0 0% 0 0); }
+                }
+                
+                .animate-reveal {
+                  animation: reveal 5s ease-out forwards;
                 }
               `}</style>
             </div>
