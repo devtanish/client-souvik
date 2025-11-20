@@ -187,7 +187,7 @@ export default function Footer() {
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-3">
                 <div 
-                  className="min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[1.90rem] xl:text-[2.5rem] text-center text-white whitespace-nowrap [animation:reveal_4s_ease-out_forwards] [clip-path:inset(0_100%_0_0)]" 
+                  className="w-[102%] -translate-x-2 min-[310px]:text-xl min-[370px]:text-2xl min-[420px]:text-[1.8rem] md:text-5xl lg:text-[1.90rem] xl:text-[2.5rem] text-center text-white whitespace-nowrap [animation:reveal_5s_ease-out_forwards] [clip-path:inset(0_100%_0_0)]" 
                   style={{ 
                     fontFamily: "'Nothing You Could Do', cursive",
                     textShadow: '2px 2px 4px #000108',
@@ -303,7 +303,7 @@ export default function Footer() {
         </div>
 
         {/* Social Icons Section */}
-        <div className="border-t border-gray-200 pt-8 pb-8">
+        <div className={` ${expandedSections.length === 0 ? 'lg:mt-24' : ''} transition-all duration-500 ease-in-out border-t border-gray-200 pt-8 pb-8`}>
           <div className="flex space-x-6 justify-center items-center">
             <Link target="_blank" href="https://www.facebook.com/share/1A7oTXbCpe/" aria-label="Facebook">
               <svg
