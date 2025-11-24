@@ -535,7 +535,7 @@ const JewelryCustomizer: React.FC = () => {
 
       {/* Main Container */}
       <div
-        className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-full w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}
+        className={`bg-[#eaebe5] p-4 md:p-12 text-center max-w-7xl w-full rounded-xl transition-all ${activePanel ? "pt-24" : ""}`}
       >
         <h2 className="text-2xl md:text-4xl leading-relaxed font-normal text-gray-800 w-full">
           <div className="flex md:justify-center flex-wrap items-baseline max-w-full text-3xl md:text-5xl justify-start">
