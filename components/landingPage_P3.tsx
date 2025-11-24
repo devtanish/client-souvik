@@ -59,8 +59,8 @@ export default function LandingPage_P3() {
                         rgba(255, 255, 255, 0.15) 0%,
                         rgba(255, 255, 255, 0.05) 100%
                     );
-                    backdrop-filter: blur(12px) saturate(150%);
-                    -webkit-backdrop-filter: blur(12px) saturate(150%);
+                    backdrop-filter: blur(24px) saturate(150%);
+                    -webkit-backdrop-filter: blur(24px) saturate(150%);
                     opacity: 0;
                     transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
                     pointer-events: none;
