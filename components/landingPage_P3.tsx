@@ -70,6 +70,17 @@ export default function LandingPage_P3() {
                         0 8px 32px rgba(0, 0, 0, 0.2);
                 }
                 
+                .parallax-image {
+                    filter: blur(10px);
+                    -webkit-filter: blur(0px);
+                    transition: filter 0.4s ease;
+                }
+                
+                .parallax-container:hover .parallax-image {
+                    filter: blur(0px);
+                    -webkit-filter: blur(10px);
+                }
+                
                 .parallax-container:hover .glass-overlay {
                     opacity: 1;
                 }
