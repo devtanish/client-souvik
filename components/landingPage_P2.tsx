@@ -274,7 +274,7 @@ const JewelryCustomizer: React.FC = () => {
                 {PANEL_CONFIG["jewelry-type"].options.map((option, i) => (
                   <label
                     key={option}
-                    className="flex text-xl md:text-2xl items-center cursor-pointer py-1.5 md:p-2.5 rounded-lg transition-all hover:bg-amber-100/50"
+                    className="flex items-center justify-start cursor-pointer hover:bg-amber-100/50 p-2 transition-all"
                     style={{ transitionDelay: `${i * 50}ms` }}
                   >
                     <input
@@ -283,7 +283,7 @@ const JewelryCustomizer: React.FC = () => {
                       onChange={(e) => handleSelection("jewelry-type", option, e.target.checked)}
                       className="w-3 h-3 sm:w-4 sm:h-4 border-gray-300 accent-amber-300 text-amber-500 focus:ring-amber-500"
                     />
-                    <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-sm ml-2">{option}</span>
+                    <span className="text-gray-700 font-medium text-xs sm:text-sm uppercase ml-2">{option}</span>
                   </label>
                 ))}
               </div>
@@ -300,7 +300,7 @@ const JewelryCustomizer: React.FC = () => {
                 {PANEL_CONFIG.recipient.options.map((option, i) => (
                   <label
                     key={option}
-                    className="flex text-xl md:text-2xl items-center cursor-pointer py-1.5 md:p-2.5 rounded-lg transition-all hover:bg-amber-100/50"
+                    className="flex items-center justify-start cursor-pointer hover:bg-amber-100/50 p-2 transition-all"
                     style={{ transitionDelay: `${i * 50}ms` }}
                   >
                     <input
@@ -310,7 +310,7 @@ const JewelryCustomizer: React.FC = () => {
                       onChange={() => handleSelection("recipient", option)}
                       className="w-3 h-3 sm:w-4 sm:h-4 border-0 focus:border-0 accent-amber-300 text-amber-500"
                     />
-                    <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-sm ml-2">{option}</span>
+                    <span className="text-gray-700 font-medium text-xs sm:text-sm uppercase ml-2">{option}</span>
                   </label>
                 ))}
               </div>
@@ -356,7 +356,7 @@ const JewelryCustomizer: React.FC = () => {
                 {PRODUCT_TYPES.map((type, index) => (
                   <label
                     key={type}
-                    className={`flex items-center cursor-pointer py-1.5 md:p-2.5 rounded-lg transition-all hover:bg-amber-100/50 ${
+                    className={`flex items-center justify-start cursor-pointer hover:bg-amber-100/50 p-2 transition-all ${
                       expandedSections.productType ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                     }`}
                     style={{
@@ -383,7 +383,7 @@ const JewelryCustomizer: React.FC = () => {
         className={`w-full h-full bg-transparent p-0 sm:p-2 lg:p-4 animate-slideDown ${cormorantGaramond.className}`}
       >
         {/* Header */}
-        <div className="mb-6 sticky top-0 bg-gradient-to-b z-10 pb-2">
+        <div className="mb-4 sticky top-0 bg-gradient-to-b z-10 pb-2 bg-white">
           <div className="mb-4">
             <h2 className="text-xl w-screen flex sm:text-2xl lg:text-3xl font-bold text-gray-800 flex-wrap gap-1">
               Help me pick
@@ -529,7 +529,7 @@ const JewelryCustomizer: React.FC = () => {
       )}
 
       {/* Leo Bottom Drawer */}
-      <BottomDrawer isOpen={showLeoDrawer} className="" onClose={() => setShowLeoDrawer(false)} title="" height="70vh">
+      <BottomDrawer isOpen={showLeoDrawer} className="" onClose={() => setShowLeoDrawer(false)} title="" height="76vh">
         {renderDrawerContent()}
       </BottomDrawer>
 
