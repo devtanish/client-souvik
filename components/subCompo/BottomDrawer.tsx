@@ -138,7 +138,7 @@ const BottomDrawer: React.FC<BottomDrawerProps> = ({
         className={`bg-gradient-to-b bg-white fixed bottom-0 left-0 right-0  shadow-2xl z-50 transition-transform duration-300 ease-out ${
           isOpen ? "translate-y-0" : "translate-y-full"
         } ${className}`}
-        style={{ height }}
+        // style={{ height }}
       >
         <div className="flex flex-col h-full">
           {/* Drawer Handle */}
