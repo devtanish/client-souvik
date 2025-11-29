@@ -34,18 +34,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
         <CartProvider>
-          <Header bg={true} />
-          <Sidebar />
-          <Tooltip />
-          <div className="">
-            {children}
+          <div className="relative z-10 bg-white">
+            <Header bg={true} />
+            <Sidebar />
+            <Tooltip />
+            <div className="">
+              {children}
+            </div>
+            <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
           </div>
-          <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
-
-          <Footer />
+          <div className="xl:sticky xl:bottom-0 xl:z-0">
+            <Footer />
+          </div>
           <CartSidebar />
         </CartProvider>
       </body>
