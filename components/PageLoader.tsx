@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import localFont from "next/font/local";
 
 const words = [
   "Hello",
@@ -11,6 +12,12 @@ const words = [
   "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ",
   "Olà",
 ];
+
+const myfont = localFont({
+  src: "../public/fonts/Articulat-CF.ttf", // use relative path if inside project folder
+  display: "swap", // optional but recommended
+  weight: "900",
+})
 
 interface LoadingPageProps {
   onComplete: () => void;
@@ -113,7 +120,7 @@ const LoadingPage = () => {
           initial="initial"
           animate="animate"
           exit="exit"
-          className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white"
+          className={`text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white ${myfont.className}`}
         >
           {words[index]}
         </motion.div>
