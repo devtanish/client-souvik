@@ -1,53 +1,125 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-export default function PageLoader() {
-  const [loading, setLoading] = useState(true);
-  const [slideUp, setSlideUp] = useState(false);
+const words = [
+  "Hello",
+  "Bonjour", 
+  "やあ",
+  "Hallo",
+  "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ",
+  "Olà",
+];
+
+interface LoadingPageProps {
+  onComplete: () => void;
+}
+
+const LoadingPage = () => {
+  const [index, setIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Prevent scrolling while loader is visible
-    document.body.style.overflow = 'hidden';
+    let currentIndex = 0;
+    const timeouts: NodeJS.Timeout[] = [];
 
-    // Start slide up animation after 1.8 seconds
-    const slideTimer = setTimeout(() => {
-      setSlideUp(true);
-    }, 1000);
+    const scheduleNext = () => {
+      // Determine how long the current word should stay on screen
+      let displayDuration: number;
+      
+      if (currentIndex === 0) {
+        // First word stays for 500ms
+        displayDuration = 1000;
+      } else if (currentIndex === words.length - 1) {
+        // Last word stays for 500ms, then start exit animation
+        const exitTimeout = setTimeout(() => {
+          setIsComplete(true);
+          // Wait for the full curtain animation to complete (1000ms) before calling onComplete
+          // setTimeout(onComplete, 1000);
+        }, 500);
+        timeouts.push(exitTimeout);
+        return;
+      } else {
+        // All middle words stay for 300ms
+        displayDuration = 300;
+      }
 
-    // Remove loader and restore scrolling after animation completes
-    const removeTimer = setTimeout(() => {
-      setLoading(false);
-      document.body.style.overflow = 'unset';
-    }, 2000); // 1800ms + 800ms animation duration
+      const timeout = setTimeout(() => {
+        currentIndex++;
+        setIndex(currentIndex);
+        scheduleNext();
+      }, displayDuration);
+      
+      timeouts.push(timeout);
+    };
+
+    scheduleNext();
 
     return () => {
-      clearTimeout(slideTimer);
-      clearTimeout(removeTimer);
-      document.body.style.overflow = 'unset';
+      timeouts.forEach(timeout => clearTimeout(timeout));
     };
   }, []);
 
-  if (!loading) return null;
+  const curtainVariants = {
+    initial: {
+      clipPath: "ellipse(90% 120% at 50% 0%)",
+    },
+    exit: {
+      clipPath: "ellipse(90% 0% at 50% 0%)",
+      transition: {
+        duration: 1,
+        ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+      },
+    },
+  };
+
+  const wordVariants = {
+    initial: {
+      opacity: 0,
+      y: 0,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: 0,
+      transition: {
+        duration: 0.2,
+        ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+      },
+    },
+  };
 
   return (
-    <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#0a0a0a] transition-transform duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
-        slideUp ? '-translate-y-full' : 'translate-y-0'
-      }`}
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+      variants={curtainVariants}
+      initial="initial"
+      animate={isComplete ? "exit" : "initial"}
+      // Prevent the component from being removed until animation completes
+      style={{ pointerEvents: isComplete ? "none" : "auto" }}
     >
-      <div className="text-center space-y-8">
-        <h1 
-          className={`text-3xl md:text-4xl lg:text-4xl font-light text-white tracking-[0.15em] transition-all duration-700 ease-out ${
-            slideUp 
-              ? 'opacity-0 -translate-y-10 scale-95' 
-              : 'opacity-100 translate-y-0 scale-100 animate-fadeInUp'
-          }`}
+      <div className="relative">
+        <motion.div
+          key={index}
+          variants={wordVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white"
         >
-          RAYA<span className='text-sm absolute bottom-5'>®</span>
-        </h1>
-
+          {words[index]}
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
-}
+};
+
+export default LoadingPage;

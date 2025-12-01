@@ -388,7 +388,7 @@ export default function ArtistryPortfolio() {
       <div className="block lg:flex w-screen items-start md:items-end gap-[25%] ">
         <img
           src="https://cdn.cosmos.so/2200c8e1-2901-4fdb-806c-a2596b3e9c49?format=jpeg"
-          className="lg:w-[45%] w-[100%]"
+          className="xl:w-[45%] lg:w-[50%] w-[100%]"
           alt="Portrait"
         />
         <div className="flex items-start md:items-end mx-4 md:mx-0">

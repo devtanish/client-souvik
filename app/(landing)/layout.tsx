@@ -9,7 +9,7 @@ import Tooltip from "@/components/tooltip";
 import { CartProvider } from "@/contexts/cart-context"
 import Header from "@/components/header"
 import CartSidebar from "@/components/cart-sidebar"
-import PageLoader from "@/components/PageLoader";
+import LoadingPage from "@/components/PageLoader";
 
 export const metadata: Metadata = {
   title: "Earrings Collection | Raya Jewelry",
@@ -38,7 +38,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
         <CartProvider>
-          <PageLoader/>
+          <LoadingPage/>
           <div className="relative z-10 bg-white">
             <Header bg={true} />
             <Sidebar />

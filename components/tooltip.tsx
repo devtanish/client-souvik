@@ -104,7 +104,7 @@ export default function Header() {
                 </div>
 
                 <div className="">
-                    <div className=" hidden lg:flex items-center space-x-8">
+                    <div className=" hidden lg:flex items-center lg:space-x-5 xl:space-x-8">
                         {tabs.map((tab, index) => (
                             <Link
                                 key={index}

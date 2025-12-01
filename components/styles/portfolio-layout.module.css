@@ -69,10 +69,6 @@
     padding-left: 0;
   }
 
-  .galleryGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .galleryDescription {
     columns: 1;
   }
