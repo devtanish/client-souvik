@@ -35,3 +35,10 @@ export const paradise = localFont({
   variable: "--font-paradise",
   display: "swap",
 });
+
+export const ppplayground = localFont({
+    src: "../../public/fonts/PPPlayground.otf",
+    weight: "400",
+    style: "normal",
+    variable: "--font-ppplayground",
+});
