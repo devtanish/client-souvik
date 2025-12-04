@@ -30,8 +30,8 @@ export function BlogCard({url, title, description, tags, sign, club}: BlogCardPr
             </div>
             <div className=" mt-3 lg:mt-5">
                 <div className="flex uppercase text-xs gap-1 text-black hover:text-black">
-                    <span className="border px-4 py-1 ">{tags && tags[0]}</span>
-                    <span className="px-4 py-1 ">{tags && tags[1]}</span>
+                    <span className="border px-4 py-1 rounded-2xl">{tags && tags[0]}</span>
+                    <span className="px-4 py-1 rounded-2xl">{tags && tags[1]}</span>
                 </div>
                 <div className={`ml-2 flex items-baseline mt-3 gap-2 flex-nowrap`}>
                     <span className={`text-xl md:text-3xl `}><span className={`text-4xl md:text-[2.7rem] ${ppplayground.className}`}>{title}:</span> {description}</span>

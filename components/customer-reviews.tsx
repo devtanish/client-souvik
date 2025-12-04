@@ -534,11 +534,11 @@ export function CustomerReviews() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="highest-rating">SORT: HIGHEST RATING</SelectItem>
-                <SelectItem value="lowest-rating">SORT: LOWEST RATING</SelectItem>
-                <SelectItem value="newest">SORT: NEWEST</SelectItem>
-                <SelectItem value="oldest">SORT: OLDEST</SelectItem>
-                <SelectItem value="most-helpful">SORT: MOST HELPFUL</SelectItem>
+                <SelectItem value="highest-rating">HIGHEST RATING</SelectItem>
+                <SelectItem value="lowest-rating">LOWEST RATING</SelectItem>
+                <SelectItem value="newest">NEWEST</SelectItem>
+                <SelectItem value="oldest">OLDEST</SelectItem>
+                <SelectItem value="most-helpful">MOST HELPFUL</SelectItem>
               </SelectContent>
             </Select>
           </div>

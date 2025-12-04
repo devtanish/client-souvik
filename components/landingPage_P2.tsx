@@ -434,75 +434,6 @@ const JewelryCustomizer: React.FC = () => {
     tab: TabType
   }
 
-  // const PanelTrigger: React.FC<PanelTriggerProps> = ({ panelId, displayText, tab }) => (
-  //   <>
-  //     <span
-  //       className={`italic font-bold cursor-pointer pb-0.5 transition-all mr-2 break-words ${
-  //         activePanel === panelId
-  //           ? "text-[#eaebe5] bg-[#000844] px-2.5 rounded scale-105"
-  //           : "text-[#000844] hover:text-gray-600 hover:scale-105"
-  //       }`}
-  //       onClick={() => openPanel(tab, panelId)}
-  //     >
-  //       <div className="-translate-x-1 text-start md:text-center">{displayText}</div>
-  //     </span>
-
-  //     <div
-  //       className={`w-full md:w-[150vh] transition-all duration-500 bg-[#eaebe5] rounded-xl mt-4 shadow-lg origin-top ${
-  //         activePanel === panelId
-  //           ? "opacity-100 scale-y-100"
-  //           : "max-h-0 opacity-0 scale-y-90 -translate-y-4 overflow-hidden"
-  //       }`}
-  //     >
-  //       <div
-  //         className={`flex flex-col w-full px-3 md:px-5 py-4 text-left space-y-2 max-h-80 overflow-y-auto ${
-  //           activePanel === panelId ? "opacity-100 delay-150" : "opacity-0"
-  //         }`}
-  //         onWheel={(e) => e.stopPropagation()}
-  //       >
-  //         {panelId === "jewelry-type" &&
-  //           PANEL_CONFIG["jewelry-type"].options.map((option, i) => (
-  //             <OptionCheckbox
-  //               key={option}
-  //               option={option}
-  //               isSelected={isSelected("jewelry-type", option)}
-  //               onChange={(checked) => handleSelection("jewelry-type", option, checked)}
-  //               delay={activePanel === "jewelry-type" ? i * 50 : 0}
-  //             />
-  //           ))}
-
-  //         {panelId === "recipient" &&
-  //           PANEL_CONFIG.recipient.options.map((option, i) => (
-  //             <label
-  //               key={option}
-  //               style={{
-  //                 transitionDelay: activePanel === "recipient" ? `${i * 50}ms` : "0ms",
-  //                 transform: activePanel === "recipient" ? "translateX(0)" : "translateX(-20px)",
-  //               }}
-  //               className="flex text-xl md:text-2xl items-center cursor-pointer py-1.5 md:p-2.5 rounded-lg transition-all hover:bg-amber-100/50"
-  //             >
-  //               <input
-  //                 type="radio"
-  //                 name="recipient"
-  //                 checked={isSelected("recipient", option)}
-  //                 onChange={() => handleSelection("recipient", option)}
-  //                 className="w-3 h-3 sm:w-4 sm:h-4 border-gray-300 accent-amber-300 text-amber-500"
-  //               />
-  //               <span className="text-gray-700 font-medium text-xs sm:text-sm lg:text-xs ml-2">{option}</span>
-  //             </label>
-  //           ))}
-
-  //         <button
-  //           onClick={handleDoneInline}
-  //           className="mt-4 border-2 bg-[#925c40] text-white px-4 py-2 text-sm rounded transition-all hover:bg-amber-800 hover:scale-105 self-start"
-  //         >
-  //           Done
-  //         </button>
-  //       </div>
-  //     </div>
-  //   </>
-  // )
-
   return (
     <div
       className={`min-h-[70vh] py-20 bg-[#eaebe5] flex justify-center md:items-center font-sans text-gray-800 ${cormorantGaramond.className}`}
@@ -529,7 +460,7 @@ const JewelryCustomizer: React.FC = () => {
       )}
 
       {/* Leo Bottom Drawer */}
-      <BottomDrawer isOpen={showLeoDrawer} className="" onClose={() => setShowLeoDrawer(false)} title="" height="76vh">
+      <BottomDrawer isOpen={showLeoDrawer} className="rounded-2xl" onClose={() => setShowLeoDrawer(false)} title="" height="76vh">
         {renderDrawerContent()}
       </BottomDrawer>
 

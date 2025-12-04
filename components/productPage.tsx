@@ -315,7 +315,7 @@ export default function ProductPageWithReviews({ params }: { params: Promise<{ p
                         <div className="px-0 md:px-2">
                           <Card className="border-none shadow-none">
                             <CardContent className="border-none shadow-none flex items-center justify-center p-1">
-                              <div className="w-full aspect-[3/3] md:aspect-[4/3] flex items-center justify-center overflow-hidden">
+                              <div className="w-full aspect-[3/3] md:aspect-[4/3] rounded-2xl ml-4 md:ml-0 flex items-center justify-center overflow-hidden">
                                 <Image
                                   src={img || "/placeholder.svg"}
                                   alt="product"
@@ -1450,7 +1450,7 @@ export default function ProductPageWithReviews({ params }: { params: Promise<{ p
                   </button>
                 </div>
 
-                {/* Product Carousel */}
+                Product Carousel
                 <div className="relative group">
                   <div
                     className="flex gap-1 overflow-x-auto scrollbar-hide pb-4"
