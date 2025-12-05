@@ -588,7 +588,7 @@ export default function EarringsPage() {
                                   <span className={`absolute left-3 top-1/2 text-xs ${montserrat.className}  -translate-y-1/2 text-gray-500`}>$</span>
                                   <Input
                                     type="number"
-                                    className={` ${montserrat.className} pl-7 w-30 rounded-none text-xs`}
+                                    className={` ${montserrat.className} pl-7 w-30  text-xs`}
                                     value={priceRange[0]}
                                     onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
                                     min={0}
@@ -599,7 +599,7 @@ export default function EarringsPage() {
                                   <span className={`absolute left-3 top-1/2 text-xs -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
                                   <Input
                                     type="number"
-                                    className={`pl-7 w-34 rounded-none text-xs ${montserrat.className} `}
+                                    className={`pl-7 w-34  text-xs ${montserrat.className} `}
                                     value={priceRange[1]}
                                     onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
                                     min={0}
@@ -864,10 +864,10 @@ export default function EarringsPage() {
                 </div>
 
                 <div className="p-4 border-t mt-auto grid grid-cols-2 gap-4">
-                  <Button variant="outline" className={`rounded-none text-sm `} onClick={resetFilters}>
+                  <Button variant="outline" className={` text-sm `} onClick={resetFilters}>
                     CLEAR ALL
                   </Button>
-                  <Button onClick={() => setOpen(false)} className={`text-sm rounded-none `}>
+                  <Button onClick={() => setOpen(false)} className={`text-sm  `}>
                     VIEW RESULTS {filterCount > 0 && `(${filterCount})`}
                   </Button>
                 </div>

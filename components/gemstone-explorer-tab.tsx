@@ -257,7 +257,7 @@ export function GemstoneExplorerTab({
   return (
     <TooltipProvider>
       <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white max-w-6xl w-full max-h-[100vh] overflow-hidden">
+        <div className="bg-white max-w-6xl w-full rounded-2xl max-h-[100vh] overflow-hidden">
           {/* Header */}
           <div className="flex items-center justify-between p-5 px-6 border-b">
             <div>
@@ -289,7 +289,7 @@ export function GemstoneExplorerTab({
               <div className="flex gap-2">
                 <Button
                   variant={activeTab === "all" ? "default" : "outline"}
-                  className="rounded-none"
+                  className=""
                   size="sm"
                   onClick={() => setActiveTab("all")}
                 >
@@ -298,13 +298,13 @@ export function GemstoneExplorerTab({
                 <Button
                   variant={activeTab === "natural" ? "default" : "outline"}
                   size="sm"
-                  className="rounded-none"
+                  className=""
                   onClick={() => setActiveTab("natural")}
                 >
                   Natural
                 </Button>
                 <Button
-                  className="rounded-none"
+                  className=""
                   variant={activeTab === "lab-grown" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setActiveTab("lab-grown")}
@@ -321,7 +321,7 @@ export function GemstoneExplorerTab({
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as "price" | "name")}
-                  className="border px-3 py-1 text-sm"
+                  className="border px-3 py-1 text-sm rounded-md"
                 >
                   <option value="price">Price</option>
                   <option value="name">A-Z</option>
@@ -339,7 +339,7 @@ export function GemstoneExplorerTab({
               {sortedGemstones.map((gemstone) => (
                 <Card
                   key={`gemstone-${gemstone.id}`}
-                  className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
+                  className={`cursor-pointer transition-all hover:shadow-lg ${selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
                     }`}
                   onClick={() => handleGemstoneSelect(gemstone)}
                 >
@@ -413,7 +413,7 @@ export function GemstoneExplorerTab({
               {sortedQuality.map((quality) => (
                 <Card
                   key={`quality-${quality.id}`}
-                  className={`cursor-pointer rounded-none transition-all hover:shadow-lg ${selectedQuality?.id === quality.id && qualityTabSource === activeTab
+                  className={`cursor-pointer  transition-all hover:shadow-lg ${selectedQuality?.id === quality.id && qualityTabSource === activeTab
                     ? "ring ring-black bg-gray-50"
                     : ""
                     }`}
@@ -496,10 +496,10 @@ export function GemstoneExplorerTab({
             <div className="flex justify-between items-center">
               <p className="text-sm text-gray-600">{getAvailableCount()}</p>
               <div className="flex gap-3">
-                <Button variant="outline" className="rounded-none bg-transparent" onClick={handleCancel}>
+                <Button variant="outline" className=" bg-transparent" onClick={handleCancel}>
                   Cancel
                 </Button>
-                <Button onClick={handleConfirmSelection} className="rounded-none" disabled={!isSelectionValid()}>
+                <Button onClick={handleConfirmSelection} className="" disabled={!isSelectionValid()}>
                   Confirm Selection
                 </Button>
               </div>

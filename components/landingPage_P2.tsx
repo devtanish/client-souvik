@@ -419,7 +419,7 @@ const JewelryCustomizer: React.FC = () => {
         <div className="pt-4 border-t border-gray-200">
           <button
             onClick={handleDoneAll}
-            className="w-full bg-black p-2 sm:p-3 mb-5 lg:py-2 text-center hover:bg-gray-800 transition-colors"
+            className="w-full bg-black p-2 sm:p-3 mb-5 lg:py-2 text-center hover:bg-gray-800 transition-colors rounded-md"
           >
             <p className="text-white font-bold tracking-wide text-sm sm:text-md lg:text-lg">Done</p>
           </button>
