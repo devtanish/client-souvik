@@ -496,7 +496,7 @@ const JewelryCustomizer: React.FC = () => {
 
           <button
             onClick={() => setShowMessageBox(true)}
-            className="block mt-8 mx-auto font-medium text-lg rounded-md md:text-3xl px-8 md:px-8 py-2 bg-[#000108] text-white shadow-lg transition-all hover:bg-gray-600 hover:-translate-y-1 hover:shadow-2xl hover:scale-105 uppercase tracking-wider"
+            className="block mt-8 mx-auto font-medium text-lg md:text-3xl px-8 md:px-8 py-2 bg-[#000108] text-white shadow-lg transition-all hover:bg-gray-600 hover:-translate-y-1 hover:shadow-2xl hover:scale-105 uppercase tracking-wider"
           >
             Show Me My Inspiration
           </button>

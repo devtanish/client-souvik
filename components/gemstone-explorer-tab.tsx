@@ -339,7 +339,7 @@ export function GemstoneExplorerTab({
               {sortedGemstones.map((gemstone) => (
                 <Card
                   key={`gemstone-${gemstone.id}`}
-                  className={`cursor-pointer transition-all hover:shadow-lg ${selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
+                  className={`cursor-pointer transition-all rounded-none hover:shadow-lg ${selectedGemstone?.id === gemstone.id ? "ring ring-black bg-gray-50" : ""
                     }`}
                   onClick={() => handleGemstoneSelect(gemstone)}
                 >
@@ -413,7 +413,7 @@ export function GemstoneExplorerTab({
               {sortedQuality.map((quality) => (
                 <Card
                   key={`quality-${quality.id}`}
-                  className={`cursor-pointer  transition-all hover:shadow-lg ${selectedQuality?.id === quality.id && qualityTabSource === activeTab
+                  className={`cursor-pointer rounded-none  transition-all hover:shadow-lg ${selectedQuality?.id === quality.id && qualityTabSource === activeTab
                     ? "ring ring-black bg-gray-50"
                     : ""
                     }`}
