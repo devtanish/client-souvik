@@ -519,7 +519,13 @@ export default function EarringsPage() {
                   Filters {filterCount > 0 && `(${filterCount})`}
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="md:w-1/2 w-screen sm:max-w-full p-0 flex flex-col">
+              <SheetContent
+                side={isMobile ? "bottom" : "left"}
+                className={cn(
+                  "p-0 flex flex-col",
+                  isMobile ? "w-full h-[80vh] rounded-t-2xl" : "md:w-1/2 w-screen sm:max-w-full",
+                )}
+              >
                 <SheetHeader className="p-4 border-b">
                   <div className="flex items-center justify-between">
                     <SheetTitle className={`  text-lg font-bold `}>FILTERS</SheetTitle>
@@ -532,8 +538,11 @@ export default function EarringsPage() {
 
                 <div className="flex-1 overflow-auto">
                   <div className="p-4 flex items-center justify-between">
-                    <Label htmlFor="pickup" className={`text-sm
-                       font-medium  `}>
+                    <Label
+                      htmlFor="pickup"
+                      className={`text-sm
+                       font-medium  `}
+                    >
                       IN-STOCK ONLY
                     </Label>
                     <Switch
@@ -559,12 +568,19 @@ export default function EarringsPage() {
                             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
                             aria-label={openFilters.price ? "Collapse" : "Expand"}
                           >
-                            <span className={`absolute transition-transform duration-300 ${openFilters.price ? "rotate-0" : "rotate-90"}`}>
-                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.price ? "rotate-0" : "rotate-90"}`}
+                            >
+                              <Minus
+                                size={16}
+                                className={openFilters.price ? "opacity-100" : "opacity-0"}
+                                color="gray"
+                              />
                             </span>
                             <span
-                              className={`absolute transition-transform duration-300 ${openFilters.price ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                                }`}
+                              className={`absolute transition-transform duration-300 ${
+                                openFilters.price ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                              }`}
                             >
                               <Plus size={16} color="gray" />
                             </span>
@@ -585,7 +601,11 @@ export default function EarringsPage() {
                               />
                               <div className="flex items-center gap-2">
                                 <div className="relative">
-                                  <span className={`absolute left-3 top-1/2 text-xs ${montserrat.className}  -translate-y-1/2 text-gray-500`}>$</span>
+                                  <span
+                                    className={`absolute left-3 top-1/2 text-xs ${montserrat.className}  -translate-y-1/2 text-gray-500`}
+                                  >
+                                    $
+                                  </span>
                                   <Input
                                     type="number"
                                     className={` ${montserrat.className} pl-7 w-30  text-xs`}
@@ -596,7 +616,11 @@ export default function EarringsPage() {
                                 </div>
                                 <span className="text-gray-500">-</span>
                                 <div className="relative">
-                                  <span className={`absolute left-3 top-1/2 text-xs -translate-y-1/2 text-gray-500 ${montserrat.className} `}>$</span>
+                                  <span
+                                    className={`absolute left-3 top-1/2 text-xs -translate-y-1/2 text-gray-500 ${montserrat.className} `}
+                                  >
+                                    $
+                                  </span>
                                   <Input
                                     type="number"
                                     className={`pl-7 w-34  text-xs ${montserrat.className} `}
@@ -628,12 +652,19 @@ export default function EarringsPage() {
                             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
                             aria-label={openFilters.stone ? "Collapse" : "Expand"}
                           >
-                            <span className={`absolute transition-transform duration-300 ${openFilters.stone ? "rotate-0" : "rotate-90"}`}>
-                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.stone ? "rotate-0" : "rotate-90"}`}
+                            >
+                              <Minus
+                                size={16}
+                                className={openFilters.price ? "opacity-100" : "opacity-0"}
+                                color="gray"
+                              />
                             </span>
                             <span
-                              className={`absolute transition-transform duration-300 ${openFilters.stone ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                                }`}
+                              className={`absolute transition-transform duration-300 ${
+                                openFilters.stone ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                              }`}
                             >
                               <Plus size={16} color="gray" />
                             </span>
@@ -692,12 +723,19 @@ export default function EarringsPage() {
                             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
                             aria-label={openFilters.metal ? "Collapse" : "Expand"}
                           >
-                            <span className={`absolute transition-transform duration-300 ${openFilters.metal ? "rotate-0" : "rotate-90"}`}>
-                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.metal ? "rotate-0" : "rotate-90"}`}
+                            >
+                              <Minus
+                                size={16}
+                                className={openFilters.price ? "opacity-100" : "opacity-0"}
+                                color="gray"
+                              />
                             </span>
                             <span
-                              className={`absolute transition-transform duration-300 ${openFilters.metal ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                                }`}
+                              className={`absolute transition-transform duration-300 ${
+                                openFilters.metal ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                              }`}
                             >
                               <Plus size={16} color="gray" />
                             </span>
@@ -750,12 +788,19 @@ export default function EarringsPage() {
                             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
                             aria-label={openFilters.material ? "Collapse" : "Expand"}
                           >
-                            <span className={`absolute transition-transform duration-300 ${openFilters.material ? "rotate-0" : "rotate-90"}`}>
-                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.material ? "rotate-0" : "rotate-90"}`}
+                            >
+                              <Minus
+                                size={16}
+                                className={openFilters.price ? "opacity-100" : "opacity-0"}
+                                color="gray"
+                              />
                             </span>
                             <span
-                              className={`absolute transition-transform duration-300 ${openFilters.material ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                                }`}
+                              className={`absolute transition-transform duration-300 ${
+                                openFilters.material ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                              }`}
                             >
                               <Plus size={16} color="gray" />
                             </span>
@@ -797,7 +842,9 @@ export default function EarringsPage() {
                                     </span>
                                   </span>
                                 </button>
-                                <Label className={`mt-3 text-xs transition-all duration-200 hover:font-medium ${montserrat.className} `}>
+                                <Label
+                                  className={`mt-3 text-xs transition-all duration-200 hover:font-medium ${montserrat.className} `}
+                                >
                                   {metal.name}
                                 </Label>
                               </div>
@@ -823,12 +870,19 @@ export default function EarringsPage() {
                             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-black focus:outline-none transition-all duration-300 ease-in-out hover:bg-gray-100`}
                             aria-label={openFilters.shape ? "Collapse" : "Expand"}
                           >
-                            <span className={`absolute transition-transform duration-300 ${openFilters.shape ? "rotate-0" : "rotate-90"}`}>
-                              <Minus size={16} className={openFilters.price ? "opacity-100" : "opacity-0"} color="gray" />
+                            <span
+                              className={`absolute transition-transform duration-300 ${openFilters.shape ? "rotate-0" : "rotate-90"}`}
+                            >
+                              <Minus
+                                size={16}
+                                className={openFilters.price ? "opacity-100" : "opacity-0"}
+                                color="gray"
+                              />
                             </span>
                             <span
-                              className={`absolute transition-transform duration-300 ${openFilters.shape ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
-                                }`}
+                              className={`absolute transition-transform duration-300 ${
+                                openFilters.shape ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                              }`}
                             >
                               <Plus size={16} color="gray" />
                             </span>
