@@ -23,7 +23,7 @@ export function BlogCard({url, title, description, tags, sign, club}: BlogCardPr
                     url={url || "/blog-images/1.webp"} 
                 />
                 {club && (
-                    <div className="absolute top-4 left-4 font-bold text-white px-4 py-2 rounded-full text-xs uppercase tracking-wider">
+                    <div className="absolute top-4 backdrop-blur-sm left-4 font-bold text-white px-4 py-2 rounded-full text-xs uppercase tracking-wider">
                         Club
                     </div>
                 )}
@@ -34,7 +34,7 @@ export function BlogCard({url, title, description, tags, sign, club}: BlogCardPr
                     <span className="px-4 py-1 rounded-2xl">{tags && tags[1]}</span>
                 </div>
                 <div className={`ml-2 flex items-baseline mt-3 gap-2 flex-nowrap`}>
-                    <span className={`text-xl md:text-3xl `}><span className={`text-4xl md:text-[2.7rem] ${ppplayground.className}`}>{title}:</span> {description}</span>
+                    <span className={`text-2xl md:text-4xl `}><span className={`text-4xl md:text-[2.7rem] ${ppplayground.className}`}>{title}:</span> {description}</span>
                     
                 </div>
                 <div className="ml-2 text-xs mt-0 lg:mt-2 text-black hover:text-black">
