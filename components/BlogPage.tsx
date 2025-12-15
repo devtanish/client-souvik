@@ -83,7 +83,12 @@ const BlogData = [
 function BlogContent() {
   const searchParams = useSearchParams();
   const blogname = searchParams.get("blogname");
+  const tag = searchParams.get("tag");
   const router = useRouter();
+
+  const filteredBlogs = tag
+    ? BlogData.filter((blog) => blog.tags.includes(tag))
+    : BlogData;
 
   const blog = BlogData.find((b) => b.title === blogname);
 
@@ -101,7 +106,7 @@ function BlogContent() {
         </div>
         <div className="lg:px-5 px-0 sm:px-4 flex justify-center items-center">
           <div className="grid 2xl:mx-5 xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 ">
-            {BlogData.map((blog, index) => {
+            {filteredBlogs.map((blog, index) => {
               return <div key={index} className="mt-10" onClick={() => {
                 router.push(`/blog?blogname=${blog.title}`)
               }}>
