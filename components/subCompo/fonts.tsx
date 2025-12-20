@@ -60,3 +60,9 @@ export const fonnts_com_Lyon_Italic = localFont({
   variable: "--font-fonnts-com-lyon-italic",
   display: "swap",
 });
+
+export const fonnts_com_Lyon_Roman = localFont({
+  src: "../../public/fonts/fonnts-com-Lyon-Roman.otf",
+  variable: "--font-fonnts-com-lyon-roman",
+  display: "swap",
+});
