@@ -12,6 +12,9 @@ const BlogData = [
     tags: ["jewellery", "knowledge"],
     sign: "By Katerina Perez",
     club: false,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/2.jpg",
@@ -20,6 +23,9 @@ const BlogData = [
     tags: ["jewellery", "profile"],
     sign: "By Katerina Perez",
     club: false,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/3.jpg",
@@ -28,6 +34,9 @@ const BlogData = [
     tags: ["jewellery", "knowledge"],
     sign: "By Katerina Perez",
     club: true,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/4.jpg",
@@ -36,6 +45,9 @@ const BlogData = [
     tags: ["jewellery", "trends"],
     sign: "By Francesca Fearon",
     club: true,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/5.jpg",
@@ -44,6 +56,9 @@ const BlogData = [
     tags: ["jewellery", "profile"],
     sign: "By Katerina Perez",
     club: false,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/6.jpg",
@@ -52,6 +67,9 @@ const BlogData = [
     tags: ["jewellery", "knowledge"],
     sign: "By Joshua Hendren",
     club: true,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/7.jpeg",
@@ -60,6 +78,9 @@ const BlogData = [
     tags: ["jewellery", "profile"],
     sign: "By Katerina Perez",
     club: true,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/8.webp",
@@ -68,6 +89,9 @@ const BlogData = [
     tags: ["jewellery", "trends"],
     sign: "By Francesca Fearon",
     club: true,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
   {
     url: "/blog-images/9.webp",
@@ -76,6 +100,9 @@ const BlogData = [
     tags: ["jewellery", "profile"],
     sign: "By Katerina Perez",
     club: true,
+    publishDate: "June 10, 2024",
+    by: "By Katerina Perez",
+    readTime: "8 min read",
   },
 ];
 

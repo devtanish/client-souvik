@@ -42,3 +42,21 @@ export const ppplayground = localFont({
     style: "normal",
     variable: "--font-ppplayground",
 });
+
+export const FuturaCyrillicBook = localFont({
+  src: "../../public/fonts/FuturaCyrillicBook.ttf",
+  variable: "--font-futura-cyrillic-book",
+  display: "swap",
+});
+
+export const kudry_weird_headline = localFont({
+  src: "../../public/fonts/kudry-weird-headline.otf",
+  variable: "--font-kudry-weird-headline",
+  display: "swap",
+});
+
+export const fonnts_com_Lyon_Italic = localFont({
+  src: "../../public/fonts/fonnts-com-Lyon-Italic.otf",
+  variable: "--font-fonnts-com-lyon-italic",
+  display: "swap",
+});
