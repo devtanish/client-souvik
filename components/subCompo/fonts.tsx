@@ -66,3 +66,9 @@ export const fonnts_com_Lyon_Roman = localFont({
   variable: "--font-fonnts-com-lyon-roman",
   display: "swap",
 });
+
+export const FuturaCyrillicLight = localFont({
+  src: "../../public/fonts/FuturaCyrillicLight.ttf",
+  variable: "--font-futura-cyrillic-light",
+  display: "swap",
+});

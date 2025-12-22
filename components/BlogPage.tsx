@@ -15,6 +15,7 @@ const BlogData = [
     publishDate: "June 10, 2024",
     by: "By Katerina Perez",
     readTime: "8 min read",
+    BigImages: ["/blog-images/1.jpg", "/blog-images/2.jpg", "/blog-images/3.jpg", "/blog-images/4.jpg"],
   },
   {
     url: "/blog-images/2.jpg",

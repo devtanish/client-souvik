@@ -1,5 +1,9 @@
 "use client";
 
+import { ImageCarousel } from './BigImage';
+import ShortImage from './Blog/ShortImage';
+import NormalText from './Blog/NormalText';
+import ItalicText from './Blog/ItalicText';
 import { useState, useEffect } from 'react';
 import BlogFooter from './BlogFooter';
 import Link from 'next/link';
@@ -54,16 +58,16 @@ const Drawer = ({ isOpen, onClose, Data }: { isOpen: boolean; onClose: () => voi
           {/* Content area - Add your additional content here */}
           <div className="md:p-6 flex gap-5 flex-col justify-center items-center w-full">
             <span className=' sticky top-5/12 self-start z-10 hidden md:block'>
-              <div className=' scale-120 border-1 mb-5 px-5  lg:px-6 xl:px-8 py-4 rounded-4xl hover:border-black bg-white transition-colors duration-200 '>
-                <svg width="14" height="20" className='translate-x-0.5' viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1V10.5M7 1L3 4.5M7 1L11 4.5M4.5625 8H0.5V19H13.5V8H9.4375" stroke="black"></path></svg>
+              <div className=' scale-120 border-1 mb-5 px-5 cursor-pointer lg:px-6 xl:px-8 py-4 rounded-4xl hover:border-black bg-white transition-colors duration-200 '>
+                <svg width="14" height="20" className='translate-x-0.5 cursor-pointer' viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1V10.5M7 1L3 4.5M7 1L11 4.5M4.5625 8H0.5V19H13.5V8H9.4375" stroke="black"></path></svg>
               </div>
-              <div className=' scale-120 border-1 px-5 lg:px-6 xl:px-8 py-4 rounded-4xl bg-white hover:border-black transition-colors duration-200'>
+              <div className=' scale-120 border-1 px-5 lg:px-6 xl:px-8 cursor-pointer py-4 rounded-4xl bg-white hover:border-black transition-colors duration-200'>
                 <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.9851 4.72677C15.9157 4.00513 15.5767 3.32585 15.1144 2.76344C14.3205 1.79857 13.0251 1.01557 11.7407 1.00024C10.4342 0.984897 9.2186 1.71896 8.49926 2.77585C7.77992 1.71896 6.56428 0.984897 5.2578 1.00024C3.97347 1.01557 2.67807 1.79857 1.88414 2.76344C1.42107 3.32585 1.08282 4.00513 1.01339 4.72677C0.927723 5.62224 1.26154 6.51772 1.77114 7.26274C2.47202 8.28749 3.47865 9.03397 4.35382 9.8995C5.73563 11.2661 7.11745 12.6327 8.5 14C9.88181 12.6334 11.2636 11.2668 12.6462 9.8995C13.5214 9.03397 14.528 8.28749 15.2289 7.26274C15.7385 6.51772 16.0723 5.62224 15.9866 4.72677H15.9851Z" stroke="black" stroke-miterlimit="10"></path></svg>
               </div>
             </span>
 
 
-            <div className=' p-6 xl:px-[8%] 2xl:px-[10%] flex gap-0 flex-col justify-center items-center w-full md:-translate-y-40'>
+            <div className=' p-6 pb-8 xl:px-[8%] 2xl:px-[10%] flex gap-0 flex-col justify-center items-center  w-full md:-translate-y-40'>
                 {/* Tags */}
                 <div className="flex uppercase text-sm gap-1 text-black font-semibold hover:text-black">
                     <Link href={`/blog?tag=${Data.tags[0]}`} className="border-1 px-4 py-1 rounded-2xl cursor-pointer">{Data.tags && Data.tags[0]}</Link>
@@ -75,27 +79,44 @@ const Drawer = ({ isOpen, onClose, Data }: { isOpen: boolean; onClose: () => voi
                   <div className={`text-center leading-none font-light text-[3rem] md:text-[5rem] xl:text-[6.5rem]  ${ppplayground.className}`}><span>{Data.title}: </span></div>
                   <span className={`text-center -translate-y-2 leading-none font-light text-[2rem] md:text-[3rem] xl:text-[5rem] `}>{Data.description}</span>
                   <div
-                    className={` hidden cursor-pointe mt-5 md:flex justify-center gap-x-5  text-center uppercase md:text-xs font-semibold ${FuturaCyrillicBook.className}`}
+                    className={` cursor-pointe mt-5 text-[0.7rem] flex justify-around md:justify-center gap-x-5  text-center uppercase md:text-xs md:font-semibold ${FuturaCyrillicBook.className}`}
                   >
                     {Data.publishDate} <span>•</span> {Data.by} <span>•</span> {Data.readTime} 
 
                   </div>
 
                 </div>
+            </div>
 
+            <div className='px-3 py-5 flex flex-col justify-center items-center w-full -translate-y-20 md:-translate-y-55'>
               {/* Content */}
-                <div className="flex flex-col gap-10 my-10">
-                  <div className={`${fonnts_com_Lyon_Italic.className} font-italic lg:px-[7%] xl:px-[10%] flex justify-center text-lg md:text-xl xl:text-2xl 2xl:text-3xl md:text-left`}>Sharing my passion for jewellery across my platforms often leads to unexpected encounters. When a new jewellery designer and devoted follower, Youngsun Nam, reached out asking to meet and show me the fruits of her imagination, I agreed right away. She had just exhibited her eponymous brand, Youngsun Nam, in Rome during Jewellery Week in October, and made a stop in Paris to meet me before flying back home to Seoul, Korea.
+
+
+              <div className='w-full h-full'>
+                <div className="xl:px-[8%] 2xl:px-[10%] flex flex-col gap-10 my-10 justify-center items-center w-full">
+
+                    <ItalicText children={"Sharing my passion for jewellery across my platforms often leads to unexpected encounters. When a new jewellery designer and devoted follower, Youngsun Nam, reached out asking to meet and show me the fruits of her imagination, I agreed right away. She had just exhibited her eponymous brand, Youngsun Nam, in Rome during Jewellery Week in October, and made a stop in Paris to meet me before flying back home to Seoul, Korea."}/>
+                    
+                    <NormalText firstCapital children={"Youngsun is one of the very few Korean jewellers I’ve had the pleasure of meeting, and her Instagram page, which revealed only glimpses of her designs, intrigued me from the very first glance. We met at the Cheval Blanc hotel in Paris, where she presented a dozen pieces from her debut collection against the backdrop of the River Seine. Three elements—a bold aesthetic, organic shapes and coloured gemstones—united the three chapters of her first collection into one harmonious vision. Though each jewel had a distinct identity, they shared a common thread: pavé diamond details, flowing organic forms and a hidden message behind every design, which I discovered one by one."}/>
+
+                    <ShortImage URL='/blog-images/smallImages/1.jpg' Title='The Lace and Diamond Collection is a collaboration between Maxence Van Der Bauwede and French fashion designer Victor Weinsanto'/>
+
+                    <NormalText  children='The collaboration came about when Maxence attended Victor’s Spring/Summer 2025 show in September 2024 at the Centre Pompidou. Captivated by the designs coming down the catwalk, he reached out to the up-and-coming Parisian designer. A former Jean Paul Gaultier protégé, Victor’s couture-meets-fantasy aesthetic resonated immediately with Maxence’s own appetite for creative risk. In their early discussions, it became clear that both saw jewellery not as static ornament but as something capable of movement, emotion and theatrical expression, and the idea of creating a jewellery collection that could live within the language of haute couture emerged. '/>
+
                   </div>
-                  
-                  <div
-                    className={`
-                      ${fonnts_com_Lyon_Roman.className} lg:px-[7%] xl:px-[10%] text-lg md:text-xl xl:text-2xl 2xl:text-3xl md:text-left first-letter:text-[4.5rem] first-letter:font-normal first-letter:leading-none first-letter:float-left first-letter:mr-2`}
-                  >
-                    Youngsun is one of the very few Korean jewellers I’ve had the pleasure of meeting, and her Instagram page, which revealed only glimpses of her designs, intrigued me from the very first glance. We met at the Cheval Blanc hotel in Paris, where she presented a dozen pieces from her debut collection against the backdrop of the River Seine. Three elements—a bold aesthetic, organic shapes and coloured gemstones—united the three chapters of her first collection into one harmonious vision. Though each jewel had a distinct identity, they shared a common thread: pavé diamond details, flowing organic forms and a hidden message behind every design, which I discovered one by one.
+                  <ImageCarousel images={["/blog-images/1.jpg", "/blog-images/2.jpg", "/blog-images/3.jpg", "/blog-images/4.jpg"]}/>
+                </div>
+
+
+                <div className='h-full w-full'>
+                  <div className="xl:px-[8%] 2xl:px-[10%] flex flex-col gap-10 my-10 justify-center items-center w-full">
+                    <NormalText children='I was genuinely moved by the perfect balance of the creations, which subtly blended haute couture craftsmanship with a sensual and avant-garde touch,” Maxence says. “The bride, all in veils, embroidery and transparency, was a revelation for me.” He had already been exploring lace from a jewellery perspective when he wrote to Victor to share his sketches—and received drawings in return inspired by Madame de Pompadour and Madame du Barry, the great seductresses of the 17th and 18th centuries. It turned out that embroidery and lace were central to his upcoming presentation at Paris Fashion Week. “Unbeknownst to us, we were working on the same theme, and our meeting became inevitable.'/>
                   </div>
                 </div>
+
+
               </div>
+              
             </div>
           <BlogFooter/>
         </div>
