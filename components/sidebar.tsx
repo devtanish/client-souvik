@@ -272,9 +272,9 @@ export default function Sidebar() {
 
       <Link href={"/"}>
         <Image
-          src={"/logo2.png"}
+          src={"/Logo.svg"}
           alt="logo"
-          className={`${pathname === "/" ? "fixed top-10 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0" : "fixed top-12 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0"}`}
+          className={`${pathname === "/" ? "fixed top-10 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0" : "fixed top-13 md:flex z-30 hidden left-35 cursor-pointer m-0 p-0"}`}
           width={pathname === "/" ? 300 : 200}
           height={300}
         />

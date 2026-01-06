@@ -54,7 +54,7 @@ export default function CartSidebar() {
       <div className={`${inter.className} fixed inset-0 bg-black/50 z-40`} onClick={() => setIsCartOpen(false)} />
 
       {/* Sidebar */}
-      <div className={`fixed right-0 top-7 md:top-8 h-full w-full max-w-xl bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out ${inter.className}`}>
+      <div className={`fixed right-0 top-7 md:top-8 lg:top-9 h-full w-full max-w-xl bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out ${inter.className}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-4 border-b">

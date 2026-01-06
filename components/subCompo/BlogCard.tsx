@@ -3,7 +3,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import ImageHoverZoom from "../animations/ImageZoom";
-import { ppplayground } from "./fonts";
+import { ppplayground, FuturaCyrillicBook } from "./fonts";
 
 interface BlogCardProps {
     url?: string;
@@ -37,7 +37,7 @@ export function BlogCard({url, title, description, tags, sign, club}: BlogCardPr
                     <span className={`text-2xl md:text-4xl `}><span className={`text-4xl md:text-[2.7rem] ${ppplayground.className}`}>{title}:</span> {description}</span>
                     
                 </div>
-                <div className="ml-2 text-xs mt-0 lg:mt-2 text-black hover:text-black">
+                <div className={`ml-2 text-[0.64rem] mt-0 lg:mt-2 text-black hover:text-black uppercase ${FuturaCyrillicBook.className}`}>
                     {sign}
                 </div>
             </div>

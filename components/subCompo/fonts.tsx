@@ -72,3 +72,9 @@ export const FuturaCyrillicLight = localFont({
   variable: "--font-futura-cyrillic-light",
   display: "swap",
 });
+
+export const HiguenSerif = localFont({
+  src: "../../public/fonts/Higuen-Serif.otf",
+  variable: "--font-higuen-serif",
+  display: "swap"
+})

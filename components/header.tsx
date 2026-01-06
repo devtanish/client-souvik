@@ -41,9 +41,9 @@ export default function Header({bg}: {bg: boolean}) {
     <div className={`fixed z-15 h-12.5 md:flex md:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none ${bg ? "": "bg-white"} md:bg-transparent`}>
       <Link href={"/"}>
         <Image
-          src={"/logo2.png"}
+          src={"/Logo.svg"}
           alt="logo"
-          className="m-0 p-0 z-30 fixed top-8 left-27 md:hidden transform cursor-pointer -translate-x-1/2"
+          className="m-0 p-0 z-30 fixed top-8.5 left-27 md:hidden transform cursor-pointer -translate-x-1/2"
           width={110}
           height={110}
         />
