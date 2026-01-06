@@ -1,12 +1,14 @@
 "use client";
 import { BlogCard } from "./subCompo/BlogCard";
 import Pagination from '@mui/material/Pagination';
+import { useScrollDirection } from "@/customFunctions/scrole";
 import { HiguenSerif } from "./subCompo/fonts";
 import Stack from '@mui/material/Stack';
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Drawer from "./subCompo/BlogSideBar";
 import { Suspense } from "react";
+import { cn } from "@/lib/utils";
 
 const BLOGS_PER_PAGE = 5;
 
@@ -124,7 +126,7 @@ function useScrollProgress() {
       const docHeight = document.documentElement.scrollHeight;
       const winHeight = window.innerHeight;
       const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
-      
+
       setProgress(Math.min(100, Math.max(0, scrollPercent)));
       ticking = false;
     };
@@ -166,13 +168,13 @@ function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
           fill="transparent"
           stroke="none"
         />
-        
+
         <defs>
           <clipPath id="circleClip">
             <circle cx="50" cy="50" r="45" />
           </clipPath>
         </defs>
-        
+
         <rect
           x="5"
           y={5 + (90 * (100 - progress) / 100)}
@@ -181,7 +183,7 @@ function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
           fill="#1a1a1a"
           clipPath="url(#circleClip)"
         />
-        
+
         <path
           d="M 50 30 L 50 60 M 50 60 L 40 50 M 50 60 L 60 50"
           stroke={arrowColor}
@@ -202,6 +204,10 @@ function BlogContent() {
   const tag = searchParams.get("tag");
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
+  // Threshold ref and visibility state
+  const topSectionRef = useRef<HTMLDivElement>(null);
+  const isTopBarVisible = useScrollDirection(topSectionRef);
+
   // Filter blogs by tag
   const filteredBlogs = tag
     ? BlogData.filter((blog) => blog.tags.includes(tag))
@@ -216,22 +222,10 @@ function BlogContent() {
   const blog = BlogData.find((b) => b.title === blogname);
 
   const TopBar = [
-    {
-      text: "Jewellery",
-      link: ""
-    },
-    {
-      text: "knowledge",
-      link: ""
-    },
-    {
-      text: "Moodbord",
-      link: ""
-    },
-    {
-      text: "Raya Story",
-      link: ""
-    }
+    { text: "Jewellery", link: "" },
+    { text: "knowledge", link: "" },
+    { text: "Moodbord", link: "" },
+    { text: "Raya Story", link: "" }
   ];
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
@@ -259,32 +253,42 @@ function BlogContent() {
     params.delete("blogname");
     router.push(`/blog?${params.toString()}`);
   };
-  
+
   return (
     <>
       {blogname && blog && (
-        <Drawer 
-          isOpen={true} 
-          onClose={handleDrawerClose} 
-          key={1} 
+        <Drawer
+          isOpen={true}
+          onClose={handleDrawerClose}
+          key={1}
           Data={blog}
         />
       )}
+
+      {/* Tracker element to know when to start hiding the bar */}
+      <div ref={topSectionRef} className="h-1 w-full" />
+
       <div className={`${blogname ? 'object-cover transition-transform' : ''}`}>
-        <div className="flex gap-10 w-screen justify-center sticky top-20 rounded-2xl md:top-30 z-10">
+      {/* TopBar visibility logic */}
+        <div
+          className={cn(
+            "flex gap-10 w-screen justify-center sticky top-20 rounded-2xl md:top-30 z-10 transition-all duration-300 ease-in-out",
+            !isTopBarVisible ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+          )}
+        >
           <div className="gap-5 md:gap-10 flex justify-center backdrop-blur-xs py-2 md:px-6">
             {TopBar.map((items, idx) => (
-              <span 
+              <button
                 key={idx}
                 onClick={() => handleTagClick(items.text)}
                 className="uppercase hover:text-gray-500 cursor-pointer text-[0.8rem] md:text-[0.95rem]"
               >
                 {items.text}
-              </span>
+              </button>
             ))}
           </div>
         </div>
-        
+
         {/* Show HELLO page when no tag is selected */}
         {!tag ? (
           <div className="flex justify-center items-center min-h-[50vh]">
@@ -292,43 +296,37 @@ function BlogContent() {
           </div>
         ) : (
           <>
+          {/* Blog Cards logic */}
             <div className="lg:px-5 px-0 sm:px-4 flex justify-center items-center">
               <div className="grid 2xl:mx-5 xl:grid-cols-3 lg:grid-cols-2 grid-cols-1">
                 {paginatedBlogs.map((blog, index) => {
                   return (
-                    <div 
-                      key={index} 
-                      className="mt-10" 
+                    <div
+                      key={index}
+                      className="mt-10"
                       onClick={() => handleBlogClick(blog.title)}
                     >
-                      <BlogCard 
-                        url={blog.url} 
-                        title={blog.title} 
-                        description={blog.description} 
-                        tags={blog.tags} 
-                        sign={blog.sign} 
-                        club={blog.club} 
+                      <BlogCard
+                        url={blog.url}
+                        title={blog.title}
+                        description={blog.description}
+                        tags={blog.tags}
+                        sign={blog.sign}
+                        club={blog.club}
                       />
                     </div>
                   );
                 })}
               </div>
             </div>
-            {/* {filteredBlogs.length == 0 ? (<Stack spacing={2} className="mt-15 flex items-center pb-10">
-              <Pagination 
-                count={totalPages} 
-                page={currentPage}
-                onChange={handlePageChange}
-                // color="primary"
-              />
-            </Stack>) : ""} */}
+
+            {/* Paging Logic And component */}
             {filteredBlogs.length > BLOGS_PER_PAGE && (
               <Stack spacing={2} className="mt-15 flex items-center pb-10">
-                <Pagination 
-                  count={totalPages} 
+                <Pagination
+                  count={totalPages}
                   page={currentPage}
                   onChange={handlePageChange}
-                  // color="primary"
                 />
               </Stack>
             )}
