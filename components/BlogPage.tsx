@@ -8,6 +8,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Drawer from "./subCompo/BlogSideBar";
 import { Suspense } from "react";
+import { FullScreenVideo } from "./video/video";
 import { cn } from "@/lib/utils";
 
 const BLOGS_PER_PAGE = 5;
@@ -154,7 +155,7 @@ function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
   const arrowColor = progress > 50 ? '#ffffff' : '#000000';
 
   return (
-    <div className={`${positionClass} bottom-5 right-2 md:bottom-22 md:right-5.5 z-[]`} style={{ width: `${size}px`, height: `${size}px` }}>
+    <div className={`${positionClass} bottom-5 right-2 md:bottom-22 md:right-5.5 z-50`} style={{ width: `${size}px`, height: `${size}px` }}>
       <svg
         width={size}
         height={size}
@@ -204,16 +205,13 @@ function BlogContent() {
   const tag = searchParams.get("tag");
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
-  // Threshold ref and visibility state
   const topSectionRef = useRef<HTMLDivElement>(null);
   const isTopBarVisible = useScrollDirection(topSectionRef);
 
-  // Filter blogs by tag
   const filteredBlogs = tag
     ? BlogData.filter((blog) => blog.tags.includes(tag))
     : BlogData;
 
-  // Calculate pagination
   const totalPages = Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE);
   const startIndex = (currentPage - 1) * BLOGS_PER_PAGE;
   const endIndex = startIndex + BLOGS_PER_PAGE;
@@ -256,48 +254,48 @@ function BlogContent() {
 
   return (
     <>
-      {blogname && blog && (
-        <Drawer
-          isOpen={true}
-          onClose={handleDrawerClose}
-          key={1}
-          Data={blog}
-        />
-      )}
+      <div className="absolute">
+        {blogname && blog && (
+          <Drawer
+            isOpen={true}
+            onClose={handleDrawerClose}
+            key={1}
+            Data={blog}
+          />
+        )}
+      </div>
 
       {/* Tracker element to know when to start hiding the bar */}
-      <div ref={topSectionRef} className="h-1 w-full" />
+      <div ref={topSectionRef} className="h-1 w-full " />
 
-      <div className={`${blogname ? 'object-cover transition-transform' : ''}`}>
-      {/* TopBar visibility logic */}
-        <div
-          className={cn(
-            "flex gap-10 w-screen justify-center sticky top-20 rounded-2xl md:top-30 z-10 transition-all duration-300 ease-in-out",
-            !isTopBarVisible ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
-          )}
-        >
-          <div className="gap-5 md:gap-10 flex justify-center backdrop-blur-xs py-2 md:px-6">
+      <div className={`${blogname ? 'object-cover transition-transform my-12 md:my-25 md:mb-15' : ''}`}>
+        {/* TopBar visibility logic - ONLY THIS PART IS FIXED */}
+      <div
+        className={cn(
+          "fixed left-0 right-0 top-20 md:top-27 z-40 transition-all duration-300 ease-in-out",
+          !isTopBarVisible ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+        )}
+      >
+        <div className="flex justify-center w-full py-0 md:py-4 xl:py-4">
+          <div className="flex gap-5 md:gap-10 backdrop-blur-xs px-6 py-2 rounded-full ">
             {TopBar.map((items, idx) => (
               <button
                 key={idx}
                 onClick={() => handleTagClick(items.text)}
-                className="uppercase hover:text-gray-500 cursor-pointer text-[0.8rem] md:text-[0.95rem]"
+                className="uppercase hover:text-gray-500 transition-colors cursor-pointer text-[0.7rem] md:text-sm font-medium"
               >
                 {items.text}
               </button>
             ))}
           </div>
         </div>
+      </div>
 
         {/* Show HELLO page when no tag is selected */}
-        {!tag ? (
-          <div className="flex justify-center items-center min-h-[50vh]">
-            <h1 className="text-4xl font-bold">HELLO</h1>
-          </div>
-        ) : (
+        {tag && (
           <>
-          {/* Blog Cards logic */}
-            <div className="lg:px-5 px-0 sm:px-4 flex justify-center items-center">
+            {/* Blog Cards logic */}
+            <div className="lg:px-5 px-0 sm:px-4 flex justify-center items-center my-18 md:my-10 md:mt-29 md:mb-15">
               <div className="grid 2xl:mx-5 xl:grid-cols-3 lg:grid-cols-2 grid-cols-1">
                 {paginatedBlogs.map((blog, index) => {
                   return (
@@ -333,6 +331,13 @@ function BlogContent() {
           </>
         )}
       </div>
+
+      {!tag && (<>
+        <FullScreenVideo
+          videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          poster="/blog-images/video-poster.jpg"
+        />
+      </>)}
     </>
   );
 }

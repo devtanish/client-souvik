@@ -36,7 +36,7 @@ export default function RootLayout({
           <Header bg={true}/>
           <Sidebar />
           <Tooltip />
-          <main className={`my-12 md:my-25 md:mb-15`}>{children}</main>
+          <main className={``}>{children}</main>
           <CartSidebar />
           <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
           <Footer />
