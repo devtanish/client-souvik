@@ -155,7 +155,7 @@ function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
   const arrowColor = progress > 50 ? '#ffffff' : '#000000';
 
   return (
-    <div className={`${positionClass} bottom-5 right-2 md:bottom-22 md:right-5.5 z-50`} style={{ width: `${size}px`, height: `${size}px` }}>
+    <div className={`${positionClass} bottom-5 right-2 md:bottom-22 md:right-5.5 `} style={{ width: `${size}px`, height: `${size}px` }}>
       <svg
         width={size}
         height={size}
