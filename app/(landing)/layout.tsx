@@ -12,7 +12,7 @@ import CartSidebar from "@/components/cart-sidebar"
 import LoadingPage from "@/components/PageLoader";
 
 export const metadata: Metadata = {
-  title: "Earrings Collection | Raya Jewelry",
+  title: "Raya",
   description: "Explore our collection of earrings - huggies, hoops, studs, and more.",
 }
 

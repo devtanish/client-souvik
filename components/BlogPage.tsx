@@ -283,7 +283,7 @@ function BlogContent() {
           )}
         >
           <div className="flex justify-center w-full py-0 md:py-4 xl:py-4">
-            <div className="flex gap-5 md:gap-10 backdrop-blur-sm px-6 py-2 rounded-full">
+            <div className="flex gap-5 md:gap-10 backdrop-blur-sm bg-white px-6 py-2 rounded-full">
               {TopBar.map((items, idx) => (
                 <button
                   key={idx}
