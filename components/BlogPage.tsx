@@ -156,26 +156,44 @@ function useScrollProgress() {
 
 function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
   const progress = useScrollProgress();
-  const positionClass = position === 'fixed' ? 'fixed' : position === 'absolute' ? 'absolute' : 'sticky';
+
+  const positionClass =
+    position === 'fixed'
+      ? 'fixed'
+      : position === 'absolute'
+      ? 'absolute'
+      : 'sticky';
 
   const arrowColor = progress > 50 ? '#ffffff' : '#000000';
 
-  return (
-    <div className={`${positionClass} bottom-22 right-5.5 md:bottom-22 md:right-5.5 `} style={{ width: `${size}px`, height: `${size}px` }}>
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 100 100"
-        className="block"
-      >
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          fill="transparent"
-          stroke="none"
-        />
+  // Mobile-safe threshold
+  const isNearBottom = progress >= 90;
 
+  const rotation = isNearBottom ? 180 : 0;
+  const translateY = isNearBottom ? 8 : 0;
+
+  const handleClick = () => {
+    if (!isNearBottom) return;
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <div
+      onClick={handleClick}
+      className={`${positionClass} bottom-22 right-5.5 md:bottom-22 md:right-5.5`}
+      style={{
+        width: size,
+        height: size,
+        transform: `rotate(${rotation}deg)`,
+        transition: 'transform 300ms ease-in-out',
+        cursor: isNearBottom ? 'pointer' : 'default',
+      }}
+    >
+      <svg width={size} height={size} viewBox="0 0 100 100">
         <defs>
           <clipPath id="circleClip">
             <circle cx="50" cy="50" r="45" />
@@ -184,9 +202,9 @@ function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
 
         <rect
           x="5"
-          y={5 + (90 * (100 - progress) / 100)}
+          y={5 + (90 * (100 - progress)) / 100}
           width="90"
-          height={90 * progress / 100}
+          height={(90 * progress) / 100}
           fill="#1a1a1a"
           clipPath="url(#circleClip)"
         />
@@ -197,12 +215,18 @@ function ScrollProgressArrow({ size = 60, position = 'fixed' }) {
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          fill="#FFFFFF"
+          fill="none"
+          style={{
+            transform: `translateY(${translateY}px)`,
+            transition: 'transform 300ms ease-in-out',
+          }}
         />
       </svg>
     </div>
   );
 }
+
+
 
 function BlogContent() {
   const searchParams = useSearchParams();
@@ -278,7 +302,7 @@ function BlogContent() {
         {/* TopBar visibility logic - ONLY THIS PART IS FIXED */}
         <div
           className={cn(
-            "fixed left-0 right-0 top-20 md:top-28 z-40 transition-all duration-300 ease-in-out",
+            "fixed left-0 right-0 top-20 md:top-28 z-5 transition-all duration-300 ease-in-out",
             !isTopBarVisible ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
           )}
         >
@@ -288,7 +312,7 @@ function BlogContent() {
                 <button
                   key={idx}
                   onClick={() => handleTagClick(items.text)}
-                  className="uppercase hover:text-gray-500 transition-colors cursor-pointer text-xs md:text-sm font-medium"
+                  className="uppercase hover:text-gray-500 transition-colors cursor-pointer text-[0.7rem] xs:text-xs md:text-sm font-medium"
                 >
                   {items.text}
                 </button>
