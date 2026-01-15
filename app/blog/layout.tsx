@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${cormorantGaramond.className}`}
       >
         <CartProvider>
-          <div className="w-screen h-25 transition-all duration-300 ease-out hover:bg-white z-10 top-7 md:flex hidden fixed"></div> 
+          {/* <div className="w-screen h-25 transition-all duration-300 ease-out hover:bg-white z-10 top-7 md:flex hidden fixed"></div>  */}
           <Header bg={true}/>
           <Sidebar />
           <Tooltip />
