@@ -28,7 +28,13 @@ export default function Section1() {
             <div className="text-sm lg:text-md font-serif">Beyond client-driven projects, we invest in experimental work that challenges the status quo and explores the limitless possibilities of digital media. By constantly pushing the limits of technology and creativity, we not only enhance our skills but also inspire new trends and set new standards in the industry.</div>
         </div>
 
-        <div className="text-sm"><ProfileDropdown /></div>
+        <div className="text-sm flex flex-col gap-1">
+          <Image src={"/man/3.webp"} alt="hello" height={100} width={100} className="rounded-full md:mb-2 size-10 md:size-15"/>
+          <div className="text-lg md:text-2xl">Alex Bennet, Creative Director</div>
+          <div className="text-md md:text-lg ">
+            <button className="cursor-pointer hover:underline w-max">Learn more</button>
+          </div>
+        </div>
         </div>
     </section>
   );
