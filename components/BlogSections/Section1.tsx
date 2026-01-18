@@ -1,5 +1,4 @@
 import Image from "next/image";
-import ProfileDropdown from "../kokonutui/profile-dropdown";
 
 export default function Section1() {
   return (
