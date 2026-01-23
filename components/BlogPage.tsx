@@ -373,7 +373,9 @@ function BlogContent() {
 
             <Section2 />
 
-            <Section3 />
+            <Section3 type="Jewellery"/>
+
+            <Section3 type="Knowledge"/>
           </div>
         </>
       )}
