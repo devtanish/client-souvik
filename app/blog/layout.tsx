@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "Explore our collection of earrings - huggies, hoops, studs, and more.",
 }
 
-const cormorantGaramond = Cormorant_Garamond({
+export const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${cormorantGaramond.className}`}
       >
         <CartProvider>
-          {/* <div className="w-screen h-25 transition-all duration-300 ease-out hover:bg-white z-10 top-7 md:flex hidden fixed"></div>  */}
+          <div className="w-screen h-25 transition-all duration-300 ease-out hover:bg-white z-10 top-7 md:flex hidden fixed"></div> 
           <Header bg={true}/>
           <Sidebar />
           <Tooltip />

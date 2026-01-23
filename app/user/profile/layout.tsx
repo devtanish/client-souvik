@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../../globals.css";
+import "@/app/globals.css";
 import WhatsAppChatButton from "@/components/whatsapp-chat-button";
 import Sidebar from "@/components/sidebar";
 import Tooltip from "@/components/tooltip";
@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import CartSidebar from "@/components/cart-sidebar";
 import Footer from "@/components/footer";
 import { CartProvider } from "@/contexts/cart-context";
+import { cormorantGaramond } from "@/components/subCompo/fonts";
 
 export const metadata: Metadata = {
   title: "Earrings Collection | Raya Jewelry",
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${cormorantGaramond.className}`}
       >
         <CartProvider>
           <Header bg={false}/>

@@ -9,6 +9,7 @@ import { SlHandbag } from "react-icons/sl"
 import { useCart } from "@/contexts/cart-context"
 import { Badge } from "@/components/ui/badge"
 import { Inter } from "next/font/google"
+import { User } from 'lucide-react'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -91,9 +92,9 @@ export default function Header({bg}: {bg: boolean}) {
           className={`${questrial.className} hidden lg:flex md:w-[400px] z-30 text-sm w-[170px] bg-transparent border-b border-gray-500 focus:border-gray-300 text-black placeholder-black px-0 outline-none transition-colors`}
         />
 
-        <div className="hidden md:flex gap-9">
-          <button onClick={handleWishlistClick} className="relative">
-            <LuHeart size={25} className="mt-0.5" />
+        <Link href={"/user/profile"} className="hidden md:flex gap-9">
+          <button className="relative">
+            <User size={25} className="mt-0.5" />
             {getWishlistCount() > 0 && (
               <Badge
                 variant="destructive"
@@ -114,7 +115,7 @@ export default function Header({bg}: {bg: boolean}) {
               </Badge>
             )}
           </button>
-        </div>
+        </Link>
       </div>
     </div>
   )

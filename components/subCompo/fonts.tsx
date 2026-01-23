@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Cormorant_Garamond } from "next/font/google";
 
 export const Montserrat = localFont({
   src: "../../public/fonts/Claremonts-Regular-Exfontb6dd.otf",
@@ -77,4 +78,10 @@ export const HiguenSerif = localFont({
   src: "../../public/fonts/Higuen-Serif.otf",
   variable: "--font-higuen-serif",
   display: "swap"
+})
+
+export const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 })
