@@ -39,7 +39,7 @@ export default function Profile() {
     ]
 
     return (
-        <div className="mt-25 md:mt-40 w-screen  mb-20">
+        <div className="mt-5 md:mt-20 w-screen  mb-20">
             <div className="md:mt-0 lg:mx-15 md:mx-10 mx-3">
                 <div className="w-screen h-24 bg-white z-10 top-8 md:flex hidden -translate-x-12 fixed"></div>
                 <div className=" bg-white">

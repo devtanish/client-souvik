@@ -62,8 +62,8 @@ export default function Header({bg}: {bg: boolean}) {
 
         <div className={`float-right md:hidden mt-0.5 gap-1.5 mr-2 inline-flex -translate-x-2  ${inter.className}`}>
           <ToggleSearch2 />
-          <button onClick={handleWishlistClick} className="relative">
-            <LuHeart size={20} className="mt-0.5 mr-2" />
+          <Link href={'/user/profile'} className="relative ">
+            <User size={20} className="mt-0.5 mr-2" />
             {getWishlistCount() > 0 && (
               <Badge
                 variant="destructive"
@@ -72,7 +72,7 @@ export default function Header({bg}: {bg: boolean}) {
                 {getWishlistCount()} 
               </Badge>
             )}
-          </button>
+          </Link>
           <button onClick={handleCartClick} className={`relative  ${inter.className}`}>
             <SlHandbag size={20} className="mt-0.5" />
             {getCartCount() > 0 && (
@@ -92,8 +92,8 @@ export default function Header({bg}: {bg: boolean}) {
           className={`${questrial.className} hidden lg:flex md:w-[400px] z-30 text-sm w-[170px] bg-transparent border-b border-gray-500 focus:border-gray-300 text-black placeholder-black px-0 outline-none transition-colors`}
         />
 
-        <Link href={"/user/profile"} className="hidden md:flex gap-9">
-          <button className="relative">
+        <div className="hidden md:flex gap-9">
+          <Link href={"/user/profile"} className="relative translate-y-1.5">
             <User size={25} className="mt-0.5" />
             {getWishlistCount() > 0 && (
               <Badge
@@ -103,7 +103,7 @@ export default function Header({bg}: {bg: boolean}) {
                 {getWishlistCount()} 
               </Badge>
             )}
-          </button>
+          </Link>
           <button onClick={handleCartClick} className="relative">
             <SlHandbag size={25} className="" />
             {getCartCount() > 0 && (
@@ -115,7 +115,7 @@ export default function Header({bg}: {bg: boolean}) {
               </Badge>
             )}
           </button>
-        </Link>
+        </div>
       </div>
     </div>
   )
