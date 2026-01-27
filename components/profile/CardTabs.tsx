@@ -15,7 +15,7 @@ export const MetricCard = ({ title, value, trend, type = 'number', description, 
     <div 
       onClick={onClick}
       className={`min-w-[250px] md:min-w-[280px] bg-white rounded-2xl p-4
-        active:scale-[0.98] md:p-6 border-2 shadow-sm flex-shrink-0 cursor-pointer transition-all hover:shadow-md ${
+        active:scale-[0.98] md:p-6 border shadow-sm flex-shrink-0 cursor-pointer transition-all hover:shadow-md ${
         isActive ? 'border-gray-900' : 'border-gray-200'
       }`}
     >
