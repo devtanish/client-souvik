@@ -450,3 +450,12 @@
     /* Disable hover effects on touch devices */
   }
 }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
