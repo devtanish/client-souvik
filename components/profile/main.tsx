@@ -3,7 +3,7 @@ import { Gift, Plus } from "lucide-react";
 import Profile from "./tabs/Profile";
 import AffiliateProgram from "./tabs/AffiliateProgram";
 import Orders from "./tabs/Orders";
-import Address from "./Address";
+import Address from "./tabs/Address";
 import StoreAndGift from "./tabs/StoreAndGift";
 import WishList from "./tabs/WishList";
 
