@@ -49,7 +49,7 @@ export default function Header({bg}: {bg: boolean}) {
           height={110}
         />
       </Link>
-      <div className={`fixed z-15 h-12.5 md:flex md:justify-end lg:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none ${bg ? "": "bg-white"} md:bg-transparent`}>
+      <div className={`fixed z-15 h-12.5 md:flex md:justify-end lg:justify-between md:w-2/5 w-screen top-6.5 md:top-15 pt-3 right-0 md:right-12 md:border-none ${bg ? "": "bg-gray-50"} md:bg-transparent`}>
         <Link href={"/"}>
           <Image
             src={"/Logo.svg"}

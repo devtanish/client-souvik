@@ -43,7 +43,7 @@ export default function RootLayout({
           <Tooltip />
           <WhatsAppChatButton phoneNumber="+918850305563" notificationCount={1} message="Hello, I'd like to chat with you!" />
 
-          <main className="pt-20">{children}</main>
+          <main className="pt-18 bg-gray-50">{children}</main>
           <CartSidebar />
           <Footer/>
         </CartProvider>
