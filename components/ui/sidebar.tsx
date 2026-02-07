@@ -164,6 +164,37 @@ function Sidebar({
   collapsible?: "offcanvas" | "icon" | "none"
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const sidebarRef = React.useRef<HTMLDivElement>(null)
+
+  // Handle sticky behavior that stops at footer
+  React.useEffect(() => {
+    if (isMobile) return
+
+    const handleScroll = () => {
+      const sidebar = sidebarRef.current
+      if (!sidebar) return
+
+      const footer = document.querySelector('footer')
+      if (!footer) return
+
+      const footerRect = footer.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      
+      // Check if footer is entering viewport
+      if (footerRect.top < viewportHeight) {
+        // Calculate how much to move sidebar up
+        const overlap = viewportHeight - footerRect.top
+        sidebar.style.transform = `translateY(-${overlap}px)`
+      } else {
+        sidebar.style.transform = 'translateY(0)'
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Initial check
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isMobile])
 
   if (collapsible === "none") {
     return (
@@ -187,11 +218,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          // UPDATED CLASSNAME BELOW:
-          // 1. Added mt-[20px] to push it down
-          // 2. Added h-[calc(100svh-20px)] to adjust height
-          // 3. Added rounded-t-xl for better aesthetics (optional)
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden mt-[28px] md:mt-0 h-[calc(100svh-20px)] "
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden mt-[28px] md:mt-0 h-[calc(100svh-20px)]"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -231,9 +258,10 @@ function Sidebar({
         )}
       />
       <div
+        ref={sidebarRef}
         data-slot="sidebar-container"
         className={cn(
-          " fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
+          "fixed top-0 z-10 hidden h-screen w-(--sidebar-width) transition-[left,right,width,transform] duration-0 ease-linear md:flex",
           side === "left"
             ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
             : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
@@ -248,7 +276,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+          className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm overflow-y-auto"
         >
           {children}
         </div>
