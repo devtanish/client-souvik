@@ -23,7 +23,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-        <SidebarHeader >
+        <SidebarHeader className=" hidden md:flex" >
             <div className=" md:mt-30 flex">
                 <button className="relative w-7 h-7.5 md:hidden" onClick={() => {
                     toggleSidebar()
