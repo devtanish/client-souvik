@@ -10,7 +10,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import Drawer from "./subCompo/BlogSideBar";
 import { Suspense } from "react";
-import { FullScreenVideo } from "./video/video";
+import { FullScreenVideo } from "./Video/video";
 
 // Utility function for conditional classes
 function cn(...classes: (string | boolean | undefined)[]) {
