@@ -24,7 +24,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
         <SidebarHeader className=" hidden md:flex" >
-            <div className=" md:mt-30 flex">
+            <div className=" md:mt-29 flex">
                 <button className="relative w-7 h-7.5 md:hidden" onClick={() => {
                     toggleSidebar()
                 }}>
@@ -40,7 +40,7 @@ export function AppSidebar() {
                 />
             </div>
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent className="md:border-1 md:border-gray-200 rounded-2xl bg-white">
             <div className="flex h-full flex-col justify-between">
                 <div className="">
                     <SidebarGroup>

@@ -6,6 +6,7 @@ import Orders from "./tabs/Orders";
 import Address from "./tabs/Address";
 import StoreAndGift from "./tabs/StoreAndGift";
 import WishList from "./tabs/WishList";
+import { div } from "motion/react-client";
 
 export const Tabs = ({ currentTab }: { currentTab: string }) => {
     // Map tab names to their corresponding components
@@ -25,7 +26,9 @@ export const Tabs = ({ currentTab }: { currentTab: string }) => {
     return (
         <div>
             {TabComponent ? (
-                <TabComponent />
+                <div className="md:pt-0">
+                    <TabComponent />
+                </div>
             ) : (
                 <div className="text-center py-10 text-gray-500">
                     Tab not found
