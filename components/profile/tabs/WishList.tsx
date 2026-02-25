@@ -120,7 +120,7 @@ export default function SavedGallery() {
     const allTags = Array.from(new Set(sampleVideos.flatMap(v => v.saved)));
 
     return (
-        <div className="min-h-screen dark:bg-zinc-950 py-0 text-white xl:px-[20%]">
+        <div className="min-h-screen dark:bg-zinc-950 py-0 text-white ">
             
             {!activeTag ? (
                 /* VIEW 1: THE FOLDERS */
@@ -128,7 +128,7 @@ export default function SavedGallery() {
                     <div className="mb-4 px-2">
                         <h2 className="text-2xl text-black">{"Your Collections".toUpperCase()}</h2>
                     </div>
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-1">
+                    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-1">
                         {allTags.map(tag => (
                             <div key={tag} onClick={() => updateSavedParam(tag)}>
                                 <InstaCard 
