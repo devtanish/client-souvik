@@ -9,20 +9,28 @@ import { useSidebar } from "@/components/ui/sidebar"
 import { RxCross1 } from "react-icons/rx";
 import Image from "next/image"
 import { useTabsContext } from "@/contexts/profileTabContext";
+import { useEffect } from "react";
 
 export function AppSidebar() {
 
-    const {setTab, isActive} = useTabsContext()
+    const {setTab, isActive, currentTab} = useTabsContext()
 
     const {
-    state,
-    open,
-    setOpen,
-    openMobile,
-    setOpenMobile,
-    isMobile,
-    toggleSidebar,
-  } = useSidebar()
+        state,
+        open,
+        setOpen,
+        openMobile,
+        setOpenMobile,
+        isMobile,
+        toggleSidebar,
+    } = useSidebar()
+
+    useEffect(()=> {
+        if(isMobile) {
+            setOpenMobile(false)
+        } else {
+        }
+    }, [currentTab])
 
   return (
     <Sidebar>
@@ -46,11 +54,52 @@ export function AppSidebar() {
         <SidebarContent className="md:border-1 md:border-gray-200 rounded-2xl bg-white">
             <div className="flex h-full flex-col justify-between">
                 <div className="">
-                    <SidebarGroup className="p-5">
-                        <SidebarContent >Wishlist</SidebarContent>
+                    <SidebarGroup className="py-2 space-y-2">
+
+                        <button
+                        onClick={() => setTab("WISHLIST")}
+                        className={`w-full text-left px-3 py-2 ${isActive("WISHLIST") ? "bg-black text-white" : "hover:bg-gray-100"} rounded-lg text-sm font-medium transition`}
+                        >
+                        Wishlist
+                        </button>
+
+                        <button
+                        onClick={() => setTab("AFFILIATE PROGRAM")}
+                        className={`w-full text-left px-3 py-2 ${isActive("AFFILIATE PROGRAM") ? "bg-black text-white" : "hover:bg-gray-100"} rounded-lg text-sm font-medium transition`}
+                        >
+                        Affiliate Program
+                        </button>
+
+                        <button
+                        onClick={() => setTab("STORE CREDIT/GIFT CARDS")}
+                        className={`w-full text-left px-3 py-2 ${isActive("STORE CREDIT/GIFT CARDS") ? "bg-black text-white" : "hover:bg-gray-100"} rounded-lg text-sm font-medium transition`}
+                        >
+                        Store Credit
+                        </button>
+
+                        <button
+                        onClick={() => setTab("ORDERS")}
+                        className={`w-full text-left px-3 py-2 ${isActive("ORDERS") ? "bg-black text-white" : "hover:bg-gray-100"} rounded-lg text-sm font-medium transition`}
+                        >
+                        Orders
+                        </button>
+
+                        <button
+                        onClick={() => setTab("ADDRESSES")}
+                        className={`w-full text-left px-3 py-2 ${isActive("ADDRESSES") ? "bg-black text-white" : "hover:bg-gray-100"} rounded-lg text-sm font-medium transition`}
+                        >
+                        Addresses
+                        </button>
+
+                        <button
+                        onClick={() => setTab("PROFILE")}
+                        className={`w-full text-left px-3 py-2 ${isActive("PROFILE") ? "bg-black text-white" : "hover:bg-gray-100"} rounded-lg text-sm font-medium transition`}
+                        >
+                        Profile
+                        </button>
+
                     </SidebarGroup>
                     <SidebarGroup className="p-5">
-                        2st Section
                     </SidebarGroup>
                 </div>
                 <SidebarGroup>
