@@ -8,8 +8,11 @@ import {
 import { useSidebar } from "@/components/ui/sidebar"
 import { RxCross1 } from "react-icons/rx";
 import Image from "next/image"
+import { useTabsContext } from "@/contexts/profileTabContext";
 
 export function AppSidebar() {
+
+    const {setTab, isActive} = useTabsContext()
 
     const {
     state,
@@ -43,10 +46,10 @@ export function AppSidebar() {
         <SidebarContent className="md:border-1 md:border-gray-200 rounded-2xl bg-white">
             <div className="flex h-full flex-col justify-between">
                 <div className="">
-                    <SidebarGroup>
-                        1st Section
+                    <SidebarGroup className="p-5">
+                        <SidebarContent >Wishlist</SidebarContent>
                     </SidebarGroup>
-                    <SidebarGroup>
+                    <SidebarGroup className="p-5">
                         2st Section
                     </SidebarGroup>
                 </div>

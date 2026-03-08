@@ -5,31 +5,39 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { Tabs } from "@/components/profile/main"
 import { useRef, useState, useEffect, Suspense, useCallback } from "react"
 import { AppSidebar } from "@/components/profile/SideBar"
+import { TabsProvider, useTabsContext } from "@/contexts/profileTabContext"
+import type { TabName } from "@/contexts/profileTabContext"
 import { useRouter, useSearchParams } from "next/navigation"
 
 type MetricType = "money" | "number"
 
-const METRICS = [
-    { title: "WISHLIST", value: 3.2, trend: 15.7, type: "number", description: "Optimization working", lastUpdate: "Above industry average" },
-    { title: "AFFILIATE PROGRAM", value: 1234, trend: -20, type: "number", description: "Down 20% this period", lastUpdate: "Acquisition needs attention" },
-    { title: "STORE CREDIT/GIFT CARDS", value: 89234, trend: 8.3, type: "number", description: "User base expanding", lastUpdate: "Active in last 30 days" },
-    { title: "ORDERS", value: 45678, trend: 12.5, type: "number", description: "Strong user retention", lastUpdate: "Engagement exceed targets" },
-    { title: "ADDRESSES", value: 4.5, trend: 4.5, type: "number", description: "Steady performance increase", lastUpdate: "Meets growth projections" },
-    { title: "PROFILE", value: 1250, trend: 12.5, type: "money", description: "Trending up this month", lastUpdate: "Visitors for the last 6 months" },
+const METRICS: { title: TabName; value: number; trend: number; type: MetricType; description: string; lastUpdate: string }[] = [
+    { title: "WISHLIST",                value: 3.2,   trend: 15.7, type: "number", description: "Optimization working",        lastUpdate: "Above industry average" },
+    { title: "AFFILIATE PROGRAM",       value: 1234,  trend: -20,  type: "number", description: "Down 20% this period",        lastUpdate: "Acquisition needs attention" },
+    { title: "STORE CREDIT/GIFT CARDS", value: 89234, trend: 8.3,  type: "number", description: "User base expanding",         lastUpdate: "Active in last 30 days" },
+    { title: "ORDERS",                  value: 45678, trend: 12.5, type: "number", description: "Strong user retention",       lastUpdate: "Engagement exceed targets" },
+    { title: "ADDRESSES",               value: 4.5,   trend: 4.5,  type: "number", description: "Steady performance increase", lastUpdate: "Meets growth projections" },
+    { title: "PROFILE",                 value: 1250,  trend: 12.5, type: "money",  description: "Trending up this month",      lastUpdate: "Visitors for the last 6 months" },
 ]
 
 function ProfileContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
 
-    const [activeTab, setActiveTab] = useState<string>(searchParams.get("tab") || "WISHLIST")
-    const [showMetrics, setShowMetrics] = useState(true)
+    // ✅ All tab state lives in context — no local activeTab
+    const { setTab, isActive } = useTabsContext()
 
+    const [showMetrics, setShowMetrics] = useState(true)
     const scrollRef = useRef<HTMLDivElement>(null)
     const scrollContainerRef = useRef<HTMLDivElement>(null)
-    const lastScrollRef = useRef(0) // Fix: use ref instead of state to avoid stale closure
+    const lastScrollRef = useRef(0)
 
-    // Fix: stable scroll handler with ref-based lastScroll
+    // Sync URL param → context on mount
+    useEffect(() => {
+        const tabFromUrl = searchParams.get("tab") as TabName | null
+        if (tabFromUrl) setTab(tabFromUrl)
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
     const handleScroll = useCallback(() => {
         const el = scrollRef.current
         if (!el) return
@@ -45,7 +53,6 @@ function ProfileContent() {
         return () => container.removeEventListener("scroll", handleScroll)
     }, [handleScroll])
 
-    // Drag scroll logic
     const dragRef = useRef({ isDragging: false, startX: 0, scrollLeft: 0 })
 
     const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -68,10 +75,11 @@ function ProfileContent() {
         el.scrollLeft = dragRef.current.scrollLeft - (x - dragRef.current.startX) * 2
     }, [])
 
-    const handleTabClick = useCallback((tabTitle: string) => {
-        setActiveTab(tabTitle)
+    // ✅ Writes to context + URL — no setActiveTab needed
+    const handleTabClick = useCallback((tabTitle: TabName) => {
+        setTab(tabTitle)
         router.push(`/user/profile?tab=${tabTitle}`, { scroll: false })
-    }, [router])
+    }, [router, setTab])
 
     return (
         <div className="mt-1 md:mt-15 mb-3 border rounded-2xl mx-2 bg-white h-screen flex flex-col overflow-hidden">
@@ -109,11 +117,11 @@ function ProfileContent() {
                                     title={metric.title}
                                     value={metric.value}
                                     trend={metric.trend}
-                                    type={metric.type as MetricType}
+                                    type={metric.type}
                                     description={metric.description}
                                     lastUpdate={metric.lastUpdate}
                                     onClick={() => handleTabClick(metric.title)}
-                                    isActive={activeTab === metric.title}
+                                    isActive={isActive(metric.title)} // ✅ from context
                                 />
                             ))}
                         </div>
@@ -126,7 +134,8 @@ function ProfileContent() {
                 ref={scrollRef}
                 className="flex-1 overflow-y-auto px-3 md:px-10 lg:px-13 pt-6 pb-10"
             >
-                <Tabs currentTab={activeTab} />
+                {/* ✅ No prop — Tabs reads currentTab from context */}
+                <Tabs />
             </div>
         </div>
     )
@@ -143,12 +152,15 @@ function Profile() {
 export default function Main() {
     return (
         <SidebarProvider>
-            <div className="flex min-h-screen w-full">
-                <AppSidebar />
-                <main className="flex-1 overflow-hidden">
-                    <Profile/>
-                </main>
-            </div>
+            {/* ✅ TabsProvider wraps everything so both ProfileContent and Tabs share state */}
+            <TabsProvider defaultTab="WISHLIST">
+                <div className="flex min-h-screen w-full">
+                    <AppSidebar />
+                    <main className="flex-1 overflow-hidden">
+                        <Profile />
+                    </main>
+                </div>
+            </TabsProvider>
         </SidebarProvider>
     )
 }
